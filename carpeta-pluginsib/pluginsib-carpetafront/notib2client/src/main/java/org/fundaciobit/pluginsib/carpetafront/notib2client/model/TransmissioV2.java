@@ -23,7 +23,6 @@ import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.DocumentConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.GenericInfo;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.PersonaConsultaV2;
-import org.joda.time.DateTime;
 /**
  * Llistat de les notificacions retornades
  */
@@ -53,13 +52,13 @@ public class TransmissioV2 {
   private String descripcio = null;
 
   @JsonProperty("dataEnviament")
-  private DateTime dataEnviament = null;
+  private Long dataEnviament = null;
 
   @JsonProperty("estat")
   private GenericInfo estat = null;
 
   @JsonProperty("dataEstat")
-  private DateTime dataEstat = null;
+  private Long dataEstat = null;
 
   @JsonProperty("document")
   private DocumentConsultaV2 document = null;
@@ -71,10 +70,10 @@ public class TransmissioV2 {
   private List<PersonaConsultaV2> destinataris = null;
 
   @JsonProperty("error")
-  private Boolean error = null;
+  private Long error = null;
 
   @JsonProperty("errorData")
-  private DateTime errorData = null;
+  private Long errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -211,7 +210,7 @@ public class TransmissioV2 {
     this.descripcio = descripcio;
   }
 
-  public TransmissioV2 dataEnviament(DateTime dataEnviament) {
+  public TransmissioV2 dataEnviament(Long dataEnviament) {
     this.dataEnviament = dataEnviament;
     return this;
   }
@@ -221,11 +220,11 @@ public class TransmissioV2 {
    * @return dataEnviament
   **/
   @Schema(description = "Data d'enviament de la notificació")
-  public DateTime getDataEnviament() {
+  public Long getDataEnviament() {
     return dataEnviament;
   }
 
-  public void setDataEnviament(DateTime dataEnviament) {
+  public void setDataEnviament(Long dataEnviament) {
     this.dataEnviament = dataEnviament;
   }
 
@@ -247,7 +246,7 @@ public class TransmissioV2 {
     this.estat = estat;
   }
 
-  public TransmissioV2 dataEstat(DateTime dataEstat) {
+  public TransmissioV2 dataEstat(Long dataEstat) {
     this.dataEstat = dataEstat;
     return this;
   }
@@ -257,11 +256,11 @@ public class TransmissioV2 {
    * @return dataEstat
   **/
   @Schema(description = "Data en que s'ha realitzat l'enviament")
-  public DateTime getDataEstat() {
+  public Long getDataEstat() {
     return dataEstat;
   }
 
-  public void setDataEstat(DateTime dataEstat) {
+  public void setDataEstat(Long dataEstat) {
     this.dataEstat = dataEstat;
   }
 
@@ -327,7 +326,7 @@ public class TransmissioV2 {
     this.destinataris = destinataris;
   }
 
-  public TransmissioV2 error(Boolean error) {
+  public TransmissioV2 error(Long error) {
     this.error = error;
     return this;
   }
@@ -336,16 +335,16 @@ public class TransmissioV2 {
    * Informa si s&#x27;ha produït algun error en la notificació
    * @return error
   **/
-  @Schema(example = "false", description = "Informa si s'ha produït algun error en la notificació")
-  public Boolean isError() {
+  @Schema(example = "0", description = "Informa si s'ha produït algun error en la notificació")
+  public Long isError() {
     return error;
   }
 
-  public void setError(Boolean error) {
+  public void setError(Long error) {
     this.error = error;
   }
 
-  public TransmissioV2 errorData(DateTime errorData) {
+  public TransmissioV2 errorData(Long errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -355,11 +354,11 @@ public class TransmissioV2 {
    * @return errorData
   **/
   @Schema(description = "Data de l'error")
-  public DateTime getErrorData() {
+  public Long getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(DateTime errorData) {
+  public void setErrorData(Long errorData) {
     this.errorData = errorData;
   }
 

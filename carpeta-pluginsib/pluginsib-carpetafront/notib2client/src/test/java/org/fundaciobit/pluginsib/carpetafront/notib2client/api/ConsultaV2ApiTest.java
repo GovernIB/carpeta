@@ -15,23 +15,12 @@ package org.fundaciobit.pluginsib.carpetafront.notib2client.api;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Arxiu;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiClient;
-import org.fundaciobit.pluginsib.carpetafront.notib2client.services.BooleanDeserializer;
-import org.fundaciobit.pluginsib.carpetafront.notib2client.services.DateTimeJodaDeserializer;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.auth.HttpBasicAuth;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
+
 import org.junit.Test;
 
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.fasterxml.jackson.datatype.joda.deser.DateTimeDeserializer;
 
 import org.junit.Ignore;
 
@@ -39,27 +28,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-
-
 
 /**
  * API tests for ConsultaV2Api
  */
 @Ignore
 public class ConsultaV2ApiTest {
-    
-    
-    
 
-    private static final ConsultaV2Api api;
-    
-    static {
-        
+    private ConsultaV2Api getApi() {
+
         Properties props = new Properties();
         try {
             props.load(new FileInputStream(new File("test.properties")));
@@ -70,36 +50,37 @@ public class ConsultaV2ApiTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
         String url = props.getProperty("url");
         String user = props.getProperty("user");
         String pass = props.getProperty("pass");
-        
-        
+
         ApiClient apiClient = new ApiClient();
-        
+
         apiClient.setBasePath(url);
         HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("basic");
         basicAuth.setUsername(user);
         basicAuth.setPassword(pass);
         //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         //apiClient.setDateFormat(sdf);
-        
-        //ObjectMapper objectMapper =apiClient.getJSON().getContext(null);
-        /*SimpleModule modul = new SimpleModule();
-        modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
-        modul.addDeserializer(Boolean.class, new BooleanDeserializer());
-        objectMapper.registerModule(modul);*/
+
+        ObjectMapper objectMapper = apiClient.getJSON().getContext(null);
+        SimpleModule modul = new SimpleModule();
+        //modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
+        //modul.addDeserializer(Boolean.class, new BooleanDeserializer());
+        objectMapper.registerModule(modul);
         //objectMapper.registerModule(new JodaModule());
         
+        
+        System.out.println("CLIENT: " + apiClient.getHttpClient());
+        
+
+        ConsultaV2Api api;
         api = new ConsultaV2Api(apiClient);
-                
+        return api;
+
     }
-    
-    
-    
-    
-    
+
     public static void main(String[] args) {
         try {
             new ConsultaV2ApiTest().notificacionsByTitularTest();
@@ -110,118 +91,11 @@ public class ConsultaV2ApiTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
     
     
-    /**
-     * Consulta totes les comunicacions d&#x27;un titular donat el seu dni
-     *
-     * Retorna informació de totes les comunicacions d&#x27;un titular, i el seu estat
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void comunicacionsByTitularTest() throws Exception {
-        String dniTitular = null;
-        LocalDate dataInicial = null;
-        LocalDate dataFinal = null;
-        Boolean visibleCarpeta = null;
-        String lang = null;
-        Integer pagina = null;
-        Integer mida = null;
-        RespostaConsultaV2 response = api.comunicacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
-
-        // TODO: test validations
-    }
-    /**
-     * Consulta totes les comunicacions llegides d&#x27;un titular donat el seu dni
-     *
-     * Retorna informació sobre les comunicacions ja llegides d&#x27;un titular, i el seu estat
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void comunicacionsLlegidesByTitularTest() throws Exception {
-        String dniTitular = null;
-        LocalDate dataInicial = null;
-        LocalDate dataFinal = null;
-        Boolean visibleCarpeta = null;
-        String lang = null;
-        Integer pagina = null;
-        Integer mida = null;
-        RespostaConsultaV2 response = api.comunicacionsLlegidesByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
-
-        // TODO: test validations
-    }
-    /**
-     * Consulta totes les comunicacions pendents (no llegides) d&#x27;un titular donat el seu dni
-     *
-     * Retorna informació sobre les comunicacions pendents d&#x27;un titular, i el seu estat
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void comunicacionsPendentsByTitularTest() throws Exception {
-        String dniTitular = null;
-        LocalDate dataInicial = null;
-        LocalDate dataFinal = null;
-        Boolean visibleCarpeta = null;
-        String lang = null;
-        Integer pagina = null;
-        Integer mida = null;
-        RespostaConsultaV2 response = api.comunicacionsPendentsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
-
-        // TODO: test validations
-    }
-    /**
-     * Obté la certificació d&#x27;una notificació
-     *
-     * Retorna el document de certificació de lectura de la notificació. El contingut del document està en Base64
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void getCertificacioTest() throws Exception {
-        Long enviamentId = null;
-        Arxiu response = api.getCertificacio(enviamentId);
-
-        // TODO: test validations
-    }
-    /**
-     * Obté el document d&#x27;una notificació
-     *
-     * Retorna el document de la notificació. El contingut del document està en Base64
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void getDocumentTest() throws Exception {
-        Long notificacioId = null;
-        Arxiu response = api.getDocument(notificacioId);
-
-        // TODO: test validations
-    }
-    /**
-     * Obté el justificant d&#x27;una comunicació
-     *
-     * Retorna el document de justificant de entrega de la comunicació. El contingut del document està en Base64
-     *
-     * @throws Exception
-     *          if the Api call fails
-     */
-    @Test
-    public void getJustificantTest() throws Exception {
-        Long enviamentId = null;
-        Arxiu response = api.getJustificant(enviamentId);
-
-        // TODO: test validations
-    }
+    
     /**
      * Consulta totes les notificacions d&#x27;un titular donat el seu dni
      *
@@ -233,29 +107,147 @@ public class ConsultaV2ApiTest {
     @Test
     public void notificacionsByTitularTest() throws Exception {
         String dniTitular = "99999999R";
-        LocalDate dataInicial = null;
-        LocalDate dataFinal = null;
+        Date dataInicial = null;
+        Date dataFinal = null;
         Boolean visibleCarpeta = true;
         String lang = "ca";
         Integer pagina = 0;
-        Integer mida = 3;
-        RespostaConsultaV2 response = api.notificacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
-        if(response != null) {
-            System.out.println("Response = "+ response);
+        Integer pageSize = 1;
+        RespostaConsultaV2 response = getApi().notificacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta,
+                lang, pagina, pageSize);
+        if (response != null) {
+            System.out.println("Response = " + response);
             //DateTime datEnv = response.getResultat().get(0).getDataEnviament();
             //DateTime dataEstat = response.getResultat().get(0).getDataEstat();
-            
+
             //System.out.println("\n\n ");
-            
-        }else {
+
+        } else {
             System.out.println("Response = null!!!!!!");
         }
-        
-        
-           
 
         // TODO: test validations
     }
+
+    /**
+     * Consulta totes les comunicacions d&#x27;un titular donat el seu dni
+     *
+     * Retorna informació de totes les comunicacions d&#x27;un titular, i el seu estat
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void comunicacionsByTitularTest() throws Exception {
+        String dniTitular = null;
+        Date dataInicial = null;
+        Date dataFinal = null;
+        Boolean visibleCarpeta = null;
+        String lang = null;
+        Integer pagina = null;
+        Integer mida = null;
+        RespostaConsultaV2 response = getApi().comunicacionsByTitular(dniTitular, dataInicial, dataFinal,
+                visibleCarpeta, lang, pagina, mida);
+
+        // TODO: test validations
+    }
+
+    /**
+     * Consulta totes les comunicacions llegides d&#x27;un titular donat el seu dni
+     *
+     * Retorna informació sobre les comunicacions ja llegides d&#x27;un titular, i el seu estat
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void comunicacionsLlegidesByTitularTest() throws Exception {
+        String dniTitular = null;
+        Date dataInicial = null;
+        Date dataFinal = null;
+        Boolean visibleCarpeta = null;
+        String lang = null;
+        Integer pagina = null;
+        Integer mida = null;
+        RespostaConsultaV2 response = getApi().comunicacionsLlegidesByTitular(dniTitular, dataInicial, dataFinal,
+                visibleCarpeta, lang, pagina, mida);
+
+        // TODO: test validations
+    }
+
+    /**
+     * Consulta totes les comunicacions pendents (no llegides) d&#x27;un titular donat el seu dni
+     *
+     * Retorna informació sobre les comunicacions pendents d&#x27;un titular, i el seu estat
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void comunicacionsPendentsByTitularTest() throws Exception {
+        String dniTitular = null;
+        Date dataInicial = null;
+        Date dataFinal = null;
+        Boolean visibleCarpeta = null;
+        String lang = null;
+        Integer pagina = null;
+        Integer mida = null;
+        RespostaConsultaV2 response = getApi().comunicacionsPendentsByTitular(dniTitular, dataInicial, dataFinal,
+                visibleCarpeta, lang, pagina, mida);
+
+        // TODO: test validations
+    }
+
+    /**
+     * Obté la certificació d&#x27;una notificació
+     *
+     * Retorna el document de certificació de lectura de la notificació. El contingut del document està en Base64
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getCertificacioTest() throws Exception {
+        Long enviamentId = null;
+        Arxiu response = getApi().getCertificacio(enviamentId);
+
+        // TODO: test validations
+    }
+
+    /**
+     * Obté el document d&#x27;una notificació
+     *
+     * Retorna el document de la notificació. El contingut del document està en Base64
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getDocumentTest() throws Exception {
+        Long notificacioId = null;
+        Arxiu response = getApi().getDocument(notificacioId);
+
+        // TODO: test validations
+    }
+
+    /**
+     * Obté el justificant d&#x27;una comunicació
+     *
+     * Retorna el document de justificant de entrega de la comunicació. El contingut del document està en Base64
+     *
+     * @throws Exception
+     *          if the Api call fails
+     */
+    @Test
+    public void getJustificantTest() throws Exception {
+        Long enviamentId = null;
+        Arxiu response = getApi().getJustificant(enviamentId);
+
+        // TODO: test validations
+    }
+
+
+
     /**
      * Consulta totes les notificacions llegides d&#x27;un titular donat el seu dni
      *
@@ -267,16 +259,18 @@ public class ConsultaV2ApiTest {
     @Test
     public void notificacionsLlegidesByTitularTest() throws Exception {
         String dniTitular = null;
-        LocalDate dataInicial = null;
-        LocalDate dataFinal = null;
+        Date dataInicial = null;
+        Date dataFinal = null;
         Boolean visibleCarpeta = null;
         String lang = null;
         Integer pagina = null;
         Integer mida = null;
-        RespostaConsultaV2 response = api.notificacionsLlegidesByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
+        RespostaConsultaV2 response = getApi().notificacionsLlegidesByTitular(dniTitular, dataInicial, dataFinal,
+                visibleCarpeta, lang, pagina, mida);
 
         // TODO: test validations
     }
+
     /**
      * Consulta totes les notificacions pendents (no llegides) d&#x27;un titular donat el seu dni
      *
@@ -288,13 +282,14 @@ public class ConsultaV2ApiTest {
     @Test
     public void notificacionsPendentsByTitularTest() throws Exception {
         String dniTitular = null;
-        LocalDate dataInicial = null;
-        LocalDate dataFinal = null;
+        Date dataInicial = null;
+        Date dataFinal = null;
         Boolean visibleCarpeta = null;
         String lang = null;
         Integer pagina = null;
         Integer mida = null;
-        RespostaConsultaV2 response = api.notificacionsPendentsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
+        RespostaConsultaV2 response = getApi().notificacionsPendentsByTitular(dniTitular, dataInicial, dataFinal,
+                visibleCarpeta, lang, pagina, mida);
 
         // TODO: test validations
     }

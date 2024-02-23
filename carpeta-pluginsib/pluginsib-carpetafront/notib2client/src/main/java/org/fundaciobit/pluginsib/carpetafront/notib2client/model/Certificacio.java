@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.joda.time.DateTime;
+import java.util.Date;
 /**
  * Informació de la certificació realitzada a Notific@
  */
@@ -27,7 +27,7 @@ import org.joda.time.DateTime;
 
 public class Certificacio {
   @JsonProperty("data")
-  private DateTime data = null;
+  private Date data = null;
 
   @JsonProperty("origen")
   private String origen = null;
@@ -50,7 +50,7 @@ public class Certificacio {
   @JsonProperty("tipusMime")
   private String tipusMime = null;
 
-  public Certificacio data(DateTime data) {
+  public Certificacio data(Date data) {
     this.data = data;
     return this;
   }
@@ -60,11 +60,11 @@ public class Certificacio {
    * @return data
   **/
   @Schema(description = "Data de creació de la certificació de la notificació")
-  public DateTime getData() {
+  public Date getData() {
     return data;
   }
 
-  public void setData(DateTime data) {
+  public void setData(Date data) {
     this.data = data;
   }
 

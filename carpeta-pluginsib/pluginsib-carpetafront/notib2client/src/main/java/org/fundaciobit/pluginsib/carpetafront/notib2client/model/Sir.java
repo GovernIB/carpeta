@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.joda.time.DateTime;
+import java.util.Date;
 /**
  * Informació per a l&#x27;enviament SIR
  */
@@ -27,12 +27,12 @@ import org.joda.time.DateTime;
 
 public class Sir {
   @JsonProperty("dataRecepcio")
-  private DateTime dataRecepcio = null;
+  private Date dataRecepcio = null;
 
   @JsonProperty("dataRegistreDesti")
-  private DateTime dataRegistreDesti = null;
+  private Date dataRegistreDesti = null;
 
-  public Sir dataRecepcio(DateTime dataRecepcio) {
+  public Sir dataRecepcio(Date dataRecepcio) {
     this.dataRecepcio = dataRecepcio;
     return this;
   }
@@ -42,15 +42,15 @@ public class Sir {
    * @return dataRecepcio
   **/
   @Schema(description = "Data en que s'ha recepcionat el registre")
-  public DateTime getDataRecepcio() {
+  public Date getDataRecepcio() {
     return dataRecepcio;
   }
 
-  public void setDataRecepcio(DateTime dataRecepcio) {
+  public void setDataRecepcio(Date dataRecepcio) {
     this.dataRecepcio = dataRecepcio;
   }
 
-  public Sir dataRegistreDesti(DateTime dataRegistreDesti) {
+  public Sir dataRegistreDesti(Date dataRegistreDesti) {
     this.dataRegistreDesti = dataRegistreDesti;
     return this;
   }
@@ -60,11 +60,11 @@ public class Sir {
    * @return dataRegistreDesti
   **/
   @Schema(description = "Data en que s'ha registrat en el registre de destí")
-  public DateTime getDataRegistreDesti() {
+  public Date getDataRegistreDesti() {
     return dataRegistreDesti;
   }
 
-  public void setDataRegistreDesti(DateTime dataRegistreDesti) {
+  public void setDataRegistreDesti(Date dataRegistreDesti) {
     this.dataRegistreDesti = dataRegistreDesti;
   }
 

@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.EnviamentReferenciaV2;
-import org.joda.time.DateTime;
 /**
  * RespostaAltaV2
  */
@@ -33,7 +33,7 @@ public class RespostaAltaV2 {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private DateTime errorData = null;
+  private Date errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -104,7 +104,7 @@ public class RespostaAltaV2 {
     this.error = error;
   }
 
-  public RespostaAltaV2 errorData(DateTime errorData) {
+  public RespostaAltaV2 errorData(Date errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -114,11 +114,11 @@ public class RespostaAltaV2 {
    * @return errorData
   **/
   @Schema(description = "Data en que s'ha produït l'error")
-  public DateTime getErrorData() {
+  public Date getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(DateTime errorData) {
+  public void setErrorData(Date errorData) {
     this.errorData = errorData;
   }
 

@@ -294,3 +294,4 @@ node_modules/
 /carpeta-api-certificats-client/gradle
 carpeta-pluginsib/pluginsib-carpetafront/notib2client/test.properties
 carpeta-pluginsib/pluginsib-carpetafront/notib/test.properties
+/carpeta-api-externa-client/test.properties

@@ -7,12 +7,9 @@ import com.google.gson.Gson;
 import es.caib.carpeta.pluginsib.carpetafront.api.*;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.ext.ContextResolver;
-import jakarta.ws.rs.ext.Providers;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.api.ConsultaV2Api;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.DocumentConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.NotificacioV2.IdiomaEnum;
@@ -20,21 +17,29 @@ import org.fundaciobit.pluginsib.carpetafront.notib2client.model.PersonaConsulta
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiClient;
-import org.fundaciobit.pluginsib.carpetafront.notib2client.services.BooleanDeserializer;
-import org.fundaciobit.pluginsib.carpetafront.notib2client.services.DateTimeJodaDeserializer;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.auth.HttpBasicAuth;
-//import org.fundaciobit.pluginsib.carpetafront.notib.api.*;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
@@ -43,9 +48,7 @@ import java.util.stream.Collectors;
 public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String NOTIB_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "notib.";
-    
-    @Context
-    private Providers providers;
+
 
     /**
      *
@@ -99,8 +102,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat,
-            String parameter, IListenerLogCarpeta logCarpeta) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter,
+            IListenerLogCarpeta logCarpeta) throws Exception {
 
         registerUserData(userData);
 
@@ -111,10 +114,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     @Override
-    public void requestCarpetaFront(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+    public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         if (isDevelopment()) {
             log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
@@ -125,79 +127,79 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
 
         if (query.startsWith(OPCIONS_PAGE)) {
-            pageOpcions(absolutePluginRequestPath, relativePluginRequestPath, query, request,
-                    response, userData, administrationEncriptedID, locale, isGet);
+            pageOpcions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
         } else if (query.startsWith(NOTIFICACIONS_ESPERA_SISTRA_PAGE)) {
 
-            pageEsperaSistra(absolutePluginRequestPath, relativePluginRequestPath, query, request,
-                    response, userData, administrationEncriptedID, locale, isGet);
+            pageEsperaSistra(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
         } else if (query.startsWith(NOTIFICACIONS_ESPERA_NOTIB_PAGE)) {
 
-            pageEsperaNotib(absolutePluginRequestPath, relativePluginRequestPath, query, request,
-                    response, userData, administrationEncriptedID, locale, isGet);
+            pageEsperaNotib(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
         } else if (query.startsWith(NOTIFICACIONS_SISTRA_PAGE)) {
 
-            comunicacionsSistra(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet);
+            comunicacionsSistra(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet);
         } else if (query.startsWith(NOTIFICACIONS_NOTIB_PAGE)) {
 
-            pageNotificacionsNotib(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet);
+            pageNotificacionsNotib(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(INDEX_HTML_PAGE)) {
 
-            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(REACT_JS_PAGE)) {
 
-            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_TOTES)) {
 
-            consultaTotes(absolutePluginRequestPath, relativePluginRequestPath, query, request,
-                    response, userData, administrationEncriptedID, locale, isGet);
+            consultaTotes(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_TOTES_PENDENTS)) {
 
-            consultaTotesPendents(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaTotesPendents(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_TOTES_LLEGIDES)) {
 
-            consultaTotesLlegides(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaTotesLlegides(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_NOTIFICACIONS)) {
 
-            consultaNotificacions(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaNotificacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_NOTIFICACIONS_PENDENTS)) {
 
-            consultaNotificacionsPendents(absolutePluginRequestPath, relativePluginRequestPath,
-                    query, request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaNotificacionsPendents(absolutePluginRequestPath, relativePluginRequestPath, query, request,
+                    response, userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_NOTIFICACIONS_LLEGIDES)) {
 
-            consultaNotificacionsLlegides(absolutePluginRequestPath, relativePluginRequestPath,
-                    query, request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaNotificacionsLlegides(absolutePluginRequestPath, relativePluginRequestPath, query, request,
+                    response, userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_COMUNICACIONS)) {
 
-            consultaComunicacions(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaComunicacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_COMUNICACIONS_PENDENTS)) {
 
-            consultaComunicacionsPendents(absolutePluginRequestPath, relativePluginRequestPath,
-                    query, request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaComunicacionsPendents(absolutePluginRequestPath, relativePluginRequestPath, query, request,
+                    response, userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_COMUNICACIONS_LLEGIDES)) {
 
-            consultaComunicacionsLlegides(absolutePluginRequestPath, relativePluginRequestPath,
-                    query, request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaComunicacionsLlegides(absolutePluginRequestPath, relativePluginRequestPath, query, request,
+                    response, userData, administrationEncriptedID, locale, isGet);
 
         } /*
            * else if (query.startsWith(NOTIFICACIONS_NOTIB_DETALL_PAGE)) {
@@ -207,9 +209,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
            * isGet); }
            */ else {
 
-            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet,
-                    logCarpeta);
+            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
 
     }
@@ -230,9 +231,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String OPCIONS_PAGE = "opcions";
 
-    public void pageOpcions(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void pageOpcions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -242,9 +243,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String plantilla = IOUtils.toString(input, "UTF-8");
 
-            String[] traduccions = { "menu.notificaciones", "notificaciones.descripcion",
-                    "menu.notificacion", "notificaciones.notificaciones",
-                    "menu.notificaciones.otras", "notificaciones.otras", "boto_tornar",
+            String[] traduccions = { "menu.notificaciones", "notificaciones.descripcion", "menu.notificacion",
+                    "notificaciones.notificaciones", "menu.notificaciones.otras", "notificaciones.otras", "boto_tornar",
                     "menu.boton" };
 
             for (String t : traduccions) {
@@ -252,12 +252,10 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             // GOVERN CENTRAL - NOTIB
-            boolean useNotibApi = "true"
-                    .equalsIgnoreCase(getProperty(NOTIB_PROPERTY_BASE + "usenotibapi"));
+            boolean useNotibApi = "true".equalsIgnoreCase(getProperty(NOTIB_PROPERTY_BASE + "usenotibapi"));
             String rutaDesti;
             if (useNotibApi) {
-                rutaDesti = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE
-                        + "/0";
+                rutaDesti = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE + "/0";
                 rutaDesti = "window.location.href ='" + rutaDesti + "'";
             } else {
                 rutaDesti = getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url");
@@ -266,15 +264,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             map.put("notificacionesUrl", rutaDesti);
 
             // CAIB - SISTRA 1
-            String comunicacionesURL = absolutePluginRequestPath + "/"
-                    + NOTIFICACIONS_ESPERA_SISTRA_PAGE;
+            String comunicacionesURL = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_SISTRA_PAGE;
 
             map.put("comunicacionesURL", comunicacionesURL);
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
-            String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map,
-                    generat);
+            String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map, generat);
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
@@ -303,9 +299,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String NOTIFICACIONS_ESPERA_SISTRA_PAGE = "esperasistra";
 
-    public void pageEsperaSistra(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void pageEsperaSistra(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -335,14 +331,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String NOTIFICACIONS_ESPERA_NOTIB_PAGE = "esperanotib";
 
-    public void pageEsperaNotib(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void pageEsperaNotib(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
-            int pagina = Integer
-                    .parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
+            int pagina = Integer.parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
             String rutaDesti;
             rutaDesti = absolutePluginRequestPath + "/" + NOTIFICACIONS_NOTIB_PAGE + "/" + pagina;
 
@@ -372,9 +367,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String INDEX_HTML_PAGE = "notib_index.html";
 
-    public void index(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -382,8 +377,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String resource = "/webpage/notib_index.html";
 
-            response.setHeader("Content-Disposition", "inline;filename=\""
-                    + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
 
             response.setCharacterEncoding("utf-8");
 
@@ -410,40 +405,34 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE_TOTES;
             map.put("pathtoservei", pathtoservei);
 
-            String pathtoserveiPendientesUrl = absolutePluginRequestPath + "/"
-                    + URL_REST_SERVICE_TOTES_PENDENTS;
+            String pathtoserveiPendientesUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_TOTES_PENDENTS;
             map.put("pathtoserveiPendientesUrl", pathtoserveiPendientesUrl);
 
-            String pathtoserveiLeidasUrl = absolutePluginRequestPath + "/"
-                    + URL_REST_SERVICE_TOTES_LLEGIDES;
+            String pathtoserveiLeidasUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_TOTES_LLEGIDES;
             map.put("pathtoserveiLeidasUrl", pathtoserveiLeidasUrl);
 
             // GOVERN CENTRAL - NOTIB
             // boolean useNotibApi = "true".equalsIgnoreCase(getProperty(NOTIB_PROPERTY_BASE
             // + "usenotibapi"));
 
-            String notificacionesTodasUrl = absolutePluginRequestPath + "/"
-                    + URL_REST_SERVICE_NOTIFICACIONS;
+            String notificacionesTodasUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_NOTIFICACIONS;
             map.put("notificacionesTodasUrl", notificacionesTodasUrl);
 
             String notificacionesPendientesUrl = absolutePluginRequestPath + "/"
                     + URL_REST_SERVICE_NOTIFICACIONS_PENDENTS;
             map.put("notificacionesPendientesUrl", notificacionesPendientesUrl);
 
-            String notificacionesLeidasUrl = absolutePluginRequestPath + "/"
-                    + URL_REST_SERVICE_NOTIFICACIONS_LLEGIDES;
+            String notificacionesLeidasUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_NOTIFICACIONS_LLEGIDES;
             map.put("notificacionesLeidasUrl", notificacionesLeidasUrl);
 
-            String comunicacionesTodasUrl = absolutePluginRequestPath + "/"
-                    + URL_REST_SERVICE_COMUNICACIONS;
+            String comunicacionesTodasUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_COMUNICACIONS;
             map.put("comunicacionesTodasUrl", comunicacionesTodasUrl);
 
             String comunicacionesPendientesUrl = absolutePluginRequestPath + "/"
                     + URL_REST_SERVICE_COMUNICACIONS_PENDENTS;
             map.put("comunicacionesPendientesUrl", comunicacionesPendientesUrl);
 
-            String comunicacionesLeidasUrl = absolutePluginRequestPath + "/"
-                    + URL_REST_SERVICE_COMUNICACIONS_LLEGIDES;
+            String comunicacionesLeidasUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_COMUNICACIONS_LLEGIDES;
             map.put("comunicacionesLeidasUrl", comunicacionesLeidasUrl);
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
@@ -471,10 +460,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_NOTIFICACIONS = "consultaNotificacions";
 
-    public void consultaNotificacions(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaNotificacions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -526,14 +514,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif,
-                        convertToLocalDateViaInstant(formDataInici),
-                        convertToLocalDateViaInstant(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                        locale.getLanguage(), 0, mida);
 
                 notificacionsList = respostaNotificacions.getResultat();
                 for (TransmissioV2 notificacio : notificacionsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
-                    // XYZZZ cn.setData(notificacio.getDataEnviament());
+                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
                     cn.setTipus("notificacio");
                     cns.add(cn);
                 }
@@ -561,14 +549,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             if (notificacionsMap == null) {
                 notificacionsMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        notificacionsMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsMap);
             }
 
             for (ComunicacioNotificacio t : sortedNotificacions) {
 
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 notificacionsMap.put(t.getTransmissio().getId(), t);
             }
 
@@ -580,23 +566,17 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 infoNotificacions.put("comunicacions",
                         sortedNotificacions.subList(pagina * regPag, notificacionsTotals));
             }
-            infoNotificacions
-                    .put("urldetallbase",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url")
-                                    + "#");
-            infoNotificacions
-                    .put("urldetallbase2",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url")
-                                    + "#");
+            infoNotificacions.put("urldetallbase",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoNotificacions.put("urldetallbase2",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoNotificacions.put("registresPagina", formRegPorPagina);
             infoNotificacions.put("totalRegistres", notificacionsTotals);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacions);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -618,11 +598,55 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
+    public static class MyResteasyJackson2Provider extends ResteasyJackson2Provider {
+
+        protected Logger log = Logger.getLogger(MyResteasyJackson2Provider.class);
+
+        public MyResteasyJackson2Provider() {
+            super();
+
+            ObjectMapper objectMapper = this._mapperConfig.getConfiguredMapper();
+
+            //this.readFrom(null, _defaultReadView, null, null, null, null)
+
+            if (objectMapper == null) {
+                objectMapper = new ObjectMapper();
+                this._mapperConfig.setMapper(objectMapper);
+            }
+
+            //ObjectMapper objectMapper = new ObjectMapper();
+
+            SimpleModule modul = new SimpleModule();
+            //modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
+            //modul.addDeserializer(Boolean.class, new BooleanDeserializer());
+            objectMapper.registerModule(modul);
+
+        }
+
+        @Override
+        public Object readFrom(Class<Object> type, final Type genericType, Annotation[] annotations,
+                javax.ws.rs.core.MediaType mediaType, javax.ws.rs.core.MultivaluedMap<String, String> httpHeaders,
+                InputStream entityStream) throws IOException {
+            log.error("\n - " + type + "\n");
+            return super.readFrom(type, genericType, annotations, null, httpHeaders, entityStream);
+        }
+
+    }
+
     private ConsultaV2Api notibClientRest2 = null;
 
     private ConsultaV2Api getApi() throws Exception {
 
         if (notibClientRest2 == null) {
+            /*
+            {
+                MyResteasyJackson2Provider rj2p = new MyResteasyJackson2Provider();
+               
+
+                ResteasyProviderFactory.getInstance().register(rj2p);
+            }
+            */
+
             String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
             String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
             String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
@@ -632,24 +656,28 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("basic");
             basicAuth.setUsername(user);
             basicAuth.setPassword(pass);
-            
-            ResteasyProviderFactory.getInstance().registerProvider(ObjectMapperContextResolver.class);
 
+            //ResteasyProviderFactory.getInstance().registerProvider(ObjectMapperContextResolver.class);
 
+            /*
             ObjectMapper objectMapper = apiClient.getJSON().getContext(null);
             apiClient.setDebugging(true);
             /*ContextResolver<ObjectMapper> resolver = 
                     providers.getContextResolver(ObjectMapper.class, MediaType.WILDCARD_TYPE);
             ObjectMapper objectMapper = resolver.getContext(ObjectMapper.class);*/
-            
-            
-            log.info("\n\n\n Inicialitzant ObjectMapper \n\n\n ");
+
+            log.info("\n\n\n Inicialitzant ObjectMapper ZZZZZZZZZZZZZZZZZZ \n\n\n ");
             //ObjectMapper objectMapper = new ObjectMapper();
-            
+            /*
             SimpleModule modul = new SimpleModule();
             modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
             modul.addDeserializer(Boolean.class, new BooleanDeserializer());
             objectMapper.registerModule(modul);
+            */
+
+            //rj2p.setMapper(objectMapper);
+
+            //ResteasyProviderFactory.getInstance().registerProvider(ResteasyJackson2Provider.class);
 
             notibClientRest2 = new ConsultaV2Api(apiClient);
 
@@ -667,15 +695,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String NOTIFICACIONS_SISTRA_PAGE = "notificacionssistra";
 
-    public void comunicacionsSistra(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet) {
+    public void comunicacionsSistra(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
-            String webpage = getComunicacionsPageSistra(absolutePluginRequestPath, userData,
-                    locale);
+            String webpage = getComunicacionsPageSistra(absolutePluginRequestPath, userData, locale);
 
             responsePage(request, response, locale, webpage, absolutePluginRequestPath);
 
@@ -694,8 +720,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    protected void responsePage(HttpServletRequest request, HttpServletResponse response,
-            Locale locale, String webpage, String absolutePluginRequestPath) {
+    protected void responsePage(HttpServletRequest request, HttpServletResponse response, Locale locale, String webpage,
+            String absolutePluginRequestPath) {
         try {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
@@ -715,16 +741,15 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
     }
 
-    public String getComunicacionsPageSistra(String absolutePluginRequestPath, UserData userData,
-            Locale locale) throws Exception {
+    public String getComunicacionsPageSistra(String absolutePluginRequestPath, UserData userData, Locale locale)
+            throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
         // TRADUCCIONS
 
-        String[] traduccions = { "comunicacion.listado", "comunicacion.vacio",
-                "comunicacion.descripcion.comunicacion", "comunicacion.fecha",
-                "comunicacion.descripcion", "boto_tornar", "notificaciones.otras" };
+        String[] traduccions = { "comunicacion.listado", "comunicacion.vacio", "comunicacion.descripcion.comunicacion",
+                "comunicacion.fecha", "comunicacion.descripcion", "boto_tornar", "notificaciones.otras" };
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -766,10 +791,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String NOTIFICACIONS_NOTIB_PAGE = "notificacionsnotib";
 
-    public void pageNotificacionsNotib(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet) {
+    public void pageNotificacionsNotib(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -778,8 +802,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // TODO XYZ ZZZ aqui ha d'anar QUERY
             int pagina;
             try {
-                pagina = Integer
-                        .parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
+                pagina = Integer.parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
             } catch (NumberFormatException e) {
                 pagina = 0;
             }
@@ -814,8 +837,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 resposta = notibClientRest.notificacionsByTitular(nif, new LocalDate(formDataInici),
-                        new LocalDate(formDataFi), true, locale.getLanguage(), pagina, mida);
+                RespostaConsultaV2 resposta = notibClientRest.notificacionsByTitular(nif, convertToApiDate(formDataInici),
+                        convertToApiDate(formDataFi), true, locale.getLanguage(), pagina, mida);
 
                 // System.out.println(" ------------ OK " + resposta + "---------------");
                 // System.out.println(" ------------ NUm Elements Retornats: " +
@@ -856,8 +879,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             if (comunicacionsMap == null) {
                 comunicacionsMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        comunicacionsMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsMap);
             }
 
             for (TransmissioV2 t : notificacions) {
@@ -881,16 +903,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             // map.put("urldetallbase", absolutePluginRequestPath + "/" +
             // NOTIFICACIONS_NOTIB_DETALL_PAGE);
-            map.put("urldetallbase",
-                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url") + "#");
+            map.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url") + "#");
 
             // TRADUCCIONS
 
             String[] traduccions = { "comunicacion.listado.notib", "comunicacion.vacio",
-                    "comunicacion.descripcion.comunicacion", "comunicacion.fecha",
-                    "comunicacion.descripcion", "comunicacion_emissor", "comunicacion_concepte",
-                    "comunicacion_estat", "comunicacion_organo", "comunicacion_dataEstat",
-                    "comunicacion_justificant", "comunicacion_certificacio", "boto_tornar",
+                    "comunicacion.descripcion.comunicacion", "comunicacion.fecha", "comunicacion.descripcion",
+                    "comunicacion_emissor", "comunicacion_concepte", "comunicacion_estat", "comunicacion_organo",
+                    "comunicacion_dataEstat", "comunicacion_justificant", "comunicacion_certificacio", "boto_tornar",
                     "notificaciones.notificaciones" };
 
             for (String t : traduccions) {
@@ -905,8 +925,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
-            String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map,
-                    generat);
+            String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map, generat);
 
             responsePage(request, response, locale, fullPage, absolutePluginRequestPath);
 
@@ -928,10 +947,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_NOTIFICACIONS_PENDENTS = "notificacionspendentsnotib";
 
-    public void consultaNotificacionsPendents(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaNotificacionsPendents(String absolutePluginRequestPath, String relativePluginRequestPath,
+            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -983,16 +1001,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest
-                        .notificacionsPendentsByTitular(nif, new LocalDate(formDataInici), new LocalDate(formDataFi),
-                                true, locale.getLanguage(), 0,
-                                mida);
+                RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif,
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
 
                 notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
-                 // XYZZZ cn.setData(notificacio.getDataEnviament());
+                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
                     cn.setTipus("notificacio");
                     cns.add(cn);
                 }
@@ -1015,39 +1031,31 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             @SuppressWarnings("unchecked")
-            Map<Long, TransmissioV2> notificacionsPendentsMap = (Map<Long, TransmissioV2>) request
-                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+            Map<Long, TransmissioV2> notificacionsPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
             if (notificacionsPendentsMap == null) {
                 notificacionsPendentsMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        notificacionsPendentsMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsPendentsMap);
             }
 
             for (ComunicacioNotificacio t : sortedNotificacionsPendents) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 notificacionsPendentsMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoNotificacionsPendents = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= notificacionsPendentsTotals) {
-                infoNotificacionsPendents.put("comunicacions", sortedNotificacionsPendents
-                        .subList(pagina * regPag, (pagina + 1) * regPag));
+                infoNotificacionsPendents.put("comunicacions",
+                        sortedNotificacionsPendents.subList(pagina * regPag, (pagina + 1) * regPag));
             } else {
-                infoNotificacionsPendents.put("comunicacions", sortedNotificacionsPendents
-                        .subList(pagina * regPag, notificacionsPendentsTotals));
+                infoNotificacionsPendents.put("comunicacions",
+                        sortedNotificacionsPendents.subList(pagina * regPag, notificacionsPendentsTotals));
             }
-            infoNotificacionsPendents
-                    .put("urldetallbase",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url")
-                                    + "#");
-            infoNotificacionsPendents
-                    .put("urldetallbase2",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url")
-                                    + "#");
+            infoNotificacionsPendents.put("urldetallbase",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoNotificacionsPendents.put("urldetallbase2",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
             infoNotificacionsPendents.put("registresPagina", formRegPorPagina);
             infoNotificacionsPendents.put("totalRegistres", notificacionsPendentsTotals);
 
@@ -1085,10 +1093,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_NOTIFICACIONS_LLEGIDES = "notificacionsllegidesnotib";
 
-    public void consultaNotificacionsLlegides(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaNotificacionsLlegides(String absolutePluginRequestPath, String relativePluginRequestPath,
+            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -1141,13 +1148,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
-                        new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
 
                 notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
-                 // XYZZZ cn.setData(notificacio.getDataEnviament());
+                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
                     cn.setTipus("notificacio");
                     cns.add(cn);
                 }
@@ -1170,46 +1177,38 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             @SuppressWarnings("unchecked")
-            Map<Long, TransmissioV2> notificacionsLlegidesMap = (Map<Long, TransmissioV2>) request
-                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+            Map<Long, TransmissioV2> notificacionsLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
             if (notificacionsLlegidesMap == null) {
                 notificacionsLlegidesMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        notificacionsLlegidesMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsLlegidesMap);
             }
 
             for (ComunicacioNotificacio t : sortedNotificacionsLlegides) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 notificacionsLlegidesMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoNotificacionsLlegides = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= notificacionsLlegidesTotals) {
-                infoNotificacionsLlegides.put("comunicacions", sortedNotificacionsLlegides
-                        .subList(pagina * regPag, (pagina + 1) * regPag));
+                infoNotificacionsLlegides.put("comunicacions",
+                        sortedNotificacionsLlegides.subList(pagina * regPag, (pagina + 1) * regPag));
             } else {
-                infoNotificacionsLlegides.put("comunicacions", sortedNotificacionsLlegides
-                        .subList(pagina * regPag, notificacionsLlegidesTotals));
+                infoNotificacionsLlegides.put("comunicacions",
+                        sortedNotificacionsLlegides.subList(pagina * regPag, notificacionsLlegidesTotals));
             }
-            infoNotificacionsLlegides
-                    .put("urldetallbase",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url")
-                                    + "#");
-            infoNotificacionsLlegides
-                    .put("urldetallbase2",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url")
-                                    + "#");
+            infoNotificacionsLlegides.put("urldetallbase",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
+            infoNotificacionsLlegides.put("urldetallbase2",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoNotificacionsLlegides.put("registresPagina", formRegPorPagina);
             infoNotificacionsLlegides.put("totalRegistres", notificacionsLlegidesTotals);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacionsLlegides);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -1240,10 +1239,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_COMUNICACIONS = "comunicacionsnotib";
 
-    public void consultaComunicacions(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaComunicacions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -1296,15 +1294,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
-                        new LocalDate(formDataInici),
-                        new LocalDate(formDataFi), true, locale.getLanguage(), 0,
-                        mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
 
                 comunicacionsList = respostaComunicacions.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
-                 // XYZZZ cn.setData(comunicacio.getDataEnviament());
+                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
                     cn.setTipus("comunicacio");
                     cns.add(cn);
                 }
@@ -1332,13 +1328,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             if (comunicacionsMap == null) {
                 comunicacionsMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        comunicacionsMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsMap);
             }
 
             for (ComunicacioNotificacio t : sortedComunicacions) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 comunicacionsMap.put(t.getTransmissio().getId(), t);
             }
 
@@ -1362,7 +1356,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacions);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -1393,10 +1387,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_COMUNICACIONS_PENDENTS = "comunicacionspendentsnotib";
 
-    public void consultaComunicacionsPendents(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaComunicacionsPendents(String absolutePluginRequestPath, String relativePluginRequestPath,
+            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -1449,13 +1442,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
-                        new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
 
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
-                 // XYZZZ cn.setData(comunicacio.getDataEnviament());
+                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
                     cn.setTipus("comunicacio");
                     cns.add(cn);
                 }
@@ -1478,28 +1471,26 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             @SuppressWarnings("unchecked")
-            Map<Long, TransmissioV2> comunicacionsPendentsMap = (Map<Long, TransmissioV2>) request
-                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+            Map<Long, TransmissioV2> comunicacionsPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
             if (comunicacionsPendentsMap == null) {
                 comunicacionsPendentsMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        comunicacionsPendentsMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsPendentsMap);
             }
 
             for (ComunicacioNotificacio t : sortedComunicacionsPendents) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 comunicacionsPendentsMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoComunicacionsPendents = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= comunicacionsPendentsTotals) {
-                infoComunicacionsPendents.put("comunicacions", sortedComunicacionsPendents
-                        .subList(pagina * regPag, (pagina + 1) * regPag));
+                infoComunicacionsPendents.put("comunicacions",
+                        sortedComunicacionsPendents.subList(pagina * regPag, (pagina + 1) * regPag));
             } else {
-                infoComunicacionsPendents.put("comunicacions", sortedComunicacionsPendents
-                        .subList(pagina * regPag, comunicacionsPendentsTotals));
+                infoComunicacionsPendents.put("comunicacions",
+                        sortedComunicacionsPendents.subList(pagina * regPag, comunicacionsPendentsTotals));
             }
             infoComunicacionsPendents.put("urldetallbase",
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
@@ -1513,7 +1504,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacionsPendents);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -1544,10 +1535,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_COMUNICACIONS_LLEGIDES = "comunicacionsllegidesnotib";
 
-    public void consultaComunicacionsLlegides(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaComunicacionsLlegides(String absolutePluginRequestPath, String relativePluginRequestPath,
+            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -1600,13 +1590,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
-                        new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
 
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
-                 // XYZZZ cn.setData(comunicacio.getDataEnviament());
+                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
                     cn.setTipus("comunicacio");
                     cns.add(cn);
                 }
@@ -1629,28 +1619,26 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             @SuppressWarnings("unchecked")
-            Map<Long, TransmissioV2> comunicacionsLlegidesMap = (Map<Long, TransmissioV2>) request
-                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+            Map<Long, TransmissioV2> comunicacionsLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
             if (comunicacionsLlegidesMap == null) {
                 comunicacionsLlegidesMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        comunicacionsLlegidesMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsLlegidesMap);
             }
 
             for (ComunicacioNotificacio t : sortedComunicacionsLlegides) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 comunicacionsLlegidesMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoComunicacionsLlegides = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= comunicacionsLlegidesTotals) {
-                infoComunicacionsLlegides.put("comunicacions", sortedComunicacionsLlegides
-                        .subList(pagina * regPag, (pagina + 1) * regPag));
+                infoComunicacionsLlegides.put("comunicacions",
+                        sortedComunicacionsLlegides.subList(pagina * regPag, (pagina + 1) * regPag));
             } else {
-                infoComunicacionsLlegides.put("comunicacions", sortedComunicacionsLlegides
-                        .subList(pagina * regPag, comunicacionsLlegidesTotals));
+                infoComunicacionsLlegides.put("comunicacions",
+                        sortedComunicacionsLlegides.subList(pagina * regPag, comunicacionsLlegidesTotals));
             }
             infoComunicacionsLlegides.put("urldetallbase",
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
@@ -1664,7 +1652,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacionsLlegides);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -1695,9 +1683,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_TOTES = "totesnotib";
 
-    public void consultaTotes(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, Boolean isGet) {
+    public void consultaTotes(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -1759,21 +1747,21 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     try {
 
                         RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif,
-                                new LocalDate(formDataInici),
-                                new LocalDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                                mida);
 
                         notificacionsList = respostaNotificacions.getResultat();
                         for (TransmissioV2 notificacio : notificacionsList) {
                             ComunicacioNotificacio cn = new ComunicacioNotificacio();
                             cn.setTransmissio(notificacio);
-                         // XYZZZ cn.setData(notificacio.getDataEnviament());
+                            cn.setData(convertToApiDate(notificacio.getDataEnviament()));
                             cn.setTipus("notificacio");
                             cns.add(cn);
                         }
                         break;
                     } catch (Exception e) {
-                        log.error("CLASS EXCEPTION[notificacionsByTitular]("+reintents+"): " + e.getMessage(), e);
-                        
+                        log.error("CLASS EXCEPTION[notificacionsByTitular](" + reintents + "): " + e.getMessage(), e);
+
                         String msg_exc = e.getMessage();
 
                         boolean isLoginJsonError = msg_exc.startsWith(
@@ -1799,14 +1787,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 while (reintents > 0) {
                     try {
                         RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
-                                new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0,
+                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                                 mida);
 
                         comunicacionsList = respostaComunicacions.getResultat();
                         for (TransmissioV2 comunicacio : comunicacionsList) {
                             ComunicacioNotificacio cn = new ComunicacioNotificacio();
                             cn.setTransmissio(comunicacio);
-                         // XYZZZ cn.setData(comunicacio.getDataEnviament());
+                            cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
                             cn.setTipus("comunicacio");
                             cns.add(cn);
                         }
@@ -1836,8 +1824,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 // Ordenam comunicacions a mostrar
-                sortedTotes = cns.stream()
-                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                sortedTotes = cns.stream().sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
 
                 comNumero = sortedTotes.size();
@@ -1846,7 +1833,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             int totesTotals = comNumero;
 
-//            Collections.reverse(comunicacions);
+            //            Collections.reverse(comunicacions);
 
             @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> totesMap = (Map<Long, TransmissioV2>) request.getSession()
@@ -1858,29 +1845,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             for (ComunicacioNotificacio t : sortedTotes) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 totesMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoComunicacions = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= totesTotals) {
-                infoComunicacions.put("comunicacions",
-                        sortedTotes.subList(pagina * regPag, (pagina + 1) * regPag));
+                infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, (pagina + 1) * regPag));
             } else {
-                infoComunicacions.put("comunicacions",
-                        sortedTotes.subList(pagina * regPag, totesTotals));
+                infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, totesTotals));
             }
-            infoComunicacions
-                    .put("urldetallbase",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url")
-                                    + "#");
-            infoComunicacions
-                    .put("urldetallbase2",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url")
-                                    + "#");
+            infoComunicacions.put("urldetallbase",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoComunicacions.put("urldetallbase2",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoComunicacions.put("urldetallbase3",
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacions.put("registresPagina", formRegPorPagina);
@@ -1889,7 +1867,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacions);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -1920,10 +1898,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_TOTES_PENDENTS = "totespendentsnotib";
 
-    public void consultaTotesPendents(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaTotesPendents(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -1977,17 +1954,15 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif,
-                        new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0,
-                        mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
-                        new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0,
-                        mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
 
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
-                 // XYZZZ cn.setData(comunicacio.getDataEnviament());
+                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
                     cn.setTipus("comunicacio");
                     cns.add(cn);
                 }
@@ -1996,7 +1971,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
-                 // XYZZZ cn.setData(notificacio.getDataEnviament());
+                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
                     cn.setTipus("notificacio");
                     cns.add(cn);
                 }
@@ -2018,13 +1993,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             if (totesPendentsMap == null) {
                 totesPendentsMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        totesPendentsMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesPendentsMap);
             }
 
             for (ComunicacioNotificacio t : sortedTotesPendents) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 totesPendentsMap.put(t.getTransmissio().getId(), t);
             }
 
@@ -2036,16 +2009,10 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 infoTotesPendents.put("comunicacions",
                         sortedTotesPendents.subList(pagina * regPag, totesPendentsTotals));
             }
-            infoTotesPendents
-                    .put("urldetallbase",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url")
-                                    + "#");
-            infoTotesPendents
-                    .put("urldetallbase2",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url")
-                                    + "#");
+            infoTotesPendents.put("urldetallbase",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoTotesPendents.put("urldetallbase2",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoTotesPendents.put("urldetallbase3",
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoTotesPendents.put("registresPagina", formRegPorPagina);
@@ -2054,7 +2021,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoTotesPendents);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -2085,10 +2052,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String URL_REST_SERVICE_TOTES_LLEGIDES = "totesllegidesnotib";
 
-    public void consultaTotesLlegides(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
+    public void consultaTotesLlegides(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -2142,17 +2108,15 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
-                        new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0,
-                        mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
-                        new LocalDate(formDataInici), new LocalDate(formDataFi), true, locale.getLanguage(), 0,
-                        mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
 
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
-                 // XYZZZ cn.setData(comunicacio.getDataEnviament());
+                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
                     cn.setTipus("comunicacio");
                     cns.add(cn);
                 }
@@ -2161,7 +2125,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
-                 // XYZZZ cn.setData(notificacio.getDataEnviament());
+                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
                     cn.setTipus("notificacio");
                     cns.add(cn);
                 }
@@ -2183,13 +2147,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             if (totesLlegidesMap == null) {
                 totesLlegidesMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB,
-                        totesLlegidesMap);
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesLlegidesMap);
             }
 
             for (ComunicacioNotificacio t : sortedTotesLlegides) {
-                t.getTransmissio()
-                        .setOrganGestor(t.getTransmissio().getOrganGestor());
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
                 totesLlegidesMap.put(t.getTransmissio().getId(), t);
             }
 
@@ -2201,16 +2163,10 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 infoTotesLlegides.put("comunicacions",
                         sortedTotesLlegides.subList(pagina * regPag, totesLlegidesTotals));
             }
-            infoTotesLlegides
-                    .put("urldetallbase",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url")
-                                    + "#");
-            infoTotesLlegides
-                    .put("urldetallbase2",
-                            getPropertyRequired(
-                                    NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url")
-                                    + "#");
+            infoTotesLlegides.put("urldetallbase",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoTotesLlegides.put("urldetallbase2",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoTotesLlegides.put("urldetallbase3",
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoTotesLlegides.put("registresPagina", formRegPorPagina);
@@ -2219,7 +2175,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoTotesLlegides);
 
-//            log.info(json);
+            //            log.info(json);
 
             try {
 
@@ -2249,10 +2205,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String NOTIFICACIONS_NOTIB_DETALL_PAGE = "notibdetall";
 
-    public void notificacioNotibDetall(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet) {
+    public void notificacioNotibDetall(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         log.info("\n\n  PAGINA NOTIB DETALL QUERY => ]" + query + "[");
 
@@ -2290,8 +2245,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             map.put("titol", "Notificacio amb ID " + n.getId());
-            map.put("urltornar",
-                    absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE + "/0");
+            map.put("urltornar", absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE + "/0");
             map.put("subtitol", (n.getDescripcio() == null) ? "" : n.getDescripcio());
 
             List<KeyValue> camps = new ArrayList<NotibCarpetaFrontPlugin.KeyValue>();
@@ -2306,13 +2260,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             camps.add(newKeyValue(T("numExpedient"), n.getNumExpedient()));
             camps.add(newKeyValue(T("concepte"), n.getConcepte()));
             camps.add(newKeyValue(T("descripcio"), n.getDescripcio()));
-         // XYZZZ camps.add(newKeyValue(T("dataEnviament"), n.getDataEnviament().toDate()));
+            camps.add(newKeyValue(T("dataEnviament"), convertToApiDate(n.getDataEnviament())));
 
             String estatStr;
             estatStr = n.getEstat().getCodi();
 
             camps.add(newKeyValue(T("estat"), estatStr));
-         // XYZZZ camps.add(newKeyValue(T("dataEstat"), n.getDataEstat().toDate()));
+            camps.add(newKeyValue(T("dataEstat"), convertToApiDate(n.getDataEstat())));
 
             DocumentConsultaV2 document = n.getDocument();
             if (document != null) {
@@ -2340,7 +2294,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             // Error
             camps.add(newKeyValue(T("error"), String.valueOf(n.isError())));
-         // XYZZZ camps.add(newKeyValue(T("errorData"), n.getErrorData().toDate()));
+            camps.add(newKeyValue(T("errorData"), convertToApiDate(n.getErrorData())));
             camps.add(newKeyValue(T("errorDescripcio"), n.getErrorDescripcio()));
 
             // XYZ Aquests camps no s'empren al front? No se perque estaven aqui.
@@ -2356,8 +2310,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
-            String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map,
-                    generat);
+            String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map, generat);
 
             responsePage(request, response, locale, fullPage, absolutePluginRequestPath);
 
@@ -2376,16 +2329,16 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     protected static final String REACT_JS_PAGE = "notib_reactjs_main.js";
 
-    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
             response.setContentType("application/javascript");
 
-            response.setHeader("Content-Disposition", "inline;filename=\""
-                    + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
             String resource = "/webpage/notib_reactjs_main.js";
 
@@ -2463,8 +2416,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected String encapsulaEnPaginaHtml(String absolutePluginRequestPath, Locale locale,
-            Map<String, Object> map, String generat) throws IOException {
+    protected String encapsulaEnPaginaHtml(String absolutePluginRequestPath, Locale locale, Map<String, Object> map,
+            String generat) throws IOException {
         String fullPage;
         {
 
@@ -2523,6 +2476,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
+    /*
     private IdiomaEnum getIdiomaEnumDto(String lang) {
         if (lang.equals("es")) {
             return IdiomaEnum.ES;
@@ -2530,6 +2484,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         return IdiomaEnum.CA;
 
     }
+    */
 
     /**
      * 
@@ -2571,8 +2526,17 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    public static LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
-        return new LocalDate(dateToConvert);
+    public static Date convertToApiDate(Date dateToConvert) {
+        return dateToConvert;
+    }
+    
+    
+    public static Date convertToApiDate(Long dateToConvert) {
+        if (dateToConvert == null) {
+            return null;
+        } else {
+            return new Date(dateToConvert);
+        }
     }
 
 }

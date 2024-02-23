@@ -8,4 +8,4 @@ Name | Type | Description | Notes
 **resultat** | [**List&lt;TransmissioV2&gt;**](TransmissioV2.md) | Llistat de les notificacions retornades |  [optional]
 **error** | **Boolean** | Error en la consulta |  [optional]
 **errorDescripcio** | **String** | Descripció de l&#x27;error |  [optional]
-**errorData** | [**DateTime**](DateTime.md) | Data de l&#x27;error |  [optional]
+**errorData** | **Long** | Data de l&#x27;error |  [optional]

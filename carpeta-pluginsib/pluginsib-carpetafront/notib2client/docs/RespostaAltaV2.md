@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | **Boolean** | Indica si s&#x27;ha produït algún error en l&#x27;enviament |  [optional]
-**errorData** | [**DateTime**](DateTime.md) | Data en que s&#x27;ha produït l&#x27;error |  [optional]
+**errorData** | [**Date**](Date.md) | Data en que s&#x27;ha produït l&#x27;error |  [optional]
 **errorDescripcio** | **String** | Identificador de la notificació a Notib |  [optional]
 **identificador** | **String** | Identificador únic que se li ha assignat a la notificació a Notib |  [optional]
 **estat** | [**EstatEnum**](#EstatEnum) | Estat de la notificació |  [optional]

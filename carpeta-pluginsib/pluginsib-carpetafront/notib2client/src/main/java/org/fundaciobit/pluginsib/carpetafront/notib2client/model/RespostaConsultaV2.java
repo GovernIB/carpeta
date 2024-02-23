@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
-import org.joda.time.DateTime;
 /**
  * RespostaConsultaV2
  */
@@ -45,7 +44,7 @@ public class RespostaConsultaV2 {
   private String errorDescripcio = null;
 
   @JsonProperty("errorData")
-  private DateTime errorData = null;
+  private Long errorData = null;
 
   public RespostaConsultaV2 numeroElementsTotals(Integer numeroElementsTotals) {
     this.numeroElementsTotals = numeroElementsTotals;
@@ -145,7 +144,7 @@ public class RespostaConsultaV2 {
     this.errorDescripcio = errorDescripcio;
   }
 
-  public RespostaConsultaV2 errorData(DateTime errorData) {
+  public RespostaConsultaV2 errorData(Long errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -155,11 +154,11 @@ public class RespostaConsultaV2 {
    * @return errorData
   **/
   @Schema(description = "Data de l'error")
-  public DateTime getErrorData() {
+  public Long getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(DateTime errorData) {
+  public void setErrorData(Long errorData) {
     this.errorData = errorData;
   }
 

@@ -1,153 +1,57 @@
 {
-  "numeroElementsTotals": 323,
-  "numeroElementsRetornats": 3,
-  "resultat": [
-    {
-      "id": 3752500,
-      "emisor": "GOIB",
-      "organGestor": {
-        "codi": "A04027005",
-        "nom": "Direcció General de Simplificació Administrativa, Modernització i Administració Digital",
-        "descripcio": null
-      },
-      "procediment": {
-        "codi": "894623",
-        "nom": "Mesures de camp electromagnètic (SE)",
-        "descripcio": null
-      },
-      "numExpedient": null,
-      "concepte": "test not web",
-      "descripcio": null,
-      "dataEnviament": "2024-01-25T07:34:53.962+0000",
-      "estat": {
-        "codi": "EXPIRADA",
-        "nom": "Expirada",
-        "descripcio": "S’ha superat la data de caducitat"
-      },
-      "dataEstat": "2024-02-02T23:00:00.000+0000",
-      "document": {
-        "nom": "blank.pdf",
-        "mediaType": "application/pdf",
-        "mida": 6911,
-        "url": "https://se.caib.es/notibapi/interna/consulta/v2/document/3752498"
-      },
-      "titular": {
-        "tipus": {
-          "codi": "FISICA",
-          "nom": "Persona física",
-          "descripcio": null
-        },
-        "nom": "Nom",
-        "llinatge1": "Llinatges",
-        "llinatge2": null,
-        "nif": "99999999R",
-        "email": null
-      },
-      "destinataris": [],
-      "error": false,
-      "errorData": null,
-      "errorDescripcio": null,
-      "justificant": null,
-      "certificacio": "https://se.caib.es/notibapi/interna/consulta/v2/certificacio/3752500"
-    },
-    {
-      "id": 3975600,
-      "emisor": "GOIB",
-      "organGestor": {
-        "codi": "A04027005",
-        "nom": "Direcció General de Simplificació Administrativa, Modernització i Administració Digital",
-        "descripcio": null
-      },
-      "procediment": {
-        "codi": "894623",
-        "nom": "Mesures de camp electromagnètic (SE)",
-        "descripcio": null
-      },
-      "numExpedient": null,
-      "concepte": "Activitat 4",
-      "descripcio": "Activitat de la Dehú",
-      "dataEnviament": "2024-01-29T16:47:51.012+0000",
-      "estat": {
-        "codi": "EXPIRADA",
-        "nom": "Expirada",
-        "descripcio": "S’ha superat la data de caducitat"
-      },
-      "dataEstat": "2024-02-08T23:00:00.000+0000",
-      "document": {
-        "nom": "annex_firmat.pdf",
-        "mediaType": "application/pdf",
-        "mida": 67506,
-        "url": "https://se.caib.es/notibapi/interna/consulta/v2/document/3975597"
-      },
-      "titular": {
-        "tipus": {
-          "codi": "FISICA",
-          "nom": "Persona física",
-          "descripcio": null
-        },
-        "nom": "Nom",
-        "llinatge1": "Llinatge1 Llinatge2",
-        "llinatge2": null,
-        "nif": "99999999R",
-        "email": null
-      },
-      "destinataris": [],
-      "error": false,
-      "errorData": null,
-      "errorDescripcio": null,
-      "justificant": null,
-      "certificacio": "https://se.caib.es/notibapi/interna/consulta/v2/certificacio/3975600"
-    },
-    {
-      "id": 3975700,
-      "emisor": "GOIB",
-      "organGestor": {
-        "codi": "A04027005",
-        "nom": "Direcció General de Simplificació Administrativa, Modernització i Administració Digital",
-        "descripcio": null
-      },
-      "procediment": {
-        "codi": "894623",
-        "nom": "Mesures de camp electromagnètic (SE)",
-        "descripcio": null
-      },
-      "numExpedient": null,
-      "concepte": "Activitat 4",
-      "descripcio": "Activitat de la Dehú",
-      "dataEnviament": "2024-01-29T16:49:32.019+0000",
-      "estat": {
-        "codi": "EXPIRADA",
-        "nom": "Expirada",
-        "descripcio": "S’ha superat la data de caducitat"
-      },
-      "dataEstat": "2024-02-08T23:00:00.000+0000",
-      "document": {
-        "nom": "annex_firmat.pdf",
-        "mediaType": "application/pdf",
-        "mida": 67506,
-        "url": "https://se.caib.es/notibapi/interna/consulta/v2/document/3975697"
-      },
-      "titular": {
-        "tipus": {
-          "codi": "FISICA",
-          "nom": "Persona física",
-          "descripcio": null
-        },
-        "nom": "Nom",
-        "llinatge1": "Llinatge1 Llinatge2",
-        "llinatge2": null,
-        "nif": "99999999R",
-        "email": null
-      },
-      "destinataris": [],
-      "error": false,
-      "errorData": null,
-      "errorDescripcio": null,
-      "justificant": null,
-      "certificacio": "https://se.caib.es/notibapi/interna/consulta/v2/certificacio/3975700"
-    }
-  ],
-  "error": false,
-  "errorDescripcio": null,
-  "errorData": null
+    "numeroElementsTotals": 325,
+    "numeroElementsRetornats": 1,
+    "resultat": [
+        {
+            "id": 3752500,
+            "emisor": "GOIB",
+            "organGestor": {
+                "codi": "A04027005",
+                "nom": "Direcció General de Simplificació Administrativa, Modernització i Administració Digital",
+                "descripcio": null
+            },
+            "procediment": {
+                "codi": "894623",
+                "nom": "Mesures de camp electromagnètic (SE)",
+                "descripcio": null
+            },
+            "numExpedient": null,
+            "concepte": "test not web",
+            "descripcio": null,
+            "dataEnviament": 1706168093962,
+            "estat": {
+                "codi": "EXPIRADA",
+                "nom": "Expirada",
+                "descripcio": "S’ha superat la data de caducitat"
+            },
+            "dataEstat": 1706914800000,
+            "document": {
+                "nom": "blank.pdf",
+                "mediaType": "application/pdf",
+                "mida": 6911,
+                "url": "https://se.caib.es/notibapi/interna/consulta/v2/document/3752498"
+            },
+            "titular": {
+                "tipus": {
+                    "codi": "FISICA",
+                    "nom": "Persona física",
+                    "descripcio": null
+                },
+                "nom": "Nom",
+                "llinatge1": "Llinatges",
+                "llinatge2": null,
+                "nif": "99999999R",
+                "email": null
+            },
+            "destinataris": [],
+            "error": 0,
+            "errorData": null,
+            "errorDescripcio": null,
+            "justificant": null,
+            "certificacio": "https://se.caib.es/notibapi/interna/consulta/v2/certificacio/3752500"
+        }
+    ],
+    "error": false,
+    "errorDescripcio": null,
+    "errorData": null
 }

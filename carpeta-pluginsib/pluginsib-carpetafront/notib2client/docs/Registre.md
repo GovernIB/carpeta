@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **numero** | **Integer** | Número de registre |  [optional]
-**data** | [**DateTime**](DateTime.md) | Data del registre |  [optional]
+**data** | [**Date**](Date.md) | Data del registre |  [optional]
 **numeroFormatat** | **String** | Número de registre amb format |  [optional]
 **estat** | [**EstatEnum**](#EstatEnum) | Estat del registre |  [optional]
 **oficina** | **String** | Oficina on s&#x27;ha realitzat el registre |  [optional]

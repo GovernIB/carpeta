@@ -2,14 +2,11 @@ package org.fundaciobit.pluginsib.carpetafront.notib2client.services;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.*;
 
 import java.text.DateFormat;
 
 import javax.ws.rs.ext.ContextResolver;
-
-import org.joda.time.DateTime;
 
 
 public class JSON implements ContextResolver<ObjectMapper> {
@@ -24,11 +21,7 @@ public class JSON implements ContextResolver<ObjectMapper> {
     mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
     mapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
     mapper.setDateFormat(new RFC3339DateFormat());
-    //mapper.registerModule(new JodaModule());
-    SimpleModule modul = new SimpleModule();
-    modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
-    modul.addDeserializer(Boolean.class, new BooleanDeserializer());
-    mapper.registerModule(modul);
+    mapper.registerModule(new JodaModule());
   }
 
   /**

@@ -19,8 +19,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import org.joda.time.DateTime;
 /**
  * RespostaConsultaDadesRegistreV2
  */
@@ -32,7 +32,7 @@ public class RespostaConsultaDadesRegistreV2 {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private DateTime errorData = null;
+  private Date errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -44,7 +44,7 @@ public class RespostaConsultaDadesRegistreV2 {
   private String numeroFormatat = null;
 
   @JsonProperty("dataRegistre")
-  private DateTime dataRegistre = null;
+  private Date dataRegistre = null;
 
   @JsonProperty("justificant")
   private List<byte[]> justificant = null;
@@ -59,10 +59,10 @@ public class RespostaConsultaDadesRegistreV2 {
   private Boolean enviamentSir = null;
 
   @JsonProperty("dataRecepcioSir")
-  private DateTime dataRecepcioSir = null;
+  private Date dataRecepcioSir = null;
 
   @JsonProperty("dataRegistreDestiSir")
-  private DateTime dataRegistreDestiSir = null;
+  private Date dataRegistreDestiSir = null;
 
   public RespostaConsultaDadesRegistreV2 error(Boolean error) {
     this.error = error;
@@ -82,7 +82,7 @@ public class RespostaConsultaDadesRegistreV2 {
     this.error = error;
   }
 
-  public RespostaConsultaDadesRegistreV2 errorData(DateTime errorData) {
+  public RespostaConsultaDadesRegistreV2 errorData(Date errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -92,11 +92,11 @@ public class RespostaConsultaDadesRegistreV2 {
    * @return errorData
   **/
   @Schema(description = "Data en que s'ha produït l'error")
-  public DateTime getErrorData() {
+  public Date getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(DateTime errorData) {
+  public void setErrorData(Date errorData) {
     this.errorData = errorData;
   }
 
@@ -154,7 +154,7 @@ public class RespostaConsultaDadesRegistreV2 {
     this.numeroFormatat = numeroFormatat;
   }
 
-  public RespostaConsultaDadesRegistreV2 dataRegistre(DateTime dataRegistre) {
+  public RespostaConsultaDadesRegistreV2 dataRegistre(Date dataRegistre) {
     this.dataRegistre = dataRegistre;
     return this;
   }
@@ -164,11 +164,11 @@ public class RespostaConsultaDadesRegistreV2 {
    * @return dataRegistre
   **/
   @Schema(description = "Data del registre")
-  public DateTime getDataRegistre() {
+  public Date getDataRegistre() {
     return dataRegistre;
   }
 
-  public void setDataRegistre(DateTime dataRegistre) {
+  public void setDataRegistre(Date dataRegistre) {
     this.dataRegistre = dataRegistre;
   }
 
@@ -252,7 +252,7 @@ public class RespostaConsultaDadesRegistreV2 {
     this.enviamentSir = enviamentSir;
   }
 
-  public RespostaConsultaDadesRegistreV2 dataRecepcioSir(DateTime dataRecepcioSir) {
+  public RespostaConsultaDadesRegistreV2 dataRecepcioSir(Date dataRecepcioSir) {
     this.dataRecepcioSir = dataRecepcioSir;
     return this;
   }
@@ -262,15 +262,15 @@ public class RespostaConsultaDadesRegistreV2 {
    * @return dataRecepcioSir
   **/
   @Schema(description = "En cas d'enviament SIR, data en que s'ha recepcionat el registre")
-  public DateTime getDataRecepcioSir() {
+  public Date getDataRecepcioSir() {
     return dataRecepcioSir;
   }
 
-  public void setDataRecepcioSir(DateTime dataRecepcioSir) {
+  public void setDataRecepcioSir(Date dataRecepcioSir) {
     this.dataRecepcioSir = dataRecepcioSir;
   }
 
-  public RespostaConsultaDadesRegistreV2 dataRegistreDestiSir(DateTime dataRegistreDestiSir) {
+  public RespostaConsultaDadesRegistreV2 dataRegistreDestiSir(Date dataRegistreDestiSir) {
     this.dataRegistreDestiSir = dataRegistreDestiSir;
     return this;
   }
@@ -280,11 +280,11 @@ public class RespostaConsultaDadesRegistreV2 {
    * @return dataRegistreDestiSir
   **/
   @Schema(description = "En cas d'enviament SIR, data en que s'ha registrat en el registre de destí")
-  public DateTime getDataRegistreDestiSir() {
+  public Date getDataRegistreDestiSir() {
     return dataRegistreDestiSir;
   }
 
-  public void setDataRegistreDestiSir(DateTime dataRegistreDestiSir) {
+  public void setDataRegistreDestiSir(Date dataRegistreDestiSir) {
     this.dataRegistreDestiSir = dataRegistreDestiSir;
   }
 

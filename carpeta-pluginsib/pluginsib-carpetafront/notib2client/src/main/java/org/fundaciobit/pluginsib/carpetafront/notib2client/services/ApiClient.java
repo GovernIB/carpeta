@@ -66,8 +66,6 @@ public class ApiClient {
     httpClient = buildHttpClient(debugging);
 
     this.dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-    //XYZ ZZZ DateTimeFormat que pareix que ha de correspondre amb el que arriba de la API?
-    //this.dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS-ZZZZ");
 
     // Use UTC as the default time zone.
     this.dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));

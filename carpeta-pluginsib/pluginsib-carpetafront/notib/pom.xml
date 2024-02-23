@@ -26,17 +26,11 @@
             <version>1.1.28</version>
             <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- NOTIB-->
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-pluginsib-notib2client</artifactId>
+            <artifactId>carpeta-pluginsib-carpetafront-notib2client</artifactId>
             <version>2.0</version>
         </dependency>
 
@@ -147,9 +141,9 @@
                                     <library>resteasy</library>
                                     <configOptions>
                                         <groupId>es.caib.carpeta</groupId>
-                                        <artifactId>carpeta-pluginsib-notib2client</artifactId>
+                                        <artifactId>carpeta-pluginsib-carpetafront-notib2client</artifactId>
                                         <artifactVersion>2.0</artifactVersion>
-                                        <dateLibrary>joda</dateLibrary>
+                                        <dateLibrary>java11</dateLibrary>
                                         <useTags>true</useTags>
                                         <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                         <java11>true</java11>

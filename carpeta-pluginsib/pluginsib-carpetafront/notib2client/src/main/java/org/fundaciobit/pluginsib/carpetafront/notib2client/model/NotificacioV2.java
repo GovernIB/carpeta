@@ -19,10 +19,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.DocumentV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Enviament;
-import org.joda.time.DateTime;
 /**
  * Objecte amb les dades necessàries per a donar d&#x27;alta una notificació
  */
@@ -78,13 +78,13 @@ public class NotificacioV2 {
   private String descripcio = null;
 
   @JsonProperty("enviamentDataProgramada")
-  private DateTime enviamentDataProgramada = null;
+  private Date enviamentDataProgramada = null;
 
   @JsonProperty("retard")
   private Integer retard = null;
 
   @JsonProperty("caducitat")
-  private DateTime caducitat = null;
+  private Date caducitat = null;
 
   @JsonProperty("caducitatDiesNaturals")
   private Integer caducitatDiesNaturals = null;
@@ -243,7 +243,7 @@ public class NotificacioV2 {
     this.descripcio = descripcio;
   }
 
-  public NotificacioV2 enviamentDataProgramada(DateTime enviamentDataProgramada) {
+  public NotificacioV2 enviamentDataProgramada(Date enviamentDataProgramada) {
     this.enviamentDataProgramada = enviamentDataProgramada;
     return this;
   }
@@ -253,11 +253,11 @@ public class NotificacioV2 {
    * @return enviamentDataProgramada
   **/
   @Schema(description = "Data en la que l’enviament es posarà a disposició per a la compareixença.  * En cas de no informar-se es posarà en disposició per a la compareixença de forma inmediata.  El format de la data serà del tipus yyyy-MM-dd")
-  public DateTime getEnviamentDataProgramada() {
+  public Date getEnviamentDataProgramada() {
     return enviamentDataProgramada;
   }
 
-  public void setEnviamentDataProgramada(DateTime enviamentDataProgramada) {
+  public void setEnviamentDataProgramada(Date enviamentDataProgramada) {
     this.enviamentDataProgramada = enviamentDataProgramada;
   }
 
@@ -279,7 +279,7 @@ public class NotificacioV2 {
     this.retard = retard;
   }
 
-  public NotificacioV2 caducitat(DateTime caducitat) {
+  public NotificacioV2 caducitat(Date caducitat) {
     this.caducitat = caducitat;
     return this;
   }
@@ -289,11 +289,11 @@ public class NotificacioV2 {
    * @return caducitat
   **/
   @Schema(description = "Data d’expiració de l’enviament.  * Aquest camp és excloent amb el de caducitatDiesNaturals. Només s'ha d'indicar un dels dos. En cas d'informar els dos, s'ignorarà el camp caducitatDiesNaturals.  * Aquest camp és obligatori per notificacions i opcional per a comunicacions.  El format de la data serà del tipus yyyy-MM-dd")
-  public DateTime getCaducitat() {
+  public Date getCaducitat() {
     return caducitat;
   }
 
-  public void setCaducitat(DateTime caducitat) {
+  public void setCaducitat(Date caducitat) {
     this.caducitat = caducitat;
   }
 

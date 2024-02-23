@@ -8,7 +8,7 @@ import org.fundaciobit.pluginsib.carpetafront.notib2client.services.Pair;
   import javax.ws.rs.core.GenericType;
 
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Arxiu;
-import org.joda.time.LocalDate;
+import java.util.Date;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 comunicacionsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 comunicacionsByTitular(String dniTitular, Date dataInicial, Date dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -100,7 +100,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 comunicacionsLlegidesByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 comunicacionsLlegidesByTitular(String dniTitular, Date dataInicial, Date dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -151,7 +151,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 comunicacionsPendentsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 comunicacionsPendentsByTitular(String dniTitular, Date dataInicial, Date dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -319,7 +319,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 notificacionsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 notificacionsByTitular(String dniTitular, Date dataInicial, Date dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -370,7 +370,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 notificacionsLlegidesByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 notificacionsLlegidesByTitular(String dniTitular, Date dataInicial, Date dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -421,7 +421,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 notificacionsPendentsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 notificacionsPendentsByTitular(String dniTitular, Date dataInicial, Date dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **estat** | [**EstatEnum**](#EstatEnum) | Estat de la notificació |  [optional]
-**data** | [**DateTime**](DateTime.md) | Data en que s&#x27;ha creat el datat |  [optional]
+**data** | [**Date**](Date.md) | Data en que s&#x27;ha creat el datat |  [optional]
 **origen** | **String** | Origen del datat |  [optional]
 **receptorNif** | **String** | Nif del receptor de la notificació |  [optional]
 **receptorNom** | **String** | Nom del receptor de la notificació |  [optional]

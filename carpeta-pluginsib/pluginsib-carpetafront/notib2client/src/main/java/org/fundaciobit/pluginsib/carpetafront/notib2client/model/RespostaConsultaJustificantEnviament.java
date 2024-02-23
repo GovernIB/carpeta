@@ -18,8 +18,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.Date;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Fitxer;
-import org.joda.time.DateTime;
 /**
  * RespostaConsultaJustificantEnviament
  */
@@ -31,7 +31,7 @@ public class RespostaConsultaJustificantEnviament {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private DateTime errorData = null;
+  private Date errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -57,7 +57,7 @@ public class RespostaConsultaJustificantEnviament {
     this.error = error;
   }
 
-  public RespostaConsultaJustificantEnviament errorData(DateTime errorData) {
+  public RespostaConsultaJustificantEnviament errorData(Date errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -67,11 +67,11 @@ public class RespostaConsultaJustificantEnviament {
    * @return errorData
   **/
   @Schema(description = "Data en que s'ha produït l'error")
-  public DateTime getErrorData() {
+  public Date getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(DateTime errorData) {
+  public void setErrorData(Date errorData) {
     this.errorData = errorData;
   }
 

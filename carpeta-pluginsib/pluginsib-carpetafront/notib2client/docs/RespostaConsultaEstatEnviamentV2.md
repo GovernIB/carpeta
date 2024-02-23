@@ -4,13 +4,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | **Boolean** | Indica si s&#x27;ha produït algún error en l&#x27;enviament |  [optional]
-**errorData** | [**DateTime**](DateTime.md) | Data en que s&#x27;ha produït l&#x27;error |  [optional]
+**errorData** | [**Date**](Date.md) | Data en que s&#x27;ha produït l&#x27;error |  [optional]
 **errorDescripcio** | **String** | Identificador de la notificació a Notib |  [optional]
 **identificador** | **String** | Identificador de la notificació a Notib |  [optional]
 **referencia** | **String** | Identificador de l&#x27;enviament a Notib |  [optional]
 **notificaIndentificador** | **String** | Identificador de l&#x27;enviament a Notific@ |  [optional]
 **estat** | [**EstatEnum**](#EstatEnum) | Enumerat amb la informació de l&#x27;estat de l&#x27;enviament |  [optional]
-**estatData** | [**DateTime**](DateTime.md) | Data en que s&#x27;ha assignat l&#x27;estat actual de l&#x27;enviament |  [optional]
+**estatData** | [**Date**](Date.md) | Data en que s&#x27;ha assignat l&#x27;estat actual de l&#x27;enviament |  [optional]
 **estatDescripcio** | **String** | Descripció de l&#x27;estat de l&#x27;enviament |  [optional]
 **enviamentSir** | **Boolean** | Indica si l&#x27;enviament s&#x27;ha realitzat a través de SIR |  [optional]
 **dehObligat** | **Boolean** | Indica si el destinatari està obligat a rebre les notificacions al DEH |  [optional]

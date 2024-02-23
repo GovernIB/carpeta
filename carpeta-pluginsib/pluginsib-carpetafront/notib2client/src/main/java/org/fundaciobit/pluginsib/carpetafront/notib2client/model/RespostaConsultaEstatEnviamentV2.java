@@ -19,13 +19,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Certificacio;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Datat;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Persona;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Registre;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Sir;
-import org.joda.time.DateTime;
 /**
  * RespostaConsultaEstatEnviamentV2
  */
@@ -37,7 +37,7 @@ public class RespostaConsultaEstatEnviamentV2 {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private DateTime errorData = null;
+  private Date errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -114,7 +114,7 @@ public class RespostaConsultaEstatEnviamentV2 {
   private EstatEnum estat = null;
 
   @JsonProperty("estatData")
-  private DateTime estatData = null;
+  private Date estatData = null;
 
   @JsonProperty("estatDescripcio")
   private String estatDescripcio = null;
@@ -170,7 +170,7 @@ public class RespostaConsultaEstatEnviamentV2 {
     this.error = error;
   }
 
-  public RespostaConsultaEstatEnviamentV2 errorData(DateTime errorData) {
+  public RespostaConsultaEstatEnviamentV2 errorData(Date errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -180,11 +180,11 @@ public class RespostaConsultaEstatEnviamentV2 {
    * @return errorData
   **/
   @Schema(description = "Data en que s'ha produït l'error")
-  public DateTime getErrorData() {
+  public Date getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(DateTime errorData) {
+  public void setErrorData(Date errorData) {
     this.errorData = errorData;
   }
 
@@ -278,7 +278,7 @@ public class RespostaConsultaEstatEnviamentV2 {
     this.estat = estat;
   }
 
-  public RespostaConsultaEstatEnviamentV2 estatData(DateTime estatData) {
+  public RespostaConsultaEstatEnviamentV2 estatData(Date estatData) {
     this.estatData = estatData;
     return this;
   }
@@ -288,11 +288,11 @@ public class RespostaConsultaEstatEnviamentV2 {
    * @return estatData
   **/
   @Schema(description = "Data en que s'ha assignat l'estat actual de l'enviament")
-  public DateTime getEstatData() {
+  public Date getEstatData() {
     return estatData;
   }
 
-  public void setEstatData(DateTime estatData) {
+  public void setEstatData(Date estatData) {
     this.estatData = estatData;
   }
 
