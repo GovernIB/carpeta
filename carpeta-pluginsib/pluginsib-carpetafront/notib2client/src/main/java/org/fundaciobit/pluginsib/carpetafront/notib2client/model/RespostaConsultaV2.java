@@ -153,7 +153,7 @@ public class RespostaConsultaV2 {
    * Data de l&#x27;error
    * @return errorData
   **/
-  @Schema(description = "Data de l'error")
+  @Schema(example = "1706168093962", description = "Data de l'error")
   public Long getErrorData() {
     return errorData;
   }

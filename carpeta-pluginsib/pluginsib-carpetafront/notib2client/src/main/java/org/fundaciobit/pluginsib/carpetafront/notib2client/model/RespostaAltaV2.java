@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.EnviamentReferenciaV2;
 /**
@@ -33,7 +32,7 @@ public class RespostaAltaV2 {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private Date errorData = null;
+  private Long errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -84,7 +83,7 @@ public class RespostaAltaV2 {
   private List<EnviamentReferenciaV2> referencies = null;
 
   @JsonProperty("dataCreacio")
-  private String dataCreacio = null;
+  private Long dataCreacio = null;
 
   public RespostaAltaV2 error(Boolean error) {
     this.error = error;
@@ -104,7 +103,7 @@ public class RespostaAltaV2 {
     this.error = error;
   }
 
-  public RespostaAltaV2 errorData(Date errorData) {
+  public RespostaAltaV2 errorData(Long errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -113,12 +112,12 @@ public class RespostaAltaV2 {
    * Data en que s&#x27;ha produït l&#x27;error
    * @return errorData
   **/
-  @Schema(description = "Data en que s'ha produït l'error")
-  public Date getErrorData() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha produït l'error")
+  public Long getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(Date errorData) {
+  public void setErrorData(Long errorData) {
     this.errorData = errorData;
   }
 
@@ -202,7 +201,7 @@ public class RespostaAltaV2 {
     this.referencies = referencies;
   }
 
-  public RespostaAltaV2 dataCreacio(String dataCreacio) {
+  public RespostaAltaV2 dataCreacio(Long dataCreacio) {
     this.dataCreacio = dataCreacio;
     return this;
   }
@@ -211,12 +210,12 @@ public class RespostaAltaV2 {
    * Data en que s&#x27;ha donat d&#x27;alta la notificació
    * @return dataCreacio
   **/
-  @Schema(example = "2023-05-29T07:32:03.526+0000", description = "Data en que s'ha donat d'alta la notificació")
-  public String getDataCreacio() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha donat d'alta la notificació")
+  public Long getDataCreacio() {
     return dataCreacio;
   }
 
-  public void setDataCreacio(String dataCreacio) {
+  public void setDataCreacio(Long dataCreacio) {
     this.dataCreacio = dataCreacio;
   }
 

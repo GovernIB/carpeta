@@ -70,7 +70,7 @@ public class TransmissioV2 {
   private List<PersonaConsultaV2> destinataris = null;
 
   @JsonProperty("error")
-  private Long error = null;
+  private Boolean error = null;
 
   @JsonProperty("errorData")
   private Long errorData = null;
@@ -219,7 +219,7 @@ public class TransmissioV2 {
    * Data d&#x27;enviament de la notificació
    * @return dataEnviament
   **/
-  @Schema(description = "Data d'enviament de la notificació")
+  @Schema(example = "1706168093962", description = "Data d'enviament de la notificació")
   public Long getDataEnviament() {
     return dataEnviament;
   }
@@ -255,7 +255,7 @@ public class TransmissioV2 {
    * Data en que s&#x27;ha realitzat l&#x27;enviament
    * @return dataEstat
   **/
-  @Schema(description = "Data en que s'ha realitzat l'enviament")
+  @Schema(example = "1706168093962", description = "Data en que s'ha realitzat l'enviament")
   public Long getDataEstat() {
     return dataEstat;
   }
@@ -326,7 +326,7 @@ public class TransmissioV2 {
     this.destinataris = destinataris;
   }
 
-  public TransmissioV2 error(Long error) {
+  public TransmissioV2 error(Boolean error) {
     this.error = error;
     return this;
   }
@@ -335,12 +335,12 @@ public class TransmissioV2 {
    * Informa si s&#x27;ha produït algun error en la notificació
    * @return error
   **/
-  @Schema(example = "0", description = "Informa si s'ha produït algun error en la notificació")
-  public Long isError() {
+  @Schema(example = "false", description = "Informa si s'ha produït algun error en la notificació")
+  public Boolean isError() {
     return error;
   }
 
-  public void setError(Long error) {
+  public void setError(Boolean error) {
     this.error = error;
   }
 
@@ -353,7 +353,7 @@ public class TransmissioV2 {
    * Data de l&#x27;error
    * @return errorData
   **/
-  @Schema(description = "Data de l'error")
+  @Schema(example = "17061680939620", description = "Data de l'error")
   public Long getErrorData() {
     return errorData;
   }

@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
 /**
  * Informació de l&#x27;apunt de registre de sortida realitzat per l&#x27;enviament
  */
@@ -30,7 +29,7 @@ public class Registre {
   private Integer numero = null;
 
   @JsonProperty("data")
-  private Date data = null;
+  private Long data = null;
 
   @JsonProperty("numeroFormatat")
   private String numeroFormatat = null;
@@ -104,7 +103,7 @@ public class Registre {
     this.numero = numero;
   }
 
-  public Registre data(Date data) {
+  public Registre data(Long data) {
     this.data = data;
     return this;
   }
@@ -113,12 +112,12 @@ public class Registre {
    * Data del registre
    * @return data
   **/
-  @Schema(description = "Data del registre")
-  public Date getData() {
+  @Schema(example = "1706168093962", description = "Data del registre")
+  public Long getData() {
     return data;
   }
 
-  public void setData(Date data) {
+  public void setData(Long data) {
     this.data = data;
   }
 

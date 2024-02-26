@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
 /**
  * Informació del datat realitzat a Notific@
  */
@@ -89,7 +88,7 @@ public class Datat {
   private EstatEnum estat = null;
 
   @JsonProperty("data")
-  private Date data = null;
+  private Long data = null;
 
   @JsonProperty("origen")
   private String origen = null;
@@ -124,7 +123,7 @@ public class Datat {
     this.estat = estat;
   }
 
-  public Datat data(Date data) {
+  public Datat data(Long data) {
     this.data = data;
     return this;
   }
@@ -133,12 +132,12 @@ public class Datat {
    * Data en que s&#x27;ha creat el datat
    * @return data
   **/
-  @Schema(description = "Data en que s'ha creat el datat")
-  public Date getData() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha creat el datat")
+  public Long getData() {
     return data;
   }
 
-  public void setData(Date data) {
+  public void setData(Long data) {
     this.data = data;
   }
 

@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Procediment;
 /**
  * RespostaConsultaEstatNotificacioV2
@@ -31,7 +30,7 @@ public class RespostaConsultaEstatNotificacioV2 {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private Date errorData = null;
+  private Long errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -97,16 +96,16 @@ public class RespostaConsultaEstatNotificacioV2 {
   private String numExpedient = null;
 
   @JsonProperty("dataCreada")
-  private Date dataCreada = null;
+  private Long dataCreada = null;
 
   @JsonProperty("dataEnviada")
-  private Date dataEnviada = null;
+  private Long dataEnviada = null;
 
   @JsonProperty("dataFinalitzada")
-  private Date dataFinalitzada = null;
+  private Long dataFinalitzada = null;
 
   @JsonProperty("dataProcessada")
-  private Date dataProcessada = null;
+  private Long dataProcessada = null;
 
   public RespostaConsultaEstatNotificacioV2 error(Boolean error) {
     this.error = error;
@@ -126,7 +125,7 @@ public class RespostaConsultaEstatNotificacioV2 {
     this.error = error;
   }
 
-  public RespostaConsultaEstatNotificacioV2 errorData(Date errorData) {
+  public RespostaConsultaEstatNotificacioV2 errorData(Long errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -135,12 +134,12 @@ public class RespostaConsultaEstatNotificacioV2 {
    * Data en que s&#x27;ha produït l&#x27;error
    * @return errorData
   **/
-  @Schema(description = "Data en que s'ha produït l'error")
-  public Date getErrorData() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha produït l'error")
+  public Long getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(Date errorData) {
+  public void setErrorData(Long errorData) {
     this.errorData = errorData;
   }
 
@@ -306,7 +305,7 @@ public class RespostaConsultaEstatNotificacioV2 {
     this.numExpedient = numExpedient;
   }
 
-  public RespostaConsultaEstatNotificacioV2 dataCreada(Date dataCreada) {
+  public RespostaConsultaEstatNotificacioV2 dataCreada(Long dataCreada) {
     this.dataCreada = dataCreada;
     return this;
   }
@@ -315,16 +314,16 @@ public class RespostaConsultaEstatNotificacioV2 {
    * Data en que s&#x27;ha donat d&#x27;alta la notificació
    * @return dataCreada
   **/
-  @Schema(description = "Data en que s'ha donat d'alta la notificació")
-  public Date getDataCreada() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha donat d'alta la notificació")
+  public Long getDataCreada() {
     return dataCreada;
   }
 
-  public void setDataCreada(Date dataCreada) {
+  public void setDataCreada(Long dataCreada) {
     this.dataCreada = dataCreada;
   }
 
-  public RespostaConsultaEstatNotificacioV2 dataEnviada(Date dataEnviada) {
+  public RespostaConsultaEstatNotificacioV2 dataEnviada(Long dataEnviada) {
     this.dataEnviada = dataEnviada;
     return this;
   }
@@ -333,16 +332,16 @@ public class RespostaConsultaEstatNotificacioV2 {
    * Data en que s&#x27;ha enviat la notificació a Notifica (o SIR)
    * @return dataEnviada
   **/
-  @Schema(description = "Data en que s'ha enviat la notificació a Notifica (o SIR)")
-  public Date getDataEnviada() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha enviat la notificació a Notifica (o SIR)")
+  public Long getDataEnviada() {
     return dataEnviada;
   }
 
-  public void setDataEnviada(Date dataEnviada) {
+  public void setDataEnviada(Long dataEnviada) {
     this.dataEnviada = dataEnviada;
   }
 
-  public RespostaConsultaEstatNotificacioV2 dataFinalitzada(Date dataFinalitzada) {
+  public RespostaConsultaEstatNotificacioV2 dataFinalitzada(Long dataFinalitzada) {
     this.dataFinalitzada = dataFinalitzada;
     return this;
   }
@@ -351,16 +350,16 @@ public class RespostaConsultaEstatNotificacioV2 {
    * Data en que s&#x27;ha finalitzat la notificació
    * @return dataFinalitzada
   **/
-  @Schema(description = "Data en que s'ha finalitzat la notificació")
-  public Date getDataFinalitzada() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha finalitzat la notificació")
+  public Long getDataFinalitzada() {
     return dataFinalitzada;
   }
 
-  public void setDataFinalitzada(Date dataFinalitzada) {
+  public void setDataFinalitzada(Long dataFinalitzada) {
     this.dataFinalitzada = dataFinalitzada;
   }
 
-  public RespostaConsultaEstatNotificacioV2 dataProcessada(Date dataProcessada) {
+  public RespostaConsultaEstatNotificacioV2 dataProcessada(Long dataProcessada) {
     this.dataProcessada = dataProcessada;
     return this;
   }
@@ -369,12 +368,12 @@ public class RespostaConsultaEstatNotificacioV2 {
    * Data en que s&#x27;ha marcat la notificació com a processada
    * @return dataProcessada
   **/
-  @Schema(description = "Data en que s'ha marcat la notificació com a processada")
-  public Date getDataProcessada() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha marcat la notificació com a processada")
+  public Long getDataProcessada() {
     return dataProcessada;
   }
 
-  public void setDataProcessada(Date dataProcessada) {
+  public void setDataProcessada(Long dataProcessada) {
     this.dataProcessada = dataProcessada;
   }
 

@@ -2,12 +2,16 @@ package org.fundaciobit.pluginsib.carpetafront.notib;
 
 import com.google.gson.Gson;
 
-import es.caib.carpeta.pluginsib.carpetafront.api.*;
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 
 import org.apache.commons.io.IOUtils;
-
 import org.fundaciobit.pluginsib.carpetafront.notib2client.api.ConsultaV2Api;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.DocumentConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.PersonaConsultaV2;
@@ -589,12 +593,75 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
 
     }
+    
+    
+    /*
+     * 
+    
+     public class BooleanDeserializer extends JsonDeserializer<Boolean> {
+    
+    protected Logger log = Logger.getLogger(this.getClass());
+    
+    public BooleanDeserializer() {
+        super();
+        log.info("Inicialiitzant BooleanDeserializer");
+    }
+
+    @Override
+    public Boolean deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        log.info("*****************Entra al deserializer Boolean");
+        String b = p.getValueAsString();
+
+        if (b == null || b.trim().length() == 0) {
+            log.info("*****************Surt del deserializerBoolean NULL");
+            return null;
+        } else {
+            log.info("*****************Surt del deserializerBoolean");
+            return b.toLowerCase().trim().equals("true");
+        }
+
+    }
+
+}
+     
+    
+    public static class MyResteasyJackson2Provider extends ResteasyJackson2Provider {
+
+        protected Logger log = Logger.getLogger(MyResteasyJackson2Provider.class);
+
+        public MyResteasyJackson2Provider() {
+            super();
+
+            ObjectMapper objectMapper = this._mapperConfig.getConfiguredMapper();
+
+            if (objectMapper == null) {
+                objectMapper = new ObjectMapper();
+                this._mapperConfig.setMapper(objectMapper);
+            }
+
+            SimpleModule modul = new SimpleModule();
+            //modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
+            modul.addDeserializer(Boolean.class, new BooleanDeserializer());
+            objectMapper.registerModule(modul);
+
+        }
+
+    }
+    */
+    
+    
 
     private ConsultaV2Api notibClientRest2 = null;
 
     private ConsultaV2Api getApi() throws Exception {
 
         if (notibClientRest2 == null) {
+            
+//            {
+//                MyResteasyJackson2Provider rj2p = new MyResteasyJackson2Provider();
+//               
+//                ResteasyProviderFactory.getInstance().register(rj2p);
+//            }
 
             String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
             String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");

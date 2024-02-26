@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Certificacio;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Datat;
@@ -37,7 +36,7 @@ public class RespostaConsultaEstatEnviamentV2 {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private Date errorData = null;
+  private Long errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -114,7 +113,7 @@ public class RespostaConsultaEstatEnviamentV2 {
   private EstatEnum estat = null;
 
   @JsonProperty("estatData")
-  private Date estatData = null;
+  private Long estatData = null;
 
   @JsonProperty("estatDescripcio")
   private String estatDescripcio = null;
@@ -170,7 +169,7 @@ public class RespostaConsultaEstatEnviamentV2 {
     this.error = error;
   }
 
-  public RespostaConsultaEstatEnviamentV2 errorData(Date errorData) {
+  public RespostaConsultaEstatEnviamentV2 errorData(Long errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -179,12 +178,12 @@ public class RespostaConsultaEstatEnviamentV2 {
    * Data en que s&#x27;ha produït l&#x27;error
    * @return errorData
   **/
-  @Schema(description = "Data en que s'ha produït l'error")
-  public Date getErrorData() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha produït l'error")
+  public Long getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(Date errorData) {
+  public void setErrorData(Long errorData) {
     this.errorData = errorData;
   }
 
@@ -278,7 +277,7 @@ public class RespostaConsultaEstatEnviamentV2 {
     this.estat = estat;
   }
 
-  public RespostaConsultaEstatEnviamentV2 estatData(Date estatData) {
+  public RespostaConsultaEstatEnviamentV2 estatData(Long estatData) {
     this.estatData = estatData;
     return this;
   }
@@ -287,12 +286,12 @@ public class RespostaConsultaEstatEnviamentV2 {
    * Data en que s&#x27;ha assignat l&#x27;estat actual de l&#x27;enviament
    * @return estatData
   **/
-  @Schema(description = "Data en que s'ha assignat l'estat actual de l'enviament")
-  public Date getEstatData() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha assignat l'estat actual de l'enviament")
+  public Long getEstatData() {
     return estatData;
   }
 
-  public void setEstatData(Date estatData) {
+  public void setEstatData(Long estatData) {
     this.estatData = estatData;
   }
 

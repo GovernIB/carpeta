@@ -20,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.joda.time.DateTime;
 /**
- * Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.
+ * Elements retornats. Pot retornar un null o una llista buida si no hi ha elements.
  */
-@Schema(description = "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.")
+@Schema(description = "Elements retornats. Pot retornar un null o una llista buida si no hi ha elements.")
 
 public class Acces {
   @JsonProperty("proveidor")

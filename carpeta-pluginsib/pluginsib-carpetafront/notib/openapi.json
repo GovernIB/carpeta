@@ -10,31 +10,25 @@
         },
         "version": "v2.0"
     },
-    "servers": [
-        {
+    "servers": [{
             "url": "/notibapi/interna",
             "description": "Servidor per defecte"
-        },
-        {
+        }, {
             "url": "https://proves.caib.es/notibapi/interna",
             "description": "Servidor de l'entorn de PROVES"
         }
     ],
-    "security": [
-        {
+    "security": [{
             "basic": []
         }
     ],
-    "tags": [
-        {
+    "tags": [{
             "name": "Consulta v2",
             "description": "API de consulta v2"
-        },
-        {
+        }, {
             "name": "Notificacio v2",
             "description": "API de notificació v2"
-        },
-        {
+        }, {
             "name": "Informació Notib",
             "description": "API de informació de Notib"
         }
@@ -42,9 +36,7 @@
     "paths": {
         "/notificacio/v2/permisConsulta": {
             "post": {
-                "tags": [
-                    "Notificacio v2"
-                ],
+                "tags": ["Notificacio v2"],
                 "summary": "Donar permis de consulta a un usuari sobre un procediment",
                 "description": "Aquest mètode permet donar el permís de consulta a un usuari específic",
                 "operationId": "donarPermisConsultaV2",
@@ -87,9 +79,7 @@
         },
         "/notificacio/v2/consultaDadesRegistre": {
             "post": {
-                "tags": [
-                    "Notificacio v2"
-                ],
+                "tags": ["Notificacio v2"],
                 "summary": "Genera el justificant i consulta la informació del registre d'una notificació.",
                 "description": "Retorna la informació del registre i el justificant d'una notificació dins Notib.",
                 "operationId": "consultaDadesRegistre",
@@ -122,9 +112,7 @@
         },
         "/notificacio/v2/alta": {
             "post": {
-                "tags": [
-                    "Notificacio v2"
-                ],
+                "tags": ["Notificacio v2"],
                 "summary": "Registra i envia la notificació a Notific@.",
                 "description": "Retorna una llista amb els codis dels enviaments creats per poder consultar el seu estat posteriorment",
                 "operationId": "alta",
@@ -157,14 +145,11 @@
         },
         "/notificacio/v2/consultaJustificantNotificacio/**": {
             "get": {
-                "tags": [
-                    "Notificacio v2"
-                ],
+                "tags": ["Notificacio v2"],
                 "summary": "Consulta el justificant de l'enviament d'una notificació",
                 "description": "Retorna el document PDF amb el justificant de l'enviament de la notificació",
                 "operationId": "consultaJustificantV2",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "identificador",
                         "in": "query",
                         "description": "Identificador de la notificació a consultar. \n * A la url del mètode es mostra aquest identificador com a '**' degut a que per compatibilitat amb versions antigues, es poden trobar identificadors que contenen el caràcter '/'. \n * Actualment els identificadors tenen el format de UUID",
@@ -194,14 +179,11 @@
         },
         "/notificacio/v2/consultaEstatNotificacio/**": {
             "get": {
-                "tags": [
-                    "Notificacio v2"
-                ],
+                "tags": ["Notificacio v2"],
                 "summary": "Consulta de la informació d'una notificació",
                 "description": "Retorna la informació sobre l'estat de l'enviament dins Notib o Notific@",
                 "operationId": "consultaEstatNotificacio",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "identificador",
                         "in": "query",
                         "description": "Identificador de la notificació a consultar. \n * A la url del mètode es mostra aquest identificador com a '**' degut a que per compatibilitat amb versions antigues, es poden trobar identificadors que contenen el caràcter '/'. \n * Actualment els identificadors tenen el format de UUID",
@@ -231,14 +213,11 @@
         },
         "/notificacio/v2/consultaEstatEnviament/**": {
             "get": {
-                "tags": [
-                    "Notificacio v2"
-                ],
+                "tags": ["Notificacio v2"],
                 "summary": "Consulta la informació de l'estat d'un enviament dins Notific@",
                 "description": "Retorna la informació sobre l'estat de l'enviament dins Notific@.",
                 "operationId": "consultaEstatEnviament",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "referencia",
                         "in": "query",
                         "description": "Referència de la notificació a consultar. \n * A la url del mètode es mostra aquesta referència com a '**' degut a que per compatibilitat amb versions antigues, es poden trobar referències que contenen el caràcter '/'. \n * Actualment les referències tenen el format de UUID",
@@ -268,14 +247,11 @@
         },
         "/consulta/v2/notificacions/{dniTitular}": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Consulta totes les notificacions d'un titular donat el seu dni",
                 "description": "Retorna informació de totes les notificacions d'un titular, i el seu estat",
                 "operationId": "notificacionsByTitular",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "dniTitular",
                         "in": "path",
                         "description": "DNI del titular de les comunicacions a consultar",
@@ -283,8 +259,7 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataInicial",
                         "in": "query",
                         "description": "Data inicial d'enviament a consultar",
@@ -297,8 +272,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataFinal",
                         "in": "query",
                         "description": "Datfa final d'enviament a consultar",
@@ -311,8 +285,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "visibleCarpeta",
                         "in": "query",
                         "description": "Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.",
@@ -324,8 +297,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "lang",
                         "in": "query",
                         "description": "Idioma de les descripcions",
@@ -334,15 +306,11 @@
                             "*/*": {
                                 "schema": {
                                     "type": "string",
-                                    "enum": [
-                                        "CA",
-                                        "ES"
-                                    ]
+                                    "enum": ["CA", "ES"]
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "pagina",
                         "in": "query",
                         "description": "Número de pàgina a mostrar en la paginació",
@@ -351,8 +319,7 @@
                             "type": "integer",
                             "format": "int32"
                         }
-                    },
-                    {
+                    }, {
                         "name": "mida",
                         "in": "query",
                         "description": "Mida de la pàgina a mostrar en la paginació",
@@ -382,14 +349,11 @@
         },
         "/consulta/v2/notificacions/{dniTitular}/pendents": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Consulta totes les notificacions pendents (no llegides) d'un titular donat el seu dni",
                 "description": "Retorna informació sobre les notificacions pendents d'un titular, i el seu estat",
                 "operationId": "notificacionsPendentsByTitular",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "dniTitular",
                         "in": "path",
                         "description": "DNI del titular de les comunicacions a consultar",
@@ -397,8 +361,7 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataInicial",
                         "in": "query",
                         "description": "Data inicial d'enviament a consultar",
@@ -411,8 +374,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataFinal",
                         "in": "query",
                         "description": "Datfa final d'enviament a consultar",
@@ -425,8 +387,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "visibleCarpeta",
                         "in": "query",
                         "description": "Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.",
@@ -438,8 +399,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "lang",
                         "in": "query",
                         "description": "Idioma de les descripcions",
@@ -448,15 +408,11 @@
                             "*/*": {
                                 "schema": {
                                     "type": "string",
-                                    "enum": [
-                                        "CA",
-                                        "ES"
-                                    ]
+                                    "enum": ["CA", "ES"]
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "pagina",
                         "in": "query",
                         "description": "Número de pàgina a mostrar en la paginació",
@@ -465,8 +421,7 @@
                             "type": "integer",
                             "format": "int32"
                         }
-                    },
-                    {
+                    }, {
                         "name": "mida",
                         "in": "query",
                         "description": "Mida de la pàgina a mostrar en la paginació",
@@ -496,14 +451,11 @@
         },
         "/consulta/v2/notificacions/{dniTitular}/llegides": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Consulta totes les notificacions llegides d'un titular donat el seu dni",
                 "description": "Retorna informació sobre les notificacions ja llegides d'un titular, i el seu estat",
                 "operationId": "notificacionsLlegidesByTitular",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "dniTitular",
                         "in": "path",
                         "description": "DNI del titular de les comunicacions a consultar",
@@ -511,8 +463,7 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataInicial",
                         "in": "query",
                         "description": "Data inicial d'enviament a consultar",
@@ -525,8 +476,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataFinal",
                         "in": "query",
                         "description": "Datfa final d'enviament a consultar",
@@ -539,8 +489,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "visibleCarpeta",
                         "in": "query",
                         "description": "Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.",
@@ -552,8 +501,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "lang",
                         "in": "query",
                         "description": "Idioma de les descripcions",
@@ -562,15 +510,11 @@
                             "*/*": {
                                 "schema": {
                                     "type": "string",
-                                    "enum": [
-                                        "CA",
-                                        "ES"
-                                    ]
+                                    "enum": ["CA", "ES"]
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "pagina",
                         "in": "query",
                         "description": "Número de pàgina a mostrar en la paginació",
@@ -579,8 +523,7 @@
                             "type": "integer",
                             "format": "int32"
                         }
-                    },
-                    {
+                    }, {
                         "name": "mida",
                         "in": "query",
                         "description": "Mida de la pàgina a mostrar en la paginació",
@@ -610,14 +553,11 @@
         },
         "/consulta/v2/justificant/{enviamentId}": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Obté el justificant d'una comunicació",
                 "description": "Retorna el document de justificant de entrega de la comunicació. El contingut del document està en Base64",
                 "operationId": "getJustificant",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "enviamentId",
                         "in": "path",
                         "description": "Identificador de l'enviament de la que es vol obtenir el justificant",
@@ -647,14 +587,11 @@
         },
         "/consulta/v2/document/{notificacioId}": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Obté el document d'una notificació",
                 "description": "Retorna el document de la notificació. El contingut del document està en Base64",
                 "operationId": "getDocument",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "notificacioId",
                         "in": "path",
                         "description": "Identificador de la notificació de la que es vol obtenir el document",
@@ -684,14 +621,11 @@
         },
         "/consulta/v2/comunicacions/{dniTitular}": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Consulta totes les comunicacions d'un titular donat el seu dni",
                 "description": "Retorna informació de totes les comunicacions d'un titular, i el seu estat",
                 "operationId": "comunicacionsByTitular",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "dniTitular",
                         "in": "path",
                         "description": "DNI del titular de les comunicacions a consultar",
@@ -699,8 +633,7 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataInicial",
                         "in": "query",
                         "description": "Data inicial d'enviament a consultar",
@@ -713,8 +646,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataFinal",
                         "in": "query",
                         "description": "Datfa final d'enviament a consultar",
@@ -727,8 +659,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "visibleCarpeta",
                         "in": "query",
                         "description": "Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.",
@@ -740,8 +671,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "lang",
                         "in": "query",
                         "description": "Idioma de les descripcions",
@@ -750,15 +680,11 @@
                             "*/*": {
                                 "schema": {
                                     "type": "string",
-                                    "enum": [
-                                        "CA",
-                                        "ES"
-                                    ]
+                                    "enum": ["CA", "ES"]
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "pagina",
                         "in": "query",
                         "description": "Número de pàgina a mostrar en la paginació",
@@ -767,8 +693,7 @@
                             "type": "integer",
                             "format": "int32"
                         }
-                    },
-                    {
+                    }, {
                         "name": "mida",
                         "in": "query",
                         "description": "Mida de la pàgina a mostrar en la paginació",
@@ -798,14 +723,11 @@
         },
         "/consulta/v2/comunicacions/{dniTitular}/pendents": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Consulta totes les comunicacions pendents (no llegides) d'un titular donat el seu dni",
                 "description": "Retorna informació sobre les comunicacions pendents d'un titular, i el seu estat",
                 "operationId": "comunicacionsPendentsByTitular",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "dniTitular",
                         "in": "path",
                         "description": "DNI del titular de les comunicacions a consultar",
@@ -813,8 +735,7 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataInicial",
                         "in": "query",
                         "description": "Data inicial d'enviament a consultar",
@@ -827,8 +748,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataFinal",
                         "in": "query",
                         "description": "Datfa final d'enviament a consultar",
@@ -841,8 +761,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "visibleCarpeta",
                         "in": "query",
                         "description": "Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.",
@@ -854,8 +773,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "lang",
                         "in": "query",
                         "description": "Idioma de les descripcions",
@@ -864,15 +782,11 @@
                             "*/*": {
                                 "schema": {
                                     "type": "string",
-                                    "enum": [
-                                        "CA",
-                                        "ES"
-                                    ]
+                                    "enum": ["CA", "ES"]
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "pagina",
                         "in": "query",
                         "description": "Número de pàgina a mostrar en la paginació",
@@ -881,8 +795,7 @@
                             "type": "integer",
                             "format": "int32"
                         }
-                    },
-                    {
+                    }, {
                         "name": "mida",
                         "in": "query",
                         "description": "Mida de la pàgina a mostrar en la paginació",
@@ -912,14 +825,11 @@
         },
         "/consulta/v2/comunicacions/{dniTitular}/llegides": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Consulta totes les comunicacions llegides d'un titular donat el seu dni",
                 "description": "Retorna informació sobre les comunicacions ja llegides d'un titular, i el seu estat",
                 "operationId": "comunicacionsLlegidesByTitular",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "dniTitular",
                         "in": "path",
                         "description": "DNI del titular de les comunicacions a consultar",
@@ -927,8 +837,7 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataInicial",
                         "in": "query",
                         "description": "Data inicial d'enviament a consultar",
@@ -941,8 +850,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "dataFinal",
                         "in": "query",
                         "description": "Datfa final d'enviament a consultar",
@@ -955,8 +863,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "visibleCarpeta",
                         "in": "query",
                         "description": "Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.",
@@ -968,8 +875,7 @@
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "lang",
                         "in": "query",
                         "description": "Idioma de les descripcions",
@@ -978,15 +884,11 @@
                             "*/*": {
                                 "schema": {
                                     "type": "string",
-                                    "enum": [
-                                        "CA",
-                                        "ES"
-                                    ]
+                                    "enum": ["CA", "ES"]
                                 }
                             }
                         }
-                    },
-                    {
+                    }, {
                         "name": "pagina",
                         "in": "query",
                         "description": "Número de pàgina a mostrar en la paginació",
@@ -995,8 +897,7 @@
                             "type": "integer",
                             "format": "int32"
                         }
-                    },
-                    {
+                    }, {
                         "name": "mida",
                         "in": "query",
                         "description": "Mida de la pàgina a mostrar en la paginació",
@@ -1026,14 +927,11 @@
         },
         "/consulta/v2/certificacio/{enviamentId}": {
             "get": {
-                "tags": [
-                    "Consulta v2"
-                ],
+                "tags": ["Consulta v2"],
                 "summary": "Obté la certificació d'una notificació",
                 "description": "Retorna el document de certificació de lectura de la notificació. El contingut del document està en Base64",
                 "operationId": "getCertificacio",
-                "parameters": [
-                    {
+                "parameters": [{
                         "name": "enviamentId",
                         "in": "path",
                         "description": "Identificador de l'enviament de la que es vol obtenir la certificació",
@@ -1063,9 +961,7 @@
         },
         "/api/rest/appinfo": {
             "get": {
-                "tags": [
-                    "Informació Notib"
-                ],
+                "tags": ["Informació Notib"],
                 "summary": "Consulta la informació de la API",
                 "description": "Retorna la data i la versió de la API REST Interna Notib",
                 "operationId": "getAppInfo",
@@ -1143,9 +1039,10 @@
                         "example": true
                     },
                     "errorData": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha produït l'error",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "errorDescripcio": {
                         "type": "string",
@@ -1164,9 +1061,10 @@
                         "example": "GOIBS1753/2023"
                     },
                     "dataRegistre": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data del registre",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "justificant": {
                         "type": "array",
@@ -1193,21 +1091,21 @@
                         "example": false
                     },
                     "dataRecepcioSir": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "En cas d'enviament SIR, data en que s'ha recepcionat el registre",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "dataRegistreDestiSir": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "En cas d'enviament SIR, data en que s'ha registrat en el registre de destí",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     }
                 }
             },
             "DocumentV2": {
-                "required": [
-                    "arxiuNom"
-                ],
+                "required": ["arxiuNom"],
                 "type": "object",
                 "properties": {
                     "arxiuNom": {
@@ -1254,69 +1152,21 @@
                         "description": "Enumerat que indica l’origen del document.\n * No s’utilitza en el cas de documents passats com a csv o uuid",
                         "example": "ADMINISTRACIO",
                         "default": "ADMINISTRACIO",
-                        "enum": [
-                            "CIUTADA",
-                            "ADMINISTRACIO"
-                        ]
+                        "enum": ["CIUTADA", "ADMINISTRACIO"]
                     },
                     "tipoDocumental": {
                         "type": "string",
                         "description": "Enumerat que indica el tipus de document.\n * No s’utilitza en el cas de documents passats com a csv o uuid",
                         "example": "INFORME",
                         "default": "NOTIFICACIO",
-                        "enum": [
-                            "RESSOLUCIO",
-                            "ACORD",
-                            "CONTRACTE",
-                            "CONVENI",
-                            "DECLARACIO",
-                            "COMUNICACIO",
-                            "NOTIFICACIO",
-                            "PUBLICACIO",
-                            "JUSTIFICANT_RECEPCIO",
-                            "ACTA",
-                            "CERTIFICAT",
-                            "DILIGENCIA",
-                            "INFORME",
-                            "SOLICITUD",
-                            "DENUNCIA",
-                            "ALEGACIO",
-                            "RECURS",
-                            "COMUNICACIO_CIUTADA",
-                            "FACTURA",
-                            "ALTRES_INCAUTATS",
-                            "ALTRES",
-                            "LLEI",
-                            "MOCIO",
-                            "INSTRUCCIO",
-                            "CONVOCATORIA",
-                            "ORDRE_DIA",
-                            "INFORME_PONENCIA",
-                            "DICTAMEN_COMISSIO",
-                            "INICIATIVA_LEGISLATIVA",
-                            "PREGUNTA",
-                            "INTERPELACIO",
-                            "RESPOSTA",
-                            "PROPOSICIO_NO_LLEI",
-                            "ESQUEMA",
-                            "PROPOSTA_RESOLUCIO",
-                            "COMPAREIXENSA",
-                            "SOLICITUD_INFORMACIO",
-                            "ESCRIT",
-                            "INICIATIVA_LEGISLATIVA2",
-                            "PETICIO"
-                        ]
+                        "enum": ["RESSOLUCIO", "ACORD", "CONTRACTE", "CONVENI", "DECLARACIO", "COMUNICACIO", "NOTIFICACIO", "PUBLICACIO", "JUSTIFICANT_RECEPCIO", "ACTA", "CERTIFICAT", "DILIGENCIA", "INFORME", "SOLICITUD", "DENUNCIA", "ALEGACIO", "RECURS", "COMUNICACIO_CIUTADA", "FACTURA", "ALTRES_INCAUTATS", "ALTRES", "LLEI", "MOCIO", "INSTRUCCIO", "CONVOCATORIA", "ORDRE_DIA", "INFORME_PONENCIA", "DICTAMEN_COMISSIO", "INICIATIVA_LEGISLATIVA", "PREGUNTA", "INTERPELACIO", "RESPOSTA", "PROPOSICIO_NO_LLEI", "ESQUEMA", "PROPOSTA_RESOLUCIO", "COMPAREIXENSA", "SOLICITUD_INFORMACIO", "ESCRIT", "INICIATIVA_LEGISLATIVA2", "PETICIO"]
                     },
                     "validesa": {
                         "type": "string",
                         "description": "Enumerat que indica la validesa del document * No s’utilitza en el cas de documents passats com a csv o uuid",
                         "example": "ORIGINAL",
                         "default": "ORIGINAL",
-                        "enum": [
-                            "COPIA",
-                            "COPIA_AUTENTICA",
-                            "ORIGINAL"
-                        ]
+                        "enum": ["COPIA", "COPIA_AUTENTICA", "ORIGINAL"]
                     },
                     "modoFirma": {
                         "type": "boolean",
@@ -1346,71 +1196,20 @@
                 "description": "Identificador del procediment SIA al que pertany la notificació * Obligatori únicament en cas d'indicar que es realitza entrega DEH\n__Actualment en desús amb l'entrada en funcionament de la DEHú__"
             },
             "EntregaPostal": {
-                "required": [
-                    "codiPostal",
-                    "tipus"
-                ],
+                "required": ["codiPostal", "tipus"],
                 "type": "object",
                 "properties": {
                     "tipus": {
                         "type": "string",
                         "description": "Enumerat que indica el tipus de entrega postal.",
                         "example": "NACIONAL",
-                        "enum": [
-                            "NACIONAL",
-                            "ESTRANGER",
-                            "APARTAT_CORREUS",
-                            "SENSE_NORMALITZAR"
-                        ]
+                        "enum": ["NACIONAL", "ESTRANGER", "APARTAT_CORREUS", "SENSE_NORMALITZAR"]
                     },
                     "viaTipus": {
                         "type": "string",
                         "description": "Enumerat que indica el tipus de via per a entregues postals\n * Obligatori quan tipoDomicili = NACIONAL",
                         "example": "CARRER",
-                        "enum": [
-                            "ALAMEDA",
-                            "CALLE",
-                            "CAMINO",
-                            "CARRER",
-                            "CARRETERA",
-                            "GLORIETA",
-                            "KALEA",
-                            "PASAJE",
-                            "PASEO",
-                            "PLAÇA",
-                            "PLAZA",
-                            "RAMBLA",
-                            "RONDA",
-                            "RUA",
-                            "SECTOR",
-                            "TRAVESIA",
-                            "URBANIZACION",
-                            "AVENIDA",
-                            "AVINGUDA",
-                            "BARRIO",
-                            "CALLEJA",
-                            "CAMI",
-                            "CAMPO",
-                            "CARRERA",
-                            "CUESTA",
-                            "EDIFICIO",
-                            "ENPARANTZA",
-                            "ESTRADA",
-                            "JARDINES",
-                            "JARDINS",
-                            "PARQUE",
-                            "PASSEIG",
-                            "PRAZA",
-                            "PLAZUELA",
-                            "PLACETA",
-                            "POBLADO",
-                            "VIA",
-                            "TRAVESSERA",
-                            "PASSATGE",
-                            "BULEVAR",
-                            "POLIGONO",
-                            "OTROS"
-                        ]
+                        "enum": ["ALAMEDA", "CALLE", "CAMINO", "CARRER", "CARRETERA", "GLORIETA", "KALEA", "PASAJE", "PASEO", "PLAÇA", "PLAZA", "RAMBLA", "RONDA", "RUA", "SECTOR", "TRAVESIA", "URBANIZACION", "AVENIDA", "AVINGUDA", "BARRIO", "CALLEJA", "CAMI", "CAMPO", "CARRERA", "CUESTA", "EDIFICIO", "ENPARANTZA", "ESTRADA", "JARDINES", "JARDINS", "PARQUE", "PASSEIG", "PRAZA", "PLAZUELA", "PLACETA", "POBLADO", "VIA", "TRAVESSERA", "PASSATGE", "BULEVAR", "POLIGONO", "OTROS"]
                     },
                     "viaNom": {
                         "maxLength": 50,
@@ -1561,9 +1360,7 @@
                 "description": "Objecte amb les dades necessàries per a realitzar una entrega postal\n * Obligatori únicament en cas d'indicar que es realitza entrega postal(Consultar prèviament si està disponible l'entrega postal a l'òrgan gestor emissor)"
             },
             "Enviament": {
-                "required": [
-                    "titular"
-                ],
+                "required": ["titular"],
                 "type": "object",
                 "properties": {
                     "titular": {
@@ -1597,23 +1394,13 @@
                         "type": "string",
                         "description": "Enumerat que indica la urgència que té l’enviament.",
                         "example": "NORMAL",
-                        "enum": [
-                            "NORMAL",
-                            "URGENT"
-                        ]
+                        "enum": ["NORMAL", "URGENT"]
                     }
                 },
                 "description": "Llista d'enviaments continguts en la Notificació/Comunicació"
             },
             "NotificacioV2": {
-                "required": [
-                    "concepte",
-                    "document",
-                    "emisorDir3Codi",
-                    "enviamentTipus",
-                    "enviaments",
-                    "usuariCodi"
-                ],
+                "required": ["concepte", "document", "emisorDir3Codi", "enviamentTipus", "enviaments", "usuariCodi"],
                 "type": "object",
                 "properties": {
                     "emisorDir3Codi": {
@@ -1635,11 +1422,7 @@
                         "description": "Enumerat que indica si l’enviament és una comunicació o una notificació",
                         "example": "NOTIFICACIO",
                         "default": "COMUNICACIO",
-                        "enum": [
-                            "NOTIFICACIO",
-                            "COMUNICACIO",
-                            "SIR"
-                        ]
+                        "enum": ["NOTIFICACIO", "COMUNICACIO", "SIR"]
                     },
                     "concepte": {
                         "maxLength": 240,
@@ -1717,10 +1500,7 @@
                         "description": "Enumerat que indica l’idioma de la notificació",
                         "example": "ES",
                         "default": "CA",
-                        "enum": [
-                            "CA",
-                            "ES"
-                        ]
+                        "enum": ["CA", "ES"]
                     },
                     "document": {
                         "$ref": "#/components/schemas/DocumentV2"
@@ -1741,10 +1521,7 @@
                 "description": "Objecte amb les dades necessàries per a donar d'alta una notificació"
             },
             "Persona": {
-                "required": [
-                    "dir3Codi",
-                    "interessatTipus"
-                ],
+                "required": ["dir3Codi", "interessatTipus"],
                 "type": "object",
                 "properties": {
                     "incapacitat": {
@@ -1757,12 +1534,7 @@
                         "type": "string",
                         "description": "Enumerat que indica el tipus de l’interessat que realitza l’enviament.\n * En cas d'indicar un interessat tipus FISICA_SENSE_NIF serà obligatori informar el camp documentTipus",
                         "example": "FISICA",
-                        "enum": [
-                            "ADMINISTRACIO",
-                            "FISICA",
-                            "JURIDICA",
-                            "FISICA_SENSE_NIF"
-                        ]
+                        "enum": ["ADMINISTRACIO", "FISICA", "JURIDICA", "FISICA_SENSE_NIF"]
                     },
                     "nom": {
                         "maxLength": 30,
@@ -1789,11 +1561,7 @@
                         "type": "string",
                         "description": "Enumerat que indica el tipus de document aportat per l’interessat\n * Aquest camp únicament es té en compte quan el tipus d’interessat és FISICA_SENSE_NIF",
                         "example": "PASSAPORT",
-                        "enum": [
-                            "PASSAPORT",
-                            "ESTRANGER",
-                            "ALTRE"
-                        ]
+                        "enum": ["PASSAPORT", "ESTRANGER", "ALTRE"]
                     },
                     "nif": {
                         "maxLength": 9,
@@ -1868,9 +1636,10 @@
                         "example": true
                     },
                     "errorData": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha produït l'error",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "errorDescripcio": {
                         "type": "string",
@@ -1886,15 +1655,7 @@
                         "type": "string",
                         "description": "Estat de la notificació",
                         "example": "PENDENT",
-                        "enum": [
-                            "PENDENT",
-                            "ENVIADA",
-                            "REGISTRADA",
-                            "FINALITZADA",
-                            "PROCESSADA",
-                            "ENVIADA_AMB_ERRORS",
-                            "FINALITZADA_AMB_ERRORS"
-                        ]
+                        "enum": ["PENDENT", "ENVIADA", "REGISTRADA", "FINALITZADA", "PROCESSADA", "ENVIADA_AMB_ERRORS", "FINALITZADA_AMB_ERRORS"]
                     },
                     "referencies": {
                         "type": "array",
@@ -1904,9 +1665,10 @@
                         }
                     },
                     "dataCreacio": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha donat d'alta la notificació",
-                        "example": "2023-05-29T07:32:03.526+0000"
+                        "format": "int64",
+                        "example": 1706168093962
                     }
                 }
             },
@@ -1945,9 +1707,10 @@
                         "example": true
                     },
                     "errorData": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha produït l'error",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "errorDescripcio": {
                         "type": "string",
@@ -1984,9 +1747,10 @@
                         "example": true
                     },
                     "errorData": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha produït l'error",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "errorDescripcio": {
                         "type": "string",
@@ -2002,15 +1766,7 @@
                         "type": "string",
                         "description": "Enumerat amb la informació de l'estat de l'enviament",
                         "example": "FINALITZADA",
-                        "enum": [
-                            "PENDENT",
-                            "ENVIADA",
-                            "REGISTRADA",
-                            "FINALITZADA",
-                            "PROCESSADA",
-                            "ENVIADA_AMB_ERRORS",
-                            "FINALITZADA_AMB_ERRORS"
-                        ]
+                        "enum": ["PENDENT", "ENVIADA", "REGISTRADA", "FINALITZADA", "PROCESSADA", "ENVIADA_AMB_ERRORS", "FINALITZADA_AMB_ERRORS"]
                     },
                     "tipus": {
                         "type": "string",
@@ -2041,24 +1797,28 @@
                         "example": "123/2023"
                     },
                     "dataCreada": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha donat d'alta la notificació",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "dataEnviada": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha enviat la notificació a Notifica (o SIR)",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "dataFinalitzada": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha finalitzat la notificació",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "dataProcessada": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha marcat la notificació com a processada",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     }
                 }
             },
@@ -2066,9 +1826,10 @@
                 "type": "object",
                 "properties": {
                     "data": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data de creació de la certificació de la notificació",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "origen": {
                         "type": "string",
@@ -2116,43 +1877,13 @@
                         "type": "string",
                         "description": "Estat de la notificació",
                         "example": "NOTIFICADA",
-                        "enum": [
-                            "NOTIB_PENDENT",
-                            "NOTIB_ENVIADA",
-                            "ABSENT",
-                            "ADRESA_INCORRECTA",
-                            "DESCONEGUT",
-                            "ENVIADA_CI",
-                            "ENVIADA_DEH",
-                            "ENVIAMENT_PROGRAMAT",
-                            "ENTREGADA_OP",
-                            "ERROR_ENTREGA",
-                            "EXPIRADA",
-                            "EXTRAVIADA",
-                            "MORT",
-                            "LLEGIDA",
-                            "NOTIFICADA",
-                            "PENDENT",
-                            "PENDENT_ENVIAMENT",
-                            "PENDENT_SEU",
-                            "PENDENT_CIE",
-                            "PENDENT_DEH",
-                            "REBUTJADA",
-                            "SENSE_INFORMACIO",
-                            "FINALITZADA",
-                            "ENVIADA",
-                            "REGISTRADA",
-                            "PROCESSADA",
-                            "ANULADA",
-                            "ENVIAT_SIR",
-                            "ENVIADA_AMB_ERRORS",
-                            "FINALITZADA_AMB_ERRORS"
-                        ]
+                        "enum": ["NOTIB_PENDENT", "NOTIB_ENVIADA", "ABSENT", "ADRESA_INCORRECTA", "DESCONEGUT", "ENVIADA_CI", "ENVIADA_DEH", "ENVIAMENT_PROGRAMAT", "ENTREGADA_OP", "ERROR_ENTREGA", "EXPIRADA", "EXTRAVIADA", "MORT", "LLEGIDA", "NOTIFICADA", "PENDENT", "PENDENT_ENVIAMENT", "PENDENT_SEU", "PENDENT_CIE", "PENDENT_DEH", "REBUTJADA", "SENSE_INFORMACIO", "FINALITZADA", "ENVIADA", "REGISTRADA", "PROCESSADA", "ANULADA", "ENVIAT_SIR", "ENVIADA_AMB_ERRORS", "FINALITZADA_AMB_ERRORS"]
                     },
                     "data": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha creat el datat",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "origen": {
                         "type": "string",
@@ -2192,9 +1923,10 @@
                         "example": 1753
                     },
                     "data": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data del registre",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "numeroFormatat": {
                         "type": "string",
@@ -2205,21 +1937,7 @@
                         "type": "string",
                         "description": "Estat del registre",
                         "example": "VALID",
-                        "enum": [
-                            "VALID",
-                            "RESERVA",
-                            "PENDENT",
-                            "OFICI_EXTERN",
-                            "OFICI_INTERN",
-                            "OFICI_ACCEPTAT",
-                            "DISTRIBUIT",
-                            "ANULAT",
-                            "RECTIFICAT",
-                            "REBUTJAT",
-                            "REENVIAT",
-                            "DISTRIBUINT",
-                            "OFICI_SIR"
-                        ]
+                        "enum": ["VALID", "RESERVA", "PENDENT", "OFICI_EXTERN", "OFICI_INTERN", "OFICI_ACCEPTAT", "DISTRIBUIT", "ANULAT", "RECTIFICAT", "REBUTJAT", "REENVIAT", "DISTRIBUINT", "OFICI_SIR"]
                     },
                     "oficina": {
                         "type": "string",
@@ -2243,9 +1961,10 @@
                         "example": true
                     },
                     "errorData": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha produït l'error",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "errorDescripcio": {
                         "type": "string",
@@ -2271,43 +1990,13 @@
                         "type": "string",
                         "description": "Enumerat amb la informació de l'estat de l'enviament",
                         "example": "NOTIFICADA",
-                        "enum": [
-                            "NOTIB_PENDENT",
-                            "NOTIB_ENVIADA",
-                            "ABSENT",
-                            "ADRESA_INCORRECTA",
-                            "DESCONEGUT",
-                            "ENVIADA_CI",
-                            "ENVIADA_DEH",
-                            "ENVIAMENT_PROGRAMAT",
-                            "ENTREGADA_OP",
-                            "ERROR_ENTREGA",
-                            "EXPIRADA",
-                            "EXTRAVIADA",
-                            "MORT",
-                            "LLEGIDA",
-                            "NOTIFICADA",
-                            "PENDENT",
-                            "PENDENT_ENVIAMENT",
-                            "PENDENT_SEU",
-                            "PENDENT_CIE",
-                            "PENDENT_DEH",
-                            "REBUTJADA",
-                            "SENSE_INFORMACIO",
-                            "FINALITZADA",
-                            "ENVIADA",
-                            "REGISTRADA",
-                            "PROCESSADA",
-                            "ANULADA",
-                            "ENVIAT_SIR",
-                            "ENVIADA_AMB_ERRORS",
-                            "FINALITZADA_AMB_ERRORS"
-                        ]
+                        "enum": ["NOTIB_PENDENT", "NOTIB_ENVIADA", "ABSENT", "ADRESA_INCORRECTA", "DESCONEGUT", "ENVIADA_CI", "ENVIADA_DEH", "ENVIAMENT_PROGRAMAT", "ENTREGADA_OP", "ERROR_ENTREGA", "EXPIRADA", "EXTRAVIADA", "MORT", "LLEGIDA", "NOTIFICADA", "PENDENT", "PENDENT_ENVIAMENT", "PENDENT_SEU", "PENDENT_CIE", "PENDENT_DEH", "REBUTJADA", "SENSE_INFORMACIO", "FINALITZADA", "ENVIADA", "REGISTRADA", "PROCESSADA", "ANULADA", "ENVIAT_SIR", "ENVIADA_AMB_ERRORS", "FINALITZADA_AMB_ERRORS"]
                     },
                     "estatData": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha assignat l'estat actual de l'enviament",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "estatDescripcio": {
                         "type": "string",
@@ -2367,14 +2056,16 @@
                 "type": "object",
                 "properties": {
                     "dataRecepcio": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha recepcionat el registre",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "dataRegistreDesti": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Data en que s'ha registrat en el registre de destí",
-                        "format": "date-time"
+                        "format": "int64",
+                        "example": 1706168093962
                     }
                 },
                 "description": "Informació per a l'enviament SIR"
@@ -2497,7 +2188,8 @@
                     "errorData": {
                         "type": "integer",
                         "description": "Data de l'error",
-                        "format": "int64"
+                        "format": "int64",
+                        "example": 1706168093962
                     }
                 }
             },
@@ -2538,7 +2230,8 @@
                     "dataEnviament": {
                         "type": "integer",
                         "description": "Data d'enviament de la notificació",
-                        "format": "int64"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "estat": {
                         "$ref": "#/components/schemas/GenericInfo"
@@ -2546,7 +2239,8 @@
                     "dataEstat": {
                         "type": "integer",
                         "description": "Data en que s'ha realitzat l'enviament",
-                        "format": "int64"
+                        "format": "int64",
+                        "example": 1706168093962
                     },
                     "document": {
                         "$ref": "#/components/schemas/DocumentConsultaV2"
@@ -2569,7 +2263,8 @@
                     "errorData": {
                         "type": "integer",
                         "description": "Data de l'error",
-                        "format": "int64"
+                        "format": "int64",
+                        "example": 17061680939620
                     },
                     "errorDescripcio": {
                         "type": "string",

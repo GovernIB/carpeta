@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 /**
  * RespostaConsultaDadesRegistreV2
@@ -32,7 +31,7 @@ public class RespostaConsultaDadesRegistreV2 {
   private Boolean error = null;
 
   @JsonProperty("errorData")
-  private Date errorData = null;
+  private Long errorData = null;
 
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
@@ -44,7 +43,7 @@ public class RespostaConsultaDadesRegistreV2 {
   private String numeroFormatat = null;
 
   @JsonProperty("dataRegistre")
-  private Date dataRegistre = null;
+  private Long dataRegistre = null;
 
   @JsonProperty("justificant")
   private List<byte[]> justificant = null;
@@ -59,10 +58,10 @@ public class RespostaConsultaDadesRegistreV2 {
   private Boolean enviamentSir = null;
 
   @JsonProperty("dataRecepcioSir")
-  private Date dataRecepcioSir = null;
+  private Long dataRecepcioSir = null;
 
   @JsonProperty("dataRegistreDestiSir")
-  private Date dataRegistreDestiSir = null;
+  private Long dataRegistreDestiSir = null;
 
   public RespostaConsultaDadesRegistreV2 error(Boolean error) {
     this.error = error;
@@ -82,7 +81,7 @@ public class RespostaConsultaDadesRegistreV2 {
     this.error = error;
   }
 
-  public RespostaConsultaDadesRegistreV2 errorData(Date errorData) {
+  public RespostaConsultaDadesRegistreV2 errorData(Long errorData) {
     this.errorData = errorData;
     return this;
   }
@@ -91,12 +90,12 @@ public class RespostaConsultaDadesRegistreV2 {
    * Data en que s&#x27;ha produït l&#x27;error
    * @return errorData
   **/
-  @Schema(description = "Data en que s'ha produït l'error")
-  public Date getErrorData() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha produït l'error")
+  public Long getErrorData() {
     return errorData;
   }
 
-  public void setErrorData(Date errorData) {
+  public void setErrorData(Long errorData) {
     this.errorData = errorData;
   }
 
@@ -154,7 +153,7 @@ public class RespostaConsultaDadesRegistreV2 {
     this.numeroFormatat = numeroFormatat;
   }
 
-  public RespostaConsultaDadesRegistreV2 dataRegistre(Date dataRegistre) {
+  public RespostaConsultaDadesRegistreV2 dataRegistre(Long dataRegistre) {
     this.dataRegistre = dataRegistre;
     return this;
   }
@@ -163,12 +162,12 @@ public class RespostaConsultaDadesRegistreV2 {
    * Data del registre
    * @return dataRegistre
   **/
-  @Schema(description = "Data del registre")
-  public Date getDataRegistre() {
+  @Schema(example = "1706168093962", description = "Data del registre")
+  public Long getDataRegistre() {
     return dataRegistre;
   }
 
-  public void setDataRegistre(Date dataRegistre) {
+  public void setDataRegistre(Long dataRegistre) {
     this.dataRegistre = dataRegistre;
   }
 
@@ -252,7 +251,7 @@ public class RespostaConsultaDadesRegistreV2 {
     this.enviamentSir = enviamentSir;
   }
 
-  public RespostaConsultaDadesRegistreV2 dataRecepcioSir(Date dataRecepcioSir) {
+  public RespostaConsultaDadesRegistreV2 dataRecepcioSir(Long dataRecepcioSir) {
     this.dataRecepcioSir = dataRecepcioSir;
     return this;
   }
@@ -261,16 +260,16 @@ public class RespostaConsultaDadesRegistreV2 {
    * En cas d&#x27;enviament SIR, data en que s&#x27;ha recepcionat el registre
    * @return dataRecepcioSir
   **/
-  @Schema(description = "En cas d'enviament SIR, data en que s'ha recepcionat el registre")
-  public Date getDataRecepcioSir() {
+  @Schema(example = "1706168093962", description = "En cas d'enviament SIR, data en que s'ha recepcionat el registre")
+  public Long getDataRecepcioSir() {
     return dataRecepcioSir;
   }
 
-  public void setDataRecepcioSir(Date dataRecepcioSir) {
+  public void setDataRecepcioSir(Long dataRecepcioSir) {
     this.dataRecepcioSir = dataRecepcioSir;
   }
 
-  public RespostaConsultaDadesRegistreV2 dataRegistreDestiSir(Date dataRegistreDestiSir) {
+  public RespostaConsultaDadesRegistreV2 dataRegistreDestiSir(Long dataRegistreDestiSir) {
     this.dataRegistreDestiSir = dataRegistreDestiSir;
     return this;
   }
@@ -279,12 +278,12 @@ public class RespostaConsultaDadesRegistreV2 {
    * En cas d&#x27;enviament SIR, data en que s&#x27;ha registrat en el registre de destí
    * @return dataRegistreDestiSir
   **/
-  @Schema(description = "En cas d'enviament SIR, data en que s'ha registrat en el registre de destí")
-  public Date getDataRegistreDestiSir() {
+  @Schema(example = "1706168093962", description = "En cas d'enviament SIR, data en que s'ha registrat en el registre de destí")
+  public Long getDataRegistreDestiSir() {
     return dataRegistreDestiSir;
   }
 
-  public void setDataRegistreDestiSir(Date dataRegistreDestiSir) {
+  public void setDataRegistreDestiSir(Long dataRegistreDestiSir) {
     this.dataRegistreDestiSir = dataRegistreDestiSir;
   }
 

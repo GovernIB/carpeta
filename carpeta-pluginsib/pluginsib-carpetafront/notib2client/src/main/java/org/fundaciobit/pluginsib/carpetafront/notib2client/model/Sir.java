@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
 /**
  * Informació per a l&#x27;enviament SIR
  */
@@ -27,12 +26,12 @@ import java.util.Date;
 
 public class Sir {
   @JsonProperty("dataRecepcio")
-  private Date dataRecepcio = null;
+  private Long dataRecepcio = null;
 
   @JsonProperty("dataRegistreDesti")
-  private Date dataRegistreDesti = null;
+  private Long dataRegistreDesti = null;
 
-  public Sir dataRecepcio(Date dataRecepcio) {
+  public Sir dataRecepcio(Long dataRecepcio) {
     this.dataRecepcio = dataRecepcio;
     return this;
   }
@@ -41,16 +40,16 @@ public class Sir {
    * Data en que s&#x27;ha recepcionat el registre
    * @return dataRecepcio
   **/
-  @Schema(description = "Data en que s'ha recepcionat el registre")
-  public Date getDataRecepcio() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha recepcionat el registre")
+  public Long getDataRecepcio() {
     return dataRecepcio;
   }
 
-  public void setDataRecepcio(Date dataRecepcio) {
+  public void setDataRecepcio(Long dataRecepcio) {
     this.dataRecepcio = dataRecepcio;
   }
 
-  public Sir dataRegistreDesti(Date dataRegistreDesti) {
+  public Sir dataRegistreDesti(Long dataRegistreDesti) {
     this.dataRegistreDesti = dataRegistreDesti;
     return this;
   }
@@ -59,12 +58,12 @@ public class Sir {
    * Data en que s&#x27;ha registrat en el registre de destí
    * @return dataRegistreDesti
   **/
-  @Schema(description = "Data en que s'ha registrat en el registre de destí")
-  public Date getDataRegistreDesti() {
+  @Schema(example = "1706168093962", description = "Data en que s'ha registrat en el registre de destí")
+  public Long getDataRegistreDesti() {
     return dataRegistreDesti;
   }
 
-  public void setDataRegistreDesti(Date dataRegistreDesti) {
+  public void setDataRegistreDesti(Long dataRegistreDesti) {
     this.dataRegistreDesti = dataRegistreDesti;
   }
 
