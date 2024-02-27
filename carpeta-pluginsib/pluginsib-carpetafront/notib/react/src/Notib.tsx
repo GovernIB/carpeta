@@ -79,7 +79,6 @@ class Notib extends React.Component<NotibProps> {
     this.processarDadesApoderaments = this.processarDadesApoderaments.bind(this);
     this.loadPaginatedData = this.loadPaginatedData.bind(this);
     this.formatDate = this.formatDate.bind(this);
-    this.dateFormat = this.dateFormat.bind(this);
     this.canviatIdioma = this.canviatIdioma.bind(this);
     i18n.on("languageChanged", this.canviatIdioma);
   }
@@ -182,17 +181,23 @@ class Notib extends React.Component<NotibProps> {
         .get(url3, { params: params })
         .then((response) => {
           if (response.data != null) {
-            let totalPagines =
-              Math.floor(response.data.totalRegistres / elementsByPage) +
-              (response.data.totalRegistres % elementsByPage == 0 ? 0 : 1);
             let paginationInfo: PaginationInfo = {
-              paginaActual: page,
-              elementsPerPagina: elementsByPage,
-              totalPagines: totalPagines,
-              elementsRetornats: response.data.registresPagina,
-              totalElements: response.data.totalRegistres,
+              paginaActual: response.data.paginaActual,
+              elementsPerPagina: response.data.elementsPerPagina,
+              totalPagines: response.data.totalPagines,
+              elementsRetornats: response.data.elementsRetornats,
+              totalElements: response.data.totalElements,
             };
 
+            /*
+            console.log("paginaActual: " + paginationInfo.paginaActual);
+            console.log("elementsPerPagina: " + paginationInfo.elementsPerPagina);
+            console.log("totalPagines: " + paginationInfo.totalPagines);
+            console.log("elementsRetornats: " + paginationInfo.elementsRetornats);
+            console.log("totalElements: " + paginationInfo.totalElements);
+            */
+
+            console.log("CRIDANT A processarDadesApoderaments ....");
             let notibDades = this.processarDadesApoderaments(
               response.data.comunicacions,
               response.data.urldetallbase,
@@ -251,17 +256,16 @@ class Notib extends React.Component<NotibProps> {
     {
       dataComunicacions.map((obj: any, i: number) => {
         let tipus: string = obj.tipus;
-        let transmissio: any = obj.transmissio;
+
         let tipusStr: string = tipus === "notificacio" ? i18n.t("notibNotificacio") : i18n.t("notibComunicacio");
 
         let urlNotib: string;
-
         if (tipus == "notificacio") {
           if (
-            transmissio.estat.codi === "FINALIZADA" ||
-            transmissio.estat.codi === "FINALITZADA" ||
-            transmissio.estat.codi === "PROCESADA" ||
-            transmissio.estat.codi === "PROCESSADA"
+            obj.estatCodi === "FINALIZADA" ||
+            obj.estatCodi === "FINALITZADA" ||
+            obj.estatCodi === "PROCESADA" ||
+            obj.estatCodi === "PROCESSADA"
           ) {
             urlNotib = urldetallbase2;
           } else {
@@ -301,22 +305,24 @@ class Notib extends React.Component<NotibProps> {
         );
 
         let element: NotibData = {
-          dataEnviament: this.dateFormat(transmissio.dataEnviament),
+          dataEnviament: obj.dataEnviament,
           tipus: tipusStr,
-          concepte: transmissio.concepte,
-          estat: transmissio.estat.codi,
-          emissor: transmissio.emisor,
-          organGestor: transmissio.organGestor.nom,
-          procediment: transmissio.procediment.codi,
-          descripcio: transmissio.descripcio,
-          darreraModificacio: this.dateFormat(transmissio.dataEstat),
-          subestat: transmissio.subestat,
+          concepte: obj.concepte,
+          estat: obj.estatCodi,
+          emissor: obj.emissor,
+          organGestor: obj.organGestor,
+          procediment: obj.procedimentCodi,
+          descripcio: obj.descripcio,
+          darreraModificacio: obj.dataEstat,
+          subestat: obj.subestat,
           notibBoto: notibBotoContent,
         };
+
         /*
         console.log("\n\n");
         console.log("Processsant notificació[" + i + "] => ");
         console.log("dataEnviament: " + element.dataEnviament);
+         
         console.log("tipus: " + element.tipus);
         console.log("concepte: " + element.concepte);
         console.log("estat: " + element.estat);
@@ -329,10 +335,15 @@ class Notib extends React.Component<NotibProps> {
         console.log("notibBoto: " + element.notibBoto);
 
         console.log("\n\n");
-*/
+
+        console.log("BUCLE FINAL[" +i+ "]");
+        */
+
         notificacions.push(element);
       });
     }
+
+    console.log("NOtificacions REBUDES POST => " + notificacions.length);
 
     return notificacions;
   }
@@ -390,9 +401,8 @@ class Notib extends React.Component<NotibProps> {
     return year.toString() + month.toString() + day.toString() + hour.toString() + minute.toString();
   };
 
-   /**  dd-MM-yyyy */
+  /**  dd-MM-yyyy */
   formatDate(d: Date): string {
-
     let date, month, year, hour, minute;
 
     date = d.getDate();
@@ -410,74 +420,9 @@ class Notib extends React.Component<NotibProps> {
     minute = minute.toString().padStart(2, "0");
 
     return `${date}/${month}/${year} ${hour}:${minute}`;
-    /**let mm = d.getMonth() + 1; // Months start at 0!
-    let dd = d.getDate();
-
-    var hour: string;
-    var minute: string;
-
-    if (d.getHours() < 10) {
-      hour = "0" + d.getHours();
-    }else{
-      hour = d.getHours().toString();
-    }
-    if (d.getMinutes() < 10) {
-      minute = "0" + d.getMinutes().toString();
-    }else{
-      minute = d.getMinutes().toString();
-    }
-
-    return ((dd < 10) ? "0" + dd : "" + dd) + (mm < 10 ? "-0" + mm : "-" + mm) + "-" + d.getFullYear()+" "+hour+":"+minute;**/
+ 
   }
-
-  dateFormat = function (dateObject: string) {
-    var d = new Date(dateObject);
-    let date, month, year, hour, minute;
-
-    date = d.getDate();
-    month = d.getMonth() + 1;
-    year = d.getFullYear();
-    hour = d.getHours();
-    minute = d.getMinutes();
-
-    date = date.toString().padStart(2, "0");
-
-    month = month.toString().padStart(2, "0");
-
-    hour = hour.toString().padStart(2, "0");
-
-    minute = minute.toString().padStart(2, "0");
-
-    return `${date}/${month}/${year} ${hour}:${minute}`;
-    /**var d = new Date(dateObject);
-    var day: string;
-    var month : string;
-    var year = d.getFullYear();
-    var hour: string;
-    var minute: string;
-
-    if (d.getDate() < 10) {
-      day = "0" + d.getDate().toString();
-    }else{
-      day = d.getDate().toString();
-    }
-    if (d.getMonth()+1 < 10) {
-      month = "0" + (d.getMonth() + 1).toString();
-    }else{
-      month = (d.getMonth() + 1).toString();
-    }
-    if (d.getHours() < 10) {
-      hour = "0" + d.getHours().toString();
-    }else{
-      hour = d.getHours().toString();
-    }
-    if (d.getMinutes() < 10) {
-      minute = "0" + d.getMinutes(). toString();
-    }else{
-      minute = d.getMinutes().toString()
-    }
-    return day + "/" + month + "/" + year + " " + hour + ":" + minute;**/
-  };
+ 
 
   dateFormatCerca = function (dateObject: Date) {
     var d = new Date(dateObject);
@@ -618,6 +563,7 @@ class Notib extends React.Component<NotibProps> {
         <>
           {formulari}
           <RenderPaginationTable
+            selectElementsByPage={[10, 20, 30, 50, 100]}
             loadPaginatedData={this.loadPaginatedData}
             columnNames={columnsNom}
             columnTitles={columnsTitols}

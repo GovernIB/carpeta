@@ -46,6 +46,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String NOTIB_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "notib.";
 
+    public static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
     /**
      *
      */
@@ -460,14 +462,17 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.NOTIFICACIONS,
+                EstatConsulta.TOTES);
+        /*
         try {
-
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -476,61 +481,58 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             List<TransmissioV2> notificacionsList;
             List<ComunicacioNotificacio> sortedNotificacions = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 notificacionsList = respostaNotificacions.getResultat();
                 for (TransmissioV2 notificacio : notificacionsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(notificacio);
-                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
-                    cn.setTipus("notificacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(notificacio, "notificacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedNotificacions = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedNotificacions.size();
-
+        
             }
-
+        
             int notificacionsTotals;
             if (notificacionsList == null) {
                 notificacionsList = new ArrayList<TransmissioV2>();
@@ -538,22 +540,21 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } else {
                 notificacionsTotals = comNumero;
             }
-
-            
-            Map<Long, TransmissioV2> notificacionsMap = (Map<Long, TransmissioV2>) request.getSession()
-                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
+            Map<Long, ComunicacioNotificacio> notificacionsMap = (Map<Long, ComunicacioNotificacio>) request
+                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+        
             if (notificacionsMap == null) {
-                notificacionsMap = new HashMap<Long, TransmissioV2>();
+                notificacionsMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedNotificacions) {
-
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                notificacionsMap.put(t.getTransmissio().getId(), t);
+        
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                notificacionsMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoNotificacions = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= notificacionsTotals) {
                 infoNotificacions.put("comunicacions",
@@ -568,33 +569,32 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoNotificacions.put("registresPagina", formRegPorPagina);
             infoNotificacions.put("totalRegistres", notificacionsTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacions);
-
+        
             //            log.info(json);
-
+        
             try {
-
+        
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
+        
                 response.getWriter().write(json);
-
+        
             } catch (IOException e) {
                 log.error("Error obtenint writer: " + e.getMessage(), e);
             }
-
+        
         } catch (Exception e) {
-
+        
             log.error("Error llistant Notificacions NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
+        
         }
-
+        */
     }
-    
-    
+
     /*
      * 
     
@@ -606,12 +606,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         super();
         log.info("Inicialiitzant BooleanDeserializer");
     }
-
+    
     @Override
     public Boolean deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         log.info("*****************Entra al deserializer Boolean");
         String b = p.getValueAsString();
-
+    
         if (b == null || b.trim().length() == 0) {
             log.info("*****************Surt del deserializerBoolean NULL");
             return null;
@@ -619,49 +619,47 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             log.info("*****************Surt del deserializerBoolean");
             return b.toLowerCase().trim().equals("true");
         }
-
+    
     }
-
-}
+    
+    }
      
     
     public static class MyResteasyJackson2Provider extends ResteasyJackson2Provider {
-
+    
         protected Logger log = Logger.getLogger(MyResteasyJackson2Provider.class);
-
+    
         public MyResteasyJackson2Provider() {
             super();
-
+    
             ObjectMapper objectMapper = this._mapperConfig.getConfiguredMapper();
-
+    
             if (objectMapper == null) {
                 objectMapper = new ObjectMapper();
                 this._mapperConfig.setMapper(objectMapper);
             }
-
+    
             SimpleModule modul = new SimpleModule();
             //modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
             modul.addDeserializer(Boolean.class, new BooleanDeserializer());
             objectMapper.registerModule(modul);
-
+    
         }
-
+    
     }
     */
-    
-    
 
     private ConsultaV2Api notibClientRest2 = null;
 
     private ConsultaV2Api getApi() throws Exception {
 
         if (notibClientRest2 == null) {
-            
-//            {
-//                MyResteasyJackson2Provider rj2p = new MyResteasyJackson2Provider();
-//               
-//                ResteasyProviderFactory.getInstance().register(rj2p);
-//            }
+
+            //            {
+            //                MyResteasyJackson2Provider rj2p = new MyResteasyJackson2Provider();
+            //               
+            //                ResteasyProviderFactory.getInstance().register(rj2p);
+            //            }
 
             String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
             String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
@@ -682,8 +680,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- NOTIFICACIONS SISTRA
-    // ---------------------------------------------
+    // ------------------- NOTIFICACIONS SISTRA ---------------------------------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -868,7 +865,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // notificacions.get(0).getDescripcio()
             // notificacions.get(0).getDataEnviament()
             // notificacions.get(0).getDocument().getUrl()
-            
+
             Map<Long, TransmissioV2> comunicacionsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -946,14 +943,18 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
-        try {
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.NOTIFICACIONS,
+                EstatConsulta.PENDENTS);
 
+        /*
+        try {
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -962,62 +963,59 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             List<TransmissioV2> notificacionsPendentsList;
             List<ComunicacioNotificacio> sortedNotificacionsPendents = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
-
+        
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(notificacio);
-                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
-                    cn.setTipus("notificacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(notificacio, "notificacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedNotificacionsPendents = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedNotificacionsPendents.size();
-
+        
             }
-
+        
             int notificacionsPendentsTotals;
             if (notificacionsPendentsList == null) {
                 notificacionsPendentsList = new ArrayList<TransmissioV2>();
@@ -1025,21 +1023,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } else {
                 notificacionsPendentsTotals = comNumero;
             }
-
-            
-            Map<Long, TransmissioV2> notificacionsPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
-                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
+            Map<Long, ComunicacioNotificacio> notificacionsPendentsMap = (Map<Long, ComunicacioNotificacio>) request
+                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+        
             if (notificacionsPendentsMap == null) {
-                notificacionsPendentsMap = new HashMap<Long, TransmissioV2>();
+                notificacionsPendentsMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsPendentsMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedNotificacionsPendents) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                notificacionsPendentsMap.put(t.getTransmissio().getId(), t);
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                notificacionsPendentsMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoNotificacionsPendents = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= notificacionsPendentsTotals) {
                 infoNotificacionsPendents.put("comunicacions",
@@ -1054,30 +1051,30 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
             infoNotificacionsPendents.put("registresPagina", formRegPorPagina);
             infoNotificacionsPendents.put("totalRegistres", notificacionsPendentsTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacionsPendents);
-
+        
             // log.info(json);
-
+        
             try {
-
+        
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
+        
                 response.getWriter().write(json);
-
+        
             } catch (IOException e) {
                 log.error("Error obtenint writer: " + e.getMessage(), e);
             }
-
+        
         } catch (Exception e) {
-
+        
             log.error("Error llistant Notificacions Pendents NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
+        
         }
-
+        */
     }
 
     // --------------------------------------------------------------------------------------
@@ -1093,14 +1090,18 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
-        try {
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.NOTIFICACIONS,
+                EstatConsulta.LLEGIDES);
 
+        /*
+        try {
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -1109,62 +1110,59 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             List<TransmissioV2> notificacionsLlegidesList;
             List<ComunicacioNotificacio> sortedNotificacionsLlegides = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
-
+        
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(notificacio);
-                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
-                    cn.setTipus("notificacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(notificacio, "notificacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedNotificacionsLlegides = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedNotificacionsLlegides.size();
-
+        
             }
-
+        
             int notificacionsLlegidesTotals;
             if (notificacionsLlegidesList == null) {
                 notificacionsLlegidesList = new ArrayList<TransmissioV2>();
@@ -1172,20 +1170,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } else {
                 notificacionsLlegidesTotals = comNumero;
             }
-
-            Map<Long, TransmissioV2> notificacionsLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
-                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
+            Map<Long, ComunicacioNotificacio> notificacionsLlegidesMap = (Map<Long, ComunicacioNotificacio>) request
+                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+        
             if (notificacionsLlegidesMap == null) {
-                notificacionsLlegidesMap = new HashMap<Long, TransmissioV2>();
+                notificacionsLlegidesMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsLlegidesMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedNotificacionsLlegides) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                notificacionsLlegidesMap.put(t.getTransmissio().getId(), t);
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                notificacionsLlegidesMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoNotificacionsLlegides = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= notificacionsLlegidesTotals) {
                 infoNotificacionsLlegides.put("comunicacions",
@@ -1200,30 +1198,30 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoNotificacionsLlegides.put("registresPagina", formRegPorPagina);
             infoNotificacionsLlegides.put("totalRegistres", notificacionsLlegidesTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacionsLlegides);
-
+        
             //            log.info(json);
-
+        
             try {
-
+        
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
+        
                 response.getWriter().write(json);
-
+        
             } catch (IOException e) {
                 log.error("Error obtenint writer: " + e.getMessage(), e);
             }
-
+        
         } catch (Exception e) {
-
+        
             log.error("Error llistant Notificacions Llegides NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
+        
         }
-
+        */
     }
 
     // --------------------------------------------------------------------------------------
@@ -1239,14 +1237,18 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
-        try {
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.COMUNICACIONS,
+                EstatConsulta.TOTES);
 
+        /*
+        try {
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -1255,62 +1257,59 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             List<TransmissioV2> comunicacionsList;
             List<ComunicacioNotificacio> sortedComunicacions = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
-
+        
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 comunicacionsList = respostaComunicacions.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(comunicacio);
-                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
-                    cn.setTipus("comunicacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(comunicacio, "comunicacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedComunicacions = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedComunicacions.size();
-
+        
             }
-
+        
             int comunicacionsTotals;
             if (comunicacionsList == null) {
                 comunicacionsList = new ArrayList<TransmissioV2>();
@@ -1318,20 +1317,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } else {
                 comunicacionsTotals = comNumero;
             }
-
-            Map<Long, TransmissioV2> comunicacionsMap = (Map<Long, TransmissioV2>) request.getSession()
-                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
+            Map<Long, ComunicacioNotificacio> comunicacionsMap = (Map<Long, ComunicacioNotificacio>) request
+                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+        
             if (comunicacionsMap == null) {
-                comunicacionsMap = new HashMap<Long, TransmissioV2>();
+                comunicacionsMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedComunicacions) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                comunicacionsMap.put(t.getTransmissio().getId(), t);
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                comunicacionsMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoComunicacions = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= comunicacionsTotals) {
                 infoComunicacions.put("comunicacions",
@@ -1348,30 +1347,30 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacions.put("registresPagina", formRegPorPagina);
             infoComunicacions.put("totalRegistres", comunicacionsTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacions);
-
+        
             //            log.info(json);
-
+        
             try {
-
+        
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
+        
                 response.getWriter().write(json);
-
+        
             } catch (IOException e) {
                 log.error("Error obtenint writer: " + e.getMessage(), e);
             }
-
+        
         } catch (Exception e) {
-
+        
             log.error("Error llistant Comunicacions NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
+        
         }
-
+        */
     }
 
     // --------------------------------------------------------------------------------------
@@ -1387,14 +1386,17 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.COMUNICACIONS,
+                EstatConsulta.PENDENTS);
+        /*
         try {
-
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -1403,62 +1405,59 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             List<TransmissioV2> comunicacionsPendentsList;
             List<ComunicacioNotificacio> sortedComunicacionsPendents = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
-
+        
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(comunicacio);
-                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
-                    cn.setTipus("comunicacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(comunicacio, "comunicacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedComunicacionsPendents = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedComunicacionsPendents.size();
-
+        
             }
-
+        
             int comunicacionsPendentsTotals;
             if (comunicacionsPendentsList == null) {
                 comunicacionsPendentsList = new ArrayList<TransmissioV2>();
@@ -1466,20 +1465,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } else {
                 comunicacionsPendentsTotals = comNumero;
             }
-
-            Map<Long, TransmissioV2> comunicacionsPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
-                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
+            Map<Long, ComunicacioNotificacio> comunicacionsPendentsMap = (Map<Long, ComunicacioNotificacio>) request
+                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+        
             if (comunicacionsPendentsMap == null) {
-                comunicacionsPendentsMap = new HashMap<Long, TransmissioV2>();
+                comunicacionsPendentsMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsPendentsMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedComunicacionsPendents) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                comunicacionsPendentsMap.put(t.getTransmissio().getId(), t);
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                comunicacionsPendentsMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoComunicacionsPendents = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= comunicacionsPendentsTotals) {
                 infoComunicacionsPendents.put("comunicacions",
@@ -1496,30 +1495,30 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacionsPendents.put("registresPagina", formRegPorPagina);
             infoComunicacionsPendents.put("totalRegistres", comunicacionsPendentsTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacionsPendents);
-
+        
             //            log.info(json);
-
+        
             try {
-
+        
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
+        
                 response.getWriter().write(json);
-
+        
             } catch (IOException e) {
                 log.error("Error obtenint writer: " + e.getMessage(), e);
             }
-
+        
         } catch (Exception e) {
-
+        
             log.error("Error llistant Comunicacions Pendents NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
+        
         }
-
+        */
     }
 
     // --------------------------------------------------------------------------------------
@@ -1535,14 +1534,17 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.COMUNICACIONS,
+                EstatConsulta.LLEGIDES);
+        /*
         try {
-
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -1551,62 +1553,59 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             List<TransmissioV2> comunicacionsLlegidesList;
             List<ComunicacioNotificacio> sortedComunicacionsLlegides = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
-
+        
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(comunicacio);
-                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
-                    cn.setTipus("comunicacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(comunicacio, "comunicacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedComunicacionsLlegides = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedComunicacionsLlegides.size();
-
+        
             }
-
+        
             int comunicacionsLlegidesTotals;
             if (comunicacionsLlegidesList == null) {
                 comunicacionsLlegidesList = new ArrayList<TransmissioV2>();
@@ -1614,20 +1613,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } else {
                 comunicacionsLlegidesTotals = comNumero;
             }
-
-            Map<Long, TransmissioV2> comunicacionsLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
-                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
+            Map<Long, ComunicacioNotificacio> comunicacionsLlegidesMap = (Map<Long, ComunicacioNotificacio>) request
+                    .getSession().getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+        
             if (comunicacionsLlegidesMap == null) {
-                comunicacionsLlegidesMap = new HashMap<Long, TransmissioV2>();
+                comunicacionsLlegidesMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsLlegidesMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedComunicacionsLlegides) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                comunicacionsLlegidesMap.put(t.getTransmissio().getId(), t);
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                comunicacionsLlegidesMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoComunicacionsLlegides = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= comunicacionsLlegidesTotals) {
                 infoComunicacionsLlegides.put("comunicacions",
@@ -1644,36 +1643,35 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacionsLlegides.put("registresPagina", formRegPorPagina);
             infoComunicacionsLlegides.put("totalRegistres", comunicacionsLlegidesTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacionsLlegides);
-
+        
             //            log.info(json);
-
+        
             try {
-
+        
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
+        
                 response.getWriter().write(json);
-
+        
             } catch (IOException e) {
                 log.error("Error obtenint writer: " + e.getMessage(), e);
             }
-
+        
         } catch (Exception e) {
-
+        
             log.error("Error llistant Comunicacions Llegides NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
+        
         }
-
+        */
     }
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS NOTIB
-    // --------------------------------
+    // ------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS NOTIB  ---------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -1682,210 +1680,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public void consultaTotes(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
-
-        try {
-
-            int pagina;
-            // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
-            String formRegPorPagina = request.getParameter("registrosPorPagina");
-
-            try {
-                pagina = Integer.parseInt(request.getParameter("pageNumber"));
-            } catch (NumberFormatException e) {
-                pagina = 0;
-            }
-            List<TransmissioV2> comunicacionsList;
-            List<TransmissioV2> notificacionsList;
-            List<ComunicacioNotificacio> sortedTotes = new ArrayList<ComunicacioNotificacio>();
-            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
-            int regPag = Integer.parseInt(formRegPorPagina);
-            int comNumero = 0;
-
-            {
-
-                ConsultaV2Api notibClientRest = getApi();
-
-                String nif = userData.getAdministrationID();
-                Integer mida = 200;
-
-                /* Filtre dates */
-                Date formDataInici;
-                Date formDataFi;
-                String formDataIniciStr = request.getParameter("dataInici");
-                String formDataFiStr = request.getParameter("dataFi");
-
-                Calendar cal = Calendar.getInstance();
-                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
-                if (formDataFiStr != null && formDataFiStr != "") {
-                    formDataFi = SDF.parse(formDataFiStr);
-
-                } else {
-                    formDataFi = cal.getTime();
-                }
-
-                if (formDataIniciStr != null && formDataIniciStr != "") {
-                    formDataInici = SDF.parse(formDataIniciStr);
-
-                } else {
-                    /* Inicialitzam darrers 6 mesos */
-                    cal.add(Calendar.MONTH, -6);
-                    formDataInici = cal.getTime();
-                }
-
-                log.info(" ===============   INICI PROCESS CONSULTES API NOTIB ================");
-
-                int reintents = 1;
-                while (reintents > 0) {
-                    try {
-
-                        RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif,
-                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
-                                locale.getLanguage(), 0, mida);
-
-                        notificacionsList = respostaNotificacions.getResultat();
-                        for (TransmissioV2 notificacio : notificacionsList) {
-                            ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                            cn.setTransmissio(notificacio);
-                            cn.setData(convertToApiDate(notificacio.getDataEnviament()));
-                            cn.setTipus("notificacio");
-                            cns.add(cn);
-                        }
-                        break;
-                    } catch (Exception e) {
-                        log.error("CLASS EXCEPTION[notificacionsByTitular](" + reintents + "): " + e.getMessage(), e);
-
-                        String msg_exc = e.getMessage();
-
-                        boolean isLoginJsonError = msg_exc.startsWith(
-                                "com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)):");
-
-                        log.error(" CLASS MESSAGE[notificacionsByTitular]: IS LOGIN-JSON ERROR " + isLoginJsonError);
-
-                        if (isLoginJsonError) {
-                            reintents--;
-                            if (reintents <= 0) {
-                                throw e;
-                            }
-                            Thread.sleep(750);
-                            continue;
-                        } else {
-                            throw e;
-                        }
-                    }
-
-                }
-
-                reintents = 3;
-                while (reintents > 0) {
-                    try {
-                        RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
-                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
-                                locale.getLanguage(), 0, mida);
-
-                        comunicacionsList = respostaComunicacions.getResultat();
-                        for (TransmissioV2 comunicacio : comunicacionsList) {
-                            ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                            cn.setTransmissio(comunicacio);
-                            cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
-                            cn.setTipus("comunicacio");
-                            cns.add(cn);
-                        }
-
-                        break;
-                    } catch (Exception e) {
-                        log.info("CLASS EXCEPTION[comunicacionsByTitular]: " + e.getClass().getName());
-
-                        String msg_exc = e.getMessage();
-
-                        boolean isLoginJsonError = msg_exc.startsWith(
-                                "com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)):");
-
-                        log.info(" CLASS MESSAGE[comunicacionsByTitular]: IS LOGIN-JSON ERROR " + isLoginJsonError);
-
-                        if (isLoginJsonError) {
-                            reintents--;
-                            if (reintents <= 0) {
-                                throw e;
-                            }
-                            Thread.sleep(750);
-                            continue;
-                        } else {
-                            throw e;
-                        }
-                    }
-                }
-
-                // Ordenam comunicacions a mostrar
-                sortedTotes = cns.stream().sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
-                        .collect(Collectors.toList());
-
-                comNumero = sortedTotes.size();
-
-            }
-
-            int totesTotals = comNumero;
-
-            Map<Long, TransmissioV2> totesMap = (Map<Long, TransmissioV2>) request.getSession()
-                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
-            if (totesMap == null) {
-                totesMap = new HashMap<Long, TransmissioV2>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesMap);
-            }
-
-            for (ComunicacioNotificacio t : sortedTotes) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                totesMap.put(t.getTransmissio().getId(), t);
-            }
-
-            Map<String, Object> infoComunicacions = new HashMap<String, Object>();
-            if ((pagina + 1) * regPag <= totesTotals) {
-                infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, (pagina + 1) * regPag));
-            } else {
-                infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, totesTotals));
-            }
-            infoComunicacions.put("urldetallbase",
-                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
-            infoComunicacions.put("urldetallbase2",
-                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
-            infoComunicacions.put("urldetallbase3",
-                    getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
-            infoComunicacions.put("registresPagina", formRegPorPagina);
-            infoComunicacions.put("totalRegistres", totesTotals);
-
-            Gson gson = new Gson();
-            String json = gson.toJson(infoComunicacions);
-
-            //            log.info(json);
-
-            try {
-
-                response.setContentType("application/json");
-                response.setCharacterEncoding("utf-8");
-
-                response.getWriter().write(json);
-
-            } catch (IOException e) {
-                log.error("Error obtenint writer: " + e.getMessage(), e);
-            }
-
-        } catch (Exception e) {
-
-            log.error("Error llistant Comunicacions NOTIB: " + e.getMessage(), e);
-            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
-        }
-
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.TOTS,
+                EstatConsulta.TOTES);
     }
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // --------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS PENDENTS NOTIB
-    // -----------------
+    // --------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS PENDENTS NOTIB -----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -1895,14 +1696,18 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
-        try {
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.TOTS,
+                EstatConsulta.PENDENTS);
 
+        /*
+        try {
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -1912,89 +1717,83 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             List<TransmissioV2> notificacionsPendentsList;
             List<ComunicacioNotificacio> sortedTotesPendents = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
-
+        
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(comunicacio);
-                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
-                    cn.setTipus("comunicacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(comunicacio,"comunicacio");
                     cns.add(cn);
                 }
-
+        
                 notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(notificacio);
-                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
-                    cn.setTipus("notificacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(notificacio,"notificacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedTotesPendents = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedTotesPendents.size();
-
+        
             }
-
+        
             int totesPendentsTotals = comNumero;
-
-            Map<Long, TransmissioV2> totesPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
+        
+            Map<Long, ComunicacioNotificacio> totesPendentsMap = (Map<Long, ComunicacioNotificacio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
             if (totesPendentsMap == null) {
-                totesPendentsMap = new HashMap<Long, TransmissioV2>();
+                totesPendentsMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesPendentsMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedTotesPendents) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                totesPendentsMap.put(t.getTransmissio().getId(), t);
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                totesPendentsMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoTotesPendents = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= totesPendentsTotals) {
                 infoTotesPendents.put("comunicacions",
@@ -2011,30 +1810,30 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoTotesPendents.put("registresPagina", formRegPorPagina);
             infoTotesPendents.put("totalRegistres", totesPendentsTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoTotesPendents);
-
+        
             //            log.info(json);
-
+        
             try {
-
+        
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
+        
                 response.getWriter().write(json);
-
+        
             } catch (IOException e) {
                 log.error("Error obtenint writer: " + e.getMessage(), e);
             }
-
+        
         } catch (Exception e) {
-
+        
             log.error("Error llistant Comunicacions Pendents NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
-
+        
         }
-
+        */
     }
 
     // --------------------------------------------------------------------------------------
@@ -2050,14 +1849,17 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
+        consultaInterna(absolutePluginRequestPath, request, response, userData, locale, TipusConsulta.TOTS,
+                EstatConsulta.LLEGIDES);
+        /*
         try {
-
+        
             int pagina;
             // int itemsPagina = 10;
-
-            /* Filtre número de registres per pàgina */
+        
+            // Filtre número de registres per pàgina 
             String formRegPorPagina = request.getParameter("registrosPorPagina");
-
+        
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (NumberFormatException e) {
@@ -2068,88 +1870,82 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // List<TransmissioV2> llegides = new ArrayList<TransmissioV2>();
             List<ComunicacioNotificacio> sortedTotesLlegides = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
-
+        
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
-
+        
             {
                 ConsultaV2Api notibClientRest = getApi();
-
+        
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
-
-                /* Filtre dates */
+        
+                // Filtre dates 
                 Date formDataInici;
                 Date formDataFi;
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
-
+        
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
                 } else {
                     formDataFi = cal.getTime();
                 }
-
+        
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
                 } else {
-                    /* Inicialitzam darrers 6 mesos */
+                    // Inicialitzam darrers 6 mesos 
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
-
+        
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
                         convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
                         mida);
-
+        
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(comunicacio);
-                    cn.setData(convertToApiDate(comunicacio.getDataEnviament()));
-                    cn.setTipus("comunicacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(comunicacio,"comunicacio");
                     cns.add(cn);
                 }
-
+        
                 notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(notificacio);
-                    cn.setData(convertToApiDate(notificacio.getDataEnviament()));
-                    cn.setTipus("notificacio");
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio(notificacio,"notificacio");
                     cns.add(cn);
                 }
-
+        
                 // Ordenam comunicacions a mostrar
                 sortedTotesLlegides = cns.stream()
                         .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
                         .collect(Collectors.toList());
-
+        
                 comNumero = sortedTotesLlegides.size();
-
+        
             }
-
+        
             int totesLlegidesTotals = comNumero;
-
-            Map<Long, TransmissioV2> totesLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
+        
+            Map<Long, ComunicacioNotificacio> totesLlegidesMap = (Map<Long, ComunicacioNotificacio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
-
+        
             if (totesLlegidesMap == null) {
-                totesLlegidesMap = new HashMap<Long, TransmissioV2>();
+                totesLlegidesMap = new HashMap<Long, ComunicacioNotificacio>();
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesLlegidesMap);
             }
-
+        
             for (ComunicacioNotificacio t : sortedTotesLlegides) {
-                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
-                totesLlegidesMap.put(t.getTransmissio().getId(), t);
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                totesLlegidesMap.put(t.getId(), t);
             }
-
+        
             Map<String, Object> infoTotesLlegides = new HashMap<String, Object>();
             if ((pagina + 1) * regPag <= totesLlegidesTotals) {
                 infoTotesLlegides.put("comunicacions",
@@ -2166,11 +1962,314 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoTotesLlegides.put("registresPagina", formRegPorPagina);
             infoTotesLlegides.put("totalRegistres", totesLlegidesTotals);
-
+        
             Gson gson = new Gson();
             String json = gson.toJson(infoTotesLlegides);
-
+        
             //            log.info(json);
+        
+            try {
+        
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+        
+                response.getWriter().write(json);
+        
+            } catch (IOException e) {
+                log.error("Error obtenint writer: " + e.getMessage(), e);
+            }
+        
+        } catch (Exception e) {
+        
+            log.error("Error llistant Comunicacions Llegides NOTIB: " + e.getMessage(), e);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+        
+        }
+        */
+    }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------------------- CONSULTA INTERNA GENERICA ---------------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    // TODO
+
+    protected void consultaInterna(String absolutePluginRequestPath, HttpServletRequest request,
+            HttpServletResponse response, UserData userData, Locale locale, TipusConsulta tipusFiltre,
+            EstatConsulta estatFiltre) {
+
+        try {
+
+            log.info("\n\n\n ===============   INICI PROCESS CONSULTES API NOTIB ================\n");
+            // int itemsPagina = 10;
+
+            /* Filtre número de registres per pàgina */
+            int page;
+            try {
+                page = Integer.parseInt(request.getParameter("pageNumber"));
+            } catch (NumberFormatException e) {
+                page = 0;
+            }
+
+            String formRegPorPagina = request.getParameter("registrosPorPagina");
+            int pageSize = Integer.parseInt(formRegPorPagina);
+
+            log.info("Pagina => " + page);
+            log.info("registrosPorPagina => " + pageSize);
+
+            if (tipusFiltre == TipusConsulta.TOTS) {
+
+                // Com que estam mesclant Comunicacions i Notificacions, llavors no podem fer paginació.
+
+                page = 0;
+                pageSize = 2000;
+                log.info("Pagina Nou VALOR => " + page);
+                log.info("registrosPorPagina NOU VALOR => " + pageSize);
+            }
+
+            List<ComunicacioNotificacio> sortedTotes = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
+
+            
+                ConsultaV2Api notibClientRest = getApi();
+
+                String nif = userData.getAdministrationID();
+
+                
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                log.info(" formDataIniciStr => " + formDataIniciStr);
+                log.info(" formDataFiStr => " + formDataFiStr);
+
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataIniciStr != null && formDataIniciStr.trim().length() != 0) {
+                    formDataInici = SDF.parse(formDataIniciStr);
+
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                formDataInici = atStartOfDay(formDataInici);
+
+                if (formDataFiStr != null && formDataFiStr.trim().length() != 0) {
+                    formDataFi = SDF.parse(formDataFiStr);
+
+                } else {
+                    Calendar cal = Calendar.getInstance();
+                    formDataFi = cal.getTime();
+                }
+
+                formDataFi = atEndOfDay(formDataFi);
+
+                // XYZ ZZZ Falta CHECK de DATEST !!!!!
+
+                log.info(" formDataInici => " + formDataInici);
+                log.info(" formDataFi => " + formDataFi);
+
+                long totalElements = 0;
+                
+                int reintents = 1;
+                if (tipusFiltre == TipusConsulta.TOTS || tipusFiltre == TipusConsulta.NOTIFICACIONS) {
+
+                    while (reintents > 0) {
+                        try {
+
+                            RespostaConsultaV2 respostaNotificacions;
+
+                            if (estatFiltre == EstatConsulta.TOTES) {
+                                respostaNotificacions = notibClientRest.notificacionsByTitular(nif,
+                                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                        locale.getLanguage(), page, pageSize);
+                            } else if (estatFiltre == EstatConsulta.PENDENTS) {
+
+                                respostaNotificacions = notibClientRest.notificacionsPendentsByTitular(nif,
+                                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                        locale.getLanguage(), page, pageSize);
+                            } else if (estatFiltre == EstatConsulta.LLEGIDES) {
+                                respostaNotificacions = notibClientRest.notificacionsLlegidesByTitular(nif,
+                                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                        locale.getLanguage(), page, pageSize);
+                            } else {
+                                throw new Exception("Valor per tipusFiltre desconegut:" + tipusFiltre, new Exception());
+                            }
+
+                            if (respostaNotificacions.getErrorDescripcio() != null) {
+                                log.error("respostaNotificacions.getErrorDescripcio() => "
+                                        + respostaNotificacions.getErrorDescripcio());
+                            }
+                            
+                            totalElements = totalElements + respostaNotificacions.getNumeroElementsTotals();
+
+                            List<TransmissioV2> notificacionsList;
+                            notificacionsList = respostaNotificacions.getResultat();
+
+                            log.info("notificacionsList.size() => " + notificacionsList.size());
+
+                            for (TransmissioV2 notificacio : notificacionsList) {
+                                ComunicacioNotificacio cn = new ComunicacioNotificacio(notificacio, "notificacio");
+                                cns.add(cn);
+                            }
+                            break;
+                        } catch (Exception e) {
+                            log.error("CLASS EXCEPTION[notificacionsByTitular](" + reintents + "): " + e.getMessage(),
+                                    e);
+
+                            String msg_exc = e.getMessage();
+
+                            boolean isLoginJsonError = msg_exc.startsWith(
+                                    "com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)):");
+
+                            log.error(
+                                    " CLASS MESSAGE[notificacionsByTitular]: IS LOGIN-JSON ERROR " + isLoginJsonError);
+
+                            if (isLoginJsonError) {
+                                reintents--;
+                                if (reintents <= 0) {
+                                    throw e;
+                                }
+                                Thread.sleep(750);
+                                continue;
+                            } else {
+                                throw e;
+                            }
+                        }
+
+                    }
+                }
+
+                if (tipusFiltre == TipusConsulta.TOTS || tipusFiltre == TipusConsulta.COMUNICACIONS) {
+                    reintents = 1;
+                    while (reintents > 0) {
+                        try {
+                            RespostaConsultaV2 respostaComunicacions;
+
+                            if (estatFiltre == EstatConsulta.TOTES) {
+                                respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
+                                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                        locale.getLanguage(), page, pageSize);
+                            } else if (estatFiltre == EstatConsulta.PENDENTS) {
+
+                                respostaComunicacions = notibClientRest.comunicacionsPendentsByTitular(nif,
+
+                                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                        locale.getLanguage(), page, pageSize);
+                            } else if (estatFiltre == EstatConsulta.LLEGIDES) {
+                                respostaComunicacions = notibClientRest.comunicacionsLlegidesByTitular(nif,
+                                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                        locale.getLanguage(), page, pageSize);
+                            } else {
+                                throw new Exception("Valor per tipusFiltre desconegut:" + tipusFiltre, new Exception());
+                            }
+
+                            if (respostaComunicacions.getErrorDescripcio() != null) {
+                                log.error("respostaComunicacions.getErrorDescripcio() => "
+                                        + respostaComunicacions.getErrorDescripcio());
+                            }
+
+                            totalElements = totalElements + respostaComunicacions.getNumeroElementsTotals();
+                            
+                            List<TransmissioV2> comunicacionsList;
+                            comunicacionsList = respostaComunicacions.getResultat();
+
+                            log.info("comunicacionsList.size() => " + comunicacionsList.size());
+
+                            for (TransmissioV2 comunicacio : comunicacionsList) {
+                                ComunicacioNotificacio cn = new ComunicacioNotificacio(comunicacio, "comunicacio");
+                                cns.add(cn);
+                            }
+
+                            break;
+                        } catch (Exception e) {
+                            log.info("CLASS EXCEPTION[comunicacionsByTitular]: " + e.getClass().getName());
+
+                            String msg_exc = e.getMessage();
+
+                            boolean isLoginJsonError = msg_exc.startsWith(
+                                    "com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)):");
+
+                            log.error(
+                                    " CLASS MESSAGE[comunicacionsByTitular]: IS LOGIN-JSON ERROR " + isLoginJsonError);
+
+                            if (isLoginJsonError) {
+                                reintents--;
+                                if (reintents <= 0) {
+                                    throw e;
+                                }
+                                Thread.sleep(750);
+                                continue;
+                            } else {
+                                throw e;
+                            }
+                        }
+                    }
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedTotes = cns.stream().sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+            
+
+            log.info("sortedTotes.size() => " + sortedTotes.size());
+
+            int elementsRetornats = sortedTotes.size();
+
+            Map<Long, ComunicacioNotificacio> totesMap = (Map<Long, ComunicacioNotificacio>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+
+            if (totesMap == null) {
+                totesMap = new HashMap<Long, ComunicacioNotificacio>();
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesMap);
+            }
+
+            for (ComunicacioNotificacio t : sortedTotes) {
+                //t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor());
+                totesMap.put(t.getId(), t);
+            }
+
+            Map<String, Object> elementsRestRetornats = new HashMap<String, Object>();
+            elementsRestRetornats.put("comunicacions", sortedTotes);
+            /*
+            Map<String, Object> infoComunicacions = new HashMap<String, Object>();
+            if ((pagina + 1) * regPag <= totesTotals) {
+               infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, (pagina + 1) * regPag));
+            } else {
+               infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, totesTotals));
+            }
+            */
+            
+            elementsRestRetornats.put("urldetallbase",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            elementsRestRetornats.put("urldetallbase2",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
+            elementsRestRetornats.put("urldetallbase3",
+                    getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
+            
+                
+            int totalPagines =  (int) (totalElements / pageSize) + ((totalElements % pageSize == 0) ? 0 : 1);
+            elementsRestRetornats.put("paginaActual", page);
+            elementsRestRetornats.put("elementsPerPagina", pageSize);
+            elementsRestRetornats.put("totalPagines",  totalPagines);
+            elementsRestRetornats.put("elementsRetornats", elementsRetornats);
+            elementsRestRetornats.put("totalElements", totalElements);
+            
+            log.info("totalElements => " + totalElements);
+            log.info("totalPagines => " + totalPagines);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(elementsRestRetornats);
+
+            //log.info(json);
 
             try {
 
@@ -2185,7 +2284,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         } catch (Exception e) {
 
-            log.error("Error llistant Comunicacions Llegides NOTIB: " + e.getMessage(), e);
+            log.error("Error llistant Comunicacions NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
@@ -2487,8 +2586,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
      */
     public static class KeyValue {
 
-        protected static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
         final String key;
         final String value;
 
@@ -2520,6 +2617,35 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
+    public static Date atEndOfDay(final Date date) {
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date);
+
+        // Establecer la hora, minutos y segundos a 23:59:59
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+
+        // Convertir Calendar a Date
+        return calendar.getTime();
+    }
+
+    public static Date atStartOfDay(final Date date) {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date);
+
+        // Establecer la hora, minutos y segundos a 23:59:59
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        // Convertir Calendar a Date
+        return calendar.getTime();
+    }
+
     public static Date convertToApiDate(Date dateToConvert) {
         return dateToConvert;
     }
@@ -2530,6 +2656,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } else {
             return new Date(dateToConvert);
         }
+    }
+
+    public static enum TipusConsulta {
+        TOTS, NOTIFICACIONS, COMUNICACIONS
+    }
+
+    public static enum EstatConsulta {
+        TOTES, PENDENTS, LLEGIDES
     }
 
 }
