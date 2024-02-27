@@ -23,5 +23,6 @@
 
 
   "sistraTramit": "Tràmit",
-  "sistraData": "Data d'inici"
+  "sistraData": "Data d'inici",
+  "sistraMesosCercaLiteral": "La cerca del Plugin de Sistra està limitada a tràmits en els darrers {{mesos}} mesos."
 }

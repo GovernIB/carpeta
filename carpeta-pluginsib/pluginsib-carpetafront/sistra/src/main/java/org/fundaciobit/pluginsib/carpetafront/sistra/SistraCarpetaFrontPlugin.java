@@ -227,7 +227,6 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
             map.put("pathtojsSistra", pathtojsSistra);
 
-            //            String pathtoservei = absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE;
             String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
 
             map.put("pathtoservei", pathtoservei);
@@ -235,7 +234,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             String detallpathtoservei = absolutePluginRequestPath + "/" + RegwebDetallComponent.DETALL_REACT_PAGE;
 
             map.put("detallpathtoservei", detallpathtoservei);
-
+            
+            String mesosFiltre = getProperty(SISTRA_PROPERTY_BASE+"mesos","6");
+            
+            map.put("mesosFiltre", mesosFiltre);
+            
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
             try {
@@ -414,7 +417,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             String json = gson.toJson(infoTramits);
 
             if (isDevelopment()) {
-              log.info("TRAMITS SISTRA JSON:\n" + json);
+              //log.info("TRAMITS SISTRA JSON:\n" + json);
             }
 
             try {
@@ -689,7 +692,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             log.info("SISTRA2 TRAMITES NULL o EMPTY: " + tramits);
         } else {
             int x = 1;
-            for (TramitePersistenteGenerico tp : tramits) {
+            /*for (TramitePersistenteGenerico tp : tramits) {
                 log.info(" -------------  TRAMITE [" + x + " ] SISTRA 2-------------------");
                 log.info("tp.getIdTramite() => " + tp.getIdTramite());
                 log.info("tp.getDescripcionTramite() => " + tp.getDescripcionTramite());
@@ -704,7 +707,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 log.info("tp.isPendiente() => " + tp.isPendiente());
                 log.info("tp.getNumero() => " + tp.getNumero());
                 x++;
-            }
+            }*/
         }
         return tramits;
 

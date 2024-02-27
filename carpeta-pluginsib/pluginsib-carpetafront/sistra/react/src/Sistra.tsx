@@ -13,7 +13,6 @@ import i18n from "./i18n";
 
 import { DetallRegistre } from "regwebdetallcomponentlib";
 import {
-  CarpetaDatePicker,
   CarpetaFormulariDeFiltre,
   CarpetaFormulariDeFiltreItem,
   RenderTable,
@@ -27,6 +26,7 @@ interface SistraProps extends WithTranslation {
   subtitles: any;
   pathtoservei: string;
   detallpathtoservei: string;
+  mesosFiltre: string;
 }
 
 interface SistraState {
@@ -367,9 +367,9 @@ class Sistra extends React.Component<SistraProps, SistraState> {
         />
       );
     }
-    let sistraDataInici: string | null = t("sistraDataInici");
-    let sistraDataFi: string | null = t("sistraDataFi");
+    
     let sistraEstat: string | null = t("sistraEstat");
+    let sistraMesosCercaLiteral: string | null = t("sistraMesosCercaLiteral",{mesos: this.props.mesosFiltre} );
 
     formulari = (
       <>
@@ -381,24 +381,16 @@ class Sistra extends React.Component<SistraProps, SistraState> {
           </div>
         </div>
 
+        <div className="row">
+          <div id="infoContainer" className="row pb-2 ml-3 mr-0">
+            <div className="alert alert-info" role="info" id="infoMsg">
+              {sistraMesosCercaLiteral}
+            </div>
+          </div>
+        </div>
+        
         <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSearcher} i18n={this.props.i18n}>
           <>
-            <CarpetaFormulariDeFiltreItem label={sistraDataInici != null ? sistraDataInici : ""}>
-              <CarpetaDatePicker
-                basename={"dataInici"}
-                defaultValue={this.filter_startDate}
-                onChangeDate={this.onChangeStartDate}
-                i18n={this.props.i18n}
-              />
-            </CarpetaFormulariDeFiltreItem>
-            <CarpetaFormulariDeFiltreItem label={sistraDataFi != null ? sistraDataFi : ""}>
-              <CarpetaDatePicker
-                basename={"dataFi"}
-                defaultValue={this.filter_endDate}
-                onChangeDate={this.onChangeEndDate}
-                i18n={this.props.i18n}
-              />
-            </CarpetaFormulariDeFiltreItem>
             <CarpetaFormulariDeFiltreItem label={sistraEstat != null ? sistraEstat : ""}>
               <select
                 id="estado"

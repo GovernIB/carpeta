@@ -23,5 +23,6 @@
 
 
   "sistraTramit": "Trámite",
-  "sistraData": "Fecha de inicio"
+  "sistraData": "Fecha de inicio",
+  "sistraMesosCercaLiteral": "La búsqueda del Plugin de Sistra esta limitada a trámites de los pasados {{mesos}} meses."
 }

@@ -108,5 +108,6 @@
     "registro_regPorPagina": "Registres per pàgina",
     "sistraProblema": "Hi ha hagut qualque problema de comunicació.",
     "sistraDates": "Dates",
-    "sistraCerca": "Cerca"
+    "sistraCerca": "Cerca",
+    "sistraMesosCercaLiteral": "La cerca del Plugin de Sistra està limitada a tràmits en els darrers {{mesos}} mesos."
 }

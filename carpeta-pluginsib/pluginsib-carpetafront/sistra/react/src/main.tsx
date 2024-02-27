@@ -17,7 +17,7 @@ declare global {
 }
 
 newInstancePlugin = function createReactCompAppIntern(nomComponent: string, props: any) {
-  ReactDOM.render(<Sistra detallpathtoservei={props.detallpathtoservei} pathtoservei={props.pathtoservei} titles={props.titles} subtitles={props.subtitles} />, document.getElementById(nomComponent));
+  ReactDOM.render(<Sistra detallpathtoservei={props.detallpathtoservei} pathtoservei={props.pathtoservei} titles={props.titles} subtitles={props.subtitles} mesosFiltre={props.mesosFiltre}/>, document.getElementById(nomComponent));
 };
 
 changeLanguagePlugin = function changeLanguageReactCompAppIntern(lng:string) {
