@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
@@ -39,20 +40,12 @@ public class ConsultaV2ApiTest {
 
     private ConsultaV2Api getApi() {
 
-        Properties props = new Properties();
-        try {
-            props.load(new FileInputStream(new File("test.properties")));
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        Properties props = getProperties();
 
         String url = props.getProperty("url");
         String user = props.getProperty("user");
         String pass = props.getProperty("pass");
+        String nif = props.getProperty("nif");
 
         ApiClient apiClient = new ApiClient();
 
@@ -80,6 +73,20 @@ public class ConsultaV2ApiTest {
 
     }
 
+    protected Properties getProperties() {
+        Properties props = new Properties();
+        try {
+            props.load(new FileInputStream(new File("test.properties")));
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return props;
+    }
+
     public static void main(String[] args) {
         try {
             new ConsultaV2ApiTest().notificacionsByTitularTest();
@@ -105,15 +112,35 @@ public class ConsultaV2ApiTest {
      */
     @Test
     public void notificacionsByTitularTest() throws Exception {
-        String dniTitular = "99999999R";
-        Date dataInicial = null;
-        Date dataFinal = null;
+        
+        Properties prop = getProperties();
+        
+        String dniTitular = prop.getProperty("nif");
+        
+        
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        
+        Date dataInicial = atStartOfDay(cal.getTime());
+        
+        
+        
+        Date dataFinal = atEndOfDay(new Date());
         Boolean visibleCarpeta = true;
         String lang = "ca";
         Integer pagina = 0;
-        Integer pageSize = 1;
-        RespostaConsultaV2 response = getApi().notificacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta,
+        Integer pageSize = 1000;
+        
+        RespostaConsultaV2 response;
+        
+        response = getApi().notificacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta,
                 lang, pagina, pageSize);
+        System.out.println("#Notifi = " + response.getResultat().size());
+        
+        response = getApi().comunicacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta,
+                lang, pagina, pageSize);
+        System.out.println("#Comuni = " + response.getResultat().size());
+        
         if (response != null) {
             System.out.println("Response = " + response);
             //DateTime datEnv = response.getResultat().get(0).getDataEnviament();
@@ -127,6 +154,38 @@ public class ConsultaV2ApiTest {
 
         // TODO: test validations
     }
+    
+    
+    public static Date atStartOfDay(final Date date) {
+        Calendar calendar = Calendar.getInstance();
+        
+        calendar.setTime(date);
+       
+       // Establecer la hora, minutos y segundos a 23:59:59
+       calendar.set(Calendar.HOUR_OF_DAY, 0);
+       calendar.set(Calendar.MINUTE, 0);
+       calendar.set(Calendar.SECOND, 0);
+       
+       // Convertir Calendar a Date
+       return calendar.getTime();
+    }
+    
+    public static Date atEndOfDay(final Date date) {
+        
+        
+        Calendar calendar = Calendar.getInstance();
+        
+        calendar.setTime(date);
+       
+       // Establecer la hora, minutos y segundos a 23:59:59
+       calendar.set(Calendar.HOUR_OF_DAY, 23);
+       calendar.set(Calendar.MINUTE, 59);
+       calendar.set(Calendar.SECOND, 59);
+       
+       // Convertir Calendar a Date
+       return calendar.getTime();
+   }
+    
 
     /**
      * Consulta totes les comunicacions d&#x27;un titular donat el seu dni
