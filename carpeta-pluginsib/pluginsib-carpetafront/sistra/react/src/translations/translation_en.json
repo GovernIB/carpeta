@@ -109,5 +109,5 @@
     "sistraProblema": "Hi ha hagut qualque problema de comunicació.",
     "sistraDates": "Dates",
     "sistraCerca": "Cerca",
-    "sistraMesosCercaLiteral": "La cerca del Plugin de Sistra està limitada a tràmits en els darrers {{mesos}} mesos."
+    "sistraMesosCercaLiteral": "Es mostraran els tràmits iniciats en els darrers {{mesos}} mesos."
 }

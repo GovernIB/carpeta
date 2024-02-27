@@ -234,11 +234,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             String detallpathtoservei = absolutePluginRequestPath + "/" + RegwebDetallComponent.DETALL_REACT_PAGE;
 
             map.put("detallpathtoservei", detallpathtoservei);
-            
-            String mesosFiltre = getProperty(SISTRA_PROPERTY_BASE+"mesos","6");
-            
+
+            String mesosFiltre = getProperty(SISTRA_PROPERTY_BASE + "mesos", "6");
+
             map.put("mesosFiltre", mesosFiltre);
-            
+
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
             try {
@@ -267,12 +267,8 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
-        Date formDataInici;
-        Date formDataFi;
         String formEstat;
 
-        String formDataIniciStr = request.getParameter("dataInici");
-        String formDataFiStr = request.getParameter("dataFi");
         formEstat = request.getParameter("estat");
         //        int pagina;
         //        pagina = Integer.parseInt(request.getParameter("pageNumber"));
@@ -280,72 +276,47 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         /* Filtre número de registres per pàgina */
         //        String formRegPorPagina = request.getParameter("registrosPorPagina");
-        
-        log.info("SistraCarpetaFront::consulta()  Paràmetres rebuts: \n"
-                + "    + formDataIniciStr = "  + formDataIniciStr + "\n"
-                + "    + formDataFiStr = "  + formDataFiStr + "\n");
 
         try {
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             //sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
 
-            formDataInici = sdf.parse(formDataIniciStr);
-            formDataFi = sdf.parse(formDataFiStr);
-
             List<TramitePersistenteGenerico> tramitesGenericos = new ArrayList<TramitePersistenteGenerico>();
-            
-
-            if (formDataInici == null) {
-                throw new Exception(getTraduccio("error.dataInici.null", locale));
-            }
-
-            if (formDataFi == null) {
-                throw new Exception(getTraduccio("error.dataFi.null", locale));
-            }
 
             if (formEstat == null) {
                 throw new Exception(getTraduccio("error.estat.null", locale));
             }
-
-            formDataFi = DateUtils.darreraHoraDelDia(formDataFi);
-            log.info("Consulta  resultats a sistra per"
-                    + " dataInici:" + TramitePersistenteGenerico.SDF.format(formDataInici) 
-                    + " | Data fi: " + TramitePersistenteGenerico.SDF.format(formDataFi)
-                    + " | Estat: " + formEstat);
-
+            
+            
+            String mes = getProperty(SISTRA_PROPERTY_BASE+"mesos");
+            int mesos = Integer.parseInt(mes);
+            
+            
+            Date formDataFi = new Date();
+            Calendar primeraData = Calendar.getInstance();
+            
+            primeraData.setTime(formDataFi);
+            primeraData.add(Calendar.MONTH, -mesos);
+            Date formDataInici = primeraData.getTime();
+            
             //String missatgeError = "";
 
             /* SISTRA1 */
             try {
-                Calendar primeraData = Calendar.getInstance();
-                Date avui = new Date();
-
-                primeraData.setTime(avui);
-                boolean cercaSistra1 = false;
-
-                if (primeraData.getTime().after(formDataInici)) {
-                    if (formDataInici.equals(formDataFi) || formDataInici.before(formDataFi)) {
-                        cercaSistra1 = true;
-                    }
+                List<TramitePersistenteGenerico> tramits = null;
+                if (isDevelopment()) {
+                    tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
+                            locale, absolutePluginRequestPath);
                 } else {
-                    cercaSistra1 = true;
+                    tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale,
+                            absolutePluginRequestPath);
                 }
 
-                if (cercaSistra1) {
-                    List<TramitePersistenteGenerico> tramits = null;
-                    if (isDevelopment()) {
-                        tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
-                                locale, absolutePluginRequestPath);
-                    } else {
-                        tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
-                                locale, absolutePluginRequestPath);
-                    }
+                log.info(" Afegits " + tramits.size() + " tramits SISTRA 1 al llistat ...");
 
-                    log.info(" Afegits " + tramits.size() + " tramits SISTRA 1 al llistat ...");
+                tramitesGenericos.addAll(tramits);
 
-                    tramitesGenericos.addAll(tramits);
-                }
             } catch (SOAPFaultException e) {
 
                 // Controlar excepció Sistra1 dintre plugin de tramitació #478
@@ -384,9 +355,10 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             }
 
             // Ordenam tràmits a mostrar
-            
-            List<TramitePersistenteGenerico> sortedTramit = new ArrayList<TramitePersistenteGenerico>(tramitesGenericos);
-            
+
+            List<TramitePersistenteGenerico> sortedTramit = new ArrayList<TramitePersistenteGenerico>(
+                    tramitesGenericos);
+
             sortedTramit = tramitesGenericos.stream()
                     .sorted(Comparator.comparing(TramitePersistenteGenerico::getFechaInicioDate).reversed())
                     .collect(Collectors.toList());
@@ -417,7 +389,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             String json = gson.toJson(infoTramits);
 
             if (isDevelopment()) {
-              //log.info("TRAMITS SISTRA JSON:\n" + json);
+                //log.info("TRAMITS SISTRA JSON:\n" + json);
             }
 
             try {
