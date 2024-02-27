@@ -50,9 +50,6 @@ class Sistra extends React.Component<SistraProps, SistraState> {
   private childRenderTable: React.RefObject<RenderTable> = React.createRef();
 
   private filter_status: string;
-  private filter_startDate: Date;
-  private filter_endDate: Date;
-
   private errorEnFiltre: boolean;
 
   private columnsNom: string[];
@@ -62,18 +59,10 @@ class Sistra extends React.Component<SistraProps, SistraState> {
 
     console.log("SISTRA:: constructor ...");
 
-    const startDateObj = new Date();
-    const endDateObj = new Date();
-    startDateObj.setMonth(endDateObj.getMonth() - 1);
-
-    // XYZ ZZZ
-    //startDateObj.setFullYear(endDateObj.getFullYear() - 3);
-
     this.columnsNom = ["index", "descripcionTramite", "fechaInicio", "estat"];
 
     this.filter_status = "A";
-    this.filter_startDate = startDateObj;
-    this.filter_endDate = endDateObj;
+    
     this.errorEnFiltre = false;
 
     this.state = {
@@ -83,10 +72,7 @@ class Sistra extends React.Component<SistraProps, SistraState> {
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
 
     this.onChangeState = this.onChangeState.bind(this);
-    this.onChangeStartDate = this.onChangeStartDate.bind(this);
-    this.onChangeEndDate = this.onChangeEndDate.bind(this);
-
-
+    
     this.formatDate = this.formatDate.bind(this);
 
     this.processarTramits = this.processarTramits.bind(this);
@@ -155,24 +141,6 @@ class Sistra extends React.Component<SistraProps, SistraState> {
     return true;
   }
 
-  onChangeStartDate(newDate: Date, _oldDate: Date): boolean {
-    if (this.validate(newDate, this.filter_endDate)) {
-      this.filter_startDate = newDate;
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  onChangeEndDate(newDate: Date, _oldDate: Date): boolean {
-    if (this.validate(this.filter_startDate, newDate)) {
-      this.filter_endDate = newDate;
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   onChangeState(e: any) {
     this.filter_status = e.target.value;
   }
@@ -209,7 +177,6 @@ class Sistra extends React.Component<SistraProps, SistraState> {
         let nouTramit: Tramit = {
           index: i + 1,
           descripcionTramite: descripcionTramite,
-          //fechaInicio:	this.dateFormat(fechaInicio),
           fechaInicio: fechaInicio,
           pendiente: pendiente,
           numero: numero,
@@ -230,13 +197,8 @@ class Sistra extends React.Component<SistraProps, SistraState> {
     console.log("Sistra::carregaDadesSistra() => Inici ...");
 
     const params = {
-      dataInici: this.formatDate(this.filter_startDate),
-      dataFi: this.formatDate(this.filter_endDate),
       estat: this.filter_status,
     };
-
-    console.log("Sistra::carregaDadesSistra() => dataInici: " + this.filter_startDate);
-    console.log("Sistra::carregaDadesSistra() => dataFi: " + this.filter_endDate);
 
     const url3 = this.props.pathtoservei;
 
