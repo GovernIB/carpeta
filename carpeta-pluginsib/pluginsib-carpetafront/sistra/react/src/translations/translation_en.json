@@ -109,5 +109,5 @@
     "sistraProblema": "Hi ha hagut qualque problema de comunicació.",
     "sistraDates": "Dates",
     "sistraCerca": "Cerca",
-    "sistraMesosCercaLiteral": "Es mostraran els tràmits iniciats en els darrers {{mesos}} mesos."
+    "sistraMesosCercaLiteral": "En aquest apartat podeu consultar tots els tràmits telemàtics que heu iniciat, tant els que estan pendents de finalitzar com els que han finalitzat, als darrers {{mesos}} mesos."
 }

@@ -350,14 +350,14 @@ class Sistra extends React.Component<SistraProps, SistraState> {
             </div>
           </div>
         </div>
-        
+        <p>En aquest apartat podeu consultar tots els tràmits telemàtics que heu iniciat, tant els que estan pendents de finalitzar com els que han finalitzat, als darrers 6 mesos.</p>
         <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSearcher} i18n={this.props.i18n}>
           <>
             <CarpetaFormulariDeFiltreItem label={sistraEstat != null ? sistraEstat : ""}>
               <select
                 id="estado"
                 name="estado"
-                className="form-control form-control-sm focusIn font1App form-select"
+                className="form-control form-control-sm focusIn font1App form-select w-25"
                 tabIndex={504}
                 aria-labelledby="estado"
                 onChange={(e) => {

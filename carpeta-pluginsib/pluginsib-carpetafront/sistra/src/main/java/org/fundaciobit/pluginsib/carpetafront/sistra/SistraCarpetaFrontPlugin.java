@@ -279,18 +279,21 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         try {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            //sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
 
             List<TramitePersistenteGenerico> tramitesGenericos = new ArrayList<TramitePersistenteGenerico>();
 
             if (formEstat == null) {
                 throw new Exception(getTraduccio("error.estat.null", locale));
             }
+            int mesos;
+            try {
+                String mes = getProperty(SISTRA_PROPERTY_BASE+"mesos", "6");
+                mesos = Integer.parseInt(mes);
+            }catch(Exception ne) {
+                log.error("*** Error obtenint el nombre de mesos per filtre de tramits. Emprant valor per defecte: 6 mesos");
+                mesos = 6;
+            }
             
-            
-            String mes = getProperty(SISTRA_PROPERTY_BASE+"mesos");
-            int mesos = Integer.parseInt(mes);
             
             
             Date formDataFi = new Date();
