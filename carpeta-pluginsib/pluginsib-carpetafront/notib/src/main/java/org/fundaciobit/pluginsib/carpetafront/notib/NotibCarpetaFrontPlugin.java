@@ -651,7 +651,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     private ConsultaV2Api notibClientRest2 = null;
 
-    private ConsultaV2Api getApi() throws Exception {
+    private synchronized ConsultaV2Api getApi() throws Exception {
 
         if (notibClientRest2 == null) {
 
@@ -2569,15 +2569,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    /*
-    private IdiomaEnum getIdiomaEnumDto(String lang) {
-        if (lang.equals("es")) {
-            return IdiomaEnum.ES;
-        }
-        return IdiomaEnum.CA;
-    
-    }
-    */
 
     /**
      * 

@@ -326,6 +326,7 @@
 					<generateApplicationXml>true</generateApplicationXml>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
 					<includeLibInApplicationXml>false</includeLibInApplicationXml>
+                    <skinnyWars>true</skinnyWars>
 					<!--suppress UnresolvedMavenProperty -->
 					<!-- Nom mòduls d'acord amb punt 4.2 de l'Estàndard CAIB -->
 					<outputFileNameMapping>@{artifactId}@-@{version}@.@{extension}@</outputFileNameMapping>
