@@ -343,12 +343,8 @@ class Sistra extends React.Component<SistraProps, SistraState> {
           </div>
         </div>
 
-        <div className="row">
-          <div id="infoContainer" className="row pb-2 ml-3 mr-0">
-            <div className="alert alert-info" role="info" id="infoMsg">
-              {sistraMesosCercaLiteral}
-            </div>
-          </div>
+        <div>
+             {sistraMesosCercaLiteral}<br/><br/>
         </div>
         <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSearcher} i18n={this.props.i18n}>
           <>
