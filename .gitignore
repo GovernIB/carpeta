@@ -295,3 +295,8 @@ node_modules/
 carpeta-pluginsib/pluginsib-carpetafront/notib2client/test.properties
 carpeta-pluginsib/pluginsib-carpetafront/notib/test.properties
 /carpeta-api-externa-client/test.properties
+/carpeta-api-interna-client/.github/workflows/maven.yml
+/carpeta-api-interna-client/.openapi-generator/FILES
+/carpeta-api-interna-client/.openapi-generator/VERSION
+/carpeta-api-interna-client/.openapi-generator/openapi.json-default.sha256
+/carpeta-api-interna-client/api/openapi.yaml

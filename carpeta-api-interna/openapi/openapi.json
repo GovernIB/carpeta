@@ -1,0 +1,301 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST INTERNA de Carpeta",
+    "description" : "Conjunt de Serveis REST de Carpeta per ser accedits des de l'interior",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "http://otae.fundaciobit.org",
+      "email" : "governdigital.carpeta@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "License Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Java Client (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-interna-client"
+  },
+  "servers" : [ {
+    "url" : "../../carpetaapi/interna"
+  }, {
+    "url" : "http://localhost:8080/carpetaapi/interna"
+  }, {
+    "url" : "https://dev.caib.es/carpetaapi/interna"
+  }, {
+    "url" : "https://proves.caib.es/carpetaapi/interna"
+  }, {
+    "url" : "https://se.caib.es/carpetaapi/interna"
+  }, {
+    "url" : "https://www.caib.es/carpetaapi/interna"
+  } ],
+  "tags" : [ {
+    "name" : "Notificacions",
+    "description" : "Notificacions a l'APP de Carpeta (missatges a Mòbil)"
+  } ],
+  "paths" : {
+    "/secure/mobilenotification/existcitizen" : {
+      "get" : {
+        "tags" : [ "Notificacions" ],
+        "summary" : "Consulta si tenim donat d'alta el mòbil d'un ciutadà/empresa a partir del seu NIF.",
+        "operationId" : "existCitizen",
+        "parameters" : [ {
+          "name" : "nif",
+          "in" : "query",
+          "description" : "NIF del Ciutadà o l'empresa",
+          "required" : true,
+          "schema" : {
+            "maxLength" : 20,
+            "minLength" : 7,
+            "type" : "string"
+          },
+          "example" : "12345678Z"
+        }, {
+          "name" : "lang",
+          "in" : "query",
+          "description" : "Codi de l'idioma",
+          "required" : true,
+          "schema" : {
+            "pattern" : "^ca|es$",
+            "type" : "string"
+          },
+          "example" : "ca"
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "200" : {
+            "description" : "Consulta finalitzada. Retorna true si existeix el ciutadà/empresa o false en cas contrari.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "boolean"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/mobilenotification/help" : {
+      "get" : {
+        "tags" : [ "Notificacions" ],
+        "summary" : "Envia un missatge al mòbil del ciutada a traves de l'App de Carpeta.",
+        "operationId" : "help",
+        "parameters" : [ {
+          "name" : "notificationCode",
+          "in" : "query",
+          "description" : "Codi de la notificació. Demanar a l'administrador de Carpeta.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "CODENAME"
+        }, {
+          "name" : "langError",
+          "in" : "query",
+          "description" : "Idioma en que s'enviaran els missatges d'error",
+          "required" : true,
+          "schema" : {
+            "pattern" : "^ca|es$",
+            "type" : "string"
+          },
+          "example" : "ca"
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "400" : {
+            "description" : "Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Enviada ajuda correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/mobilenotification/sendnotificationtomobile" : {
+      "get" : {
+        "tags" : [ "Notificacions" ],
+        "summary" : "Envia un missatge al mòbil del ciutada a traves de l'App de Carpeta.",
+        "operationId" : "sendNotificationToMobile",
+        "parameters" : [ {
+          "name" : "nif",
+          "in" : "query",
+          "description" : "NIF del Ciutadà o l'empresa",
+          "required" : true,
+          "schema" : {
+            "maxLength" : 20,
+            "minLength" : 7,
+            "type" : "string"
+          },
+          "example" : "12345678Z"
+        }, {
+          "name" : "notificationCode",
+          "in" : "query",
+          "description" : "Codi de la notificació. Demanar a l'administrador de Carpeta.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "CODENAME"
+        }, {
+          "name" : "notificationParameters",
+          "in" : "query",
+          "description" : "Paràmetres associats al Codi de la notificació",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "name" : "notificationLang",
+          "in" : "query",
+          "description" : "Idioma en que s'enviaran les notificacion",
+          "required" : true,
+          "schema" : {
+            "pattern" : "^ca|es$",
+            "type" : "string"
+          },
+          "example" : "ca"
+        }, {
+          "name" : "langError",
+          "in" : "query",
+          "description" : "Idioma en que s'enviaran els missatges d'error",
+          "required" : true,
+          "schema" : {
+            "pattern" : "^ca|es$",
+            "type" : "string"
+          },
+          "example" : "ca"
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "400" : {
+            "description" : "Error durant el processament o enviament del missatge",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SendMessageResult"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Enviat missatge correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SendMessageResult"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "SendMessageResult" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "$ref" : "#/components/schemas/SendMessageResultCode"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Missatge si hi ha error"
+          }
+        }
+      },
+      "SendMessageResultCode" : {
+        "type" : "string",
+        "description" : "Codi resultat de l'operació",
+        "enum" : [ "OK", "UNKNOWN_ERROR", "NOTIFICATION_CODE_DO_NOT_EXIST", "NOTIFICATION_CODE_DISABLED", "ENTITYCODE_DO_NOT_EXIST", "ENTITY_DISABLED", "PLUGIN_DISABLED", "PLUGIN_ENTITY_DO_NOT_EXIST", "PLUGIN_ENTITY_DISABLED", "CITIZEN_DO_NOT_EXIST", "ERROR_SENDING_NOTIFICATION" ]
+      }
+    },
+    "securitySchemes" : {
+      "BasicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}

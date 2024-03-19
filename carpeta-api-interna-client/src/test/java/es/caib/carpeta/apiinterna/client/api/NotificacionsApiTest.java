@@ -43,7 +43,8 @@ public class NotificacionsApiTest {
         try {
             NotificacionsApiTest n = new NotificacionsApiTest();
             
-            //n.existCiutadaTest();
+            //n.existCiutadaTest();start .
+            
             
             n.sendMessageTest();
             

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -15,7 +17,8 @@
     <properties>
         <auth.method>BASIC</auth.method>
         <client.default.package>es.caib.carpeta.apiinterna.client</client.default.package>
-        <!-- La darrera versió disponible: https://github.com/swagger-api/swagger-ui/releases -->
+        <!-- La darrera versió disponible:
+        https://github.com/swagger-api/swagger-ui/releases -->
         <swagger-ui.version>3.52.5</swagger-ui.version>
     </properties>
 
@@ -98,79 +101,100 @@
         <plugins>
             <!-- Genera el descriptor openapi.json de forma estàtica, després 
                 el posarem l'arrel del WAR -->
-            <!-- https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-maven-plugin -->
+            <!--
+            https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-maven-plugin -->
             <plugin>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
-                <version>2.2.0</version>
-                <configuration>
-                    <outputFileName>openapi</outputFileName>
-                    <outputPath>${project.build.directory}/openapi/</outputPath>
-                    <outputFormat>JSONANDYAML</outputFormat>
-                    <resourcePackages>
-                        <package>es.caib.carpeta.api.interna</package>
-                    </resourcePackages>
-                    <prettyPrint>TRUE</prettyPrint>
-                </configuration>
+                <version>2.2.15</version>
+
+
                 <executions>
+
                     <execution>
+                        <id>openapi1</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>resolve</goal>
                         </goals>
+                        <configuration>
+                            <contextId>openapi1</contextId>
+                            <outputFileName>openapi</outputFileName>
+                            <outputPath>${project.basedir}/openapi/</outputPath>
+                            <outputFormat>JSON</outputFormat>
+                            <resourcePackages>
+                                <package>es.caib.carpeta.api.interna</package>
+                                <package>
+                                    es.caib.carpeta.api.interna.secure.mobilenotification</package>
+                            </resourcePackages>
+                            <prettyPrint>TRUE</prettyPrint>
+                        </configuration>
+
                     </execution>
                 </executions>
             </plugin>
+
+
             <!-- Genera el Client Rest per Java a partir del fitxer openapi.json -->
-            <!-- https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md#general-configuration-parameters -->
             <plugin>
-                <groupId>io.swagger.codegen.v3</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>3.0.45</version>
+
+                <!-- https://openapi-generator.tech/docs/generators/java/ -->
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>6.6.0</version>
 
                 <executions>
                     <execution>
+                        <phase>install</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>install</phase>
                         <configuration>
-                            <inputSpec>${project.basedir}/target/openapi/openapi.json</inputSpec>
-                            <language>java</language>
+
+                            <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
+                            <generatorName>java</generatorName>
+                            <skipValidateSpec>true</skipValidateSpec>
                             <library>resteasy</library>
+                            <!-- ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA*** -->
+                            <!-- <configHelp>true</configHelp> -->
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <output>
+                                ${project.basedir}/../carpeta-api-interna-client</output>
+                            <apiPackage>${client.default.package}.api</apiPackage>
+                            <modelPackage>${client.default.package}.model</modelPackage>
+                            <invokerPackage>${client.default.package}.services</invokerPackage>
+                            <generateModelTests>false</generateModelTests>
+
+                            <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>
+
+                            
+                            <!--
+                               <enablePostProcessFile>true</enablePostProcessFile>
+                               Terminal => set JAVA_POST_PROCESS_FILE=postprocessfile.bat
+                            -->
+
                             <configOptions>
                                 <groupId>es.caib.carpeta</groupId>
                                 <artifactId>carpeta-api-interna-client</artifactId>
                                 <artifactVersion>1.1</artifactVersion>
-                                <dateLibrary>joda</dateLibrary>
+                                <artifactDescription>Carpeta - API Rest -
+                                    Interna Client</artifactDescription>
+                                <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                            </configOptions>
+                                <java11>true</java11>
+                                <booleanGetterPrefix>is</booleanGetterPrefix>
 
-                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
-                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                            <!-- <configHelp>true</configHelp> -->
-                            <!--<library>jersey2</library>  -->
-                            <!--<library>resttemplate</library>  -->
-                            <!--<configOptions>  -->
-                            <!--    <dateLibrary>joda</dateLibrary>  -->
-                            <!--</configOptions>  -->
-                            <!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
-                            <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>${project.basedir}/../carpeta-api-interna-client</output>
-                            <apiPackage>${client.default.package}.api</apiPackage>
-                            <modelPackage>${client.default.package}.model</modelPackage>
-                            <invokerPackage>${client.default.package}.services</invokerPackage>
-                            <variableNamingConvention>camelCase</variableNamingConvention>
-                            <!-- <serializableModel>true</serializableModel> -->
-                            <fullJavaUtil>true</fullJavaUtil>
+                            </configOptions>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
+
             <!-- Profile per incloure swagger-ui dins el mòdul -->
-            <!-- Davalla la versió de swagger-ui (Web UI que parseja openapi.json. 
+            <!-- Davalla la versió de swagger-ui (Web UI que parseja
+            openapi.json. 
                 Veure index.html) -->
             <plugin>
                 <groupId>com.googlecode.maven-download-plugin</groupId>
@@ -184,7 +208,8 @@
                         </goals>
                         <configuration>
                             <skipCache>false</skipCache>
-                            <url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
+                            <url>
+                                https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
                             <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}</outputDirectory>
                         </configuration>
@@ -205,7 +230,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <file>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist/index.html</file>
+                    <file>
+                        ${project.build.directory}/swagger-ui-${swagger-ui.version}/dist/index.html</file>
                     <replacements>
                         <replacement>
                             <token>https://petstore.swagger.io/v2/swagger.json</token>
@@ -222,10 +248,11 @@
                     <webResources>
                         <!--  combine.children="append">  -->
                         <resource>
-                            <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
+                            <directory>
+                                ${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
                         </resource>
                         <resource>
-                            <directory>${project.build.directory}/openapi</directory>
+                            <directory>${project.basedir}/openapi</directory>
                         </resource>
                     </webResources>
                 </configuration>
@@ -244,8 +271,10 @@
                             <goal>rename</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>${basedir}/../carpeta-api-interna-client/.gitignore</sourceFile>
-                            <destinationFile>${project.build.directory}/client_gitignore_renamed.txt</destinationFile>
+                            <sourceFile>
+                                ${basedir}/../carpeta-api-interna-client/.gitignore</sourceFile>
+                            <destinationFile>
+                                ${project.build.directory}/client_gitignore_renamed.txt</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
