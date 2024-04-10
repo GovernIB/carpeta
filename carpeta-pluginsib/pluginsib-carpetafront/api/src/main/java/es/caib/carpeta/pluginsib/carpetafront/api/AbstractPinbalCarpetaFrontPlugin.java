@@ -75,6 +75,9 @@ public abstract class AbstractPinbalCarpetaFrontPlugin extends AbstractCarpetaFr
 		ClientGeneric clientRest = new ClientGeneric(baseUrl,userName,password); //, true, null, null       );
 		log.info("solicitud tamany: " + solicituds.size());
 		log.info("solicitud3: " + solicituds.get(0).getDatosEspecificos());
+		
+		// Si hi ha problemes de comunicacio, descomentar linia per logs de la cridada
+		//clientRest.enableLogginFilter();
 		resposta = clientRest.peticionSincrona(codigoCertificado, solicituds);
 	     
 		return resposta;
