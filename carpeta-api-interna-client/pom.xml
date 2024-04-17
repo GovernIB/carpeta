@@ -156,46 +156,8 @@
                     </execution>
                 </executions>
             </plugin>
-          <plugin>
-
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <message>Maven artifacts for ${project.version}</message>
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-                    <noJekyll>true</noJekyll>
-                    <branch>refs/heads/gh-pages</branch>
-                    <includes>
-                        <include>**/*</include>
-                    </includes>
-                    <path>maven</path>
-                    <repositoryName>maven</repositoryName>
-                    <repositoryOwner>GovernIB</repositoryOwner>
-                    <server>github_governib_maven</server>
-                    <merge>true</merge>
-                    <dryRun>false</dryRun>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                    </execution>
-                </executions>
-            </plugin>
-
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>github_governib_maven</id>
-            <name>GitHub GovernIB Maven Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
-        </repository>
-    </distributionManagement>
     <dependencies>
         <!-- @Nullable annotation -->
         <dependency>

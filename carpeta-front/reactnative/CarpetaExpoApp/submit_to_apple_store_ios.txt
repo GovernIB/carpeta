@@ -1,4 +1,8 @@
 
+* Canviar versions (Veure fitxer canvi_versio.txt)
+
+* Executar run.bat i provar APP (comprovar versió canto esquerra adalt) dins de màquina virtual MacOSX Ventura 13
+
 
 (1) Compilar i Build
    (a) npm install -g eas-cli
@@ -9,14 +13,14 @@
 
 (2) Email governdigital.carpeta@fundaciobit.org (contrasenya igual que keeweb)
 
-(3) Validar account a traves de "device" (Obrir màqina virtual MacOS Monterey) o a traves de telefons de anadal(73) o atrobat
+(3) Validar account a traves de "device" (Obrir màqina virtual MacOS Monterey) o a traves de telefons de anadal(acabat en 73) o atrobat
 
 (4) Esperar a que acabi de construir-se. 
 
 (5) Entrar a https://expo.dev amb governdigital.carpeta@fundaciobit.org (contrasenya igual que keeweb)
 
-(6) Anar als builds que acabam de construir i fer click. Anar a "Options" 
-    i seleccionar "Submit to an app store". Seguir instruccions (eas submit --platform ios )
+(6) Anar als builds que acabam de construir i fer click. Anar a tres punts verticals ("Options")
+    i seleccionar "Submit to an app store". Seguir instruccions (Segurament ens dirà que hem d'executar eas submit --platform ios )
         - Triar "Select a build from EAS"
         o
         - Triar [Enter amb App Specific Password]

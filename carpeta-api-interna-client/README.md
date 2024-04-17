@@ -41,7 +41,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>es.caib.carpeta</groupId>
   <artifactId>carpeta-api-interna-client</artifactId>
-  <version>2.0</version>
+  <version>1.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +57,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "es.caib.carpeta:carpeta-api-interna-client:2.0"
+     implementation "es.caib.carpeta:carpeta-api-interna-client:1.1"
   }
 ```
 
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/carpeta-api-interna-client-2.0.jar`
+- `target/carpeta-api-interna-client-1.1.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
