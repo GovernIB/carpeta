@@ -155,6 +155,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **500** | Error intern de servidor |  -  |
-| **404** |  XYZ Paràmetres incorrectes |  -  |
-| **200** | XYZ Llista d&#39;accessos a CARPETA |  -  |
+| **404** | Paràmetres incorrectes |  -  |
+| **200** | Llista d&#39;accessos a CARPETA |  -  |
 

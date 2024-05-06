@@ -107,13 +107,13 @@ paths:
         "404":
           content:
             application/json: {}
-          description: ' XYZ Paràmetres incorrectes'
+          description: Paràmetres incorrectes
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CertificatInfo'
-          description: XYZ Llista d'accessos a CARPETA
+          description: Llista d'accessos a CARPETA
       security:
       - BasicAuth: []
       summary: 'Retorna un CertificatInfo que indica si l''usuari té certificat '

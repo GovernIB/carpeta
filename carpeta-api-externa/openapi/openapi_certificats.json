@@ -134,13 +134,13 @@
             }
           },
           "404" : {
-            "description" : " XYZ Paràmetres incorrectes",
+            "description" : "Paràmetres incorrectes",
             "content" : {
               "application/json" : { }
             }
           },
           "200" : {
-            "description" : "XYZ Llista d'accessos a CARPETA",
+            "description" : "Llista d'accessos a CARPETA",
             "content" : {
               "application/json" : {
                 "schema" : {
