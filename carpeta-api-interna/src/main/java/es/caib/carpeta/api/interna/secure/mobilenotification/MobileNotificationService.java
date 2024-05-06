@@ -38,10 +38,14 @@ import es.caib.carpeta.model.fields.SeccioFields;
 import es.caib.carpeta.persistence.EstadisticaJPA;
 import es.caib.carpeta.persistence.NotificacioAppJPA;
 import es.caib.carpeta.persistence.PluginJPA;
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
@@ -58,9 +62,26 @@ import io.swagger.v3.oas.annotations.media.Content;
  */
 @Path("/secure/mobilenotification")
 @OpenAPIDefinition(
-        tags = @Tag(
-                name = "Notificacions",
-                description = "Notificacions a l'APP de Carpeta (missatges a Mòbil)"))
+        tags = @Tag(name = "Notificacions", description = "Notificacions a l'APP de Carpeta (missatges a Mòbil)"),
+        info = @Info(
+                title = "API REST INTERNA de Carpeta - Mobile Notifications",
+                description = "Conjunt de Serveis REST de Carpeta per enviar Notificacions a l'APP de Carpeta (missatges a Mòbil)",
+                version = "1.0.0",
+                        license = @License(
+                                name = "European Union Public Licence (EUPL v1.2)",
+                                url = "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf"),
+                contact = @Contact(
+                        name = "Departament de Govern Digital a la Fundació Bit",
+                        email = "governdigital.carpeta@fundaciobit.org",
+                        url = "https://governdigital.fundaciobit.org")
+
+        ),
+
+        externalDocs = @ExternalDocumentation(
+                description = "Java Client (GovernIB Github)",
+                url = "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-interna-client-mobilenotifications-v1")
+
+)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")
@@ -106,21 +127,20 @@ public class MobileNotificationService {
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = SendMessageResult.class))) })
-    public Response sendNotificationToMobile(@Parameter(
-            description = "NIF del Ciutadà o l'empresa",
-            required = true,
-            example = "12345678Z",
-            schema = @Schema(implementation = String.class)) @NotEmpty @Size(
-                    min = 7,
-                    max = 20) @QueryParam("nif")
-            String nif,
+    public Response sendNotificationToMobile(
+            @Parameter(
+                    description = "NIF del Ciutadà o l'empresa",
+                    required = true,
+                    example = "12345678Z",
+                    schema = @Schema(implementation = String.class)) @NotEmpty @Size(
+                            min = 7,
+                            max = 20) @QueryParam("nif") String nif,
 
             @Parameter(
                     description = "Codi de la notificació. Demanar a l'administrador de Carpeta.",
                     schema = @Schema(implementation = String.class),
                     required = true,
-                    example = "CODENAME") @NotNull @QueryParam("notificationCode")
-            String notificationCode,
+                    example = "CODENAME") @NotNull @QueryParam("notificationCode") String notificationCode,
 
             @Parameter(
                     description = "Paràmetres associats al Codi de la notificació",
@@ -128,24 +148,21 @@ public class MobileNotificationService {
                     example = "",
                     array = @ArraySchema(
                             schema = @Schema(
-                                    type = "string"))) @NotNull @QueryParam("notificationParameters")
-            String[] notificationParameters,
+                                    type = "string"))) @NotNull @QueryParam("notificationParameters") String[] notificationParameters,
 
             @Parameter(
                     description = "Idioma en que s'enviaran les notificacion",
                     required = true,
                     example = "ca",
                     schema = @Schema(implementation = String.class)) @Pattern(
-                            regexp = "^ca|es$") @QueryParam("notificationLang")
-            String notificationLang,
+                            regexp = "^ca|es$") @QueryParam("notificationLang") String notificationLang,
 
             @Parameter(
                     description = "Idioma en que s'enviaran els missatges d'error",
                     required = true,
                     example = "ca",
                     schema = @Schema(implementation = String.class)) @Pattern(
-                            regexp = "^ca|es$") @QueryParam("langError")
-            String langError) {
+                            regexp = "^ca|es$") @QueryParam("langError") String langError) {
 
         final long start = System.currentTimeMillis();
         try {
@@ -158,12 +175,12 @@ public class MobileNotificationService {
             }
 
             // Check if notificationCode exists
-            List<NotificacioApp> nList = apiRestEjb.notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
+            List<NotificacioApp> nList = apiRestEjb
+                    .notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
             if (nList.size() != 1) {
                 // TODO XYZ ZZZ TRA
-                return generateError(SendMessageResultCode.NOTIFICATION_CODE_DO_NOT_EXIST,
-                        "El codi de notificacio " + notificationCode + " no està registrat."
-                                + "Consulti amb l'administrador de Carpeta.");
+                return generateError(SendMessageResultCode.NOTIFICATION_CODE_DO_NOT_EXIST, "El codi de notificacio "
+                        + notificationCode + " no està registrat." + "Consulti amb l'administrador de Carpeta.");
             }
 
             // Check if Entity exists
@@ -176,8 +193,7 @@ public class MobileNotificationService {
             if (entitat == null) {
                 // TODO XYZ ZZZ TRA
                 return generateError(SendMessageResultCode.ENTITYCODE_DO_NOT_EXIST,
-                        "No existeix cap entitat dins Carpeta amb ID  `"
-                                + notificacio.getEntitatID()
+                        "No existeix cap entitat dins Carpeta amb ID  `" + notificacio.getEntitatID()
                                 + "`. Consulti amb l'administrador de Carpeta.");
             }
 
@@ -222,9 +238,8 @@ public class MobileNotificationService {
                     // TODO XYZ ZZZ TRA
                     return generateError(SendMessageResultCode.PLUGIN_ENTITY_DISABLED,
                             "El plugin `" + plugin.getNom().getTraduccio(langError)
-                                    + " associat al codi de notificació  `" + notificationCode
-                                    + "` en l'entitat `" + entitat.getCodi()
-                                    + "` no està actiu. Consulti amb l'administrador de Carpeta.");
+                                    + " associat al codi de notificació  `" + notificationCode + "` en l'entitat `"
+                                    + entitat.getCodi() + "` no està actiu. Consulti amb l'administrador de Carpeta.");
                 }
             }
 
@@ -245,29 +260,29 @@ public class MobileNotificationService {
             String message = notificacio.getMissatge().getTraduccio(notificationLang).getValor();
             String missatge = MessageFormat.format(message, parametres);
 
-            
             Map<String, Object> data = new HashMap<String, Object>();
-            
+
             if (pluginEntitat == null) {
-               data.put("action", "NONE");
+                data.put("action", "NONE");
             } else {
-               data.put("action", "SHOWPLUGIN");
-               boolean ispublic = !(plugin.getTipus() == Constants.PLUGIN_TIPUS_FRONT_PRIVAT);
-               String seccio = apiRestEjb.seccioEjbExecuteQueryOne(SeccioFields.CONTEXTE, SeccioFields.SECCIOID.equal(pluginEntitat.getSeccioID()));
-               
-               String url = "/#";
-               if (seccio != null) {
-                   url = url + "/seccio/" + seccio;
-               }
-               
-               if (ispublic) {
-                   url = url + "/publicmodul/";
-               } else {
-                   url = url + "/modul/";
-               }
-               
-               data.put("url", url + plugin.getContext());
-               data.put("ispublic",ispublic);
+                data.put("action", "SHOWPLUGIN");
+                boolean ispublic = !(plugin.getTipus() == Constants.PLUGIN_TIPUS_FRONT_PRIVAT);
+                String seccio = apiRestEjb.seccioEjbExecuteQueryOne(SeccioFields.CONTEXTE,
+                        SeccioFields.SECCIOID.equal(pluginEntitat.getSeccioID()));
+
+                String url = "/#";
+                if (seccio != null) {
+                    url = url + "/seccio/" + seccio;
+                }
+
+                if (ispublic) {
+                    url = url + "/publicmodul/";
+                } else {
+                    url = url + "/modul/";
+                }
+
+                data.put("url", url + plugin.getContext());
+                data.put("ispublic", ispublic);
             }
 
             // Send message
@@ -275,17 +290,14 @@ public class MobileNotificationService {
             snr = SendNotificationToMobile.sendMessageToMobile(mobileID, titol, missatge, data);
             if (snr.isEstatEnviat() && snr.isEstatRebut()) {
 
-                final int elapsed = (int)(System.currentTimeMillis() - start);
+                final int elapsed = (int) (System.currentTimeMillis() - start);
                 try {
-                    EstadisticaJPA est = new EstadisticaJPA(
-                            Constants.TIPUS_ESTADISTICA_ENVIADA_NOTIFICACIO_MOBIL,
+                    EstadisticaJPA est = new EstadisticaJPA(Constants.TIPUS_ESTADISTICA_ENVIADA_NOTIFICACIO_MOBIL,
                             new Timestamp(System.currentTimeMillis()), elapsed,
-                            pluginEntitat == null ? null : pluginEntitat.getPluginID(),
-                            entitat.getEntitatID());
+                            pluginEntitat == null ? null : pluginEntitat.getPluginID(), entitat.getEntitatID());
                     apiRestEjb.estadisticaEjbCreate(est);
                 } catch (Throwable th) {
-                    log.error("Error crean Estadistiques de Enviada Notificacio a Mòbil: "
-                            + th.getMessage(), th);
+                    log.error("Error crean Estadistiques de Enviada Notificacio a Mòbil: " + th.getMessage(), th);
 
                 }
 
@@ -293,8 +305,7 @@ public class MobileNotificationService {
                 smr.setCode(SendMessageResultCode.OK);
                 return Response.ok().entity(smr).build();
             } else {
-                return generateError(SendMessageResultCode.ERROR_SENDING_NOTIFICATION,
-                        snr.toString());
+                return generateError(SendMessageResultCode.ERROR_SENDING_NOTIFICATION, snr.toString());
             }
 
         } catch (Throwable th) {
@@ -341,8 +352,7 @@ public class MobileNotificationService {
         Where w1 = CiutadaFields.NIF.equal(nif);
         Where w2 = CiutadaFields.REPRESENTANTNIF.isNull();
 
-        String mobileID = apiRestEjb.ciutadaLogicaEjbExecuteQueryOne(CiutadaFields.MOBILEID,
-                Where.AND(w1, w2));
+        String mobileID = apiRestEjb.ciutadaLogicaEjbExecuteQueryOne(CiutadaFields.MOBILEID, Where.AND(w1, w2));
 
         if (mobileID == null) {
             Where w3 = CiutadaFields.REPRESENTANTNIF.isNotNull();
@@ -380,22 +390,21 @@ public class MobileNotificationService {
     @Path("/existcitizen")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response existCitizen(@Parameter(
-            description = "NIF del Ciutadà o l'empresa",
-            required = true,
-            example = "12345678Z",
-            schema = @Schema(implementation = String.class)) @NotEmpty @Size(
-                    min = 7,
-                    max = 20) @QueryParam("nif")
-    String nif,
+    public Response existCitizen(
+            @Parameter(
+                    description = "NIF del Ciutadà o l'empresa",
+                    required = true,
+                    example = "12345678Z",
+                    schema = @Schema(implementation = String.class)) @NotEmpty @Size(
+                            min = 7,
+                            max = 20) @QueryParam("nif") String nif,
 
             @Parameter(
                     description = "Codi de l'idioma",
                     required = true,
                     example = "ca",
                     schema = @Schema(implementation = String.class)) @Pattern(
-                            regexp = "^ca|es$") @QueryParam("lang")
-            String lang) {
+                            regexp = "^ca|es$") @QueryParam("lang") String lang) {
 
         try {
             String mobileID = getMobileIdOfCiutada(nif);
@@ -416,8 +425,7 @@ public class MobileNotificationService {
             }
 
             log.error("Error cridada api rest consulta de ciutadà/empresa: " + msg, th);
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("{ \"error\" : " + "\"" + msg + "\" }").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("{ \"error\" : " + "\"" + msg + "\" }").build();
         }
 
     }
@@ -463,15 +471,13 @@ public class MobileNotificationService {
                     description = "Codi de la notificació. Demanar a l'administrador de Carpeta.",
                     schema = @Schema(implementation = String.class),
                     required = true,
-                    example = "CODENAME") @NotNull @QueryParam("notificationCode")
-            String notificationCode,
+                    example = "CODENAME") @NotNull @QueryParam("notificationCode") String notificationCode,
             @Parameter(
                     description = "Idioma en que s'enviaran els missatges d'error",
                     required = true,
                     example = "ca",
                     schema = @Schema(implementation = String.class)) @Pattern(
-                            regexp = "^ca|es$") @QueryParam("langError")
-            String langError) {
+                            regexp = "^ca|es$") @QueryParam("langError") String langError) {
 
         try {
 
@@ -482,11 +488,12 @@ public class MobileNotificationService {
             }
 
             // Check if notificationCode exists
-            List<NotificacioApp> nList = apiRestEjb.notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
+            List<NotificacioApp> nList = apiRestEjb
+                    .notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
             if (nList.size() != 1) {
                 // TODO XYZ ZZZ TRA
-                return generateError("El codi de notificacio " + notificationCode
-                        + " no està registrat." + "Consulti amb l'administrador de Carpeta.");
+                return generateError("El codi de notificacio " + notificationCode + " no està registrat."
+                        + "Consulti amb l'administrador de Carpeta.");
             }
 
             NotificacioAppJPA notificacio = (NotificacioAppJPA) nList.get(0);

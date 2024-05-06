@@ -1,0 +1,16 @@
+[
+    {
+        "url": "./openapi_certificats.json",
+        "name": "Certificats"
+    }
+,
+    {
+        "url": "./openapi_estadistiquesaccessos.json",
+        "name": "Estadístiques d'Accessos"
+    }
+,
+    {
+        "url": "./openapi_echosecuritzat.json",
+        "name": "Echo Securitzat"
+    }
+]

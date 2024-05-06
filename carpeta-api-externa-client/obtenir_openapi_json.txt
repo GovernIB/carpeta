@@ -1,3 +1,0 @@
-
-
-http://localhost:8080/carpetaapi/externa/openapi.json

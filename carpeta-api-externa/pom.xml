@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -14,9 +16,9 @@
 
     <properties>
         <auth.method>BASIC</auth.method>
-        <client.default.package>es.caib.carpeta.apiexterna.client</client.default.package>
-        <client.certificats.default.package>es.caib.carpeta.apicertificats.client</client.certificats.default.package>
-        <!-- La darrera versió disponible: https://github.com/swagger-api/swagger-ui/releases -->
+        <client.default.package>es.caib.carpeta.api.externa.client</client.default.package>
+        <!-- La darrera versió disponible:
+        https://github.com/swagger-api/swagger-ui/releases -->
         <swagger-ui.version>3.52.5</swagger-ui.version>
     </properties>
 
@@ -51,6 +53,13 @@
             <artifactId>carpeta-ejb</artifactId>
             <version>1.1.29</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <!-- Esta en LIB de l'EAR -->
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--
         <dependency>
@@ -64,7 +73,7 @@
             <artifactId>swagger-annotations</artifactId>
             <version>2.1.13</version>
         </dependency>
-        
+
         <dependency>
             <artifactId>pluginsib-utils-rest</artifactId>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
@@ -77,35 +86,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Dependències de test -->
+
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>org.webjars</groupId>
+            <artifactId>swager-ui-configurable</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
-        <!-- Llibreries necessàries implementació client JAX-RS Només són 
-            necessàries perquè al test el client s'executa fora del servidor d'aplicacions. -->
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-json-binding-provider</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>commons-logging-jboss-logging</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- Per tests amb Arquillian -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
     </dependencies>
 
@@ -114,221 +101,162 @@
         <plugins>
             <!-- Genera el descriptor openapi.json de forma estàtica, després 
                 el posarem l'arrel del WAR -->
-            <!-- https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-maven-plugin -->
+            <!--
+            https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-maven-plugin -->
             <plugin>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
                 <version>2.2.0</version>
 
+                <configuration>
+                    <outputFormat>JSON</outputFormat>
+                    <prettyPrint>TRUE</prettyPrint>
+                    <outputPath>${project.basedir}/openapi/</outputPath>
+                </configuration>
+
                 <executions>
                     <execution>
-                        <id>estadistiques</id>
+                        <id>openapi1</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>resolve</goal>
                         </goals>
                         <configuration>
-                            <outputFileName>openapi</outputFileName>
-                            <outputPath>${project.basedir}/openapi/</outputPath>
-                            <outputFormat>JSONANDYAML</outputFormat>
+                            <contextId>Certificats</contextId>
+                            <outputFileName>openapi_certificats</outputFileName>
                             <resourcePackages>
-                                <package>es.caib.carpeta.api.externa.estadistiques</package>
-                                <package>es.caib.carpeta.api.externa.secureexample</package>
                                 <package>es.caib.carpeta.api.externa.config</package>
+                                <package>es.caib.carpeta.api.externa.secure.certificats</package>
                             </resourcePackages>
-                            <prettyPrint>TRUE</prettyPrint>
                         </configuration>
                     </execution>
-                    <!-- NOTA: Aquesta segona execució no la fa bé. !!!! -->
-                    <!-- Per això s'executa el següent plugin io.openapitools.swagger -->
-                    <!--
+
                     <execution>
-                        <id>certificats</id>
+                        <id>openapi2</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>resolve</goal>
                         </goals>
                         <configuration>
-                            <outputFileName>openapi_certificat2</outputFileName>
-                            <outputPath>${project.basedir}/openapi2/</outputPath>
-                            <outputFormat>JSONANDYAML</outputFormat>
+                            <contextId>Estadístiques d'Accessos</contextId>
+                            <outputFileName>openapi_estadistiquesaccessos</outputFileName>
                             <resourcePackages>
-                                <package>es.caib.carpeta.api.externa.certificats</package>
                                 <package>es.caib.carpeta.api.externa.config</package>
+                                <package>
+                                    es.caib.carpeta.api.externa.all.estadistiques</package>
                             </resourcePackages>
-                            <prettyPrint>TRUE</prettyPrint>
                         </configuration>
                     </execution>
-                    -->
+
+                    <execution>
+                        <id>openapi3</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                        <configuration>
+                            <contextId>Echo Securitzat</contextId>
+                            <outputFileName>openapi_echosecuritzat</outputFileName>
+                            <resourcePackages>
+                                <package>es.caib.carpeta.api.externa.config</package>
+                                <package>es.caib.carpeta.api.externa.secure.echo</package>
+                            </resourcePackages>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
 
-            <plugin>
-              <groupId>io.openapitools.swagger</groupId>
-              <artifactId>swagger-maven-plugin</artifactId>
-              <configuration>
-                <resourcePackages>
-                  <package>es.caib.carpeta.api.externa.certificats</package>
-                  <package>es.caib.carpeta.api.externa.config</package>
-                </resourcePackages>
-                <outputDirectory>${project.basedir}/openapi/</outputDirectory>
-                <outputFilename>openapi_certificat</outputFilename>
-                <outputFormats>JSON,YAML</outputFormats>
-                <prettyPrint>true</prettyPrint>
-              </configuration>
-              <executions>
-                <execution>
-                  <goals>
-                    <goal>generate</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-         
 
-
-            <!-- Genera el Client Rest per Java a partir del fitxer openapi.json -->
-            <!-- https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md#general-configuration-parameters -->
+            <!--
+            ==================================================================  -->
+            <!-- Genera el Client Rest per Java a partir del fitxers
+            openapi_*.json -->
+            <!--
+            ==================================================================  -->
             <plugin>
-                <groupId>io.swagger.codegen.v3</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>3.0.27</version>
+                <!-- https://openapi-generator.tech/docs/generators/java/ -->
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.3.0</version>
 
                 <executions>
 
                     <execution>
-                        <id>estadistiques_i_secure</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <phase>install</phase>
-                        <configuration>
-                            <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
-                            <language>java</language>
-
-                            <library>resteasy</library>
-                            <configOptions>
-                                <groupId>es.caib.carpeta</groupId>
-                                <artifactId>carpeta-api-externa-client</artifactId>
-                                <artifactVersion>1.1</artifactVersion>
-                                <dateLibrary>joda</dateLibrary>
-                                <useTags>true</useTags>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <java11>true</java11>
-                            </configOptions>
-
-                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
-                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                            <!-- <configHelp>true</configHelp> -->
-                            <!--<library>jersey2</library>  -->
-                            <!--<library>resttemplate</library>  -->
-                            <!--<configOptions>  -->
-                            <!--    <dateLibrary>joda</dateLibrary>  -->
-                            <!--</configOptions>  -->
-                            <!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
-                            <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>${project.basedir}/../carpeta-api-externa-client</output>
-                            <apiPackage>${client.default.package}.api</apiPackage>
-                            <modelPackage>${client.default.package}.model</modelPackage>
-                            <invokerPackage>${client.default.package}.services</invokerPackage>
-                            <!-- <variableNamingConvention>camelCase</variableNamingConvention> -->
-                            <!-- <serializableModel>true</serializableModel> -->
-                            <!-- <fullJavaUtil>true</fullJavaUtil> -->
-                        </configuration>
-                    </execution>
-
-
-                    <execution>
-                        <id>certificat</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <phase>install</phase>
-                        <configuration>
-                            <inputSpec>${project.basedir}/openapi/openapi_certificat.json</inputSpec>
-                            <language>java</language>
-
-
-                            <library>okhttp-gson</library>
-                            <!-- <library>resteasy</library> -->
-                            <configOptions>
-                                <groupId>es.caib.carpeta</groupId>
-                                <artifactId>carpeta-api-certificats-client</artifactId>
-                                <artifactVersion>1.1</artifactVersion>
-                                <dateLibrary>jdk18</dateLibrary>
-                                <useTags>true</useTags>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <java11>true</java11>
-                            </configOptions>
-
-                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
-                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                            <!-- <configHelp>true</configHelp> -->
-                            <!--<library>jersey2</library>  -->
-                            <!--<library>resttemplate</library>  -->
-                            <!--<configOptions>  -->
-                            <!--    <dateLibrary>joda</dateLibrary>  -->
-                            <!--</configOptions>  -->
-                            <!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
-                            <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>${project.basedir}/../carpeta-api-certificats-client</output>
-                            <apiPackage>${client.certificats.default.package}.api</apiPackage>
-                            <modelPackage>${client.certificats.default.package}.model</modelPackage>
-                            <invokerPackage>${client.certificats.default.package}.services</invokerPackage>
-                            <!-- <variableNamingConvention>camelCase</variableNamingConvention> -->
-                            <!-- <serializableModel>true</serializableModel> -->
-                            <!-- <fullJavaUtil>true</fullJavaUtil> -->
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Profile per incloure swagger-ui dins el mòdul -->
-            <!-- Davalla la versió de swagger-ui (Web UI que parseja openapi.json. 
-                Veure index.html) -->
-            <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>swagger-ui</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <skipCache>false</skipCache>
-                            <uri>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</uri>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Canvia l'adreça de la configuració d'exemple per la real, 
-                ./openapi.json -->
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <executions>
-                    <execution>
-                        <id>index</id>
+                        <id>openapi1</id>
                         <phase>prepare-package</phase>
                         <goals>
-                            <goal>replace</goal>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/openapi/openapi_certificats.json</inputSpec>
+                            <generatorName>java</generatorName>
+                            <skipValidateSpec>false</skipValidateSpec>
+                            <configHelp>java</configHelp>
+                            <library>resteasy</library>
+                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
+                            <!-- <configHelp>true</configHelp> -->
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <output>
+                                ${project.basedir}/../carpeta-api-externa-client-certificats-v1</output>
+                            <apiPackage>${client.default.package}.certificats.v1.api</apiPackage>
+                            <modelPackage>${client.default.package}.certificats.v1.model</modelPackage>
+                            <invokerPackage>${client.default.package}.certificats.v1.services</invokerPackage>
+                            <generateModelTests>false</generateModelTests>
+                            <configOptions>
+                                <groupId>es.caib.carpeta</groupId>
+                                <artifactId>
+                                    carpeta-api-externa-client-certificats-v1</artifactId>
+                                <artifactVersion>1.0-SNAPSHOT</artifactVersion>
+                                <artifactDescription>Carpeta - API Rest -
+                                    Externa Client - Certificats v1</artifactDescription>
+                                <dateLibrary>java8</dateLibrary>
+                                <useTags>true</useTags>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <java11>true</java11>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>java</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <file>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist/index.html</file>
-                    <replacements>
-                        <replacement>
-                            <token>url: "https://petstore.swagger.io/v2/swagger.json",</token>
-                            <value>urls: [{url: "/carpetaapi/externa/openapi.json", name: "Estadístiques(./openapi.json)"}, {url: "/carpetaapi/externa/openapi_certificat.json", name: "Certificats (./openapi_certificat.json)"}],</value>
-                        </replacement>
-                    </replacements>
+                    <includeProjectDependencies>false</includeProjectDependencies>
+                    <includePluginDependencies>true</includePluginDependencies>
+                    <executableDependency>
+                        <artifactId>pluginsib-utils-rest</artifactId>
+                        <groupId>org.fundaciobit.pluginsib.utils</groupId>
+                    </executableDependency>
+                    <mainClass>
+                        org.fundaciobit.pluginsib.utils.rest.pomadaptertojboss72.AdaptApiClientPomToJboss72</mainClass>
+                    <arguments>
+                        <argument>${project.basedir}</argument>
+                    </arguments>
+
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <artifactId>pluginsib-utils-rest</artifactId>
+                        <groupId>org.fundaciobit.pluginsib.utils</groupId>
+                        <version>2.0.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
             </plugin>
+
 
             <!-- Inclou el openapi.json i el swagger-ui dins el war -->
             <plugin>
@@ -336,102 +264,15 @@
                 <configuration>
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <webResources>
-                        <!--  combine.children="append">  -->
-                        <resource>
-                            <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
-                        </resource>
+
                         <resource>
                             <directory>${project.basedir}/openapi</directory>
                         </resource>
                     </webResources>
                 </configuration>
             </plugin>
-            <!--   Llevar el .gitignore del codi generat -->
-            <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-file</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>rename</goal>
-                        </goals>
-                        <configuration>
-                            <sourceFile>${basedir}/../carpeta-api-externa-client/.gitignore</sourceFile>
-                            <destinationFile>${project.build.directory}/client_gitignore_renamed.txt</destinationFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <!--This plugin's configuration is used to store Eclipse 
-                    m2e settings only. It has no influence on the Maven build itself. -->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>
-                                            org.apache.geronimo
-                                        </groupId>
-                                        <artifactId>
-                                            geronimo-openapi-maven-plugin
-                                        </artifactId>
-                                        <versionRange>
-                                            [1.0.12,)
-                                        </versionRange>
-                                        <goals>
-                                            <goal>openapi.json</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore></ignore>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 
-    <profiles>
-        <!-- Realitza els tests arrancant automàticament un JBoss ubicat 
-            a la variable d'entorn JBOSS_HOME -->
-        <profile>
-            <id>arq-jboss-managed</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly.arquillian</groupId>
-                    <artifactId>wildfly-arquillian-container-managed</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <!-- Realitza els tests connectant a una instància de JBoss en marxa 
-            a localhost -->
-        <profile>
-            <id>arq-jboss-remote</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly.arquillian</groupId>
-                    <artifactId>wildfly-arquillian-container-remote</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+    </build>
 </project>

@@ -1,0 +1,181 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: governdigital.carpeta@fundaciobit.org
+    name: Departament de Govern Digital a la Fundació Bit
+    url: https://governdigital.fundaciobit.org
+  description: Plantilla de Serveis REST a implementar per servidors externs per des
+    de Carpeta poder accedir a Certificats dels Ciutadans
+  license:
+    name: European Union Public Licence (EUPL v1.2)
+    url: https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf
+  title: API REST EXTERNA de Carpeta - Certificats
+  version: 1.0.0
+externalDocs:
+  description: Java Client (GovernIB Github)
+  url: https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-externa-client-certificats
+servers:
+- url: ../../carpetaapi/externa
+- url: http://localhost:8080/carpetaapi/externa
+- url: https://dev.caib.es/carpetaapi/externa
+- url: https://proves.caib.es/carpetaapi/externa
+- url: https://se.caib.es/carpetaapi/externa
+- url: https://www.caib.es/carpetaapi/externa
+tags:
+- description: Certificats
+  name: Certificats
+paths:
+  /secure/certificats/descarregarCertificat:
+    get:
+      operationId: descarregarCertificat
+      parameters:
+      - description: DNI o NIF de la persona de la qual volem obtenir el certificat.
+        example: 99999999X
+        explode: true
+        in: query
+        name: dni
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Codi de l'idioma
+        example: ca
+        explode: true
+        in: query
+        name: idioma
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Numero de plugin
+        example: 1
+        explode: false
+        in: header
+        name: pluginNumber
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json: {}
+          description: Error intern de servidor
+        "404":
+          content:
+            application/json: {}
+          description: Paràmetres incorrectes
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificatBean'
+          description: Llista d'accessos a CARPETA
+      security:
+      - BasicAuth: []
+      summary: Retorna un certificat provinent de un servei extern a CARPETA.
+      tags:
+      - Certificats
+      x-accepts: application/json
+  /secure/certificats/teCertificat:
+    get:
+      operationId: teCertificat
+      parameters:
+      - description: DNI o NIF de la persona de la qual volem saber si té certificat.
+        example: 99999999X
+        explode: true
+        in: query
+        name: dni
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Numero de plugin
+        example: 1
+        explode: false
+        in: header
+        name: pluginNumber
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json: {}
+          description: Error intern de servidor
+        "404":
+          content:
+            application/json: {}
+          description: ' XYZ Paràmetres incorrectes'
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificatInfo'
+          description: XYZ Llista d'accessos a CARPETA
+      security:
+      - BasicAuth: []
+      summary: 'Retorna un CertificatInfo que indica si l''usuari té certificat '
+      tags:
+      - Certificats
+      x-accepts: application/json
+components:
+  schemas:
+    CertificatBean:
+      example:
+        fitxer:
+          bytes: bytes
+          mime: mime
+          length: 0
+          nom: nom
+        tipus: null
+        url: url
+      properties:
+        tipus:
+          $ref: '#/components/schemas/CertificatType'
+        fitxer:
+          $ref: '#/components/schemas/CertificatFileInfo'
+        url:
+          type: string
+      type: object
+    CertificatFileInfo:
+      example:
+        bytes: bytes
+        mime: mime
+        length: 0
+        nom: nom
+      properties:
+        nom:
+          type: string
+        mime:
+          type: string
+        length:
+          format: int32
+          type: integer
+        bytes:
+          format: byte
+          type: string
+      required:
+      - bytes
+      type: object
+    CertificatType:
+      enum:
+      - VALOR
+      - FITXER
+      type: string
+    CertificatInfo:
+      example:
+        administrationId: administrationId
+        teCertificat: true
+      properties:
+        teCertificat:
+          type: boolean
+        administrationId:
+          type: string
+      type: object
+  securitySchemes:
+    BasicAuth:
+      scheme: basic
+      type: http
+

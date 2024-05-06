@@ -1,14 +1,19 @@
 package org.fundaciobit.pluginsib.carpetafront.certificats;
 
-import es.caib.carpeta.apicertificats.client.api.CertificatsApi;
-import es.caib.carpeta.apicertificats.client.model.CertificatBean;
-import es.caib.carpeta.apicertificats.client.model.CertificatFileInfo;
-import es.caib.carpeta.apicertificats.client.model.CertificatInfo;
-import es.caib.carpeta.apicertificats.client.services.ApiClient;
-import es.caib.carpeta.apicertificats.client.services.ByteArrayDeserializer;
-import es.caib.carpeta.apicertificats.client.services.JSON;
-import es.caib.carpeta.apicertificats.client.services.auth.HttpBasicAuth;
-import es.caib.carpeta.pluginsib.carpetafront.api.*;
+
+import es.caib.carpeta.api.externa.client.certificats.v1.model.CertificatBean;
+import es.caib.carpeta.api.externa.client.certificats.v1.model.CertificatFileInfo;
+import es.caib.carpeta.api.externa.client.certificats.v1.model.CertificatInfo;
+import es.caib.carpeta.api.externa.client.certificats.v1.services.ApiClient;
+import es.caib.carpeta.api.externa.client.certificats.v1.services.auth.HttpBasicAuth;
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import es.caib.carpeta.api.externa.client.certificats.v1.api.CertificatsApi;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +21,6 @@ import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -325,7 +329,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             log.info("XYZ ZZZ userData AdministrationID = " + userData.getAdministrationID());
                                     
             CertificatInfo teCertInfo = api.teCertificat(userData.getAdministrationID(), numeroStr);
-            Boolean teCertificat = teCertInfo.isTeCertificat();
+            Boolean teCertificat = teCertInfo.getTeCertificat();
             String url = teCertificat
                     ? absolutePluginRequestPath + "/" + URL_REST_SERVICE_DESCARREGA_CERTIFICATS + "/" + numeroStr
                     : null;
@@ -424,11 +428,11 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         ApiClient client = new ApiClient();
         
         client.addDefaultHeader("pluginNumber", String.valueOf(pluginNumber));
-
+/*
         JSON serializer = client.getJSON();
         Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new ByteArrayDeserializer()).create();
         serializer.setGson(gson);
-
+*/
         client.setBasePath(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + pluginNumber + ".url"));
         HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
         auth.setUsername(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + pluginNumber + ".username"));

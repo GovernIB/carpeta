@@ -1,0 +1,84 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST EXTERNA de Carpeta - Echo",
+    "description" : "Exemple de Echo amb seguretat.",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "https://governdigital.fundaciobit.org",
+      "email" : "governdigital.carpeta@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "European Union Public Licence (EUPL v1.2)",
+      "url" : "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf"
+    },
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Java Client (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-externa"
+  },
+  "servers" : [ {
+    "url" : "../../carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "http://localhost:8080/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://dev.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://proves.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://se.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://www.caib.es/carpetaapi/externa",
+    "variables" : { }
+  } ],
+  "tags" : [ {
+    "name" : "Echo",
+    "description" : "Implementació de Echo"
+  } ],
+  "paths" : {
+    "/secure/echo/echo" : {
+      "get" : {
+        "tags" : [ "Securetat" ],
+        "summary" : "Fa un ECHO",
+        "operationId" : "echo",
+        "parameters" : [ {
+          "name" : "echoInput",
+          "in" : "query",
+          "description" : "Cadena a retornar",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Respon el valor enviat per paràmetre",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "securitySchemes" : {
+      "BasicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}

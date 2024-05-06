@@ -13,13 +13,18 @@
     </parent>
 
     <dependencies>
-
+<!--
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-api-certificats-client</artifactId>
             <version>1.1</version>
         </dependency>
-
+        -->
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-api-externa-client-certificats-v1</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <version>1.1.29</version>

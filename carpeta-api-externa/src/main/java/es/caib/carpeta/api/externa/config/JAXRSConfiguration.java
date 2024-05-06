@@ -1,10 +1,6 @@
 package es.caib.carpeta.api.externa.config;
 
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Contact;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 import javax.annotation.PostConstruct;
@@ -19,29 +15,12 @@ import org.apache.log4j.Logger;
  *
  */
 @OpenAPIDefinition(
-        info = @Info(
-                title = "API REST EXTERNA de Carpeta",
-                description = "Conjunt de Serveis REST de Carpeta per ser accedits des de l'exterior", 
-                version = "1.0.0",
-                license = @License(
-                        name = "License Apache 2.0",
-                        url = "http://www.apache.org/licenses/LICENSE-2.0"),
-                contact = @Contact(
-                        name = "Departament de Govern Digital a la Fundació Bit",
-                        email = "governdigital.carpeta@fundaciobit.org",
-                        url = "http://otae.fundaciobit.org")
-
-        ),
         servers = { @Server(url = "../../carpetaapi/externa"),
                     @Server(url = "http://localhost:8080/carpetaapi/externa"),
                     @Server(url = "https://dev.caib.es/carpetaapi/externa"),
                     @Server(url = "https://proves.caib.es/carpetaapi/externa"),
                     @Server(url = "https://se.caib.es/carpetaapi/externa"),
-                    @Server(url = "https://www.caib.es/carpetaapi/externa")},
-        externalDocs = @ExternalDocumentation(
-                description = "Java Client (GovernIB Github)",
-                url = "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-externa-client")
-
+                    @Server(url = "https://www.caib.es/carpetaapi/externa")}
 )
 @ApplicationPath("/")
 public class JAXRSConfiguration extends Application {

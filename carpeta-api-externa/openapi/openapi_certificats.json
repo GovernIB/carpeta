@@ -1,0 +1,218 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST EXTERNA de Carpeta - Certificats",
+    "description" : "Plantilla de Serveis REST a implementar per servidors externs per des de Carpeta poder accedir a Certificats dels Ciutadans",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "https://governdigital.fundaciobit.org",
+      "email" : "governdigital.carpeta@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "European Union Public Licence (EUPL v1.2)",
+      "url" : "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf"
+    },
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Java Client (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-externa-client-certificats"
+  },
+  "servers" : [ {
+    "url" : "../../carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "http://localhost:8080/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://dev.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://proves.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://se.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://www.caib.es/carpetaapi/externa",
+    "variables" : { }
+  } ],
+  "tags" : [ {
+    "name" : "Certificats",
+    "description" : "Certificats"
+  } ],
+  "paths" : {
+    "/secure/certificats/descarregarCertificat" : {
+      "get" : {
+        "tags" : [ "Certificats" ],
+        "summary" : "Retorna un certificat provinent de un servei extern a CARPETA.",
+        "operationId" : "descarregarCertificat",
+        "parameters" : [ {
+          "name" : "dni",
+          "in" : "query",
+          "description" : "DNI o NIF de la persona de la qual volem obtenir el certificat.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "99999999X"
+        }, {
+          "name" : "idioma",
+          "in" : "query",
+          "description" : "Codi de l'idioma",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "ca"
+        }, {
+          "name" : "pluginNumber",
+          "in" : "header",
+          "description" : "Numero de plugin",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Error intern de servidor",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "200" : {
+            "description" : "Llista d'accessos a CARPETA",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificatBean"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/certificats/teCertificat" : {
+      "get" : {
+        "tags" : [ "Certificats" ],
+        "summary" : "Retorna un CertificatInfo que indica si l'usuari té certificat ",
+        "operationId" : "teCertificat",
+        "parameters" : [ {
+          "name" : "dni",
+          "in" : "query",
+          "description" : "DNI o NIF de la persona de la qual volem saber si té certificat.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "99999999X"
+        }, {
+          "name" : "pluginNumber",
+          "in" : "header",
+          "description" : "Numero de plugin",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Error intern de servidor",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "404" : {
+            "description" : " XYZ Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "200" : {
+            "description" : "XYZ Llista d'accessos a CARPETA",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificatInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "CertificatBean" : {
+        "type" : "object",
+        "properties" : {
+          "tipus" : {
+            "$ref" : "#/components/schemas/CertificatType"
+          },
+          "fitxer" : {
+            "$ref" : "#/components/schemas/CertificatFileInfo"
+          },
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CertificatFileInfo" : {
+        "required" : [ "bytes" ],
+        "type" : "object",
+        "properties" : {
+          "nom" : {
+            "type" : "string"
+          },
+          "mime" : {
+            "type" : "string"
+          },
+          "length" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "bytes" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        }
+      },
+      "CertificatType" : {
+        "type" : "string",
+        "enum" : [ "VALOR", "FITXER" ]
+      },
+      "CertificatInfo" : {
+        "type" : "object",
+        "properties" : {
+          "teCertificat" : {
+            "type" : "boolean"
+          },
+          "administrationId" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "BasicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}
