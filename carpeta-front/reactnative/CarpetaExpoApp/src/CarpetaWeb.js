@@ -212,7 +212,7 @@ class CarpetaWeb extends Component {
 
     var ubase = this.getUrlBase(u);
 
-    var deeplinknativeapp = Linking.makeUrl("carpeta/show/LOGINCODE");
+    var deeplinknativeapp = Linking.createURL("carpeta/show/LOGINCODE");
 
     var reactNativeHomepage =
       u +

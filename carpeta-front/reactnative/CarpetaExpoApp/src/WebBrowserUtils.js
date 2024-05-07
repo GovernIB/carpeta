@@ -8,6 +8,7 @@
 
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
+import { Platform } from "react-native";
 
 export const LinkingOpenURL = async (url, loadRootPage) => {
   let _handleRedirect = (event) => {

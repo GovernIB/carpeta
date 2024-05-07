@@ -8,7 +8,7 @@
 import React, { Component } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View, Platform } from "react-native";
 import Persistencia from "./Persistencia";
-import Constants from "expo-constants";
+import * as Application from 'expo-application';
 import { sessionStorageRN } from "./SessionStorageClass";
 import ConfigurationProvider from "./ConfigurationProvider";
 import withRouter from "./withRouter";
@@ -81,7 +81,10 @@ class PersistenciaControl extends Component {
       <View>
         <Text style={styles.title}>Carpeta APP</Text>
         <Text style={styles.label}>
-          Version App: {Constants.manifest.version}{"\n"}
+
+
+
+          Version App: {"Queda pendent"}{"\n"}
           Expo Push Token: {expoPushToken}{"\n"}
           Platform OS: {Platform.OS}{"\n"}          
           Platform Version: {Platform.Version}{"\n"}
