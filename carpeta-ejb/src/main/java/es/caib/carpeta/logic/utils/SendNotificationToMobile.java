@@ -1,5 +1,6 @@
 package es.caib.carpeta.logic.utils;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +60,10 @@ public class SendNotificationToMobile {
             expoPushMessages.add(expoPushMessage);
 
             PushClient client = new PushClient();
+            //client.setBaseApiUrl(new URL("https://exp.host/--/api/v2/push/send?useFcmV1=true&another=")); //?useFcmV1=true
+            
+
+            
             List<List<ExpoPushMessage>> chunks = client.chunkPushNotifications(expoPushMessages);
 
             List<CompletableFuture<List<ExpoPushTicket>>> messageRepliesFutures = new ArrayList<>();
@@ -227,6 +232,9 @@ public class SendNotificationToMobile {
             // TODO: handle exception
             String msg = "Error no controlat enviant missatge a mòbil: " + e.getMessage();
             log.error(msg, e);
+            
+            e.printStackTrace();
+            
             throw new I18NException("genapp.comodi", msg);
         } finally {
 

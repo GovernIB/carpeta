@@ -1,0 +1,100 @@
+package com.niamedtech.expo.exposerversdk;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.niamedtech.expo.exposerversdk.handler.BaseResponseHandler;
+import com.niamedtech.expo.exposerversdk.request.PushNotification;
+import com.niamedtech.expo.exposerversdk.request.ReceiptRequest;
+import com.niamedtech.expo.exposerversdk.response.ReceiptResponse;
+import com.niamedtech.expo.exposerversdk.response.TicketResponse;
+import com.niamedtech.expo.exposerversdk.util.ObjectMapperFactory;
+import java.io.IOException;
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Client for synchronous communication with Expo Push Notificatio Servic. See
+ * https://docs.expo.dev/push-notifications/sending-notifications/
+ */
+
+public final class ExpoPushNotificationClient {
+
+    private final ObjectMapper objectMapper = ObjectMapperFactory.getInstance();
+
+    public static final Logger log = LoggerFactory.getLogger(ExpoPushNotificationClient.class);
+
+    private final BaseResponseHandler<List<TicketResponse.Ticket>> sendResponseHandler = new BaseResponseHandler<>(
+            TicketResponse.class);
+
+    private final BaseResponseHandler<Map<String, ReceiptResponse.Receipt>> getReceiptHandler = new BaseResponseHandler<>(
+            ReceiptResponse.class);
+
+    private final URI baseUri;
+
+    private final CloseableHttpClient httpClient;
+
+    public ExpoPushNotificationClient(URI baseUri, CloseableHttpClient httpClient) {
+        super();
+        this.baseUri = baseUri;
+        this.httpClient = httpClient;
+    }
+
+    public List<TicketResponse.Ticket> sendPushNotifications(List<PushNotification> notifications) throws IOException {
+
+        log.info("XYZ ZZZ Sending notifications: " + notifications);
+        final HttpPost request = createHttpPostRequest("/push/send?useFcmV1=true", notifications);
+        return httpClient.execute(request, sendResponseHandler);
+    }
+
+    private HttpPost createHttpPostRequest(String subpath, Object requestData) throws JsonProcessingException {
+        final HttpPost request = new HttpPost(URI.create(baseUri.toString() + subpath));
+        request.setHeader("Host", "exp.host");
+        request.setHeader("accept", "application/json");
+        request.setHeader("accept-encoding", "gzip, deflate");
+        request.setHeader("content-type", "application/json");
+
+        final String json = objectMapper.writeValueAsString(requestData);
+        final StringEntity stringEntity = new StringEntity(json);
+        request.setEntity(stringEntity);
+
+        return request;
+    }
+
+    public Map<String, ReceiptResponse.Receipt> getPushNotificationReceipts(List<String> ids) throws IOException {
+
+        final HttpPost request = createHttpPostRequest("/push/getReceipts", new ReceiptRequest(ids));
+        return httpClient.execute(request, getReceiptHandler);
+    }
+
+    public static class Builder {
+
+        private String baseUri = "https://exp.host/--/api/v2/";
+
+        private CloseableHttpClient httpClient;
+
+        public Builder setBaseUri(String baseUri) {
+            this.baseUri = baseUri;
+            return this;
+        }
+
+        public Builder setHttpClient(CloseableHttpClient httpClient) {
+            this.httpClient = httpClient;
+            return this;
+        }
+
+        public ExpoPushNotificationClient build() {
+            return new ExpoPushNotificationClient(URI.create(baseUri), httpClient);
+        }
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+}
