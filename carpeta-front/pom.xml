@@ -28,6 +28,12 @@
 			<groupId>es.caib.apodera</groupId>
 			<artifactId>apodera-client</artifactId>
 			<version>1.0.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.fundaciobit.pluginsib.core</groupId>
+					<artifactId>pluginsib-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
