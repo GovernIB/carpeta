@@ -8,3 +8,5 @@ submit_to_apple_store_ios.txt
 submit_to_apple_store_ios_passwords.txt
 submit_to_play_store_android.txt
 Generar build per iOS (.IPA) amb Expo.pdf
+./ios
+./android

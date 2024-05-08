@@ -11,6 +11,7 @@ import Persistencia from "./Persistencia";
 import * as Application from 'expo-application';
 import { sessionStorageRN } from "./SessionStorageClass";
 import ConfigurationProvider from "./ConfigurationProvider";
+import Constants from 'expo-constants';
 import withRouter from "./withRouter";
 
 
@@ -77,14 +78,13 @@ class PersistenciaControl extends Component {
       expoPushToken = "== NO DEFINIT ==";
     }
 
+     
+
     return (
       <View>
         <Text style={styles.title}>Carpeta APP</Text>
         <Text style={styles.label}>
-
-
-
-          Version App: {"Queda pendent"}{"\n"}
+          Version App: {Constants.expoConfig.version}{"\n"}
           Expo Push Token: {expoPushToken}{"\n"}
           Platform OS: {Platform.OS}{"\n"}          
           Platform Version: {Platform.Version}{"\n"}

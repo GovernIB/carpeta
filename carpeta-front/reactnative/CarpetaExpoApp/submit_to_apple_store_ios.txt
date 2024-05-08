@@ -51,7 +51,7 @@ TO TEST APP
 		 
 		 
       (7.2) Convidar a usuaris a provar APP:
-	      - Anar a Internal Testing >> App Store Connect Users
+	      - Anar a Individual testers
 		  - Pitjar la icona (+) de testers i afegir
       (7.3) Anar al mòbil iphone, entrar a TestFlight, descarregar nova versió i provar-la.
 	  (7.4) Esperar a que l'estat "Waiting for Review" de TestFlight hagi acabat i s'hagi passat a "Testing" (color verd).  

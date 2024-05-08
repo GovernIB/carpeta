@@ -60,9 +60,11 @@ async function registerForPushNotificationsAsync() {
   }  else  */ {
     var pushToken;
     try {
-      pushToken = await Notifications.getExpoPushTokenAsync();
+      pushToken = await Notifications.getExpoPushTokenAsync({
+        'projectId': Constants.expoConfig.extra.eas.projectId,
+      });
     } catch (e) {
-      alert("Error fent Notifications.getExpoPushTokenAsync(): " + e);
+      alert("Error fent Notifications.getExpoPushTokenAsync(): projectId: " + Constants.expoConfig.extra?.eas?.projectId +".\n  Error:" + e);
       return;
     }
     token = pushToken.data;
