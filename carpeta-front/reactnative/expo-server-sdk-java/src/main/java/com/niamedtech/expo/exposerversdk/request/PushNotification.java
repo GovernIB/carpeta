@@ -17,6 +17,11 @@ public final class PushNotification {
         private String name;
         private Long volume;
 
+        public Sound() {
+            super();
+            // TODO Auto-generated constructor stub
+        }
+        
         public Sound(Sound other) {
             this.critical = other.critical;
             this.name = other.name;
