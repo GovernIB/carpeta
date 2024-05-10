@@ -6,7 +6,7 @@
 
 * npm install -g eas-cli
 
-* prebuild.bat (npx expo prebuild -p android) i
+* prebuild.bat (npx expo prebuild -p android) i npx expo-doctor
 
 * Per construir AAB per enviar a Google Console (Play Store) => "eas build -p android"
 
@@ -27,7 +27,7 @@
      (1) A l'app "Carpeta Ciutadana GOIB", Apartat "Produccio" i pitjar "Crea una versió"
      (2) Ves a App bundles i pitja "Afegeix de biblioteca"
      (3) Boto d'abaix titulat "Següent"
-     (4) Boto d'abaix titulat "Desa"
+     (4) Revisar Advertiments. Finalment pitjar Boto d'abaix titulat "Desa"
      (5) Enviarà a "Visio General de la publicació" i pitjar "Envia 1 canvi a revisió"
      (6) Es posarà en estat "En revisió". Esperar ...
    

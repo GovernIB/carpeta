@@ -49,7 +49,7 @@ public final class ExpoPushNotificationClient {
     public List<TicketResponse.Ticket> sendPushNotifications(List<PushNotification> notifications) throws IOException {
 
         log.info("XYZ ZZZ Sending notifications: " + notifications);
-        final HttpPost request = createHttpPostRequest("/push/send?useFcmV1=true", notifications);
+        final HttpPost request = createHttpPostRequest("/push/send", notifications); // ?useFcmV1=true
         return httpClient.execute(request, sendResponseHandler);
     }
 

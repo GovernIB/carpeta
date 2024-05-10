@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import com.niamedtech.expo.exposerversdk.ExpoPushNotificationClient;
 import com.niamedtech.expo.exposerversdk.request.PushNotification;
+import com.niamedtech.expo.exposerversdk.request.PushNotification.Sound;
 import com.niamedtech.expo.exposerversdk.response.TicketResponse.Ticket;
 import com.niamedtech.expo.exposerversdk.util.PushNotificationUtil;
 
@@ -68,6 +69,16 @@ public class TestCarpeta {
             notification.setTitle(title);
             notification.setBody(message);
             notification.setData(data);
+            
+            /*
+            
+            Sound sound = new Sound();
+            sound.setCritical(false);
+            //sound.setName("hola");
+            sound.setVolume(1L);
+            
+            notification.setSound(sound);
+            */;
 
 
             List<PushNotification> all = new ArrayList<PushNotification>();

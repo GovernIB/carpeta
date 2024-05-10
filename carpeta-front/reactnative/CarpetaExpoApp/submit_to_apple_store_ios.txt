@@ -51,14 +51,14 @@ TO TEST APP
 		 
 		 
       (7.2) Convidar a usuaris a provar APP:
-	      - Anar a Internal Testing >> App Store Connect Users
+	      - Anar a Individual testers
 		  - Pitjar la icona (+) de testers i afegir
       (7.3) Anar al mòbil iphone, entrar a TestFlight, descarregar nova versió i provar-la.
 	  (7.4) Esperar a que l'estat "Waiting for Review" de TestFlight hagi acabat i s'hagi passat a "Testing" (color verd).  
 
 (8) Despres anar a la pipella AppStore de "CarpetaAPP GOIB"
 
-      (8.1) Al menu lateral pitjar sobre "Add version". Escriure la nova versió
+      (8.1) Al menu lateral pitjar sobre "Add version"(Boto blau amb un (+) ). Escriure la nova versió
 	  (8.2) Entrar a la versió en qüestió i anar a l'apartat "Build" i seleccionar la versió correcta. Pitjar a SAVE.
 	  (8.3) Adjuntar fitxer cert2.p12.zip a l'apartat "App Review Information"
 	  (8.4) Revisar la resta de informació (Mirar What's New in This Version)
