@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
 
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.logic.utils.SendNotificationResult;
@@ -54,6 +55,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+
 
 /**
  *
@@ -103,6 +105,18 @@ public class MobileNotificationService {
     @SecurityRequirement(name = "BasicAuth")
     @ApiResponses(
             value = {
+            		 @ApiResponse(
+                             responseCode = "200",
+                             description = "Enviat missatge correctament",
+                             content = @Content(
+                                     mediaType = MediaType.APPLICATION_JSON,
+                                     schema = @Schema(implementation = SendMessageResult.class))),
+            		 @ApiResponse(
+                             responseCode = "400",
+                             description = "Paràmetres incorrectes",
+                             content = { @Content(
+                                     mediaType = MediaType.APPLICATION_JSON,
+                                     schema = @Schema(implementation = RestExceptionInfo.class)) }),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
@@ -116,17 +130,13 @@ public class MobileNotificationService {
                             description = "No Autoritzat",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON)),
                     @ApiResponse(
-                            responseCode = "400",
-                            description = "Error durant el processament o enviament del missatge",
-                            content = @Content(
+                            responseCode = "500",
+                            description = "Error no controlat",
+                            content = { @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = SendMessageResult.class))),
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Enviat missatge correctament",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = SendMessageResult.class))) })
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) })
+                    })
+    
     public Response sendNotificationToMobile(
             @Parameter(
                     description = "NIF del Ciutadà o l'empresa",
@@ -368,24 +378,32 @@ public class MobileNotificationService {
     @SecurityRequirement(name = "BasicAuth")
     @ApiResponses(
             value = {
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Paràmetres incorrectes",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
-                            responseCode = "401",
-                            description = "No Autenticat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
-                            responseCode = "403",
-                            description = "No Autoritzat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
+            		@ApiResponse(
                             responseCode = "200",
                             description = "Consulta finalitzada. Retorna true si existeix el ciutadà/empresa o false en cas contrari.",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = Boolean.class))) })
+                                    schema = @Schema(implementation = Boolean.class))),
+            		@ApiResponse(
+                            responseCode = "400",
+                            description = "Paràmetres incorrectes",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            		@ApiResponse(
+                            responseCode = "401",
+                            description = "No Autenticat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+            		@ApiResponse(
+                            responseCode = "403",
+                            description = "No Autoritzat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+            		@ApiResponse(
+                            responseCode = "500",
+                            description = "Error no controlat",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) }) })
     @GET
     @Path("/existcitizen")
     @Produces(MediaType.APPLICATION_JSON)
@@ -441,30 +459,36 @@ public class MobileNotificationService {
     @SecurityRequirement(name = "BasicAuth")
     @ApiResponses(
             value = {
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Paràmetres incorrectes",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
-                            responseCode = "401",
-                            description = "No Autenticat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
-                            responseCode = "403",
-                            description = "No Autoritzat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
+            		@ApiResponse(
+                            responseCode = "200",
+                            description = "Enviada ajuda correctament",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = String.class))),
+            		@ApiResponse(
                             responseCode = "400",
                             description = "Error",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = String.class))),
+            		@ApiResponse(
+                            responseCode = "401",
+                            description = "No Autenticat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+            		@ApiResponse(
+                            responseCode = "403",
+                            description = "No Autoritzat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
                     @ApiResponse(
-                            responseCode = "200",
-                            description = "Enviada ajuda correctament",
-                            content = @Content(
+                            responseCode = "404",
+                            description = "Paràmetres incorrectes",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Error no controlat",
+                            content = { @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = String.class))) })
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) }) })
     public Response help(
 
             @Parameter(
