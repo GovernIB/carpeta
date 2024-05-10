@@ -75,8 +75,34 @@
           "example" : 1
         } ],
         "responses" : {
-          "500" : {
-            "description" : "Error intern de servidor",
+          "200" : {
+            "description" : "Llista d'accessos a CARPETA",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificatBean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
             "content" : {
               "application/json" : { }
             }
@@ -87,12 +113,12 @@
               "application/json" : { }
             }
           },
-          "200" : {
-            "description" : "Llista d'accessos a CARPETA",
+          "500" : {
+            "description" : "Error no controlat",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/CertificatBean"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -127,8 +153,34 @@
           "example" : 1
         } ],
         "responses" : {
-          "500" : {
-            "description" : "Error intern de servidor",
+          "200" : {
+            "description" : "Llista d'accessos a CARPETA",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificatInfo"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
             "content" : {
               "application/json" : { }
             }
@@ -139,14 +191,10 @@
               "application/json" : { }
             }
           },
-          "200" : {
-            "description" : "Llista d'accessos a CARPETA",
+          "500" : {
+            "description" : "Error intern de servidor",
             "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/CertificatInfo"
-                }
-              }
+              "application/json" : { }
             }
           }
         },
@@ -195,6 +243,34 @@
       "CertificatType" : {
         "type" : "string",
         "enum" : [ "VALOR", "FITXER" ]
+      },
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
       },
       "CertificatInfo" : {
         "type" : "object",

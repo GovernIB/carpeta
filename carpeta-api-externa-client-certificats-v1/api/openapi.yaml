@@ -57,20 +57,36 @@ paths:
           type: string
         style: simple
       responses:
-        "500":
-          content:
-            application/json: {}
-          description: Error intern de servidor
-        "404":
-          content:
-            application/json: {}
-          description: Paràmetres incorrectes
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CertificatBean'
           description: Llista d'accessos a CARPETA
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json: {}
+          description: No Autenticat
+        "403":
+          content:
+            application/json: {}
+          description: No Autoritzat
+        "404":
+          content:
+            application/json: {}
+          description: Paràmetres incorrectes
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
       security:
       - BasicAuth: []
       summary: Retorna un certificat provinent de un servei extern a CARPETA.
@@ -100,20 +116,34 @@ paths:
           type: string
         style: simple
       responses:
-        "500":
-          content:
-            application/json: {}
-          description: Error intern de servidor
-        "404":
-          content:
-            application/json: {}
-          description: Paràmetres incorrectes
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CertificatInfo'
           description: Llista d'accessos a CARPETA
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json: {}
+          description: No Autenticat
+        "403":
+          content:
+            application/json: {}
+          description: No Autoritzat
+        "404":
+          content:
+            application/json: {}
+          description: Paràmetres incorrectes
+        "500":
+          content:
+            application/json: {}
+          description: Error intern de servidor
       security:
       - BasicAuth: []
       summary: 'Retorna un CertificatInfo que indica si l''usuari té certificat '
@@ -164,6 +194,35 @@ components:
       - VALOR
       - FITXER
       type: string
+    RestExceptionInfo:
+      description: Estructura de dades utilitzada per passar informació d'un error
+      example:
+        code: 6
+        causeStackTrace: causeStackTrace
+        causeException: causeException
+        errorMessage: errorMessage
+        stackTrace: stackTrace
+      properties:
+        code:
+          description: Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
+          format: int32
+          type: integer
+        errorMessage:
+          description: Missatge de l'error
+          type: string
+        stackTrace:
+          description: Stacktrace de l'excepció si n'hi hagués.
+          type: string
+        causeException:
+          description: Tipus de l'excepció origen (cause) si n'hi hagués.
+          type: string
+        causeStackTrace:
+          description: Stacktrace de l'excepció origen (cause) si n'hi hagués.
+          type: string
+      required:
+      - code
+      - errorMessage
+      type: object
     CertificatInfo:
       example:
         administrationId: administrationId

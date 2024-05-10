@@ -9,6 +9,7 @@ import javax.ws.rs.core.GenericType;
 
 import es.caib.carpeta.api.externa.client.certificats.v1.model.CertificatBean;
 import es.caib.carpeta.api.externa.client.certificats.v1.model.CertificatInfo;
+import es.caib.carpeta.api.externa.client.certificats.v1.model.RestExceptionInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

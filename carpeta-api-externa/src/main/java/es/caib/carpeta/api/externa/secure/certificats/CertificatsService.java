@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
 
 import es.caib.carpeta.commons.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -72,19 +73,35 @@ public class CertificatsService {
             method = "get")
     @ApiResponses(
             value = {
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Error intern de servidor",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
+            		@ApiResponse(
+                            responseCode = "200",
+                            description = "Llista d'accessos a CARPETA",
+                            content = @Content(schema = @Schema(implementation = CertificatBean.class))),
+            		@ApiResponse(
+                            responseCode = "400",
+                            description = "Paràmetres incorrectes",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) }),
+                   @ApiResponse(
+                           responseCode = "401",
+                           description = "No Autenticat",
+                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                   @ApiResponse(
+                           responseCode = "403",
+                           description = "No Autoritzat",
+                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+            		@ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    // mediaType = MediaType.APPLICATION_JSON, 
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Llista d'accessos a CARPETA",
-                            content = @Content(schema = @Schema(implementation = CertificatBean.class))) })
+            		@ApiResponse(
+                            responseCode = "500",
+                            description = "Error no controlat",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) })
+                    })
     @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -219,20 +236,36 @@ public class CertificatsService {
             method = "get")
     @ApiResponses(
             value = {
-                    @ApiResponse(
-                            responseCode = "500",
-                            description = "Error intern de servidor",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+            		@ApiResponse(
+                            responseCode = "200",
+                            description = "Llista d'accessos a CARPETA",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = CertificatInfo.class))),
+            		@ApiResponse(
+                            responseCode = "400",
+                            description = "Paràmetres incorrectes",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) }),
+                   @ApiResponse(
+                           responseCode = "401",
+                           description = "No Autenticat",
+                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                   @ApiResponse(
+                           responseCode = "403",
+                           description = "No Autoritzat",
+                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    
                     @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON)),
                     @ApiResponse(
-                            responseCode = "200",
-                            description = "Llista d'accessos a CARPETA",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = CertificatInfo.class))) })
+                            responseCode = "500",
+                            description = "Error intern de servidor",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON))
+                     })
     @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

@@ -80,9 +80,12 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **500** | Error intern de servidor |  -  |
-| **404** | Paràmetres incorrectes |  -  |
 | **200** | Llista d&#39;accessos a CARPETA |  -  |
+| **400** | Paràmetres incorrectes |  -  |
+| **401** | No Autenticat |  -  |
+| **403** | No Autoritzat |  -  |
+| **404** | Paràmetres incorrectes |  -  |
+| **500** | Error no controlat |  -  |
 
 
 ## teCertificat
@@ -154,7 +157,10 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **500** | Error intern de servidor |  -  |
-| **404** | Paràmetres incorrectes |  -  |
 | **200** | Llista d&#39;accessos a CARPETA |  -  |
+| **400** | Paràmetres incorrectes |  -  |
+| **401** | No Autenticat |  -  |
+| **403** | No Autoritzat |  -  |
+| **404** | Paràmetres incorrectes |  -  |
+| **500** | Error intern de servidor |  -  |
 

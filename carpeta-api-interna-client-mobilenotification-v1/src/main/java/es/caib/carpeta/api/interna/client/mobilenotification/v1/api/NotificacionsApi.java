@@ -7,6 +7,7 @@ import es.caib.carpeta.api.interna.client.mobilenotification.v1.services.Pair;
 
 import javax.ws.rs.core.GenericType;
 
+import es.caib.carpeta.api.interna.client.mobilenotification.v1.model.RestExceptionInfo;
 import es.caib.carpeta.api.interna.client.mobilenotification.v1.model.SendMessageResult;
 
 import java.util.ArrayList;

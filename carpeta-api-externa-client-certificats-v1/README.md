@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
  - [CertificatFileInfo](docs/CertificatFileInfo.md)
  - [CertificatInfo](docs/CertificatInfo.md)
  - [CertificatType](docs/CertificatType.md)
+ - [RestExceptionInfo](docs/RestExceptionInfo.md)
 
 
 <a id="documentation-for-authorization"></a>

@@ -118,16 +118,16 @@ public class MobileNotificationService {
                                      mediaType = MediaType.APPLICATION_JSON,
                                      schema = @Schema(implementation = RestExceptionInfo.class)) }),
                     @ApiResponse(
-                            responseCode = "404",
-                            description = "Paràmetres incorrectes",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    @ApiResponse(
                             responseCode = "401",
                             description = "No Autenticat",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON)),
                     @ApiResponse(
                             responseCode = "403",
                             description = "No Autoritzat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Paràmetres incorrectes",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON)),
                     @ApiResponse(
                             responseCode = "500",
@@ -397,6 +397,10 @@ public class MobileNotificationService {
             		@ApiResponse(
                             responseCode = "403",
                             description = "No Autoritzat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+            		@ApiResponse(
+                            responseCode = "404",
+                            description = "Paràmetres incorrectes",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON)),
             		@ApiResponse(
                             responseCode = "500",

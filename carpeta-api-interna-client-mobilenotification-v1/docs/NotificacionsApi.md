@@ -79,10 +79,12 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **404** | Paràmetres incorrectes |  -  |
+| **200** | Consulta finalitzada. Retorna true si existeix el ciutadà/empresa o false en cas contrari. |  -  |
+| **400** | Paràmetres incorrectes |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
-| **200** | Consulta finalitzada. Retorna true si existeix el ciutadà/empresa o false en cas contrari. |  -  |
+| **404** | Paràmetres incorrectes |  -  |
+| **500** | Error no controlat |  -  |
 
 
 ## help
@@ -154,11 +156,12 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **404** | Paràmetres incorrectes |  -  |
+| **200** | Enviada ajuda correctament |  -  |
+| **400** | Error |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
-| **400** | Error |  -  |
-| **200** | Enviada ajuda correctament |  -  |
+| **404** | Paràmetres incorrectes |  -  |
+| **500** | Error no controlat |  -  |
 
 
 ## sendNotificationToMobile
@@ -236,9 +239,10 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **404** | Paràmetres incorrectes |  -  |
+| **200** | Enviat missatge correctament |  -  |
+| **400** | Paràmetres incorrectes |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
-| **400** | Error durant el processament o enviament del missatge |  -  |
-| **200** | Enviat missatge correctament |  -  |
+| **404** | Paràmetres incorrectes |  -  |
+| **500** | Error no controlat |  -  |
 

@@ -127,6 +127,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [RestExceptionInfo](docs/RestExceptionInfo.md)
  - [SendMessageResult](docs/SendMessageResult.md)
  - [SendMessageResultCode](docs/SendMessageResultCode.md)
 

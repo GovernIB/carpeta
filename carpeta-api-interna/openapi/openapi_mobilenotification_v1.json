@@ -64,10 +64,24 @@
           "example" : "ca"
         } ],
         "responses" : {
-          "404" : {
+          "200" : {
+            "description" : "Consulta finalitzada. Retorna true si existeix el ciutadà/empresa o false en cas contrari.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "boolean"
+                }
+              }
+            }
+          },
+          "400" : {
             "description" : "Paràmetres incorrectes",
             "content" : {
-              "application/json" : { }
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
             }
           },
           "401" : {
@@ -82,12 +96,18 @@
               "application/json" : { }
             }
           },
-          "200" : {
-            "description" : "Consulta finalitzada. Retorna true si existeix el ciutadà/empresa o false en cas contrari.",
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "boolean"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -124,10 +144,24 @@
           "example" : "ca"
         } ],
         "responses" : {
-          "404" : {
-            "description" : "Paràmetres incorrectes",
+          "200" : {
+            "description" : "Enviada ajuda correctament",
             "content" : {
-              "application/json" : { }
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
             }
           },
           "401" : {
@@ -142,22 +176,18 @@
               "application/json" : { }
             }
           },
-          "400" : {
-            "description" : "Error",
+          "404" : {
+            "description" : "Paràmetres incorrectes",
             "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              }
+              "application/json" : { }
             }
           },
-          "200" : {
-            "description" : "Enviada ajuda correctament",
+          "500" : {
+            "description" : "Error no controlat",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -226,10 +256,24 @@
           "example" : "ca"
         } ],
         "responses" : {
-          "404" : {
+          "200" : {
+            "description" : "Enviat missatge correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SendMessageResult"
+                }
+              }
+            }
+          },
+          "400" : {
             "description" : "Paràmetres incorrectes",
             "content" : {
-              "application/json" : { }
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
             }
           },
           "401" : {
@@ -244,22 +288,18 @@
               "application/json" : { }
             }
           },
-          "400" : {
-            "description" : "Error durant el processament o enviament del missatge",
+          "404" : {
+            "description" : "Paràmetres incorrectes",
             "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/SendMessageResult"
-                }
-              }
+              "application/json" : { }
             }
           },
-          "200" : {
-            "description" : "Enviat missatge correctament",
+          "500" : {
+            "description" : "Error no controlat",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/SendMessageResult"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -273,6 +313,34 @@
   },
   "components" : {
     "schemas" : {
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
+      },
       "SendMessageResult" : {
         "type" : "object",
         "properties" : {
