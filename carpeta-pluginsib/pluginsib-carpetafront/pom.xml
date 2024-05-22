@@ -17,7 +17,6 @@
     <module>api</module>
     <module>sistra</module>
     <module>regweb32</module>
-    <module>notib2client</module>
     <module>notib</module>
     <module>notificacionssistra</module>
     <module>dadeslogin</module>

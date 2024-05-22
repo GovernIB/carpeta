@@ -1,0 +1,2912 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: limit@limit.es
+    name: Limit Tecnologies
+    url: http://limit.es
+  description: API Interna de NOTIB
+  title: API Interna NOTIB
+  version: v2.0
+servers:
+- description: Servidor per defecte
+  url: /notibapi/interna
+- description: Servidor de l'entorn de PROVES
+  url: https://proves.caib.es/notibapi/interna
+security:
+- basic: []
+tags:
+- description: API de consulta v2
+  name: Consulta v2
+- description: API de notificació v2
+  name: Notificacio v2
+- description: API de informació de Notib
+  name: Informació Notib
+paths:
+  /notificacio/v2/permisConsulta:
+    post:
+      description: Aquest mètode permet donar el permís de consulta a un usuari específic
+      operationId: donarPermisConsultaV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermisConsulta'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Permisos assignats
+        "201":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Created
+      summary: Donar permis de consulta a un usuari sobre un procediment
+      tags:
+      - Notificacio v2
+      x-content-type: application/json
+      x-accepts: application/json
+  /notificacio/v2/consultaDadesRegistre:
+    post:
+      description: Retorna la informació del registre i el justificant d'una notificació
+        dins Notib.
+      operationId: consultaDadesRegistre
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DadesConsulta'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaDadesRegistreV2'
+          description: Consulta realitzada correctament
+      summary: Genera el justificant i consulta la informació del registre d'una notificació.
+      tags:
+      - Notificacio v2
+      x-content-type: application/json
+      x-accepts: application/json
+  /notificacio/v2/alta:
+    post:
+      description: Retorna una llista amb els codis dels enviaments creats per poder
+        consultar el seu estat posteriorment
+      operationId: alta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificacioV2'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaAltaV2'
+          description: Alta de notificació
+      summary: Registra i envia la notificació a Notific@.
+      tags:
+      - Notificacio v2
+      x-content-type: application/json
+      x-accepts: application/json
+  /notificacio/v2/consultaJustificantNotificacio/**:
+    get:
+      description: Retorna el document PDF amb el justificant de l'enviament de la
+        notificació
+      operationId: consultaJustificantV2
+      parameters:
+      - description: "Identificador de la notificació a consultar. \n * A la url del\
+          \ mètode es mostra aquest identificador com a '**' degut a que per compatibilitat\
+          \ amb versions antigues, es poden trobar identificadors que contenen el\
+          \ caràcter '/'. \n * Actualment els identificadors tenen el format de UUID"
+        example: 00000000-0000-0000-0000-000000000000
+        explode: true
+        in: query
+        name: identificador
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaJustificantEnviament'
+          description: Consulta realitzada correctament
+      summary: Consulta el justificant de l'enviament d'una notificació
+      tags:
+      - Notificacio v2
+      x-accepts: application/json
+  /notificacio/v2/consultaEstatNotificacio/**:
+    get:
+      description: Retorna la informació sobre l'estat de l'enviament dins Notib o
+        Notific@
+      operationId: consultaEstatNotificacio
+      parameters:
+      - description: "Identificador de la notificació a consultar. \n * A la url del\
+          \ mètode es mostra aquest identificador com a '**' degut a que per compatibilitat\
+          \ amb versions antigues, es poden trobar identificadors que contenen el\
+          \ caràcter '/'. \n * Actualment els identificadors tenen el format de UUID"
+        example: 00000000-0000-0000-0000-000000000000
+        explode: true
+        in: query
+        name: identificador
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaEstatNotificacioV2'
+          description: Consulta realitzada correctament
+      summary: Consulta de la informació d'una notificació
+      tags:
+      - Notificacio v2
+      x-accepts: application/json
+  /notificacio/v2/consultaEstatEnviament/**:
+    get:
+      description: Retorna la informació sobre l'estat de l'enviament dins Notific@.
+      operationId: consultaEstatEnviament
+      parameters:
+      - description: "Referència de la notificació a consultar. \n * A la url del\
+          \ mètode es mostra aquesta referència com a '**' degut a que per compatibilitat\
+          \ amb versions antigues, es poden trobar referències que contenen el carà\
+          cter '/'. \n * Actualment les referències tenen el format de UUID"
+        example: 00000000-0000-0000-0000-000000000000
+        explode: true
+        in: query
+        name: referencia
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaEstatEnviamentV2'
+          description: Consulta realitzada correctament
+      summary: Consulta la informació de l'estat d'un enviament dins Notific@
+      tags:
+      - Notificacio v2
+      x-accepts: application/json
+  /consulta/v2/notificacions/{dniTitular}:
+    get:
+      description: "Retorna informació de totes les notificacions d'un titular, i\
+        \ el seu estat"
+      operationId: notificacionsByTitular
+      parameters:
+      - description: DNI del titular de les comunicacions a consultar
+        explode: false
+        in: path
+        name: dniTitular
+        required: true
+        schema:
+          type: string
+        style: simple
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Data inicial d'enviament a consultar
+        in: query
+        name: dataInicial
+        required: false
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Datfa final d'enviament a consultar
+        in: query
+        name: dataFinal
+        required: false
+      - content:
+          '*/*':
+            schema:
+              type: boolean
+        description: "Filtrar per visible a carpeta. Si s'indica el valor si, nomé\
+          s es retornaran enviaments amb estats visibles per la carpeta. Si s'indica\
+          \ el valor no, es retornaran tots els enviaments independentment de si els\
+          \ seus estats son visible o no a la carpeta."
+        in: query
+        name: visibleCarpeta
+        required: false
+      - content:
+          '*/*':
+            schema:
+              enum:
+              - CA
+              - ES
+              type: string
+        description: Idioma de les descripcions
+        in: query
+        name: lang
+        required: false
+      - description: Número de pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: pagina
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Mida de la pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: mida
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaV2'
+          description: Notificacions/Comunicacions per titular
+      summary: Consulta totes les notificacions d'un titular donat el seu dni
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/notificacions/{dniTitular}/pendents:
+    get:
+      description: "Retorna informació sobre les notificacions pendents d'un titular,\
+        \ i el seu estat"
+      operationId: notificacionsPendentsByTitular
+      parameters:
+      - description: DNI del titular de les comunicacions a consultar
+        explode: false
+        in: path
+        name: dniTitular
+        required: true
+        schema:
+          type: string
+        style: simple
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Data inicial d'enviament a consultar
+        in: query
+        name: dataInicial
+        required: false
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Datfa final d'enviament a consultar
+        in: query
+        name: dataFinal
+        required: false
+      - content:
+          '*/*':
+            schema:
+              type: boolean
+        description: "Filtrar per visible a carpeta. Si s'indica el valor si, nomé\
+          s es retornaran enviaments amb estats visibles per la carpeta. Si s'indica\
+          \ el valor no, es retornaran tots els enviaments independentment de si els\
+          \ seus estats son visible o no a la carpeta."
+        in: query
+        name: visibleCarpeta
+        required: false
+      - content:
+          '*/*':
+            schema:
+              enum:
+              - CA
+              - ES
+              type: string
+        description: Idioma de les descripcions
+        in: query
+        name: lang
+        required: false
+      - description: Número de pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: pagina
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Mida de la pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: mida
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaV2'
+          description: Notificacions/Comunicacions per titular
+      summary: Consulta totes les notificacions pendents (no llegides) d'un titular
+        donat el seu dni
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/notificacions/{dniTitular}/llegides:
+    get:
+      description: "Retorna informació sobre les notificacions ja llegides d'un titular,\
+        \ i el seu estat"
+      operationId: notificacionsLlegidesByTitular
+      parameters:
+      - description: DNI del titular de les comunicacions a consultar
+        explode: false
+        in: path
+        name: dniTitular
+        required: true
+        schema:
+          type: string
+        style: simple
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Data inicial d'enviament a consultar
+        in: query
+        name: dataInicial
+        required: false
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Datfa final d'enviament a consultar
+        in: query
+        name: dataFinal
+        required: false
+      - content:
+          '*/*':
+            schema:
+              type: boolean
+        description: "Filtrar per visible a carpeta. Si s'indica el valor si, nomé\
+          s es retornaran enviaments amb estats visibles per la carpeta. Si s'indica\
+          \ el valor no, es retornaran tots els enviaments independentment de si els\
+          \ seus estats son visible o no a la carpeta."
+        in: query
+        name: visibleCarpeta
+        required: false
+      - content:
+          '*/*':
+            schema:
+              enum:
+              - CA
+              - ES
+              type: string
+        description: Idioma de les descripcions
+        in: query
+        name: lang
+        required: false
+      - description: Número de pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: pagina
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Mida de la pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: mida
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaV2'
+          description: Notificacions/Comunicacions per titular
+      summary: Consulta totes les notificacions llegides d'un titular donat el seu
+        dni
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/justificant/{enviamentId}:
+    get:
+      description: Retorna el document de justificant de entrega de la comunicació.
+        El contingut del document està en Base64
+      operationId: getJustificant
+      parameters:
+      - description: Identificador de l'enviament de la que es vol obtenir el justificant
+        explode: false
+        in: path
+        name: enviamentId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Arxiu'
+          description: Notificacions/Comunicacions per titular
+      summary: Obté el justificant d'una comunicació
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/document/{notificacioId}:
+    get:
+      description: Retorna el document de la notificació. El contingut del document
+        està en Base64
+      operationId: getDocument
+      parameters:
+      - description: Identificador de la notificació de la que es vol obtenir el document
+        explode: false
+        in: path
+        name: notificacioId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Arxiu'
+          description: Notificacions/Comunicacions per titular
+      summary: Obté el document d'una notificació
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/comunicacions/{dniTitular}:
+    get:
+      description: "Retorna informació de totes les comunicacions d'un titular, i\
+        \ el seu estat"
+      operationId: comunicacionsByTitular
+      parameters:
+      - description: DNI del titular de les comunicacions a consultar
+        explode: false
+        in: path
+        name: dniTitular
+        required: true
+        schema:
+          type: string
+        style: simple
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Data inicial d'enviament a consultar
+        in: query
+        name: dataInicial
+        required: false
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Datfa final d'enviament a consultar
+        in: query
+        name: dataFinal
+        required: false
+      - content:
+          '*/*':
+            schema:
+              type: boolean
+        description: "Filtrar per visible a carpeta. Si s'indica el valor si, nomé\
+          s es retornaran enviaments amb estats visibles per la carpeta. Si s'indica\
+          \ el valor no, es retornaran tots els enviaments independentment de si els\
+          \ seus estats son visible o no a la carpeta."
+        in: query
+        name: visibleCarpeta
+        required: false
+      - content:
+          '*/*':
+            schema:
+              enum:
+              - CA
+              - ES
+              type: string
+        description: Idioma de les descripcions
+        in: query
+        name: lang
+        required: false
+      - description: Número de pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: pagina
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Mida de la pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: mida
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaV2'
+          description: Notificacions/Comunicacions per titular
+      summary: Consulta totes les comunicacions d'un titular donat el seu dni
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/comunicacions/{dniTitular}/pendents:
+    get:
+      description: "Retorna informació sobre les comunicacions pendents d'un titular,\
+        \ i el seu estat"
+      operationId: comunicacionsPendentsByTitular
+      parameters:
+      - description: DNI del titular de les comunicacions a consultar
+        explode: false
+        in: path
+        name: dniTitular
+        required: true
+        schema:
+          type: string
+        style: simple
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Data inicial d'enviament a consultar
+        in: query
+        name: dataInicial
+        required: false
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Datfa final d'enviament a consultar
+        in: query
+        name: dataFinal
+        required: false
+      - content:
+          '*/*':
+            schema:
+              type: boolean
+        description: "Filtrar per visible a carpeta. Si s'indica el valor si, nomé\
+          s es retornaran enviaments amb estats visibles per la carpeta. Si s'indica\
+          \ el valor no, es retornaran tots els enviaments independentment de si els\
+          \ seus estats son visible o no a la carpeta."
+        in: query
+        name: visibleCarpeta
+        required: false
+      - content:
+          '*/*':
+            schema:
+              enum:
+              - CA
+              - ES
+              type: string
+        description: Idioma de les descripcions
+        in: query
+        name: lang
+        required: false
+      - description: Número de pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: pagina
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Mida de la pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: mida
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaV2'
+          description: Notificacions/Comunicacions per titular
+      summary: Consulta totes les comunicacions pendents (no llegides) d'un titular
+        donat el seu dni
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/comunicacions/{dniTitular}/llegides:
+    get:
+      description: "Retorna informació sobre les comunicacions ja llegides d'un titular,\
+        \ i el seu estat"
+      operationId: comunicacionsLlegidesByTitular
+      parameters:
+      - description: DNI del titular de les comunicacions a consultar
+        explode: false
+        in: path
+        name: dniTitular
+        required: true
+        schema:
+          type: string
+        style: simple
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Data inicial d'enviament a consultar
+        in: query
+        name: dataInicial
+        required: false
+      - content:
+          '*/*':
+            schema:
+              format: date
+              type: string
+        description: Datfa final d'enviament a consultar
+        in: query
+        name: dataFinal
+        required: false
+      - content:
+          '*/*':
+            schema:
+              type: boolean
+        description: "Filtrar per visible a carpeta. Si s'indica el valor si, nomé\
+          s es retornaran enviaments amb estats visibles per la carpeta. Si s'indica\
+          \ el valor no, es retornaran tots els enviaments independentment de si els\
+          \ seus estats son visible o no a la carpeta."
+        in: query
+        name: visibleCarpeta
+        required: false
+      - content:
+          '*/*':
+            schema:
+              enum:
+              - CA
+              - ES
+              type: string
+        description: Idioma de les descripcions
+        in: query
+        name: lang
+        required: false
+      - description: Número de pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: pagina
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Mida de la pàgina a mostrar en la paginació
+        explode: true
+        in: query
+        name: mida
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConsultaV2'
+          description: Notificacions/Comunicacions per titular
+      summary: Consulta totes les comunicacions llegides d'un titular donat el seu
+        dni
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /consulta/v2/certificacio/{enviamentId}:
+    get:
+      description: Retorna el document de certificació de lectura de la notificació.
+        El contingut del document està en Base64
+      operationId: getCertificacio
+      parameters:
+      - description: Identificador de l'enviament de la que es vol obtenir la certificació
+        explode: false
+        in: path
+        name: enviamentId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "400":
+          description: Bad Request
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Arxiu'
+          description: Notificacions/Comunicacions per titular
+      summary: Obté la certificació d'una notificació
+      tags:
+      - Consulta v2
+      x-accepts: application/json
+  /api/rest/appinfo:
+    get:
+      description: Retorna la data i la versió de la API REST Interna Notib
+      operationId: getAppInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppInfo'
+          description: Informació de l'aplicació
+      security: []
+      summary: Consulta la informació de la API
+      tags:
+      - Informació Notib
+      x-accepts: application/json
+components:
+  schemas:
+    PermisConsulta:
+      description: Objecte amb les dades necessàries per donar el permís
+      example:
+        usuariCodi: u000000
+        codiDir3Entitat: A04003003
+        permisConsulta: true
+        procedimentCodi: "666666"
+      properties:
+        codiDir3Entitat:
+          description: Codi dir3 de l'entitat en la que es vol donar permís de consulta
+          example: A04003003
+          type: string
+        permisConsulta:
+          description: Indica si es vol donar o treure el permís de consulta
+          example: true
+          type: boolean
+        procedimentCodi:
+          description: Codi SIA del procediment sobre el que es vol donar permís de
+            consulta
+          example: "666666"
+          type: string
+        usuariCodi:
+          description: Codi de l'usuari al que es vol donar permís de consulta
+          example: u000000
+          type: string
+      type: object
+    DadesConsulta:
+      description: Objecte amb les dades necessàries per consultar les dades de registre
+        d'una notificació o enviament
+      example:
+        ambJustificant: "true"
+        referencia: 00000000-0000-0000-0000-000000000000
+        identificador: 00000000-0000-0000-0000-000000000000
+      properties:
+        identificador:
+          description: |-
+            Identificador únic de la notificació a consultar
+             * Camp mantingut únicament per compatibilitat amb versions antigues
+             * S'ha d'indicar un idientificador o una referència. En cas d'informar ambdós, només es tindrà en compte l'identificador. Es recomana cercar sempre per referència
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        referencia:
+          description: |-
+            Referència (identificador) única de l'enviament que es vol consultar
+             * S'ha d'indicar un idientificador o una referència. En cas d'informar ambdós, només es tindrà en compte l'identificador.
+             * Es recomana cercar sempre per referència
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        ambJustificant:
+          description: Indica si a la resposta s'ha d'incloure el justificant de registre
+          example: "true"
+          type: string
+      type: object
+    RespostaConsultaDadesRegistreV2:
+      example:
+        numRegistre: 1753
+        llibre: Govern de les Illes Balears
+        dataRegistreDestiSir: 1706168093962
+        oficina: Oficina Virtual
+        enviamentSir: false
+        errorDescripcio: java.lang.NullPointerException
+        dataRegistre: 1706168093962
+        error: true
+        errorData: 1706168093962
+        numeroFormatat: GOIBS1753/2023
+        justificant:
+        - justificant
+        - justificant
+        dataRecepcioSir: 1706168093962
+      properties:
+        error:
+          description: Indica si s'ha produït algún error en l'enviament
+          example: true
+          type: boolean
+        errorData:
+          description: Data en que s'ha produït l'error
+          example: 1706168093962
+          format: int64
+          type: integer
+        errorDescripcio:
+          description: Identificador de la notificació a Notib
+          example: java.lang.NullPointerException
+          type: string
+        numRegistre:
+          description: Número de registre
+          example: 1753
+          format: int32
+          type: integer
+        numeroFormatat:
+          description: Número de registre amb format
+          example: GOIBS1753/2023
+          type: string
+        dataRegistre:
+          description: Data del registre
+          example: 1706168093962
+          format: int64
+          type: integer
+        justificant:
+          description: Contingut del fitxer justificant
+          items:
+            description: Contingut del fitxer justificant
+            format: byte
+            type: string
+          type: array
+        oficina:
+          description: Oficina on s'ha realitzat el registre
+          example: Oficina Virtual
+          type: string
+        llibre:
+          description: Llibre on s'ha anotat el registre
+          example: Govern de les Illes Balears
+          type: string
+        enviamentSir:
+          description: Indica si s'ha realitzat l'enviament via SIR
+          example: false
+          type: boolean
+        dataRecepcioSir:
+          description: "En cas d'enviament SIR, data en que s'ha recepcionat el registre"
+          example: 1706168093962
+          format: int64
+          type: integer
+        dataRegistreDestiSir:
+          description: "En cas d'enviament SIR, data en que s'ha registrat en el registre\
+            \ de destí"
+          example: 1706168093962
+          format: int64
+          type: integer
+      type: object
+    DocumentV2:
+      description: |-
+        Document que s’envia en la comunicació.
+         * Únicament es pot adjuntar més d’un document en cas de comunicacions a la administració (SIR)
+      example:
+        arxiuNom: document.pdf
+        contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+        csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+        normalitzat: false
+        tipoDocumental: INFORME
+        origen: ADMINISTRACIO
+        modoFirma: false
+        uuid: 00000000-0000-0000-0000-000000000000
+        url: http://server_path/document/123456.pdf
+        validesa: ORIGINAL
+      properties:
+        arxiuNom:
+          description: Nom de l’arxiu
+          example: document.pdf
+          maxLength: 200
+          minLength: 0
+          type: string
+        contingutBase64:
+          description: |-
+            Contingut del document en Base64.
+             * Obligatori si no està informat l’enllaç extern, l’uuid o el csv. * Mida màxima 10Mb
+          example: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          type: string
+        uuid:
+          description: |-
+            Codi uuid que es pot utilitzar per tal d’obtenir el document imprimible del sistema d’arxiu
+             * Obligatori si no està informat l’enllaç extern, el contingut en Base64 o el csv.
+          example: 00000000-0000-0000-0000-000000000000
+          maxLength: 256
+          minLength: 0
+          type: string
+        csv:
+          description: |-
+            Codi csv que es pot utilitzar per tal d’obtenir el document imprimible del sistema d’arxiu
+             * Obligatori si no està informat l’enllaç extern, el contingut en Base64 o l'uuid.
+          example: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          maxLength: 256
+          minLength: 0
+          type: string
+        url:
+          description: |-
+            Enllaç extern on es troba el document de l’enviament.
+             * Obligatori si no està informat l’uuid, el contingut en Base64 o el csv. * Sistema actualment NO soportat.
+          example: http://server_path/document/123456.pdf
+          maxLength: 256
+          minLength: 0
+          type: string
+        normalitzat:
+          default: false
+          description: "Indica si el document està normalitzat per a la impressió\
+            \ al CIE. \n * Només aplica per enviaments postals."
+          example: false
+          type: boolean
+        origen:
+          default: ADMINISTRACIO
+          description: |-
+            Enumerat que indica l’origen del document.
+             * No s’utilitza en el cas de documents passats com a csv o uuid
+          enum:
+          - CIUTADA
+          - ADMINISTRACIO
+          example: ADMINISTRACIO
+          type: string
+        tipoDocumental:
+          default: NOTIFICACIO
+          description: |-
+            Enumerat que indica el tipus de document.
+             * No s’utilitza en el cas de documents passats com a csv o uuid
+          enum:
+          - RESSOLUCIO
+          - ACORD
+          - CONTRACTE
+          - CONVENI
+          - DECLARACIO
+          - COMUNICACIO
+          - NOTIFICACIO
+          - PUBLICACIO
+          - JUSTIFICANT_RECEPCIO
+          - ACTA
+          - CERTIFICAT
+          - DILIGENCIA
+          - INFORME
+          - SOLICITUD
+          - DENUNCIA
+          - ALEGACIO
+          - RECURS
+          - COMUNICACIO_CIUTADA
+          - FACTURA
+          - ALTRES_INCAUTATS
+          - ALTRES
+          - LLEI
+          - MOCIO
+          - INSTRUCCIO
+          - CONVOCATORIA
+          - ORDRE_DIA
+          - INFORME_PONENCIA
+          - DICTAMEN_COMISSIO
+          - INICIATIVA_LEGISLATIVA
+          - PREGUNTA
+          - INTERPELACIO
+          - RESPOSTA
+          - PROPOSICIO_NO_LLEI
+          - ESQUEMA
+          - PROPOSTA_RESOLUCIO
+          - COMPAREIXENSA
+          - SOLICITUD_INFORMACIO
+          - ESCRIT
+          - INICIATIVA_LEGISLATIVA2
+          - PETICIO
+          example: INFORME
+          type: string
+        validesa:
+          default: ORIGINAL
+          description: Enumerat que indica la validesa del document * No s’utilitza
+            en el cas de documents passats com a csv o uuid
+          enum:
+          - COPIA
+          - COPIA_AUTENTICA
+          - ORIGINAL
+          example: ORIGINAL
+          type: string
+        modoFirma:
+          description: |-
+            Indica, en cas de document pdf, si aquest està firmat electrònicament.
+             * No s’utilitza en el cas de documents passats com a csv o uuid.
+          example: false
+          type: boolean
+      required:
+      - arxiuNom
+      type: object
+    EntregaDeh:
+      description: |-
+        Identificador del procediment SIA al que pertany la notificació * Obligatori únicament en cas d'indicar que es realitza entrega DEH
+        __Actualment en desús amb l'entrada en funcionament de la DEHú__
+      example:
+        obligat: false
+        procedimentCodi: "666666"
+      properties:
+        obligat:
+          default: false
+          description: Indica si l’enviament és obligatori o voluntari
+          example: false
+          type: boolean
+        procedimentCodi:
+          description: |-
+            Codi del procediment a la DEH per a enviaments voluntaris.
+             * Aquest camp NO s'utilitza, sinó que s’agafa el codi del procediment de la notificació.
+            (Es manté únicament per compatibilitat amb els serveis de Notific@)
+          example: "666666"
+          maxLength: 64
+          minLength: 0
+          type: string
+      type: object
+    EntregaPostal:
+      description: |-
+        Objecte amb les dades necessàries per a realitzar una entrega postal
+         * Obligatori únicament en cas d'indicar que es realitza entrega postal(Consultar prèviament si està disponible l'entrega postal a l'òrgan gestor emissor)
+      example:
+        poblacio: Palma
+        municipiCodi: "070407"
+        linea1: "Carrer Aragó 26bis, 4t - 3"
+        linea2: Palma 07003 - Illes Balears
+        formatSobre: C5
+        numeroCasa: "26"
+        planta: "4"
+        numeroQualificador: bis
+        formatFulla: A4
+        provincia: "07"
+        tipus: NACIONAL
+        paisCodi: DE
+        viaNom: Aragó
+        puntKm: "12.5"
+        bloc: C
+        codiPostal: "07003"
+        apartatCorreus: "123"
+        viaTipus: CARRER
+        portal: "2"
+        complement: Edificio Walden
+        escala: B
+        porta: "2"
+        cie: Servera
+      properties:
+        tipus:
+          description: Enumerat que indica el tipus de entrega postal.
+          enum:
+          - NACIONAL
+          - ESTRANGER
+          - APARTAT_CORREUS
+          - SENSE_NORMALITZAR
+          example: NACIONAL
+          type: string
+        viaTipus:
+          description: |-
+            Enumerat que indica el tipus de via per a entregues postals
+             * Obligatori quan tipoDomicili = NACIONAL
+          enum:
+          - ALAMEDA
+          - CALLE
+          - CAMINO
+          - CARRER
+          - CARRETERA
+          - GLORIETA
+          - KALEA
+          - PASAJE
+          - PASEO
+          - PLAÇA
+          - PLAZA
+          - RAMBLA
+          - RONDA
+          - RUA
+          - SECTOR
+          - TRAVESIA
+          - URBANIZACION
+          - AVENIDA
+          - AVINGUDA
+          - BARRIO
+          - CALLEJA
+          - CAMI
+          - CAMPO
+          - CARRERA
+          - CUESTA
+          - EDIFICIO
+          - ENPARANTZA
+          - ESTRADA
+          - JARDINES
+          - JARDINS
+          - PARQUE
+          - PASSEIG
+          - PRAZA
+          - PLAZUELA
+          - PLACETA
+          - POBLADO
+          - VIA
+          - TRAVESSERA
+          - PASSATGE
+          - BULEVAR
+          - POLIGONO
+          - OTROS
+          example: CARRER
+          type: string
+        viaNom:
+          description: |-
+            Nom de la via per entregues postals
+             * Obligatori quan tipoDomicili = NACIONAL o ESTRANGER
+          example: Aragó
+          maxLength: 50
+          minLength: 0
+          type: string
+        numeroCasa:
+          description: |-
+            Número de la casa per entregues postals
+             * Obligatori quan tipoDomicili = NACIONAL excepte si s’indica el punt quilomètric
+          example: "26"
+          maxLength: 5
+          minLength: 0
+          type: string
+        numeroQualificador:
+          description: Informació addicional sobre la numeració de l’adreça
+          example: bis
+          maxLength: 3
+          minLength: 0
+          type: string
+        puntKm:
+          description: |-
+            Punt quilomètric per entregues postals
+             * Obligatori quan tipoDomicili = NACIONAL excepte si s’indica numeroCasa
+          example: "12.5"
+          maxLength: 30
+          minLength: 0
+          type: string
+        apartatCorreus:
+          description: |-
+            Apartat de correus per entregues postals
+             * Obligatori quan tipoDomicili = APARTAT_CORREUS
+          example: "123"
+          maxLength: 10
+          minLength: 0
+          type: string
+        portal:
+          description: Portal de la casa per entregues postals
+          example: "2"
+          maxLength: 3
+          minLength: 0
+          type: string
+        escala:
+          description: Escala de la casa per entregues postals
+          example: B
+          maxLength: 3
+          minLength: 0
+          type: string
+        planta:
+          description: Planta de la casa per entregues postals
+          example: "4"
+          maxLength: 3
+          minLength: 0
+          type: string
+        porta:
+          description: Porta de la casa per entregues postals
+          example: "2"
+          maxLength: 3
+          minLength: 0
+          type: string
+        bloc:
+          description: Bloc de la casa per entregues postals
+          example: C
+          maxLength: 3
+          minLength: 0
+          type: string
+        complement:
+          description: Informació extra sobre la casa per entregues postals
+          example: Edificio Walden
+          maxLength: 40
+          minLength: 0
+          type: string
+        codiPostal:
+          description: |-
+            Codi postal de la casa per entregues postals.
+             * Per enviaments internacionals a països sense codi posatal es pot posar 00000.
+          example: "07003"
+          maxLength: 10
+          minLength: 0
+          type: string
+        poblacio:
+          description: |-
+            Població on s’entrega l’enviament
+             * Obligatori quan tipoDomicili = NACIONAL, ESTRANGER o APARTAT_POSTAL
+          example: Palma
+          maxLength: 255
+          minLength: 0
+          type: string
+        municipiCodi:
+          description: |-
+            Codi INE de 6 caràcters del municipi on s’entrega l’enviament (inclou codi de control)
+             * Obligatori quan tipoDomicili = NACIONAL o APARTAT_POSTAL
+          example: "070407"
+          maxLength: 6
+          minLength: 0
+          type: string
+        provincia:
+          description: |-
+            Codi INE de 2 dígits de la província on s’entrega l’enviament
+             * Obligatori quan tipoDomicili = NACIONAL o APARTAT_POSTAL
+          example: "07"
+          maxLength: 2
+          minLength: 0
+          type: string
+        paisCodi:
+          description: |-
+            Codi ISO 3166 de 2 caràcters del país on s’entrega l’enviament
+            * Obligatori quan tipoDomicili = ESTRANGER
+          example: DE
+          maxLength: 2
+          minLength: 0
+          type: string
+        linea1:
+          description: |-
+            Línia 1 de l’adreça d’entrega de l’enviament sense normalitzar
+             * Obligatori quan tipoDomicili = SENSE_NORMALITZAR
+          example: "Carrer Aragó 26bis, 4t - 3"
+          maxLength: 50
+          minLength: 0
+          type: string
+        linea2:
+          description: |-
+            Línia 2 de l’adreça d’entrega de l’enviament sense normalitzar
+             * Obligatori quan tipoDomicili = SENSE_NORMALITZAR
+          example: Palma 07003 - Illes Balears
+          maxLength: 50
+          minLength: 0
+          type: string
+        cie:
+          description: Línia 2 de l’adreça d’entrega de l’enviament sense normalitzar
+          example: Servera
+          type: string
+        formatSobre:
+          description: 'Cadena indicant el format del sobre '
+          example: C5
+          maxLength: 10
+          minLength: 0
+          type: string
+        formatFulla:
+          description: Cadena indicant el format de la fulla
+          example: A4
+          maxLength: 10
+          minLength: 0
+          type: string
+      required:
+      - codiPostal
+      - tipus
+      type: object
+    Enviament:
+      description: Llista d'enviaments continguts en la Notificació/Comunicació
+      example:
+        serveiTipus: NORMAL
+        entregaPostal:
+          poblacio: Palma
+          municipiCodi: "070407"
+          linea1: "Carrer Aragó 26bis, 4t - 3"
+          linea2: Palma 07003 - Illes Balears
+          formatSobre: C5
+          numeroCasa: "26"
+          planta: "4"
+          numeroQualificador: bis
+          formatFulla: A4
+          provincia: "07"
+          tipus: NACIONAL
+          paisCodi: DE
+          viaNom: Aragó
+          puntKm: "12.5"
+          bloc: C
+          codiPostal: "07003"
+          apartatCorreus: "123"
+          viaTipus: CARRER
+          portal: "2"
+          complement: Edificio Walden
+          escala: B
+          porta: "2"
+          cie: Servera
+        entregaPostalActiva: false
+        entregaDehActiva: false
+        destinataris:
+        - raoSocial: Amazon ltd.
+          llinatge2: Servera
+          incapacitat: false
+          llinatge1: Riera
+          telefon: "678123456"
+          nif: 00000000T
+          interessatTipus: FISICA
+          dir3Codi: A04035965
+          nom: Joan
+          email: persona@correu.es
+          documentTipus: PASSAPORT
+        - raoSocial: Amazon ltd.
+          llinatge2: Servera
+          incapacitat: false
+          llinatge1: Riera
+          telefon: "678123456"
+          nif: 00000000T
+          interessatTipus: FISICA
+          dir3Codi: A04035965
+          nom: Joan
+          email: persona@correu.es
+          documentTipus: PASSAPORT
+        entregaDeh:
+          obligat: false
+          procedimentCodi: "666666"
+        titular:
+          raoSocial: Amazon ltd.
+          llinatge2: Servera
+          incapacitat: false
+          llinatge1: Riera
+          telefon: "678123456"
+          nif: 00000000T
+          interessatTipus: FISICA
+          dir3Codi: A04035965
+          nom: Joan
+          email: persona@correu.es
+          documentTipus: PASSAPORT
+      properties:
+        titular:
+          $ref: '#/components/schemas/Persona'
+        destinataris:
+          description: |-
+            Conjunt de destinataris als que s'enviarà la notificació.
+             * Depenent de l'entitat es permet informar únicament un destinatari per enviament a múltiples destinataris (Ex. la CAIB únicamnet admet un destinatari.
+             * En cas d'informar múltiples destinataris, només que un d'ells accepti la notificació, aquesta es dóna per notificada.
+          items:
+            $ref: '#/components/schemas/Persona'
+          type: array
+        entregaPostalActiva:
+          description: |-
+            Indica si s'ha de realitzar entrega postal
+            (Consultar prèviament si està disponible l'entrega postal a l'òrgan gestor emissor)
+          example: false
+          type: boolean
+        entregaPostal:
+          $ref: '#/components/schemas/EntregaPostal'
+        entregaDehActiva:
+          default: false
+          description: |-
+            Indica si s'ha de realitzar l'enviament a la DEH
+            __Actualment en desús amb l'entrada en funcionament de la DEHú__
+          example: false
+          type: boolean
+        entregaDeh:
+          $ref: '#/components/schemas/EntregaDeh'
+        serveiTipus:
+          description: Enumerat que indica la urgència que té l’enviament.
+          enum:
+          - NORMAL
+          - URGENT
+          example: NORMAL
+          type: string
+      required:
+      - titular
+      type: object
+    NotificacioV2:
+      description: Objecte amb les dades necessàries per a donar d'alta una notificació
+      example:
+        organGestor: A04035965
+        concepte: Concepte de la notificació
+        document4:
+          arxiuNom: document.pdf
+          contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          normalitzat: false
+          tipoDocumental: INFORME
+          origen: ADMINISTRACIO
+          modoFirma: false
+          uuid: 00000000-0000-0000-0000-000000000000
+          url: http://server_path/document/123456.pdf
+          validesa: ORIGINAL
+        descripcio: Descripció de la notificació
+        document3:
+          arxiuNom: document.pdf
+          contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          normalitzat: false
+          tipoDocumental: INFORME
+          origen: ADMINISTRACIO
+          modoFirma: false
+          uuid: 00000000-0000-0000-0000-000000000000
+          url: http://server_path/document/123456.pdf
+          validesa: ORIGINAL
+        emisorDir3Codi: A04003003
+        grupCodi: NOT_DG_DESTECNOLOGIC
+        document:
+          arxiuNom: document.pdf
+          contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          normalitzat: false
+          tipoDocumental: INFORME
+          origen: ADMINISTRACIO
+          modoFirma: false
+          uuid: 00000000-0000-0000-0000-000000000000
+          url: http://server_path/document/123456.pdf
+          validesa: ORIGINAL
+        document5:
+          arxiuNom: document.pdf
+          contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          normalitzat: false
+          tipoDocumental: INFORME
+          origen: ADMINISTRACIO
+          modoFirma: false
+          uuid: 00000000-0000-0000-0000-000000000000
+          url: http://server_path/document/123456.pdf
+          validesa: ORIGINAL
+        enviamentDataProgramada: 2000-01-23T04:56:07.000+00:00
+        idioma: ES
+        document2:
+          arxiuNom: document.pdf
+          contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          normalitzat: false
+          tipoDocumental: INFORME
+          origen: ADMINISTRACIO
+          modoFirma: false
+          uuid: 00000000-0000-0000-0000-000000000000
+          url: http://server_path/document/123456.pdf
+          validesa: ORIGINAL
+        enviamentTipus: NOTIFICACIO
+        procedimentCodi: "666666"
+        caducitat: 2000-01-23T04:56:07.000+00:00
+        usuariCodi: u000000
+        numExpedient: 123/2023
+        caducitatDiesNaturals: 10
+        retard: 5
+        enviaments:
+        - serveiTipus: NORMAL
+          entregaPostal:
+            poblacio: Palma
+            municipiCodi: "070407"
+            linea1: "Carrer Aragó 26bis, 4t - 3"
+            linea2: Palma 07003 - Illes Balears
+            formatSobre: C5
+            numeroCasa: "26"
+            planta: "4"
+            numeroQualificador: bis
+            formatFulla: A4
+            provincia: "07"
+            tipus: NACIONAL
+            paisCodi: DE
+            viaNom: Aragó
+            puntKm: "12.5"
+            bloc: C
+            codiPostal: "07003"
+            apartatCorreus: "123"
+            viaTipus: CARRER
+            portal: "2"
+            complement: Edificio Walden
+            escala: B
+            porta: "2"
+            cie: Servera
+          entregaPostalActiva: false
+          entregaDehActiva: false
+          destinataris:
+          - raoSocial: Amazon ltd.
+            llinatge2: Servera
+            incapacitat: false
+            llinatge1: Riera
+            telefon: "678123456"
+            nif: 00000000T
+            interessatTipus: FISICA
+            dir3Codi: A04035965
+            nom: Joan
+            email: persona@correu.es
+            documentTipus: PASSAPORT
+          - raoSocial: Amazon ltd.
+            llinatge2: Servera
+            incapacitat: false
+            llinatge1: Riera
+            telefon: "678123456"
+            nif: 00000000T
+            interessatTipus: FISICA
+            dir3Codi: A04035965
+            nom: Joan
+            email: persona@correu.es
+            documentTipus: PASSAPORT
+          entregaDeh:
+            obligat: false
+            procedimentCodi: "666666"
+          titular:
+            raoSocial: Amazon ltd.
+            llinatge2: Servera
+            incapacitat: false
+            llinatge1: Riera
+            telefon: "678123456"
+            nif: 00000000T
+            interessatTipus: FISICA
+            dir3Codi: A04035965
+            nom: Joan
+            email: persona@correu.es
+            documentTipus: PASSAPORT
+        - serveiTipus: NORMAL
+          entregaPostal:
+            poblacio: Palma
+            municipiCodi: "070407"
+            linea1: "Carrer Aragó 26bis, 4t - 3"
+            linea2: Palma 07003 - Illes Balears
+            formatSobre: C5
+            numeroCasa: "26"
+            planta: "4"
+            numeroQualificador: bis
+            formatFulla: A4
+            provincia: "07"
+            tipus: NACIONAL
+            paisCodi: DE
+            viaNom: Aragó
+            puntKm: "12.5"
+            bloc: C
+            codiPostal: "07003"
+            apartatCorreus: "123"
+            viaTipus: CARRER
+            portal: "2"
+            complement: Edificio Walden
+            escala: B
+            porta: "2"
+            cie: Servera
+          entregaPostalActiva: false
+          entregaDehActiva: false
+          destinataris:
+          - raoSocial: Amazon ltd.
+            llinatge2: Servera
+            incapacitat: false
+            llinatge1: Riera
+            telefon: "678123456"
+            nif: 00000000T
+            interessatTipus: FISICA
+            dir3Codi: A04035965
+            nom: Joan
+            email: persona@correu.es
+            documentTipus: PASSAPORT
+          - raoSocial: Amazon ltd.
+            llinatge2: Servera
+            incapacitat: false
+            llinatge1: Riera
+            telefon: "678123456"
+            nif: 00000000T
+            interessatTipus: FISICA
+            dir3Codi: A04035965
+            nom: Joan
+            email: persona@correu.es
+            documentTipus: PASSAPORT
+          entregaDeh:
+            obligat: false
+            procedimentCodi: "666666"
+          titular:
+            raoSocial: Amazon ltd.
+            llinatge2: Servera
+            incapacitat: false
+            llinatge1: Riera
+            telefon: "678123456"
+            nif: 00000000T
+            interessatTipus: FISICA
+            dir3Codi: A04035965
+            nom: Joan
+            email: persona@correu.es
+            documentTipus: PASSAPORT
+      properties:
+        emisorDir3Codi:
+          description: |-
+            Codi Dir3 de l’organisme emisor
+            (Entitat de Notib)
+          example: A04003003
+          maxLength: 9
+          minLength: 0
+          type: string
+        organGestor:
+          description: |-
+            Codi DIR3 de l’òrgan gestor que realitza la notificació/comunicació.
+             * Obligatori en el cas de procediments comuns.
+             * En el cas de notificacions de procediments no comuns, no s'utilitzarà aquest camp, sinó que s’utilitzarà l’òrgan gestor al que pertany el procediment.
+          example: A04035965
+          maxLength: 9
+          minLength: 0
+          type: string
+        enviamentTipus:
+          default: COMUNICACIO
+          description: Enumerat que indica si l’enviament és una comunicació o una
+            notificació
+          enum:
+          - NOTIFICACIO
+          - COMUNICACIO
+          - SIR
+          example: NOTIFICACIO
+          type: string
+        concepte:
+          description: "Concepte de l’enviament. \n * Si ha d’anar a CIE només s’\
+            agafaran els 50 primers caràcters"
+          example: Concepte de la notificació
+          maxLength: 240
+          minLength: 0
+          type: string
+        descripcio:
+          description: Descripció detallada de l’enviament
+          example: Descripció de la notificació
+          maxLength: 1000
+          minLength: 0
+          type: string
+        enviamentDataProgramada:
+          description: |-
+            Data en la que l’enviament es posarà a disposició per a la compareixença.
+             * En cas de no informar-se es posarà en disposició per a la compareixença de forma inmediata.
+
+            El format de la data serà del tipus yyyy-MM-dd
+          format: date-time
+          type: string
+        retard:
+          description: Dies que l’enviament estarà a disposició de compareixença en
+            carpeta abans d’entregar-lo per altres mitjans
+          example: 5
+          format: int32
+          type: integer
+        caducitat:
+          description: |-
+            Data d’expiració de l’enviament.
+             * Aquest camp és excloent amb el de caducitatDiesNaturals. Només s'ha d'indicar un dels dos. En cas d'informar els dos, s'ignorarà el camp caducitatDiesNaturals.
+             * Aquest camp és obligatori per notificacions i opcional per a comunicacions.
+
+            El format de la data serà del tipus yyyy-MM-dd
+          format: date-time
+          type: string
+        caducitatDiesNaturals:
+          description: |-
+            Dies naturals abans que expiri l'enviament
+             * Aquest camp és excloent amb el de caducitat. Només s'ha d'indicar un dels dos. En cas d'informar els dos, aquest s'ignorarà.
+          example: 10
+          format: int32
+          type: integer
+        usuariCodi:
+          description: |-
+            Codi de l’usuari que està realitzant la notificació.
+            Aquest usuari s'utilitzarà per a realitzar l'assentament registral de sortida
+          example: u000000
+          maxLength: 64
+          minLength: 0
+          type: string
+        procedimentCodi:
+          description: |-
+            Identificador del procediment SIA al que pertany la notificació.
+            Obligatori en el cas de notificacions
+          example: "666666"
+          maxLength: 64
+          minLength: 0
+          type: string
+        grupCodi:
+          description: |-
+            Codi del grup al que s’assigna la notificació.
+             * Aquest camp només té sentit quan es vol donar d’alta una notificació que s’ha configurat amb grups a Notifica (veure manual d’usuari)
+          example: NOT_DG_DESTECNOLOGIC
+          maxLength: 64
+          minLength: 0
+          type: string
+        numExpedient:
+          description: Identificador de l'expedient al qual pertany la notificació
+          example: 123/2023
+          maxLength: 80
+          minLength: 0
+          type: string
+        enviaments:
+          description: Llista d'enviaments continguts en la Notificació/Comunicació
+          items:
+            $ref: '#/components/schemas/Enviament'
+          type: array
+        idioma:
+          default: CA
+          description: Enumerat que indica l’idioma de la notificació
+          enum:
+          - CA
+          - ES
+          example: ES
+          type: string
+        document:
+          $ref: '#/components/schemas/DocumentV2'
+        document2:
+          $ref: '#/components/schemas/DocumentV2'
+        document3:
+          $ref: '#/components/schemas/DocumentV2'
+        document4:
+          $ref: '#/components/schemas/DocumentV2'
+        document5:
+          $ref: '#/components/schemas/DocumentV2'
+      required:
+      - concepte
+      - document
+      - emisorDir3Codi
+      - enviamentTipus
+      - enviaments
+      - usuariCodi
+      type: object
+    Persona:
+      description: Representants a qui enviar l'enviament
+      example:
+        raoSocial: Amazon ltd.
+        llinatge2: Servera
+        incapacitat: false
+        llinatge1: Riera
+        telefon: "678123456"
+        nif: 00000000T
+        interessatTipus: FISICA
+        dir3Codi: A04035965
+        nom: Joan
+        email: persona@correu.es
+        documentTipus: PASSAPORT
+      properties:
+        incapacitat:
+          default: false
+          description: |-
+            Indica si el titular es incapacitat per llegir/rebutjar la notificació.
+            En aquest cas, seria obligatori informar un destinatari de l'enviament.
+          example: false
+          type: boolean
+        interessatTipus:
+          description: |-
+            Enumerat que indica el tipus de l’interessat que realitza l’enviament.
+             * En cas d'indicar un interessat tipus FISICA_SENSE_NIF serà obligatori informar el camp documentTipus
+          enum:
+          - ADMINISTRACIO
+          - FISICA
+          - JURIDICA
+          - FISICA_SENSE_NIF
+          example: FISICA
+          type: string
+        nom:
+          description: |-
+            Nom del titular.
+             * Obligatori en cas de persones físiques
+             * Mida màxima de 255 caràcters quan es tracta d'una administració
+             * Mida màxima de 30 caràcters per la resta de tipus d'interessats
+             * En el cas de persones jurídiques es posarà el nom en el camp raoSocial. En cas de no informar-se el camp raoSocial s'agafarà el valor indicat en aquest camp
+          example: Joan
+          maxLength: 30
+          minLength: 0
+          type: string
+        llinatge1:
+          description: |-
+            Primer llinatge de l’interessat
+             * Obligatori en cas de persones físiques
+          example: Riera
+          maxLength: 30
+          minLength: 0
+          type: string
+        llinatge2:
+          description: Segon llinatge de l’interessat
+          example: Servera
+          maxLength: 30
+          minLength: 0
+          type: string
+        documentTipus:
+          description: |-
+            Enumerat que indica el tipus de document aportat per l’interessat
+             * Aquest camp únicament es té en compte quan el tipus d’interessat és FISICA_SENSE_NIF
+          enum:
+          - PASSAPORT
+          - ESTRANGER
+          - ALTRE
+          example: PASSAPORT
+          type: string
+        nif:
+          description: |-
+            Número del document de l'interessat
+             * Obligatori excepte per interessats tipus FISICA_SENSE_NIF
+          example: 00000000T
+          maxLength: 9
+          minLength: 0
+          type: string
+        telefon:
+          description: |-
+            Telèfon de l’interessat
+             * Actualment no s’utilitza
+          example: "678123456"
+          maxLength: 16
+          minLength: 0
+          type: string
+        email:
+          description: "Correu electrònic de l’interessat. \n * Altament recomanat\
+            \ el seu ús."
+          example: persona@correu.es
+          maxLength: 160
+          minLength: 0
+          type: string
+        raoSocial:
+          description: |-
+            Raó social de l’interessat
+             * S’utilitza únicament en cas de persones jurídiques, i si no s’informa aquest camp, s’utilitzarà el valor del camp nom. És obligatori que un dels dos camps estigui informat
+          example: Amazon ltd.
+          maxLength: 80
+          minLength: 0
+          type: string
+        dir3Codi:
+          description: |-
+            Codi DIR3 de la administració a la que pertany la persona.
+             * Obligatori si s’ha d’enviar a una administració.
+          example: A04035965
+          maxLength: 9
+          minLength: 0
+          type: string
+      required:
+      - dir3Codi
+      - interessatTipus
+      type: object
+    EnviamentReferenciaV2:
+      description: Referències (identificadors) úniques que s'han assignat a de cada
+        un dels enviaments de la notificació
+      example:
+        titularNom: Pep Riera
+        titularNif: 00000000T
+        titularEmail: titular@correu.es
+        referencia: 00000000-0000-0000-0000-000000000000
+      properties:
+        titularNom:
+          description: Nom del titular a qui va adreçat l'enviament
+          example: Pep Riera
+          type: string
+        titularNif:
+          description: Nif del titular a qui va adreçat l'enviament
+          example: 00000000T
+          type: string
+        titularEmail:
+          description: Correu electrònic del titular a qui va adreçat l'enviament
+          example: titular@correu.es
+          type: string
+        referencia:
+          description: Referència (identificador) única de l'enviament a Notib
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      type: object
+    RespostaAltaV2:
+      example:
+        dataCreacio: 1706168093962
+        referencies:
+        - titularNom: Pep Riera
+          titularNif: 00000000T
+          titularEmail: titular@correu.es
+          referencia: 00000000-0000-0000-0000-000000000000
+        - titularNom: Pep Riera
+          titularNif: 00000000T
+          titularEmail: titular@correu.es
+          referencia: 00000000-0000-0000-0000-000000000000
+        errorDescripcio: java.lang.NullPointerException
+        error: true
+        estat: PENDENT
+        errorData: 1706168093962
+        identificador: 00000000-0000-0000-0000-000000000000
+      properties:
+        error:
+          description: Indica si s'ha produït algún error en l'enviament
+          example: true
+          type: boolean
+        errorData:
+          description: Data en que s'ha produït l'error
+          example: 1706168093962
+          format: int64
+          type: integer
+        errorDescripcio:
+          description: Identificador de la notificació a Notib
+          example: java.lang.NullPointerException
+          type: string
+        identificador:
+          description: Identificador únic que se li ha assignat a la notificació a
+            Notib
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        estat:
+          description: Estat de la notificació
+          enum:
+          - PENDENT
+          - ENVIADA
+          - REGISTRADA
+          - FINALITZADA
+          - PROCESSADA
+          - ENVIADA_AMB_ERRORS
+          - FINALITZADA_AMB_ERRORS
+          example: PENDENT
+          type: string
+        referencies:
+          description: Referències (identificadors) úniques que s'han assignat a de
+            cada un dels enviaments de la notificació
+          items:
+            $ref: '#/components/schemas/EnviamentReferenciaV2'
+          type: array
+        dataCreacio:
+          description: Data en que s'ha donat d'alta la notificació
+          example: 1706168093962
+          format: int64
+          type: integer
+      type: object
+    Fitxer:
+      description: Fitxer del justificant
+      example:
+        tamany: 4265384
+        contingut: contingut
+        nom: document
+        contentType: application/pdf
+      properties:
+        nom:
+          description: Nom del fitxer
+          example: document
+          type: string
+        contentType:
+          description: Tipus de contingut del fitxer
+          example: application/pdf
+          type: string
+        contingut:
+          description: Contingut del fitxer
+          type: string
+        tamany:
+          description: Mida del fitxer
+          example: 4265384
+          format: int64
+          type: integer
+      type: object
+    RespostaConsultaJustificantEnviament:
+      example:
+        errorDescripcio: java.lang.NullPointerException
+        error: true
+        errorData: 1706168093962
+        justificant:
+          tamany: 4265384
+          contingut: contingut
+          nom: document
+          contentType: application/pdf
+      properties:
+        error:
+          description: Indica si s'ha produït algún error en l'enviament
+          example: true
+          type: boolean
+        errorData:
+          description: Data en que s'ha produït l'error
+          example: 1706168093962
+          format: int64
+          type: integer
+        errorDescripcio:
+          description: Identificador de la notificació a Notib
+          example: java.lang.NullPointerException
+          type: string
+        justificant:
+          $ref: '#/components/schemas/Fitxer'
+      type: object
+    Procediment:
+      description: Procediment al que pertany la notificació
+      example:
+        nom: Instància genèrica
+        codiSia: "666666"
+      properties:
+        codiSia:
+          description: Codi SIA del procediment
+          example: "666666"
+          type: string
+        nom:
+          description: Nom del procediment
+          example: Instància genèrica
+          type: string
+      type: object
+    RespostaConsultaEstatNotificacioV2:
+      example:
+        concepte: Concepte de la notificació
+        dataFinalitzada: 1706168093962
+        procediment:
+          nom: Instància genèrica
+          codiSia: "666666"
+        organGestorDir3: A04035965
+        dataEnviada: 1706168093962
+        errorDescripcio: java.lang.NullPointerException
+        error: true
+        tipus: NOTIFICACIO
+        errorData: 1706168093962
+        emisorDir3: A04003003
+        dataProcessada: 1706168093962
+        estat: FINALITZADA
+        numExpedient: 123/2023
+        identificador: 00000000-0000-0000-0000-000000000000
+        dataCreada: 1706168093962
+      properties:
+        error:
+          description: Indica si s'ha produït algún error en l'enviament
+          example: true
+          type: boolean
+        errorData:
+          description: Data en que s'ha produït l'error
+          example: 1706168093962
+          format: int64
+          type: integer
+        errorDescripcio:
+          description: Identificador de la notificació a Notib
+          example: java.lang.NullPointerException
+          type: string
+        identificador:
+          description: Identificador de la notificació a Notib
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        estat:
+          description: Enumerat amb la informació de l'estat de l'enviament
+          enum:
+          - PENDENT
+          - ENVIADA
+          - REGISTRADA
+          - FINALITZADA
+          - PROCESSADA
+          - ENVIADA_AMB_ERRORS
+          - FINALITZADA_AMB_ERRORS
+          example: FINALITZADA
+          type: string
+        tipus:
+          description: Indica si l’enviament és una comunicació o una notificació
+          example: NOTIFICACIO
+          type: string
+        emisorDir3:
+          description: |-
+            Codi Dir3 de l’organisme emisor
+            (Entitat de Notib)
+          example: A04003003
+          type: string
+        procediment:
+          $ref: '#/components/schemas/Procediment'
+        organGestorDir3:
+          description: Codi DIR3 de l’òrgan gestor que realitza la notificació/comunicació
+          example: A04035965
+          type: string
+        concepte:
+          description: Concepte de la notificació
+          example: Concepte de la notificació
+          type: string
+        numExpedient:
+          description: Identificador de l'expedient al qual pertany la notificació
+          example: 123/2023
+          type: string
+        dataCreada:
+          description: Data en que s'ha donat d'alta la notificació
+          example: 1706168093962
+          format: int64
+          type: integer
+        dataEnviada:
+          description: Data en que s'ha enviat la notificació a Notifica (o SIR)
+          example: 1706168093962
+          format: int64
+          type: integer
+        dataFinalitzada:
+          description: Data en que s'ha finalitzat la notificació
+          example: 1706168093962
+          format: int64
+          type: integer
+        dataProcessada:
+          description: Data en que s'ha marcat la notificació com a processada
+          example: 1706168093962
+          format: int64
+          type: integer
+      type: object
+    Certificacio:
+      description: Informació de la certificació realitzada a Notific@
+      example:
+        tamany: 4265384
+        metadades: "00000000"
+        contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+        data: 1706168093962
+        csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+        tipusMime: application/pdf
+        origen: carpeta
+        hash: "00000000"
+      properties:
+        data:
+          description: Data de creació de la certificació de la notificació
+          example: 1706168093962
+          format: int64
+          type: integer
+        origen:
+          description: Origen de la certificació
+          example: carpeta
+          type: string
+        contingutBase64:
+          description: Contingut de la certificació en Base64.
+          example: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          type: string
+        tamany:
+          description: Mida de la certificació
+          example: 4265384
+          format: int32
+          type: integer
+        hash:
+          description: Hash de la certificació
+          example: "00000000"
+          type: string
+        metadades:
+          description: Metadades de la certificació
+          example: "00000000"
+          type: string
+        csv:
+          description: Codi CSV de la certificació
+          example: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          type: string
+        tipusMime:
+          description: Tipus MIME de la certificació
+          example: application/pdf
+          type: string
+      type: object
+    Datat:
+      description: Informació del datat realitzat a Notific@
+      example:
+        receptorNif: 00000000T
+        data: 1706168093962
+        origen: carpeta
+        errorDescripcio: java.lang.NullPointerException
+        numSeguiment: "123456789"
+        estat: NOTIFICADA
+        receptorNom: Pep Riera
+      properties:
+        estat:
+          description: Estat de la notificació
+          enum:
+          - NOTIB_PENDENT
+          - NOTIB_ENVIADA
+          - ABSENT
+          - ADRESA_INCORRECTA
+          - DESCONEGUT
+          - ENVIADA_CI
+          - ENVIADA_DEH
+          - ENVIAMENT_PROGRAMAT
+          - ENTREGADA_OP
+          - ERROR_ENTREGA
+          - EXPIRADA
+          - EXTRAVIADA
+          - MORT
+          - LLEGIDA
+          - NOTIFICADA
+          - PENDENT
+          - PENDENT_ENVIAMENT
+          - PENDENT_SEU
+          - PENDENT_CIE
+          - PENDENT_DEH
+          - REBUTJADA
+          - SENSE_INFORMACIO
+          - FINALITZADA
+          - ENVIADA
+          - REGISTRADA
+          - PROCESSADA
+          - ANULADA
+          - ENVIAT_SIR
+          - ENVIADA_AMB_ERRORS
+          - FINALITZADA_AMB_ERRORS
+          example: NOTIFICADA
+          type: string
+        data:
+          description: Data en que s'ha creat el datat
+          example: 1706168093962
+          format: int64
+          type: integer
+        origen:
+          description: Origen del datat
+          example: carpeta
+          type: string
+        receptorNif:
+          description: Nif del receptor de la notificació
+          example: 00000000T
+          type: string
+        receptorNom:
+          description: Nom del receptor de la notificació
+          example: Pep Riera
+          type: string
+        errorDescripcio:
+          description: "Descripció de l'error, en cas que es datat tingui algun error"
+          example: java.lang.NullPointerException
+          type: string
+        numSeguiment:
+          description: |-
+            Número de seguiment, en cas d'enviament postal
+             * Camp actualemnt no utilitzat
+          example: "123456789"
+          type: string
+      type: object
+    Registre:
+      description: Informació de l'apunt de registre de sortida realitzat per l'enviament
+      example:
+        llibre: Govern de les Illes Balears
+        oficina: Oficina Virtual
+        numero: 1753
+        data: 1706168093962
+        estat: VALID
+        numeroFormatat: GOIBS1753/2023
+      properties:
+        numero:
+          description: Número de registre
+          example: 1753
+          format: int32
+          type: integer
+        data:
+          description: Data del registre
+          example: 1706168093962
+          format: int64
+          type: integer
+        numeroFormatat:
+          description: Número de registre amb format
+          example: GOIBS1753/2023
+          type: string
+        estat:
+          description: Estat del registre
+          enum:
+          - VALID
+          - RESERVA
+          - PENDENT
+          - OFICI_EXTERN
+          - OFICI_INTERN
+          - OFICI_ACCEPTAT
+          - DISTRIBUIT
+          - ANULAT
+          - RECTIFICAT
+          - REBUTJAT
+          - REENVIAT
+          - DISTRIBUINT
+          - OFICI_SIR
+          example: VALID
+          type: string
+        oficina:
+          description: Oficina on s'ha realitzat el registre
+          example: Oficina Virtual
+          type: string
+        llibre:
+          description: Llibre on s'ha anotat el registre
+          example: Govern de les Illes Balears
+          type: string
+      type: object
+    RespostaConsultaEstatEnviamentV2:
+      example:
+        dehNif: 00000000T
+        estatData: 1706168093962
+        estatDescripcio: notificada
+        enviamentSir: false
+        adressaPostal: "Carrer Aragó 26bis, 4t - 3, Palma 07003 - Illes Balears"
+        datat:
+          receptorNif: 00000000T
+          data: 1706168093962
+          origen: carpeta
+          errorDescripcio: java.lang.NullPointerException
+          numSeguiment: "123456789"
+          estat: NOTIFICADA
+          receptorNom: Pep Riera
+        representants:
+        - raoSocial: Amazon ltd.
+          llinatge2: Servera
+          incapacitat: false
+          llinatge1: Riera
+          telefon: "678123456"
+          nif: 00000000T
+          interessatTipus: FISICA
+          dir3Codi: A04035965
+          nom: Joan
+          email: persona@correu.es
+          documentTipus: PASSAPORT
+        - raoSocial: Amazon ltd.
+          llinatge2: Servera
+          incapacitat: false
+          llinatge1: Riera
+          telefon: "678123456"
+          nif: 00000000T
+          interessatTipus: FISICA
+          dir3Codi: A04035965
+          nom: Joan
+          email: persona@correu.es
+          documentTipus: PASSAPORT
+        errorDescripcio: java.lang.NullPointerException
+        certificacio:
+          tamany: 4265384
+          metadades: "00000000"
+          contingutBase64: JVBERi0xLjYKJcOkw7zDtsOfCjIgMCBv==
+          data: 1706168093962
+          csv: aa10b27d8e221cf923715f01e01f515fa7cfec1322b6b49644a27a00461defea
+          tipusMime: application/pdf
+          origen: carpeta
+          hash: "00000000"
+        error: true
+        errorData: 1706168093962
+        interessat:
+          raoSocial: Amazon ltd.
+          llinatge2: Servera
+          incapacitat: false
+          llinatge1: Riera
+          telefon: "678123456"
+          nif: 00000000T
+          interessatTipus: FISICA
+          dir3Codi: A04035965
+          nom: Joan
+          email: persona@correu.es
+          documentTipus: PASSAPORT
+        entragaPostalActiva: false
+        registre:
+          llibre: Govern de les Illes Balears
+          oficina: Oficina Virtual
+          numero: 1753
+          data: 1706168093962
+          estat: VALID
+          numeroFormatat: GOIBS1753/2023
+        notificaIndentificador: QNzVj5Z9BvbLyftgqDhP
+        dehObligat: false
+        estat: NOTIFICADA
+        sir:
+          dataRecepcio: 1706168093962
+          dataRegistreDesti: 1706168093962
+        referencia: 00000000-0000-0000-0000-000000000000
+        identificador: 00000000-0000-0000-0000-000000000000
+      properties:
+        error:
+          description: Indica si s'ha produït algún error en l'enviament
+          example: true
+          type: boolean
+        errorData:
+          description: Data en que s'ha produït l'error
+          example: 1706168093962
+          format: int64
+          type: integer
+        errorDescripcio:
+          description: Identificador de la notificació a Notib
+          example: java.lang.NullPointerException
+          type: string
+        identificador:
+          description: Identificador de la notificació a Notib
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        referencia:
+          description: Identificador de l'enviament a Notib
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        notificaIndentificador:
+          description: Identificador de l'enviament a Notific@
+          example: QNzVj5Z9BvbLyftgqDhP
+          type: string
+        estat:
+          description: Enumerat amb la informació de l'estat de l'enviament
+          enum:
+          - NOTIB_PENDENT
+          - NOTIB_ENVIADA
+          - ABSENT
+          - ADRESA_INCORRECTA
+          - DESCONEGUT
+          - ENVIADA_CI
+          - ENVIADA_DEH
+          - ENVIAMENT_PROGRAMAT
+          - ENTREGADA_OP
+          - ERROR_ENTREGA
+          - EXPIRADA
+          - EXTRAVIADA
+          - MORT
+          - LLEGIDA
+          - NOTIFICADA
+          - PENDENT
+          - PENDENT_ENVIAMENT
+          - PENDENT_SEU
+          - PENDENT_CIE
+          - PENDENT_DEH
+          - REBUTJADA
+          - SENSE_INFORMACIO
+          - FINALITZADA
+          - ENVIADA
+          - REGISTRADA
+          - PROCESSADA
+          - ANULADA
+          - ENVIAT_SIR
+          - ENVIADA_AMB_ERRORS
+          - FINALITZADA_AMB_ERRORS
+          example: NOTIFICADA
+          type: string
+        estatData:
+          description: Data en que s'ha assignat l'estat actual de l'enviament
+          example: 1706168093962
+          format: int64
+          type: integer
+        estatDescripcio:
+          description: Descripció de l'estat de l'enviament
+          example: notificada
+          type: string
+        enviamentSir:
+          description: Indica si l'enviament s'ha realitzat a través de SIR
+          example: false
+          type: boolean
+        dehObligat:
+          description: Indica si el destinatari està obligat a rebre les notificacions
+            al DEH
+          example: false
+          type: boolean
+        dehNif:
+          description: Nif a utilitzar per l'enviamnt a DEH
+          example: 00000000T
+          type: string
+        entragaPostalActiva:
+          description: Indica si l'enviament està configurat per enviament postal
+          example: false
+          type: boolean
+        adressaPostal:
+          description: Adreça on es realitzarà l'enviament postal
+          example: "Carrer Aragó 26bis, 4t - 3, Palma 07003 - Illes Balears"
+          type: string
+        interessat:
+          $ref: '#/components/schemas/Persona'
+        representants:
+          description: Representants a qui enviar l'enviament
+          items:
+            $ref: '#/components/schemas/Persona'
+          type: array
+        registre:
+          $ref: '#/components/schemas/Registre'
+        sir:
+          $ref: '#/components/schemas/Sir'
+        datat:
+          $ref: '#/components/schemas/Datat'
+        certificacio:
+          $ref: '#/components/schemas/Certificacio'
+      type: object
+    Sir:
+      description: Informació per a l'enviament SIR
+      example:
+        dataRecepcio: 1706168093962
+        dataRegistreDesti: 1706168093962
+      properties:
+        dataRecepcio:
+          description: Data en que s'ha recepcionat el registre
+          example: 1706168093962
+          format: int64
+          type: integer
+        dataRegistreDesti:
+          description: Data en que s'ha registrat en el registre de destí
+          example: 1706168093962
+          format: int64
+          type: integer
+      type: object
+    DocumentConsultaV2:
+      description: Document notificat
+      example: codi
+      properties:
+        nom:
+          description: Nom del document
+          example: document.pdf
+          type: string
+        mediaType:
+          description: Tipus de document
+          example: application/pdf
+          type: string
+        mida:
+          description: Mida del document
+          example: 4532
+          format: int64
+          type: integer
+        url:
+          description: Url per a la descàrrega del document
+          example: http://localhost:8080/notibapi/interna/v2/document/00000000-0000-0000-0000-000000000000
+          type: string
+      type: object
+    GenericInfo:
+      description: Tipus d'interessat
+      example:
+        descripcio: descripcio
+        nom: nom
+        codi: codi
+      properties:
+        codi:
+          description: Codi de l'element
+          example: codi
+          type: string
+        nom:
+          description: Nom de l'element
+          example: nom
+          type: string
+        descripcio:
+          description: Descripcio de l'element
+          example: descripcio
+          type: string
+      type: object
+    PersonaConsultaV2:
+      description: "Persones representans, destinatàries de l'enviament"
+      example:
+        llinatge2: codi
+        llinatge1: codi
+        nif: codi
+        tipus:
+          descripcio: descripcio
+          nom: nom
+          codi: codi
+        nom: codi
+        email: codi
+      properties:
+        tipus:
+          $ref: '#/components/schemas/GenericInfo'
+        nom:
+          description: Nom de la persona
+          example: codi
+          type: string
+        llinatge1:
+          description: Primer llinatge de la persona
+          example: codi
+          type: string
+        llinatge2:
+          description: Segon llinatge de la persona
+          example: codi
+          type: string
+        nif:
+          description: NIF de la persona
+          example: codi
+          type: string
+        email:
+          description: Correu electrònic de la persona
+          example: codi
+          type: string
+      type: object
+    RespostaConsultaV2:
+      example:
+        numeroElementsTotals: 127
+        numeroElementsRetornats: 10
+        errorDescripcio: java.lang.NullPointerException
+        resultat:
+        - organGestor:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          concepte: Concepte de la notificació
+          procediment:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          descripcio: Descripció de la notificació
+          dataEnviament: 1706168093962
+          dataEstat: 1706168093962
+          document: codi
+          destinataris:
+          - llinatge2: codi
+            llinatge1: codi
+            nif: codi
+            tipus:
+              descripcio: descripcio
+              nom: nom
+              codi: codi
+            nom: codi
+            email: codi
+          - llinatge2: codi
+            llinatge1: codi
+            nif: codi
+            tipus:
+              descripcio: descripcio
+              nom: nom
+              codi: codi
+            nom: codi
+            email: codi
+          errorDescripcio: java.lang.NullPointerException
+          certificacio: http://localhost:8080/notibapi/interna/v2/certificacio/00000000-0000-0000-0000-000000000000
+          error: false
+          errorData: 17061680939620
+          id: 0
+          numExpedient: 123/2023
+          estat:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          titular:
+            llinatge2: codi
+            llinatge1: codi
+            nif: codi
+            tipus:
+              descripcio: descripcio
+              nom: nom
+              codi: codi
+            nom: codi
+            email: codi
+          emisor: A04003003
+          justificant: http://localhost:8080/notibapi/interna/v2/justificant/00000000-0000-0000-0000-000000000000
+        - organGestor:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          concepte: Concepte de la notificació
+          procediment:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          descripcio: Descripció de la notificació
+          dataEnviament: 1706168093962
+          dataEstat: 1706168093962
+          document: codi
+          destinataris:
+          - llinatge2: codi
+            llinatge1: codi
+            nif: codi
+            tipus:
+              descripcio: descripcio
+              nom: nom
+              codi: codi
+            nom: codi
+            email: codi
+          - llinatge2: codi
+            llinatge1: codi
+            nif: codi
+            tipus:
+              descripcio: descripcio
+              nom: nom
+              codi: codi
+            nom: codi
+            email: codi
+          errorDescripcio: java.lang.NullPointerException
+          certificacio: http://localhost:8080/notibapi/interna/v2/certificacio/00000000-0000-0000-0000-000000000000
+          error: false
+          errorData: 17061680939620
+          id: 0
+          numExpedient: 123/2023
+          estat:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          titular:
+            llinatge2: codi
+            llinatge1: codi
+            nif: codi
+            tipus:
+              descripcio: descripcio
+              nom: nom
+              codi: codi
+            nom: codi
+            email: codi
+          emisor: A04003003
+          justificant: http://localhost:8080/notibapi/interna/v2/justificant/00000000-0000-0000-0000-000000000000
+        error: false
+        errorData: 1706168093962
+      properties:
+        numeroElementsTotals:
+          description: "Número total de notificacions, segons el filtre aplicat"
+          example: 127
+          format: int32
+          type: integer
+        numeroElementsRetornats:
+          description: "Número de notificacions retornades, depenent de la paginació"
+          example: 10
+          format: int32
+          type: integer
+        resultat:
+          description: Llistat de les notificacions retornades
+          items:
+            $ref: '#/components/schemas/TransmissioV2'
+          type: array
+        error:
+          description: Error en la consulta
+          example: false
+          type: boolean
+        errorDescripcio:
+          description: Descripció de l'error
+          example: java.lang.NullPointerException
+          type: string
+        errorData:
+          description: Data de l'error
+          example: 1706168093962
+          format: int64
+          type: integer
+      type: object
+    TransmissioV2:
+      description: Llistat de les notificacions retornades
+      example:
+        organGestor:
+          descripcio: descripcio
+          nom: nom
+          codi: codi
+        concepte: Concepte de la notificació
+        procediment:
+          descripcio: descripcio
+          nom: nom
+          codi: codi
+        descripcio: Descripció de la notificació
+        dataEnviament: 1706168093962
+        dataEstat: 1706168093962
+        document: codi
+        destinataris:
+        - llinatge2: codi
+          llinatge1: codi
+          nif: codi
+          tipus:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          nom: codi
+          email: codi
+        - llinatge2: codi
+          llinatge1: codi
+          nif: codi
+          tipus:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          nom: codi
+          email: codi
+        errorDescripcio: java.lang.NullPointerException
+        certificacio: http://localhost:8080/notibapi/interna/v2/certificacio/00000000-0000-0000-0000-000000000000
+        error: false
+        errorData: 17061680939620
+        id: 0
+        numExpedient: 123/2023
+        estat:
+          descripcio: descripcio
+          nom: nom
+          codi: codi
+        titular:
+          llinatge2: codi
+          llinatge1: codi
+          nif: codi
+          tipus:
+            descripcio: descripcio
+            nom: nom
+            codi: codi
+          nom: codi
+          email: codi
+        emisor: A04003003
+        justificant: http://localhost:8080/notibapi/interna/v2/justificant/00000000-0000-0000-0000-000000000000
+      properties:
+        id:
+          description: Identificador de l'enviament
+          format: int64
+          type: integer
+        emisor:
+          description: Codi dir3 de l'entitat emisora
+          example: A04003003
+          type: string
+        organGestor:
+          $ref: '#/components/schemas/GenericInfo'
+        procediment:
+          $ref: '#/components/schemas/GenericInfo'
+        numExpedient:
+          description: Número de l’expedient al que està associada la notificació
+          example: 123/2023
+          type: string
+        concepte:
+          description: Concepte de la notificació
+          example: Concepte de la notificació
+          type: string
+        descripcio:
+          description: Descripció de la notificació
+          example: Descripció de la notificació
+          type: string
+        dataEnviament:
+          description: Data d'enviament de la notificació
+          example: 1706168093962
+          format: int64
+          type: integer
+        estat:
+          $ref: '#/components/schemas/GenericInfo'
+        dataEstat:
+          description: Data en que s'ha realitzat l'enviament
+          example: 1706168093962
+          format: int64
+          type: integer
+        document:
+          $ref: '#/components/schemas/DocumentConsultaV2'
+        titular:
+          $ref: '#/components/schemas/PersonaConsultaV2'
+        destinataris:
+          description: "Persones representans, destinatàries de l'enviament"
+          items:
+            $ref: '#/components/schemas/PersonaConsultaV2'
+          type: array
+        error:
+          description: Informa si s'ha produït algun error en la notificació
+          example: false
+          type: boolean
+        errorData:
+          description: Data de l'error
+          example: 17061680939620
+          format: int64
+          type: integer
+        errorDescripcio:
+          description: Descripció de l'error
+          example: java.lang.NullPointerException
+          type: string
+        justificant:
+          description: Url per a descarregar el justificant de registre
+          example: http://localhost:8080/notibapi/interna/v2/justificant/00000000-0000-0000-0000-000000000000
+          type: string
+        certificacio:
+          description: Url per a descarregar la Certificació generada al realitzar
+            la compareixença de la notificació
+          example: http://localhost:8080/notibapi/interna/v2/certificacio/00000000-0000-0000-0000-000000000000
+          type: string
+      type: object
+    Arxiu:
+      example:
+        mediaType: codi
+        contingut: codi
+        error: false
+        nom: document.pdf
+        missatgeError: No s'ha trobat el document.
+      properties:
+        nom:
+          description: Nom de l'arxiu'
+          example: document.pdf
+          type: string
+        mediaType:
+          description: Tipus d'arxiu
+          example: codi
+          type: string
+        contingut:
+          description: Contingut de l'arxiu en Base64
+          example: codi
+          type: string
+        error:
+          description: Indica si s'ha produït un error al intentar recuperar l'arxiu
+          example: false
+          type: boolean
+        missatgeError:
+          description: Descripció de l'error
+          example: No s'ha trobat el document.
+          type: string
+      type: object
+    AppInfo:
+      example:
+        data: 2023-05-29T11:36:55Z
+        versio: 2.0.1
+        nom: Notib
+      properties:
+        nom:
+          description: Nom de l'aplicació
+          example: Notib
+          type: string
+        versio:
+          description: Versió de l'aplicació
+          example: 2.0.1
+          type: string
+        data:
+          description: Data de compilació de l'aplicació
+          example: 2023-05-29T11:36:55Z
+          type: string
+      type: object
+  securitySchemes:
+    basic:
+      in: header
+      scheme: basic
+      type: http
+

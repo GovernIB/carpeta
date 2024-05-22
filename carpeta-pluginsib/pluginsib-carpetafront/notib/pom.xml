@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <artifactId>carpeta-pluginsib-carpetafront-notib</artifactId>
+	<artifactId>carpeta-pluginsib-carpetafront-notib</artifactId>
 
-    <name>Carpeta - PluginsIB - Carpeta Front - Notib</name>
+	<name>Carpeta - PluginsIB - Carpeta Front - Notib</name>
 
-    <parent>
-        <groupId>es.caib.carpeta</groupId>
-        <artifactId>carpeta-pluginsib-carpetafront</artifactId>
-        <version>1.1.29</version>
-    </parent>
+	<parent>
+		<groupId>es.caib.carpeta</groupId>
+		<artifactId>carpeta-pluginsib-carpetafront</artifactId>
+		<version>1.1.29</version>
+	</parent>
 
-    <properties>
-        <auth.method>BASIC</auth.method>
-        <client.default.package>org.fundaciobit.pluginsib.carpetafront.notib2client</client.default.package>
-        <!-- La darrera versió disponible: https://github.com/swagger-api/swagger-ui/releases -->
-        <swagger-ui.version>3.52.5</swagger-ui.version>
-    </properties>
+	<properties>
+		<auth.method>BASIC</auth.method>
+		<client.default.package>
+			org.fundaciobit.pluginsib.carpetafront.notib2client</client.default.package>
+		<!-- La darrera versió disponible:
+		https://github.com/swagger-api/swagger-ui/releases -->
+		<swagger-ui.version>3.52.5</swagger-ui.version>
+	</properties>
 
-    <dependencies>
+	<dependencies>
 
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.29</version>
-            <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.29</version>
+			<artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
+		</dependency>
 
-        <!-- NOTIB-->
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-pluginsib-carpetafront-notib2client</artifactId>
-            <version>2.0</version>
-        </dependency>
+		<!-- NOTIB-->
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-pluginsib-carpetafront-notib2client</artifactId>
+			<version>2.0</version>
+		</dependency>
 
-        <!-- Dependències incompatibles amb altres pluguins. En vers d'emprar aquest client, 
-            el generam a partir del openapi.json dins el directori notib2client de pluginsib-->
-        <!--<dependency>
+		<!-- Dependències incompatibles amb altres pluguins. En vers d'emprar
+		aquest client, 
+            el generam a partir del openapi.json dins el directori notib2client de
+		pluginsib-->
+		<!--<dependency>
             <groupId>es.caib.notib</groupId>
             <artifactId>notib-client-intf</artifactId>
             <version>2.0.1</version>
@@ -47,128 +53,153 @@
             <version>2.0.1</version>
         </dependency>-->
 
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.19.4</version>
-        </dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.19.4</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>3.1.5</version>
-        </dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>3.1.5</version>
+		</dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-
-        <!-- Sistra1 -->
-        <dependency>
-            <groupId>es.caib.sistra</groupId>
-            <artifactId>zonaper-ws-api</artifactId>
-            <version>3.5.24</version>
-        </dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 
 
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <scope>provided</scope>
-        </dependency>
+		<!-- Sistra1 -->
+		<dependency>
+			<groupId>es.caib.sistra</groupId>
+			<artifactId>zonaper-ws-api</artifactId>
+			<version>3.5.24</version>
+		</dependency>
 
 
-        <dependency>
-            <groupId>javax.xml.ws</groupId>
-            <artifactId>jaxws-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>rt</artifactId>
-            <version>2.3.1</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
-    <profiles>
-        <profile>
-            <id>generacio-notib2-client</id>
-            <build>
-                <plugins>
-                    <!-- Genera el Client Rest per Java a partir del fitxer openapi.json -->
-                    <!-- https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md#general-configuration-parameters -->
-                    <plugin>
-                        <groupId>io.swagger.codegen.v3</groupId>
-                        <artifactId>swagger-codegen-maven-plugin</artifactId>
-                        <version>3.0.45</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <phase>install</phase>
-                                <configuration>
-                                    <inputSpec>${project.basedir}/openapi.json</inputSpec>
-                                    <language>java</language>
-                                    <library>resteasy</library>
-                                    <configOptions>
-                                        <groupId>es.caib.carpeta</groupId>
-                                        <artifactId>carpeta-pluginsib-carpetafront-notib2client</artifactId>
-                                        <artifactVersion>2.0</artifactVersion>
-                                        <dateLibrary>java11</dateLibrary>
-                                        <useTags>true</useTags>
-                                        <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                        <java11>true</java11>
-                                    </configOptions>
-
-                                    <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
-                                    <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                                    <!-- <configHelp>true</configHelp> -->
-                                    <!--<library>jersey2</library>  -->
-                                    <!--<library>resttemplate</library>  -->
-                                    <!--<configOptions>  -->
-                                    <!--    <dateLibrary>joda</dateLibrary>  -->
-                                    <!--</configOptions>  -->
-                                    <!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
-                                    <addCompileSourceRoot>false</addCompileSourceRoot>
-                                    <output>${project.basedir}/../notib2client</output>
-                                    <apiPackage>${client.default.package}.api</apiPackage>
-                                    <modelPackage>${client.default.package}.model</modelPackage>
-                                    <invokerPackage>${client.default.package}.services</invokerPackage>
-                                    <variableNamingConvention>camelCase</variableNamingConvention>
-                                    <!-- <serializableModel>true</serializableModel> -->
-                                    <fullJavaUtil>true</fullJavaUtil>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-
-        </profile>
-    </profiles>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 
+		<dependency>
+			<groupId>javax.xml.ws</groupId>
+			<artifactId>jaxws-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>rt</artifactId>
+			<version>2.3.1</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<!-- ==================================================================  -->
+            <!-- Genera el Client Rest per Java a partir del fitxers openapi_*.json -->
+            <!-- ==================================================================  -->
+            <!-- https://openapi-generator.tech/docs/generators/java/ -->
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.3.0</version>
+                <executions>
+                    <execution>
+                        <id>openapi1</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/openapi.json</inputSpec>
+                            <generatorName>java</generatorName>
+                            <skipValidateSpec>false</skipValidateSpec>
+                            <library>resteasy</library>
+                            <!-- ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA*** -->
+                            <!-- <configHelp>true</configHelp> -->
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <output>${project.basedir}/../notib2client</output>
+                            <apiPackage>${client.default.package}.api</apiPackage>
+                            <modelPackage>${client.default.package}.model</modelPackage>
+                            <invokerPackage>${client.default.package}.services</invokerPackage>
+                            <generateModelTests>false</generateModelTests>
+                            <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>
+                            <configOptions>
+                                <groupId>es.caib.carpeta</groupId>
+                                <artifactId>carpeta-pluginsib-carpetafront-notib2client</artifactId>
+                                <artifactVersion>2.0</artifactVersion>
+                                <artifactDescription>Carpeta - API Client - Notib Client 2</artifactDescription>
+                                <dateLibrary>java11</dateLibrary>
+                                <useTags>true</useTags>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <java11>true</java11>
+                                <booleanGetterPrefix>is</booleanGetterPrefix>
+
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includeProjectDependencies>false</includeProjectDependencies>
+                    <includePluginDependencies>true</includePluginDependencies>
+                    <executableDependency>
+                        <artifactId>pluginsib-utils-rest</artifactId>
+                        <groupId>org.fundaciobit.pluginsib.utils</groupId>
+                    </executableDependency>
+                    <mainClass>
+                        org.fundaciobit.pluginsib.utils.rest.pomadaptertojboss72.AdaptApiClientPomToJboss72</mainClass>
+                    <arguments>
+                        <argument>${project.basedir}</argument>
+                    </arguments>
+
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <artifactId>pluginsib-utils-rest</artifactId>
+                        <groupId>org.fundaciobit.pluginsib.utils</groupId>
+                        <version>2.0.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+		</plugins>
+	</build>
 </project>
