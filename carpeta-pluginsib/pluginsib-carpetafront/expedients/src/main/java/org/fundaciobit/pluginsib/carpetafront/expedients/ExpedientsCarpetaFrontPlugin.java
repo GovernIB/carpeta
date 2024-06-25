@@ -22,8 +22,8 @@ import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.ProcedimentDt
 import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.ProcedimientosResponse;
 import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.UnidadAdministrativa;
 import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.UnidadesAdministrativasResponse;
-import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
-import org.fundaciobit.pluginsib.core.utils.PluginsManager;
+import org.fundaciobit.pluginsib.core.v3.utils.MetadataConstants;
+import org.fundaciobit.pluginsib.core.v3.utils.PluginsManager;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;

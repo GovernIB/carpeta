@@ -4,10 +4,9 @@ package es.caib.carpeta.pluginsib.carpetafront.api;
 //import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 //import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import org.fundaciobit.pluginsib.core.utils.AbstractPluginPropertiesTranslations;
-
+import org.fundaciobit.pluginsib.core.v3.utils.AbstractPluginPropertiesTranslations;
+import org.jboss.logging.Logger;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;

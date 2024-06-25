@@ -72,13 +72,13 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-api</artifactId>
-            <version>3.0.0</version>
+            <version>${pluginsib.userinformation.version}</version>
         </dependency>
         
         <dependency>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
             <artifactId>pluginsib-utils-templateengine</artifactId>
-            <version>2.0.2</version>
+            <version>${pluginsib.utils.version}</version>
         </dependency>
         
         <dependency>

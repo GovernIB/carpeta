@@ -1,6 +1,6 @@
 package es.caib.carpeta.pluginsib.carpetafront.api;
 
-import org.fundaciobit.pluginsib.core.IPlugin;
+import org.fundaciobit.pluginsib.core.v3.IPluginIB;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +11,7 @@ import java.util.Locale;
  * 
  * @author anadal
  */
-public interface ICarpetaFrontPlugin extends IPlugin {
+public interface ICarpetaFrontPlugin extends IPluginIB {
 
     public static final String CARPETAFRONT_PROPERTY_BASE = IPLUGINSIB_BASE_PROPERTIES + "carpetafront.";
     

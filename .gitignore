@@ -335,3 +335,10 @@ carpeta-pluginsib/pluginsib-carpetafront/notib/test.properties
 /carpeta-api-interna-client-mobilenotification-v1/gradlew.bat
 /carpeta-api-interna-client-mobilenotification-v1/pom_backup.xml
 /carpeta-front/reactnative/expo-server-sdk-java/mobileid.properties
+carpeta-api-externa-client-certificats-v1/.gradle/
+carpeta-api-externa-client-certificats-v1/bin/
+carpeta-api-interna-client/.gradle/
+carpeta-api-interna-client-mobilenotification-v1/.gradle/
+carpeta-api-interna-client-mobilenotification-v1/bin/
+carpeta-pluginsib/pluginsib-carpetafront/notib2client/.gradle/
+carpeta-pluginsib/pluginsib-carpetafront/notib2client/bin/

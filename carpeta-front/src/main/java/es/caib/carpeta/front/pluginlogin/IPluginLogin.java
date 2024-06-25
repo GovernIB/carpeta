@@ -1,13 +1,13 @@
 package es.caib.carpeta.front.pluginlogin;
 
-import org.fundaciobit.pluginsib.core.IPlugin;
+import org.fundaciobit.pluginsib.core.v3.IPluginIB;
 
 /**
  * 
  * @author anadal
  *
  */
-public interface IPluginLogin extends IPlugin {
+public interface IPluginLogin extends IPluginIB {
 
     /**
      * 

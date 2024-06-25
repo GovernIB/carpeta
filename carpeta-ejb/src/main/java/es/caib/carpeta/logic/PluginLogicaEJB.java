@@ -2,7 +2,7 @@ package es.caib.carpeta.logic;
 
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.pluginsib.core.IPlugin;
+import org.fundaciobit.pluginsib.core.v3.IPluginIB;
 
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
@@ -29,7 +29,7 @@ import java.util.Map;
 @Stateless
 public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
 
-  private static final Map<Long, IPlugin> pluginsCache = new HashMap<Long, IPlugin>();
+  private static final Map<Long, IPluginIB> pluginsCache = new HashMap<Long, IPluginIB>();
 
   @EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
   protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
@@ -58,7 +58,7 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
   @Override
   public boolean deleteOfCache(Long pluginID) {
     synchronized (pluginsCache) {
-      IPlugin p = pluginsCache.remove(pluginID);
+      IPluginIB p = pluginsCache.remove(pluginID);
       return p != null;
     }
   }
@@ -81,13 +81,13 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
   }
   
   
-  public void addPluginToCache(Long pluginID, IPlugin pluginInstance) { 
+  public void addPluginToCache(Long pluginID, IPluginIB pluginInstance) { 
     synchronized (pluginsCache) {
       pluginsCache.put(pluginID, pluginInstance);  
     }
   }
   
-  public IPlugin getPluginFromCache(Long pluginID) {
+  public IPluginIB getPluginFromCache(Long pluginID) {
     synchronized (pluginsCache) {
       return  pluginsCache.get(pluginID);  
     }
