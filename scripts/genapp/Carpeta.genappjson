@@ -5300,8 +5300,8 @@
       "labelsPlural": {
         "de": "",
         "en": "",
-        "ca": "",
-        "es": ""
+        "ca": "TraduccionsMap",
+        "es": "TraduccionesMap"
       },
       "generate": true,
       "fileMappingEntity": false,
@@ -5884,5 +5884,6 @@
   ],
   "generateBack": true,
   "generateFront": false,
-  "generateWS": false
+  "generateApiInterna": false,
+  "generateApiExterna": false
 }
