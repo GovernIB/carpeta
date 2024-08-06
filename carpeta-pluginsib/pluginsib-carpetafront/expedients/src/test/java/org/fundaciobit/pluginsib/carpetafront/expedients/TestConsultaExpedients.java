@@ -16,7 +16,6 @@ public class TestConsultaExpedients {
     public static void main(String[] args) {
 
         try {
-            org.fundaciobit.pluginsib.core.utils.XTrustProvider.install();
 
             Properties testProperties = new Properties();
 
@@ -80,7 +79,7 @@ public class TestConsultaExpedients {
         int totalPagines;
 
         final int elementsPerPagina = 5;
-        
+
         Locale locale = new Locale("ca");
 
         do {
@@ -90,8 +89,10 @@ public class TestConsultaExpedients {
             String filtreEstat = null;
             String filtreDataInici = null;
             String filtreDataFi = null;
-
-            ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta, locale, filtreNom, filtreEstat,filtreDataInici, filtreDataFi);
+            String filtreCodiSia = null;
+            //getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale, String filtreNom, String filtreCodiSia, String filtreEstat, String filtreDataInici, String filtreDataFi
+            ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta, locale,
+                    filtreNom, filtreCodiSia, filtreEstat, filtreDataInici, filtreDataFi);
 
             if (resposta.getError() != null) {
 

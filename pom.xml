@@ -13,15 +13,26 @@
 		<connection>scm:git:https://github.com/GovernIB/carpeta.git</connection>
 		<url>https://github.com/GovernIB/carpeta</url>
 	</scm>
+
+    <parent>
+        <groupId>es.caib.maven</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <artifactId>caib-artifacts-jdk11-jboss72</artifactId>
+    </parent>
+
 	<properties>
 		<!-- Versions de JBoss -->
+        <!--
 		<jboss-eap.version>7.2.6.GA</jboss-eap.version>
 		<jboss-javaee.version>1.0.1.Final-redhat-00003</jboss-javaee.version>
+        -->
 		<!-- Propietats que afecten els plugins -->
+        <!--
 		<maven.compiler.release>11</maven.compiler.release>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        -->
 		<!-- No fer els tests per defecte. -->
 		<maven.test.skip>true</maven.test.skip>
 		<!-- Versions de les llibreries emprades dins els mòduls -->
@@ -32,14 +43,14 @@
 		<slf4j.version>1.7.30</slf4j.version>
 		<keycloak.version>6.0.1</keycloak.version>
 		<!-- 6.0.1 -->
-		<cxf.version>3.3.3</cxf.version>
+		<cxf.version>3.2.5.redhat-00001</cxf.version>
 		<junit.version>4.8.2</junit.version>
-		<hibernate.version>5.3.15.Final</hibernate.version>
+		<hibernate.version>5.3.14.Final-redhat-00001</hibernate.version>
 		<hibernate.annotations.version>5.3.15.Final</hibernate.annotations.version>
-		<resteasy.version>3.6.3.Final</resteasy.version>
-		<jboss-logging.version>3.3.2.Final</jboss-logging.version>
-		<spring.version>4.3.26.RELEASE</spring.version>
-		<spring-security.version>4.2.14.RELEASE</spring-security.version>
+		<resteasy.version>3.6.1.SP2-redhat-00001</resteasy.version>
+		<jboss-logging.version>3.3.2.Final-redhat-00001</jboss-logging.version>
+		<spring.version>4.3.30.RELEASE</spring.version>
+		<spring-security.version>4.2.20.RELEASE</spring-security.version>
 		<spring-data-jpa>1.6.6.RELEASE</spring-data-jpa>
 		<!--
 		<spring.version>4.3.30.RELEASE</spring.version>
@@ -56,25 +67,25 @@
         <pluginsib.utils.version>3.0.0-SNAPSHOT</pluginsib.utils.version>
         <pluginsib.exportdata.version>3.0.0-SNAPSHOT</pluginsib.exportdata.version>
         <pluginsib.userinformation.version>4.0.0-SNAPSHOT</pluginsib.userinformation.version>
-        
+
 	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<!-- Definició de les versions de les llibreries, especificacions i eines disponibles dins JBoss -->
 			<!-- Dependències de JAVA EE 8 -->
+ 
 			<dependency>
 				<groupId>javax</groupId>
 				<artifactId>javaee-api</artifactId>
 				<version>${javaee-api.version}</version>
 				<exclusions>
-					<!-- La dependència de javax.mail fa referència a activation 1.1 enlloc 
-						de 1.1.1 -->
 					<exclusion>
 						<groupId>javax.activation</groupId>
 						<artifactId>activation</artifactId>
 					</exclusion>
 				</exclusions>
-			</dependency>
+            </dependency>
+
 			<!-- A partir de Java 11 les llibreries JAXB ja no s'inclouen al JDK -->
 			<dependency>
 				<groupId>javax.xml.bind</groupId>
@@ -82,6 +93,7 @@
 				<version>${jaxb-api.version}</version>
 				<scope>provided</scope>
 			</dependency>
+            <!--
 			<dependency>
 				<groupId>org.jboss.bom</groupId>
 				<artifactId>eap-runtime-artifacts</artifactId>
@@ -102,6 +114,7 @@
 				<version>${jboss-javaee.version}</version>
 				<type>pom</type>
 			</dependency>
+            -->
 			<!-- Altres llibreries emprades dins els mòduls -->
 			<dependency>
 				<groupId>org.eclipse.microprofile.openapi</groupId>

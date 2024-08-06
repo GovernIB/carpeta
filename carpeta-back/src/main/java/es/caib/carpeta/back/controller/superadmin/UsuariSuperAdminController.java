@@ -11,6 +11,7 @@ import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -144,7 +145,7 @@ public class UsuariSuperAdminController extends UsuariController {
 
             if (!Configuracio.isCAIB()) {
               usuariFilterForm.addAdditionalButton(new AdditionalButton("fas fa-plus-circle", "usuari.afegir",
-                    getContextWeb() + "/checkusername", "btn-success"));
+                    getContextWeb() + "/checkusername", AdditionalButtonStyle.SUCCESS));
             }
 
         }

@@ -17,6 +17,37 @@
             <module name="org.keycloak.keycloak-wildfly-adapter" optional="TRUE"/>
             <module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE"/>
             <module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE"/>
+            
+            
+            <!-- Afegir dins del fitxer jboss-deployment-structure.xml en l'apartat de jboss-deployment-structure>>deployment>>dependencies -->
+            <module name="org.codehaus.woodstox" export="TRUE"/>
+            <module name="org.apache.ws.security" export="TRUE"/>
+            <module name="org.apache.santuario.xmlsec" export="TRUE"/>
+            <module name="org.opensaml" export="TRUE"/>
+            <module name="com.sun.xml.fastinfoset" export="TRUE"/>
+            <module name="com.google.code.gson" export="TRUE"/>
+            <module name="javax.xml.bind.api" export="TRUE"/>
+            <module name="org.apache.commons.io" export="TRUE"/>
+            <module name="com.google.guava" export="TRUE"/>
+            <module name="asm.asm" export="TRUE"/>
+            <module name="com.fasterxml.jackson.datatype.jackson-datatype-jsr310" export="TRUE"/>
+            <module name="javax.annotation.api" export="TRUE"/>
+            <module name="org.jboss.logging" export="TRUE"/>
+            <module name="org.joda.time" export="TRUE"/>
+            <module name="org.apache.xml-resolver" export="TRUE"/>
+            <module name="org.apache.ws.xmlschema" export="TRUE"/>
+            <module name="org.apache.neethi" export="TRUE"/>
+            <module name="com.sun.xml.txw2" export="TRUE"/>
+            <module name="com.sun.xml.bind" export="TRUE"/>
+            <module name="javax.wsdl4j.api" export="TRUE"/>
+            <module name="org.apache.commons.codec" export="TRUE"/>
+            
+            <module name="org.apache.cxf" export="true"/>
+            <module name="org.apache.cxf.impl" export="true"/>
+            
+            
+            <module name="com.sun.istack" export="TRUE"/> 
+            
         </dependencies>
     </deployment>
 </jboss-deployment-structure>

@@ -1,26 +1,30 @@
 package es.caib.carpeta.front.pluginlogin;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.DatatypeConverter;
 
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientProperties;
-import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+//import org.glassfish.jersey.client.ClientConfig;
+//import org.glassfish.jersey.client.ClientProperties;
+//import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,6 +90,7 @@ public class AbstractJersey2ConnectionManager {
         Response response;
         try {
 
+            /* XXXX
             ClientConfig config = new ClientConfig();
             
             if (this.getConnectionTimeoutMs() != null) {
@@ -130,14 +135,17 @@ public class AbstractJersey2ConnectionManager {
             
             
             final Client client = clientBuilder.build();
+            */
             
+            // NOU JAX-RS
+            ClientBuilder configuration = ClientBuilder.newBuilder();
+            configuration.connectTimeout(this.getConnectionTimeoutMs(), TimeUnit.MILLISECONDS);
+            configuration.readTimeout(this.getReadTimeoutMs(), TimeUnit.MILLISECONDS);
+            Client client = configuration.build();
             
-            
-            
-
             WebTarget webTarget = client.target(endPoint);
             
-            webTarget.property(ClientProperties.FOLLOW_REDIRECTS, Boolean.TRUE);
+            // XXX webTarget.property(ClientProperties.FOLLOW_REDIRECTS, Boolean.TRUE);
 
             Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 
@@ -146,8 +154,14 @@ public class AbstractJersey2ConnectionManager {
                 invocationBuilder.header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
             } else {
                 // Basic Authenticatin (username and password)
+                // JERSEY 2.0
+                /*
                 HttpAuthenticationFeature feature = HttpAuthenticationFeature.universal(this.username, this.password);
                 webTarget.register(feature);
+                */
+                
+                // JAX RS
+                webTarget.register(new Authenticator(this.username, this.password));
             }
 
             if (parameter == null) {
@@ -209,6 +223,38 @@ public class AbstractJersey2ConnectionManager {
         }
 
     }
+    
+    
+    /**
+     * 
+     */
+    public class Authenticator implements ClientRequestFilter {
+
+        private final String user;
+        private final String password;
+
+        public Authenticator(String user, String password) {
+            this.user = user;
+            this.password = password;
+        }
+
+        public void filter(ClientRequestContext requestContext) throws IOException {
+            MultivaluedMap<String, Object> headers = requestContext.getHeaders();
+            final String basicAuthentication = getBasicAuthentication();
+            headers.add("Authorization", basicAuthentication);
+
+        }
+
+        private String getBasicAuthentication() {
+            String token = this.user + ":" + this.password;
+            try {
+                return "BASIC " + DatatypeConverter.printBase64Binary(token.getBytes("UTF-8"));
+            } catch (UnsupportedEncodingException ex) {
+                throw new IllegalStateException("Cannot encode with UTF-8", ex);
+            }
+        }
+    }
+    
 
     /**
      * 

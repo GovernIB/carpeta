@@ -97,15 +97,16 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- LoginIB -->
+		<!--
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>2.33</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>es.caib.loginib</groupId>
@@ -133,23 +134,18 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.bytebuddy</groupId>
 			<artifactId>byte-buddy</artifactId>
-			<scope>provided</scope>
-			<!--  1.9.11.redhat-00002 -->
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -204,7 +200,6 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<!--  Utilitats -->
 		<dependency>
@@ -231,12 +226,10 @@
 			<groupId>javax.activation</groupId>
 			<artifactId>javax.activation-api</artifactId>
 			<version>1.2.0</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.fundaciobit.genapp</groupId>
@@ -245,12 +238,14 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- Sistra1 -->
+		<!--
 		<dependency>
 			<groupId>es.caib.sistra</groupId>
 			<artifactId>zonaper-ws-api</artifactId>
 			<version>3.5.24</version>
 			<scope>provided</scope>
 		</dependency>
+		-->
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>

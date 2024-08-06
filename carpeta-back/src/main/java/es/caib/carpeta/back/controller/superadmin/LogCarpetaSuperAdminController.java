@@ -6,6 +6,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.GroupByItem;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,7 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
             logCarpetaFilterForm.setDeleteButtonVisible(false);
             logCarpetaFilterForm.setEditButtonVisible(false);
             logCarpetaFilterForm.addAdditionalButtonForEachItem(
-                    new AdditionalButton("fas fa-eye", "genapp.viewtitle", getContextWeb() + "/view/{0}", "btn-info"));
+                    new AdditionalButton("fas fa-eye", "genapp.viewtitle", getContextWeb() + "/view/{0}", AdditionalButtonStyle.INFO));
             logCarpetaFilterForm.addGroupByField(TIPUS);
             logCarpetaFilterForm.addGroupByField(ESTAT);
             

@@ -134,7 +134,7 @@
             <!-- ==================================================================  -->
             <!-- https://openapi-generator.tech/docs/generators/java/ -->
             <plugin>
-                
+
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.3.0</version>
@@ -163,17 +163,15 @@
                             <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>
                             <configOptions>
                                 <groupId>es.caib.carpeta</groupId>
-                                <artifactId>
-                                    carpeta-api-interna-client-mobilenotification-v1</artifactId>
+                                <artifactId>carpeta-api-interna-client-mobilenotification-v1</artifactId>
                                 <artifactVersion>1.0-SNAPSHOT</artifactVersion>
-                                <artifactDescription>Carpeta - API Rest -
-                                    Interna Client - Mobile Notification v1</artifactDescription>
+                                <artifactDescription>Carpeta - API Rest - Interna Client - Mobile Notification v1</artifactDescription>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
                                 <booleanGetterPrefix>is</booleanGetterPrefix>
-
+                                <useJakartaEe>false</useJakartaEe>
                             </configOptions>
                         </configuration>
                     </execution>
@@ -200,8 +198,7 @@
                         <artifactId>pluginsib-utils-rest</artifactId>
                         <groupId>org.fundaciobit.pluginsib.utils</groupId>
                     </executableDependency>
-                    <mainClass>
-                        org.fundaciobit.pluginsib.utils.rest.pomadaptertojboss72.AdaptApiClientPomToJboss72</mainClass>
+                    <mainClass>org.fundaciobit.pluginsib.utils.rest.pomadaptertojboss72.AdaptApiClientPomToJboss72</mainClass>
                     <arguments>
                         <argument>${project.basedir}</argument>
                     </arguments>

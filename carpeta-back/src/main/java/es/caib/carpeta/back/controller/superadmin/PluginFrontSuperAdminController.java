@@ -7,6 +7,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
 import org.springframework.stereotype.Controller;
@@ -125,7 +126,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
         if (pluginFilterForm.isNou()) {
             pluginFilterForm.addAdditionalButtonForEachItem(
-                    new AdditionalButton("fas fa-sync", "reload", getContextWeb() + "/reload/{0}", "btn-warning"));
+                    new AdditionalButton("fas fa-sync", "reload", getContextWeb() + "/reload/{0}", AdditionalButtonStyle.WARNING));
 
             pluginFilterForm.setAttachedAdditionalJspCode(true);
 
