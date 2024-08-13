@@ -411,6 +411,12 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                    <packagingExcludes>
+                        <!-- Requereix afegir mòdul 'org.apache.commons.collections' a jboss-deployment-structure.xml -->
+                         **/commons-collections*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.beanutils' a jboss-deployment-structure.xml -->
+                         **/commons-beanutils*redhat*.jar,
+                    </packagingExcludes>
                 </configuration>
             </plugin>
 
