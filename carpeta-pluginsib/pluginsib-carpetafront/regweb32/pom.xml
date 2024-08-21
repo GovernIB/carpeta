@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>carpeta-pluginsib-carpetafront-regweb32</artifactId>
@@ -21,7 +20,7 @@
             <version>1.1.29</version>
             <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <version>1.1.29</version>
@@ -38,7 +37,7 @@
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
@@ -57,11 +56,18 @@
             <version>1.1.29</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
 		    <groupId>javax.ejb</groupId>
 		    <artifactId>javax.ejb-api</artifactId>
 		    <version>3.2.2</version>
-		</dependency>
+		</dependency>-->
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+            <version>1.0.1.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
 
 
 
@@ -85,8 +91,8 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
-    
-         <dependency>
+
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <scope>provided</scope>
