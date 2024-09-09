@@ -276,7 +276,7 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariEntitatList.jsp" />
     </definition>
     
-        <definition name="buitSuperAdmin" extends="superadmin">
+    <definition name="buitSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/buit.jsp" />
     </definition>
 

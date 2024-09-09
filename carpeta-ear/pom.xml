@@ -379,6 +379,8 @@
                          **/cxf-*.redhat*.jar,
                         <!-- Requereix afegir mòdul 'com.sun.istack' a jboss-deployment-structure.xml -->
                         **/istack-commons-runtime-*.redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.jboss.logging.commons.logging' a jboss-deployment-structure.xml -->
+                         **/commons-logging-jboss-logging*redhat*.jar,
                     </packagingExcludes>
                     
                     

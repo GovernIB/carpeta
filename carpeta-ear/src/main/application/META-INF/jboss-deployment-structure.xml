@@ -48,6 +48,13 @@
             
             <module name="com.sun.istack" export="TRUE"/> 
             
+            <module name="org.jboss.logging.commons.logging" export="TRUE"/>
         </dependencies>
     </deployment>
+    <sub-deployment name="carpeta-back.war">
+        <dependencies>
+            <module name="org.apache.commons.beanutils" export="TRUE"/>
+            <module name="org.apache.commons.collections" export="TRUE"/>
+        </dependencies>
+   </sub-deployment>
 </jboss-deployment-structure>

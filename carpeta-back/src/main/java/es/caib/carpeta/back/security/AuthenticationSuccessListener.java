@@ -442,21 +442,21 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
         loginInfo = new LoginInfo(username, user, usuariPersona, entitatIDActual, entitats, rolesPerEntitat,
                 usuariEntitatPerEntitatID, necesitaConfigurar);
-
+        
         // and set the authentication of the current Session context
         SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());
-
         try {
             // AUDITORIA
             if (loginInfo.getUsuariPersona() != null) {
-
                 if (Constants.ROLE_SUPER.equals(WebUtils.getRequiredSessionAttribute(sra.getRequest(), "rolBack"))) {
                     authenticationLogicaEjb.crearAuditoria(null,
                             loginInfo.getUsuariPersona().getUsername());
 
+
                 } else if (Constants.ROLE_ADMIN.equals(WebUtils.getRequiredSessionAttribute(sra.getRequest(), "rolBack"))){
                     authenticationLogicaEjb.crearAuditoria(loginInfo.getEntitatID(),
                             loginInfo.getUsuariPersona().getUsername());
+
                 }
 
             }

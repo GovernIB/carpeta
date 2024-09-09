@@ -59,7 +59,7 @@ public class LoginInfo {
         this.needConfigUser = needConfigUser;
 //        log.info(" ---------- PRE 1 -------------- ");
         setEntitatID(entitatIDActual);
-//        log.info(" ---------- POST -------------- ");
+//      log.info(" ---------- POST -------------- ");
 
     }
 
