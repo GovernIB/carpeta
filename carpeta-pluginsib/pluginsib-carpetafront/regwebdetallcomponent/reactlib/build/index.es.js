@@ -3324,6 +3324,7 @@ var justificante_error_generando$2 = "No s'ha pogut generar el justificant.";
 var justificante_error_obteniendo$2 = "S'ha produit un error obtenint el contingut del justificant";
 var anexo_error_obtenent$2 = "S'ha produit un error obtenint l'annex";
 var registro_anexo_confidencial$2 = "Confidencial";
+var carpeta_descargar$2 = "Descarregar";
 var tornar$2 = "Tornar";
 var translation_ca = {
 	registro_titulo_detalle: registro_titulo_detalle$2,
@@ -3396,6 +3397,7 @@ var translation_ca = {
 	justificante_error_obteniendo: justificante_error_obteniendo$2,
 	anexo_error_obtenent: anexo_error_obtenent$2,
 	registro_anexo_confidencial: registro_anexo_confidencial$2,
+	carpeta_descargar: carpeta_descargar$2,
 	tornar: tornar$2
 };
 
@@ -3469,6 +3471,7 @@ var justificante_error_generando$1 = "No se ha podido generar el justificante.";
 var justificante_error_obteniendo$1 = "Se ha producio un error obteniendo el contenido del justificante";
 var anexo_error_obtenent$1 = "Se ha producido un error obtenieno el anexo";
 var registro_anexo_confidencial$1 = "Confidencial";
+var carpeta_descargar$1 = "Descargar";
 var tornar$1 = "Volver";
 var translation_es = {
 	registro_titulo_detalle: registro_titulo_detalle$1,
@@ -3541,6 +3544,7 @@ var translation_es = {
 	justificante_error_obteniendo: justificante_error_obteniendo$1,
 	anexo_error_obtenent: anexo_error_obtenent$1,
 	registro_anexo_confidencial: registro_anexo_confidencial$1,
+	carpeta_descargar: carpeta_descargar$1,
 	tornar: tornar$1
 };
 
@@ -3614,6 +3618,7 @@ var justificante_error_generando = "No s'ha pogut generar el justificant.";
 var justificante_error_obteniendo = "S'ha produit un error obtenint el contingut del justificant";
 var anexo_error_obtenent = "S'ha produit un error obtenint l'annex";
 var registro_anexo_confidencial = "Confidencial";
+var carpeta_descargar = "Descarregar";
 var tornar = "Tornar";
 var translation_en = {
 	registro_titulo_detalle: registro_titulo_detalle,
@@ -3686,6 +3691,7 @@ var translation_en = {
 	justificante_error_obteniendo: justificante_error_obteniendo,
 	anexo_error_obtenent: anexo_error_obtenent,
 	registro_anexo_confidencial: registro_anexo_confidencial,
+	carpeta_descargar: carpeta_descargar,
 	tornar: tornar
 };
 
