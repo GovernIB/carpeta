@@ -45,6 +45,8 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	public static final String VALIDEZ_DOCUMENTO_ORIGINAL = "4";
 
 	public static final String REGWEB32_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "regweb32.";
+	
+	public static final String ANEXO_ID = "d";
 
 	public RegwebDetallComponent() {
 		super();
@@ -206,7 +208,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
                 // Montamos la url de obtención del anexo
                 String urlAnnexe = absolutePluginRequestPath + "/" + ANNEXE_REGISTRE_PAGE + "?numeroRegistroFormateado="
-                        + registre.getNumeroRegistro() + "&anexo=";
+                        + registre.getNumeroRegistro() + "&" + ANEXO_ID + "=";
                 dades.put("urlAnnexe", urlAnnexe);
 
                 dades.put("justificanteUrl", "");
@@ -547,7 +549,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 			response.setContentType("text/html");
 
 			String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
-			String idAnnexeEncripted = request.getParameter("anexo");
+			String idAnnexeEncripted = request.getParameter(ANEXO_ID);
 			long idAnnexe = HibernateFileUtil.decryptFileID(idAnnexeEncripted);
 
 			getAnnexeDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado, idAnnexe,
