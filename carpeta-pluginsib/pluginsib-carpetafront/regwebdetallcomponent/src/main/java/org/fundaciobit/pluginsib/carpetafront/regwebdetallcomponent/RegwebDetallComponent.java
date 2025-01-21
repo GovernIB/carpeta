@@ -173,7 +173,9 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 Gson jsonRegistre = new Gson();
                 String jsonReg = jsonRegistre.toJson(registre);
                 
-                final String CADENA = "\"FileID\":";
+                //log.info("--------------------------------\n" + jsonReg + "\n--------------------------------");
+                
+                final String CADENA = "\"fileID\":";
                 
                 int pos = 0;
                 int indexInici;
@@ -182,13 +184,15 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 
                 	int indexFinal = jsonReg.indexOf(",", indexInici);
                     
-                    String valor = jsonReg.substring(indexInici+CADENA.length()+1, indexFinal).trim();
+                    String valor = jsonReg.substring(indexInici+CADENA.length(), indexFinal).trim();
                     String nouValor = HibernateFileUtil.encryptString(valor);
                     
-                    jsonReg = jsonReg.substring(0,indexInici+CADENA.length()+1) + "\"" + nouValor + "\"" + jsonReg.substring(indexFinal);
+                    jsonReg = jsonReg.substring(0,indexInici+CADENA.length()) + "\"" + nouValor + "\"" + jsonReg.substring(indexFinal);
                 	
                     pos = indexFinal;
                 }
+                
+                //log.info("=========================\n" + jsonReg + "\n==============================");
                 
                
                 dades.put("registre", jsonReg);

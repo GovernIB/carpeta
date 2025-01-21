@@ -24,8 +24,7 @@
         <dependency>
             <groupId>es.caib.regweb3</groupId>
             <artifactId>regweb3-ws-api</artifactId>
-            <version>3.2.3</version>
-            <scope>provided</scope>
+            <version>3.2.4</version>
         </dependency>
 
         <dependency>
@@ -73,7 +72,6 @@
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
-            <version>1.0.1.Final</version>
             <scope>provided</scope>
         </dependency>
 
@@ -93,7 +91,6 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>
