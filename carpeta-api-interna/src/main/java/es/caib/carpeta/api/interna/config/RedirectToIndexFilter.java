@@ -1,4 +1,4 @@
-package es.caib.carpeta.api.interna;
+package es.caib.carpeta.api.interna.config;
 
 import java.io.IOException;
 

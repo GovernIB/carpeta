@@ -47,7 +47,7 @@
         <dependency>
             <artifactId>pluginsib-utils-rest</artifactId>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
-            <version>${pluginsib.utils.version}</version>
+            <version>${pluginsib.utils.rest.version}</version>
             <exclusions>
                 <exclusion>
                     <!-- Esta en LIB de l'EAR -->
@@ -117,9 +117,8 @@
                             <contextId>Mobile Notification</contextId>
                             <outputFileName>openapi_mobilenotification_v1</outputFileName>
                             <resourcePackages>
-                                <package>es.caib.carpeta.api.interna</package>
-                                <package>
-                                    es.caib.carpeta.api.interna.secure.mobilenotification</package>
+                                <package>es.caib.carpeta.api.interna.config</package>
+                                <package>es.caib.carpeta.api.interna.secure.mobilenotification</package>
                             </resourcePackages>
                         </configuration>
 
@@ -136,7 +135,7 @@
 
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.3.0</version>
+                <version>7.10.0</version>
 
                 <executions>
                     <execution>
@@ -207,7 +206,7 @@
                     <dependency>
                         <artifactId>pluginsib-utils-rest</artifactId>
                         <groupId>org.fundaciobit.pluginsib.utils</groupId>
-                        <version>${pluginsib.utils.version}</version>
+                        <version>${pluginsib.utils.rest.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

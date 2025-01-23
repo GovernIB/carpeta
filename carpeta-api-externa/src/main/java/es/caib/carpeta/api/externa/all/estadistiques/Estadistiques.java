@@ -17,6 +17,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
@@ -227,7 +228,7 @@ public class Estadistiques extends RestUtils {
 
                 // si falta entitat, retorna error 400
                 if (entitat == null) {
-                    throw new RestException("No s'ha definit el paràmetre 'entitat'", Response.Status.BAD_REQUEST);
+                    throw new RestException("No s'ha definit el paràmetre 'entitat'", "entitat");
                 }
                 entitatFinal = entitat;
             }
@@ -362,7 +363,7 @@ public class Estadistiques extends RestUtils {
             // XYZ ZZZ
             log.error("Error cridada api rest estadistiques accessos: " + msg, th);
 
-            throw new RestException(msg, Response.Status.BAD_REQUEST);
+            throw new RestException(Status.INTERNAL_SERVER_ERROR, msg);
         }
     }
 

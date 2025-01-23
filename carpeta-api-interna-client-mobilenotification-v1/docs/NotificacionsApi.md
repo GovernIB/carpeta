@@ -157,7 +157,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Enviada ajuda correctament |  -  |
-| **400** | Error |  -  |
+| **400** | Errors en els Paràmetres |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
 | **404** | Paràmetres incorrectes |  -  |

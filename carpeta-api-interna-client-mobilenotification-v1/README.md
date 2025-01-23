@@ -4,6 +4,8 @@ API REST INTERNA de Carpeta - Mobile Notifications
 
 - API version: 1.0.0
 
+- Generator version: 7.10.0
+
 Conjunt de Serveis REST de Carpeta per enviar Notificacions a l'APP de Carpeta (missatges a Mòbil)
 
   For more information, please visit [https://governdigital.fundaciobit.org](https://governdigital.fundaciobit.org)

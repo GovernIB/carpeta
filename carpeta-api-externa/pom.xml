@@ -77,7 +77,7 @@
         <dependency>
             <artifactId>pluginsib-utils-rest</artifactId>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
-            <version>${pluginsib.utils.version}</version>
+            <version>${pluginsib.utils.rest.version}</version>
             <exclusions>
                 <exclusion>
                     <!-- Esta en LIB de l'EAR -->
@@ -142,8 +142,7 @@
                             <outputFileName>openapi_estadistiquesaccessos</outputFileName>
                             <resourcePackages>
                                 <package>es.caib.carpeta.api.externa.config</package>
-                                <package>
-                                    es.caib.carpeta.api.externa.all.estadistiques</package>
+                                <package>es.caib.carpeta.api.externa.all.estadistiques</package>
                             </resourcePackages>
                         </configuration>
                     </execution>
@@ -170,15 +169,14 @@
 
             <!--
             ==================================================================  -->
-            <!-- Genera el Client Rest per Java a partir del fitxers
-            openapi_*.json -->
+            <!-- Genera el Client Rest per Java a partir del fitxers openapi_*.json -->
             <!--
             ==================================================================  -->
             <plugin>
                 <!-- https://openapi-generator.tech/docs/generators/java/ -->
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.3.0</version>
+                <version>7.10.0</version>
 
                 <executions>
 
@@ -209,8 +207,7 @@
                                 <artifactId>
                                     carpeta-api-externa-client-certificats-v1</artifactId>
                                 <artifactVersion>1.0-SNAPSHOT</artifactVersion>
-                                <artifactDescription>Carpeta - API Rest -
-                                    Externa Client - Certificats v1</artifactDescription>
+                                <artifactDescription>Carpeta - API Rest - Externa Client - Certificats v1</artifactDescription>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
@@ -253,7 +250,7 @@
                     <dependency>
                         <artifactId>pluginsib-utils-rest</artifactId>
                         <groupId>org.fundaciobit.pluginsib.utils</groupId>
-                        <version>${pluginsib.utils.version}</version>
+                        <version>${pluginsib.utils.rest.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

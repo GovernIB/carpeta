@@ -30,27 +30,29 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CertificatInfo.JSON_PROPERTY_TE_CERTIFICAT,
   CertificatInfo.JSON_PROPERTY_ADMINISTRATION_ID
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class CertificatInfo {
   public static final String JSON_PROPERTY_TE_CERTIFICAT = "teCertificat";
+  @javax.annotation.Nullable
   private Boolean teCertificat;
 
   public static final String JSON_PROPERTY_ADMINISTRATION_ID = "administrationId";
+  @javax.annotation.Nullable
   private String administrationId;
 
   public CertificatInfo() {
   }
 
-  public CertificatInfo teCertificat(Boolean teCertificat) {
+  public CertificatInfo teCertificat(@javax.annotation.Nullable Boolean teCertificat) {
     
     this.teCertificat = teCertificat;
     return this;
   }
 
-   /**
+  /**
    * Get teCertificat
    * @return teCertificat
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TE_CERTIFICAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -62,21 +64,20 @@ public class CertificatInfo {
 
   @JsonProperty(JSON_PROPERTY_TE_CERTIFICAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTeCertificat(Boolean teCertificat) {
+  public void setTeCertificat(@javax.annotation.Nullable Boolean teCertificat) {
     this.teCertificat = teCertificat;
   }
 
-
-  public CertificatInfo administrationId(String administrationId) {
+  public CertificatInfo administrationId(@javax.annotation.Nullable String administrationId) {
     
     this.administrationId = administrationId;
     return this;
   }
 
-   /**
+  /**
    * Get administrationId
    * @return administrationId
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADMINISTRATION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -88,7 +89,7 @@ public class CertificatInfo {
 
   @JsonProperty(JSON_PROPERTY_ADMINISTRATION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAdministrationId(String administrationId) {
+  public void setAdministrationId(@javax.annotation.Nullable String administrationId) {
     this.administrationId = administrationId;
   }
 

@@ -4,6 +4,8 @@ API REST EXTERNA de Carpeta - Certificats
 
 - API version: 1.0.0
 
+- Generator version: 7.10.0
+
 Plantilla de Serveis REST a implementar per servidors externs per des de Carpeta poder accedir a Certificats dels Ciutadans
 
   For more information, please visit [https://governdigital.fundaciobit.org](https://governdigital.fundaciobit.org)

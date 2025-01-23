@@ -33,30 +33,33 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CertificatBean.JSON_PROPERTY_FITXER,
   CertificatBean.JSON_PROPERTY_URL
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class CertificatBean {
   public static final String JSON_PROPERTY_TIPUS = "tipus";
+  @javax.annotation.Nullable
   private CertificatType tipus;
 
   public static final String JSON_PROPERTY_FITXER = "fitxer";
+  @javax.annotation.Nullable
   private CertificatFileInfo fitxer;
 
   public static final String JSON_PROPERTY_URL = "url";
+  @javax.annotation.Nullable
   private String url;
 
   public CertificatBean() {
   }
 
-  public CertificatBean tipus(CertificatType tipus) {
+  public CertificatBean tipus(@javax.annotation.Nullable CertificatType tipus) {
     
     this.tipus = tipus;
     return this;
   }
 
-   /**
+  /**
    * Get tipus
    * @return tipus
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TIPUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -68,21 +71,20 @@ public class CertificatBean {
 
   @JsonProperty(JSON_PROPERTY_TIPUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTipus(CertificatType tipus) {
+  public void setTipus(@javax.annotation.Nullable CertificatType tipus) {
     this.tipus = tipus;
   }
 
-
-  public CertificatBean fitxer(CertificatFileInfo fitxer) {
+  public CertificatBean fitxer(@javax.annotation.Nullable CertificatFileInfo fitxer) {
     
     this.fitxer = fitxer;
     return this;
   }
 
-   /**
+  /**
    * Get fitxer
    * @return fitxer
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FITXER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -94,21 +96,20 @@ public class CertificatBean {
 
   @JsonProperty(JSON_PROPERTY_FITXER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFitxer(CertificatFileInfo fitxer) {
+  public void setFitxer(@javax.annotation.Nullable CertificatFileInfo fitxer) {
     this.fitxer = fitxer;
   }
 
-
-  public CertificatBean url(String url) {
+  public CertificatBean url(@javax.annotation.Nullable String url) {
     
     this.url = url;
     return this;
   }
 
-   /**
+  /**
    * Get url
    * @return url
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -120,7 +121,7 @@ public class CertificatBean {
 
   @JsonProperty(JSON_PROPERTY_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setUrl(String url) {
+  public void setUrl(@javax.annotation.Nullable String url) {
     this.url = url;
   }
 

@@ -32,33 +32,37 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CertificatFileInfo.JSON_PROPERTY_LENGTH,
   CertificatFileInfo.JSON_PROPERTY_BYTES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class CertificatFileInfo {
   public static final String JSON_PROPERTY_NOM = "nom";
+  @javax.annotation.Nullable
   private String nom;
 
   public static final String JSON_PROPERTY_MIME = "mime";
+  @javax.annotation.Nullable
   private String mime;
 
   public static final String JSON_PROPERTY_LENGTH = "length";
+  @javax.annotation.Nullable
   private Integer length;
 
   public static final String JSON_PROPERTY_BYTES = "bytes";
+  @javax.annotation.Nonnull
   private byte[] bytes;
 
   public CertificatFileInfo() {
   }
 
-  public CertificatFileInfo nom(String nom) {
+  public CertificatFileInfo nom(@javax.annotation.Nullable String nom) {
     
     this.nom = nom;
     return this;
   }
 
-   /**
+  /**
    * Get nom
    * @return nom
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -70,21 +74,20 @@ public class CertificatFileInfo {
 
   @JsonProperty(JSON_PROPERTY_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNom(String nom) {
+  public void setNom(@javax.annotation.Nullable String nom) {
     this.nom = nom;
   }
 
-
-  public CertificatFileInfo mime(String mime) {
+  public CertificatFileInfo mime(@javax.annotation.Nullable String mime) {
     
     this.mime = mime;
     return this;
   }
 
-   /**
+  /**
    * Get mime
    * @return mime
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -96,21 +99,20 @@ public class CertificatFileInfo {
 
   @JsonProperty(JSON_PROPERTY_MIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setMime(String mime) {
+  public void setMime(@javax.annotation.Nullable String mime) {
     this.mime = mime;
   }
 
-
-  public CertificatFileInfo length(Integer length) {
+  public CertificatFileInfo length(@javax.annotation.Nullable Integer length) {
     
     this.length = length;
     return this;
   }
 
-   /**
+  /**
    * Get length
    * @return length
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LENGTH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -122,21 +124,20 @@ public class CertificatFileInfo {
 
   @JsonProperty(JSON_PROPERTY_LENGTH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLength(Integer length) {
+  public void setLength(@javax.annotation.Nullable Integer length) {
     this.length = length;
   }
 
-
-  public CertificatFileInfo bytes(byte[] bytes) {
+  public CertificatFileInfo bytes(@javax.annotation.Nonnull byte[] bytes) {
     
     this.bytes = bytes;
     return this;
   }
 
-   /**
+  /**
    * Get bytes
    * @return bytes
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_BYTES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -148,7 +149,7 @@ public class CertificatFileInfo {
 
   @JsonProperty(JSON_PROPERTY_BYTES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setBytes(byte[] bytes) {
+  public void setBytes(@javax.annotation.Nonnull byte[] bytes) {
     this.bytes = bytes;
   }
 

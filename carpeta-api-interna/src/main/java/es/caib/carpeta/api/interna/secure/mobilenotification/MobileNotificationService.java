@@ -24,7 +24,9 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.pluginsib.utils.rest.RestException;
 import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
+import org.fundaciobit.pluginsib.utils.rest.RestUtils;
 
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.logic.utils.SendNotificationResult;
@@ -64,7 +66,7 @@ import io.swagger.v3.oas.annotations.media.Content;
  */
 @Path("/secure/mobilenotification")
 @OpenAPIDefinition(
-        tags = @Tag(name = "Notificacions", description = "Notificacions a l'APP de Carpeta (missatges a Mòbil)"),
+        tags = @Tag(name = MobileNotificationService.TAG_NAME, description = "Notificacions a l'APP de Carpeta (missatges a Mòbil)"),
         info = @Info(
                 title = "API REST INTERNA de Carpeta - Mobile Notifications",
                 description = "Conjunt de Serveis REST de Carpeta per enviar Notificacions a l'APP de Carpeta (missatges a Mòbil)",
@@ -86,8 +88,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 )
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")
-public class MobileNotificationService {
+@SecurityScheme(type = SecuritySchemeType.HTTP, name = MobileNotificationService.SECURITY_NAME, scheme = "basic")
+public class MobileNotificationService extends RestUtils {
+    
+    protected static final String TAG_NAME = "Notificacions";
+
+    protected static final String SECURITY_NAME = "BasicAuth";
 
     protected Logger log = Logger.getLogger(this.getClass());
 
@@ -102,7 +108,7 @@ public class MobileNotificationService {
             tags = { "Notificacions" },
             operationId = "sendNotificationToMobile",
             summary = "Envia un missatge al mòbil del ciutada a traves de l'App de Carpeta.")
-    @SecurityRequirement(name = "BasicAuth")
+    @SecurityRequirement(name = MobileNotificationService.SECURITY_NAME)
     @ApiResponses(
             value = {
             		 @ApiResponse(
@@ -137,7 +143,7 @@ public class MobileNotificationService {
                                     schema = @Schema(implementation = RestExceptionInfo.class)) })
                     })
     
-    public Response sendNotificationToMobile(
+    public SendMessageResult sendNotificationToMobile(
             @Parameter(
                     description = "NIF del Ciutadà o l'empresa",
                     required = true,
@@ -172,7 +178,7 @@ public class MobileNotificationService {
                     required = true,
                     example = "ca",
                     schema = @Schema(implementation = String.class)) @Pattern(
-                            regexp = "^ca|es$") @QueryParam("langError") String langError) {
+                            regexp = "^ca|es$") @QueryParam("langError") String langError) throws RestException {
 
         final long start = System.currentTimeMillis();
         try {
@@ -180,8 +186,8 @@ public class MobileNotificationService {
             // Check if notificationCode is empty
             if (notificationCode == null || notificationCode.trim().length() == 0) {
                 // TODO XYZ ZZZ TRA
-                return generateError(SendMessageResultCode.NOTIFICATION_CODE_DO_NOT_EXIST,
-                        "El codi de notificacio és null o buit. ");
+                throw new RestException(SendMessageResultCode.NOTIFICATION_CODE_DO_NOT_EXIST + 
+                        "  El codi de notificacio és null o buit. ");
             }
 
             // Check if notificationCode exists
@@ -189,7 +195,7 @@ public class MobileNotificationService {
                     .notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
             if (nList.size() != 1) {
                 // TODO XYZ ZZZ TRA
-                return generateError(SendMessageResultCode.NOTIFICATION_CODE_DO_NOT_EXIST, "El codi de notificacio "
+                throw new RestException(SendMessageResultCode.NOTIFICATION_CODE_DO_NOT_EXIST+ ": " + "El codi de notificacio "
                         + notificationCode + " no està registrat." + "Consulti amb l'administrador de Carpeta.");
             }
 
@@ -202,14 +208,14 @@ public class MobileNotificationService {
 
             if (entitat == null) {
                 // TODO XYZ ZZZ TRA
-                return generateError(SendMessageResultCode.ENTITYCODE_DO_NOT_EXIST,
+                throw new RestException(SendMessageResultCode.ENTITYCODE_DO_NOT_EXIST+ ": " +
                         "No existeix cap entitat dins Carpeta amb ID  `" + notificacio.getEntitatID()
                                 + "`. Consulti amb l'administrador de Carpeta.");
             }
 
             if (!entitat.isActiva()) {
                 // TODO XYZ ZZZ TRA
-                return generateError(SendMessageResultCode.ENTITY_DISABLED,
+                throw new RestException(SendMessageResultCode.ENTITY_DISABLED+ ": " +
                         "No existeix cap entitat dins Carpeta amb codi `" + entitat.getCodi()
                                 + "`. Consulti amb l'administrador de Carpeta.");
             }
@@ -223,7 +229,7 @@ public class MobileNotificationService {
                 plugin = apiRestEjb.pluginEjbFindByPrimaryKey(pluginID);
                 if (!plugin.isActiu()) {
                     // TODO XYZ ZZZ TRA
-                    return generateError(SendMessageResultCode.PLUGIN_DISABLED,
+                    throw new RestException(SendMessageResultCode.PLUGIN_DISABLED+ ": " +
                             "El plugin `" + plugin.getNom().getTraduccio(langError)
                                     + " associat al codi de notificació  `" + notificationCode
                                     + "` no està actiu. Consulti amb l'administrador de Carpeta.");
@@ -235,7 +241,7 @@ public class MobileNotificationService {
 
                 if (listPE.size() != 1) {
                     // TODO XYZ ZZZ TRA
-                    return generateError(SendMessageResultCode.PLUGIN_ENTITY_DO_NOT_EXIST,
+                    throw new RestException(SendMessageResultCode.PLUGIN_ENTITY_DO_NOT_EXIST+ ": " +
                             "El plugin `" + plugin.getNom().getTraduccio(langError)
                                     + " associat al codi de notificació  `" + notificationCode
                                     + "` no existeix en l'entitat `" + entitat.getCodi()
@@ -246,7 +252,7 @@ public class MobileNotificationService {
 
                 if (!pluginEntitat.isActiu()) {
                     // TODO XYZ ZZZ TRA
-                    return generateError(SendMessageResultCode.PLUGIN_ENTITY_DISABLED,
+                    throw new RestException(SendMessageResultCode.PLUGIN_ENTITY_DISABLED+ ": " +
                             "El plugin `" + plugin.getNom().getTraduccio(langError)
                                     + " associat al codi de notificació  `" + notificationCode + "` en l'entitat `"
                                     + entitat.getCodi() + "` no està actiu. Consulti amb l'administrador de Carpeta.");
@@ -257,7 +263,7 @@ public class MobileNotificationService {
             String mobileID = getMobileIdOfCiutada(nif);
             if (mobileID == null) {
                 // TODO XYZ ZZZ TRA
-                return generateError(SendMessageResultCode.CITIZEN_DO_NOT_EXIST,
+                throw new RestException(SendMessageResultCode.CITIZEN_DO_NOT_EXIST+ ": " +
                         "No es té registrat el mòbil del ciutada/empresa amb NIF " + nif);
             }
 
@@ -313,11 +319,12 @@ public class MobileNotificationService {
 
                 SendMessageResult smr = new SendMessageResult();
                 smr.setCode(SendMessageResultCode.OK);
-                return Response.ok().entity(smr).build();
+                return smr;
             } else {
-                return generateError(SendMessageResultCode.ERROR_SENDING_NOTIFICATION, snr.toString());
+                throw new RestException(SendMessageResultCode.ERROR_SENDING_NOTIFICATION + ": " + snr.toString());
             }
-
+        } catch (RestException re) {
+            throw re;
         } catch (Throwable th) {
 
             String msg;
@@ -330,7 +337,7 @@ public class MobileNotificationService {
 
             log.error("Error desconegut en la cridada api rest enviar notificacions: " + msg, th);
 
-            return generateError(SendMessageResultCode.UNKNOWN_ERROR, msg);
+            throw new RestException( msg);
 
         }
 
@@ -346,17 +353,17 @@ public class MobileNotificationService {
         }
         return objs;
     }
-
-    protected Response generateError(SendMessageResultCode errorCode, String msg) {
-        SendMessageResult smr = new SendMessageResult();
-        smr.setCode(errorCode);
-        smr.setMessage(msg);
-        return Response.status(Response.Status.BAD_REQUEST).entity(smr).build();
-    }
-
-    protected Response generateError(String errorMsg) {
-        return Response.status(Response.Status.BAD_REQUEST).entity(errorMsg).build();
-    }
+//
+//    protected Response generateError(SendMessageResultCode errorCode, String msg) {
+//        SendMessageResult smr = new SendMessageResult();
+//        smr.setCode(errorCode);
+//        smr.setMessage(msg);
+//        return Response.status(Response.Status.BAD_REQUEST).entity(smr).build();
+//    }
+//
+//    protected Response generateError(String errorMsg) {
+//        return Response.status(Response.Status.BAD_REQUEST).entity(errorMsg).build();
+//    }
 
     protected String getMobileIdOfCiutada(String nif) throws I18NException {
         Where w1 = CiutadaFields.NIF.equal(nif);
@@ -375,7 +382,7 @@ public class MobileNotificationService {
             tags = { "Notificacions" },
             operationId = "existCitizen",
             summary = "Consulta si tenim donat d'alta el mòbil d'un ciutadà/empresa a partir del seu NIF.")
-    @SecurityRequirement(name = "BasicAuth")
+    @SecurityRequirement(name = MobileNotificationService.SECURITY_NAME)
     @ApiResponses(
             value = {
             		@ApiResponse(
@@ -393,15 +400,18 @@ public class MobileNotificationService {
             		@ApiResponse(
                             responseCode = "401",
                             description = "No Autenticat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
             		@ApiResponse(
                             responseCode = "403",
                             description = "No Autoritzat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
             		@ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
             		@ApiResponse(
                             responseCode = "500",
                             description = "Error no controlat",
@@ -412,7 +422,7 @@ public class MobileNotificationService {
     @Path("/existcitizen")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response existCitizen(
+    public Boolean existCitizen(
             @Parameter(
                     description = "NIF del Ciutadà o l'empresa",
                     required = true,
@@ -426,15 +436,15 @@ public class MobileNotificationService {
                     required = true,
                     example = "ca",
                     schema = @Schema(implementation = String.class)) @Pattern(
-                            regexp = "^ca|es$") @QueryParam("lang") String lang) {
+                            regexp = "^ca|es$") @QueryParam("lang") String lang) throws RestException {
 
         try {
             String mobileID = getMobileIdOfCiutada(nif);
 
             if (mobileID == null) {
-                return Response.ok().entity(Boolean.FALSE).build();
+                return Boolean.FALSE;
             } else {
-                return Response.ok().entity(Boolean.TRUE).build();
+                return Boolean.TRUE;
             }
         } catch (Throwable th) {
 
@@ -447,7 +457,7 @@ public class MobileNotificationService {
             }
 
             log.error("Error cridada api rest consulta de ciutadà/empresa: " + msg, th);
-            return Response.status(Response.Status.BAD_REQUEST).entity("{ \"error\" : " + "\"" + msg + "\" }").build();
+            throw new RestException(Response.Status.INTERNAL_SERVER_ERROR, msg, th);
         }
 
     }
@@ -460,7 +470,7 @@ public class MobileNotificationService {
             tags = { "Notificacions" },
             operationId = "help",
             summary = "Envia un missatge al mòbil del ciutada a traves de l'App de Carpeta.")
-    @SecurityRequirement(name = "BasicAuth")
+    @SecurityRequirement(name = MobileNotificationService.SECURITY_NAME)
     @ApiResponses(
             value = {
             		@ApiResponse(
@@ -471,29 +481,32 @@ public class MobileNotificationService {
                                     schema = @Schema(implementation = String.class))),
             		@ApiResponse(
                             responseCode = "400",
-                            description = "Error",
+                            description = "Errors en els Paràmetres",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = String.class))),
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
             		@ApiResponse(
                             responseCode = "401",
                             description = "No Autenticat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
             		@ApiResponse(
                             responseCode = "403",
                             description = "No Autoritzat",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
                     @ApiResponse(
                             responseCode = "500",
                             description = "Error no controlat",
                             content = { @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = RestExceptionInfo.class)) }) })
-    public Response help(
+    public String help(
 
             @Parameter(
                     description = "Codi de la notificació. Demanar a l'administrador de Carpeta.",
@@ -512,7 +525,7 @@ public class MobileNotificationService {
             // Check if notificationCode is empty
             if (notificationCode == null || notificationCode.trim().length() == 0) {
                 // TODO XYZ ZZZ TRA
-                return generateError("El codi de notificacio és null o buit. ");
+                throw new RestException("El codi de notificacio és null o buit. ", notificationCode);
             }
 
             // Check if notificationCode exists
@@ -520,7 +533,7 @@ public class MobileNotificationService {
                     .notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
             if (nList.size() != 1) {
                 // TODO XYZ ZZZ TRA
-                return generateError("El codi de notificacio " + notificationCode + " no està registrat."
+                throw new RestException("El codi de notificacio " + notificationCode + " no està registrat."
                         + "Consulti amb l'administrador de Carpeta.");
             }
 
@@ -541,8 +554,9 @@ public class MobileNotificationService {
             result.append("\n");
             result.append(notificacio.getAjuda());
 
-            return Response.ok().entity(result.toString()).build();
-
+            return result.toString();
+        } catch (RestException re) {
+            throw re;
         } catch (Throwable th) {
 
             String msg;
@@ -555,7 +569,7 @@ public class MobileNotificationService {
 
             log.error("Error desconegut en la cridada api rest enviar notificacions: " + msg, th);
 
-            return generateError(msg);
+            throw new RestException(msg, th);
 
         }
 
