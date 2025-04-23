@@ -28,4 +28,10 @@ public interface AccesLogicaService extends AccesService {
 
     /* Llistat de accesos entre dues dates ordenat per data descendent */
     public List<Acces> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException;
+    
+    /* Retorna el penultim acces d'un usuari especific (per poder veure el seu darrer inici de sesio previ)*/
+    public List<Acces> getLastAcces(String nif, int nAccessos) throws I18NException;
+    
+    public List<Acces> getLastAccesByEntity(String nif, int nAccessos, long entitatId) throws I18NException;
+
 }

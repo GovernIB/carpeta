@@ -6,9 +6,11 @@ import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.security.LoginController;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.logic.AccesLogicaService;
 import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.entity.Acces;
 import es.caib.carpeta.model.entity.Ciutada;
 import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.fields.EntitatFields;
@@ -36,6 +38,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -59,11 +64,13 @@ public class InicioController extends CommonFrontController {
     @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
     EntitatLogicaService entitatEjb;
 
+    @EJB(mappedName = AccesLogicaService.JNDI_NAME)
+    AccesLogicaService accesEjb;
+
     protected static final Log log = LogFactory.getLog(InicioController.class);
 
     @RequestMapping(value = { "/entitat" }, method = RequestMethod.GET)
-    public ModelAndView llistarEntitats(HttpServletRequest request, HttpServletResponse response)
-            throws I18NException {
+    public ModelAndView llistarEntitats(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         ModelAndView mav = new ModelAndView("entitat");
 
@@ -119,8 +126,8 @@ public class InicioController extends CommonFrontController {
     public static final String SESSION_INITIAL_URL = "SESSION_INITIAL_URL";
 
     @RequestMapping(value = { "/fa/{fullAddress}" }, method = RequestMethod.GET)
-    public void fullAddress(@PathVariable("fullAddress") String fullAddress,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void fullAddress(@PathVariable("fullAddress")
+    String fullAddress, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String urlBaseDec = new String(Base64.getDecoder().decode(fullAddress), "utf-8");
 
@@ -181,8 +188,8 @@ public class InicioController extends CommonFrontController {
         ReactNativeLogin rnl = reactNativeLogins.get(loginCode);
 
         if (rnl == null) {
-            log.error("\n\n\n" + "NO S?HA TROBAT ReactNativeLogin amb codiLogin ]" + loginCode
-                    + "[\n" + "  reactNativeLogins.size() => " + reactNativeLogins.size() + "\n");
+            log.error("\n\n\n" + "NO S?HA TROBAT ReactNativeLogin amb codiLogin ]" + loginCode + "[\n"
+                    + "  reactNativeLogins.size() => " + reactNativeLogins.size() + "\n");
 
             int count = 1;
             for (String lc : reactNativeLogins.keySet()) {
@@ -198,9 +205,8 @@ public class InicioController extends CommonFrontController {
      * Entorn WebView
      */
     @RequestMapping(value = { "/public/rnhp/{codiEntitat}" }, method = RequestMethod.GET)
-    public String reactNativeHomePage(@PathVariable("codiEntitat") String codiEntitat,
-            HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
+    public String reactNativeHomePage(@PathVariable("codiEntitat")
+    String codiEntitat, HttpServletRequest request, HttpServletResponse response) throws I18NException, IOException {
 
         request.getSession().invalidate();
 
@@ -218,8 +224,7 @@ public class InicioController extends CommonFrontController {
 
         log.info("XYZ ZZZ ENTRA A doLogin APP => Cream codiLogin: ]" + loginCode + "[");
 
-        reactNativeLogins.put(loginCode,
-                new ReactNativeLogin(codiEntitat, urlBase, deeplinknativeapp));
+        reactNativeLogins.put(loginCode, new ReactNativeLogin(codiEntitat, urlBase, deeplinknativeapp));
 
         request.getSession().setAttribute(InicioController.SESSION_LOGIN_CODE, loginCode);
 
@@ -251,16 +256,14 @@ public class InicioController extends CommonFrontController {
 
         if (loginCode == null) {
             // Això és Web
-            return new ModelAndView(new RedirectView(
-                    "/prelogin?urlbase=" + URLEncoder.encode(urlBase, "UTF-8"), true));
+            return new ModelAndView(new RedirectView("/prelogin?urlbase=" + URLEncoder.encode(urlBase, "UTF-8"), true));
 
         } else {
 
             // Això és React Native
             String codiEntitat = sesionHttp.getEntitat();
 
-            log.info("XYZ ZZZ ENTRA A doLogin APP => Obri pagina carpetaappdologin E:"
-                    + codiEntitat);
+            log.info("XYZ ZZZ ENTRA A doLogin APP => Obri pagina carpetaappdologin E:" + codiEntitat);
 
             // Això obrirà un Browser al dispositiu Mòbil
             ModelAndView mav = new ModelAndView("carpetaappdologin");
@@ -287,8 +290,8 @@ public class InicioController extends CommonFrontController {
      * @throws IOException
      */
     @RequestMapping(value = { "/public/preLoginApp/{codiLogin}" }, method = RequestMethod.GET)
-    public String preLoginApp(@PathVariable("codiLogin") String codiLogin,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String preLoginApp(@PathVariable("codiLogin")
+    String codiLogin, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         log.info("preLoginApp => START  codiLogin: ]" + codiLogin + "[");
 
@@ -298,8 +301,7 @@ public class InicioController extends CommonFrontController {
 
         assignEntitat(rnl.codiEntitat, request, response);
 
-        String urlReturn = rnl.urlBase + request.getContextPath() + "/public/postLoginApp/"
-                + codiLogin;
+        String urlReturn = rnl.urlBase + request.getContextPath() + "/public/postLoginApp/" + codiLogin;
 
         log.info("preLoginApp => URL DE RETORN: " + urlReturn);
 
@@ -317,7 +319,8 @@ public class InicioController extends CommonFrontController {
     }
 
     @RequestMapping(value = { "/public/postLoginApp/{codiLogin}" }, method = RequestMethod.GET)
-    public ModelAndView postLoginApp(@PathVariable("codiLogin") String codiLogin,
+    public ModelAndView postLoginApp(@PathVariable("codiLogin")
+    String codiLogin,
             // @PathVariable("codiEntitat") String codiEntitat,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -388,17 +391,14 @@ public class InicioController extends CommonFrontController {
     /**
      * Aqui ja estam a WebView ...
      */
-    @RequestMapping(
-            value = { "/public/homePageAppPostWebLogin/{codiLogin}" },
-            method = RequestMethod.GET)
-    public String homePageAppPostWebLogin(@PathVariable("codiLogin") String codiLogin,
-            HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, Exception {
+    @RequestMapping(value = { "/public/homePageAppPostWebLogin/{codiLogin}" }, method = RequestMethod.GET)
+    public String homePageAppPostWebLogin(@PathVariable("codiLogin")
+    String codiLogin, HttpServletRequest request, HttpServletResponse response) throws I18NException, Exception {
 
         log.info("\n\nhomePageAppPostWebLogin => ENTRA (codiLogin: " + codiLogin + ")\n\n");
 
         ReactNativeLogin rnl = reactNativeLogins.get(codiLogin);
-        
+
         if (rnl == null) {
             throw new Exception("No trobam cap Login realitzat des de ReactNative amb codi ]" + codiLogin + "[");
         }
@@ -406,20 +406,22 @@ public class InicioController extends CommonFrontController {
         log.info("homePageAppPostWebLogin =>  ReactNativeLogin   (" + rnl + ")");
 
         assignEntitat(rnl.codiEntitat, request, response);
-        
+
         String expopushtoken = request.getParameter("expopushtoken");
         if (expopushtoken == null) {
-           log.warn("A la cridada a /public/homePageAppPostWebLogin no s'ha rebut el parametre /public/homePageAppPostWebLogin", new Exception());
+            log.warn(
+                    "A la cridada a /public/homePageAppPostWebLogin no s'ha rebut el parametre /public/homePageAppPostWebLogin",
+                    new Exception());
         } else {
-            
+
             UsuarioClave uc = rnl.getUsuarioAutenticado().getUsuarioClave();
-            
+
             Ciutada c = utilsEjb.updateMobileIdOfCiutada(uc, expopushtoken);
-            
-            log.info(" Assignat EXPOPUSHTOKEN ]" + expopushtoken + "[ a usuari {" + c.getNif() + " , " + c.getRepresentantNif() + "}");
-            
+
+            log.info(" Assignat EXPOPUSHTOKEN ]" + expopushtoken + "[ a usuari {" + c.getNif() + " , "
+                    + c.getRepresentantNif() + "}");
+
         }
-        
 
         request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
         log.info(" homePageAppPostWebLogin => posant SESSION_IS_REACTNATIVE  a ]"
@@ -432,8 +434,7 @@ public class InicioController extends CommonFrontController {
                 + request.getSession().getAttribute(SESSION_LOGIN_CODE) + "[");
 
         // Despres del Login amb el Plugin de Login de ReactNative anar a aquesta pàgina
-        String urlReturn = rnl.urlBase + request.getContextPath() + "/public/postReactNativeLogin/"
-                + codiLogin;
+        String urlReturn = rnl.urlBase + request.getContextPath() + "/public/postReactNativeLogin/" + codiLogin;
 
         log.info("homePageAppPostWebLogin => URL DE RETORN: " + urlReturn);
 
@@ -453,12 +454,9 @@ public class InicioController extends CommonFrontController {
      * WebView: Ja hem fet el Login emprant el PLugin de Login de react Native i ara
      * mostrarem la pàgina loguejada
      */
-    @RequestMapping(
-            value = { "/public/postReactNativeLogin/{codiLogin}" },
-            method = RequestMethod.GET)
-    public String postReactNativeLogin(@PathVariable("codiLogin") String codiLogin,
-            HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
+    @RequestMapping(value = { "/public/postReactNativeLogin/{codiLogin}" }, method = RequestMethod.GET)
+    public String postReactNativeLogin(@PathVariable("codiLogin")
+    String codiLogin, HttpServletRequest request, HttpServletResponse response) throws I18NException, IOException {
 
         log.info("postReactNativeLogin => ENTRA (codiLogin: " + codiLogin + ")");
 
@@ -485,15 +483,14 @@ public class InicioController extends CommonFrontController {
     }
 
     @RequestMapping(value = { "/e/{codiEntitat}" }, method = RequestMethod.GET)
-    public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat,
-            HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    public String triarEntitat(@PathVariable("codiEntitat")
+    String codiEntitat, HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         assignEntitat(codiEntitat, request, response);
 
         // http://localhost:8080/carpetafront/#/moduls/registre32
 
-        String fullUrlRedirect = (String) request.getSession()
-                .getAttribute(InicioController.SESSION_INITIAL_URL);
+        String fullUrlRedirect = (String) request.getSession().getAttribute(InicioController.SESSION_INITIAL_URL);
 
         if (fullUrlRedirect == null) {
             fullUrlRedirect = "/";
@@ -515,10 +512,8 @@ public class InicioController extends CommonFrontController {
                     if (file.startsWith(cp + "/seccio/") || file.startsWith(cp + "/modul/")
                             || file.startsWith(cp + "/moduls/")) {
 
-                        fullUrlRedirect = "/prelogin?urlbase=" + URLEncoder.encode(
-                                url.getProtocol() + "://" + url.getHost()
-                                        + ((url.getPort() == -1) ? "" : (":" + url.getPort())),
-                                "UTF-8");
+                        fullUrlRedirect = "/prelogin?urlbase=" + URLEncoder.encode(url.getProtocol() + "://"
+                                + url.getHost() + ((url.getPort() == -1) ? "" : (":" + url.getPort())), "UTF-8");
 
                     }
                 }
@@ -537,8 +532,8 @@ public class InicioController extends CommonFrontController {
 
     }
 
-    protected void assignEntitat(String codiEntitat, HttpServletRequest request,
-            HttpServletResponse response) throws I18NException {
+    protected void assignEntitat(String codiEntitat, HttpServletRequest request, HttpServletResponse response)
+            throws I18NException {
         String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
         EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
         sesionHttp.setNomEntitat(entitat.getNom().getTraduccio(IDIOMA).getValor());
@@ -546,16 +541,14 @@ public class InicioController extends CommonFrontController {
         long temps = System.currentTimeMillis();
         try {
 
-            Boolean isReactNative = (Boolean) request.getSession()
-                    .getAttribute(SESSION_IS_REACTNATIVE);
+            Boolean isReactNative = (Boolean) request.getSession().getAttribute(SESSION_IS_REACTNATIVE);
             log.info("\n  ASSIGNENTITAT PRE SESSION_IS_REACTNATIVE => " + isReactNative);
 
             String loginCode = (String) request.getSession().getAttribute(SESSION_LOGIN_CODE);
             // Eliminam sessió anterior
             if (sesionHttp.getEntitat() != null) {
                 if (!sesionHttp.getEntitat().equals(codiEntitat)) {
-                    String initialURL = (String) request.getSession()
-                            .getAttribute(SESSION_INITIAL_URL);
+                    String initialURL = (String) request.getSession().getAttribute(SESSION_INITIAL_URL);
                     String baseURL = (String) request.getSession()
                             .getAttribute(LoginController.SESSION_RETURN_URL_POST_LOGIN);
                     String url_callback_logout = baseURL + "/salir";
@@ -586,8 +579,7 @@ public class InicioController extends CommonFrontController {
 
             sesionHttp.setEntitat(codiEntitat);
 
-            long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
-                    EntitatFields.CODI.equal(codiEntitat));
+            long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(codiEntitat));
             sesionHttp.setEntitatID(entitatID);
 
         } catch (Throwable e) {
@@ -596,8 +588,8 @@ public class InicioController extends CommonFrontController {
     }
 
     @RequestMapping(value = { "/" })
-    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response,
-            HttpSession session) throws I18NException {
+    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+            throws I18NException {
 
         ModelAndView mav = new ModelAndView("inici");
         long temps = System.currentTimeMillis();
@@ -612,31 +604,97 @@ public class InicioController extends CommonFrontController {
         // Posam la sessió de la variable global (per 60 segons)
         PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
         if (EjbManager.getFrontSessionTime(propietatGlobalEjb) != null) {
-            int frontSessionTime = Integer
-                    .parseInt(EjbManager.getFrontSessionTime(propietatGlobalEjb));
+            int frontSessionTime = Integer.parseInt(EjbManager.getFrontSessionTime(propietatGlobalEjb));
             mav.addObject("maxInactiveInterval", frontSessionTime * 60);
         } else {
             mav.addObject("maxInactiveInterval", 30 * 60);
         }
+        
+        
         
         // Registram la variable de Id de Sessió per l'enregistrament dels accesos.
         sesionHttp.setIdSessio(request.getSession().getId());
         sesionHttp.setIpAddress(request.getRemoteAddr());
         try {
 
+            //Idioma
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
+            //Properties
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             String canviardefront = EjbManager.getCanviarDeFront(propietatGlobalEjb);
 
+            //ListEntitats
             List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
 
-            String errorDeLogin = sesionHttp.getErrorLogin();
+            // Entitat seleccionada
+            long entitatID=0;
+            String codiEntitat="";
+            
+            
+            if (sesionHttp.getEntitat() != null || defaultEntityCode != null) {
+                log.info("getEntitat != null or defaultEntityCode existent.... ");
 
-            if (defaultEntityCode == null && sesionHttp.getEntitat() == null) {
+                if (sesionHttp.getEntitat() != null) {
+                    log.info("getEntitat() => "+sesionHttp.getEntitat());
+                    codiEntitat = sesionHttp.getEntitat();
+                    entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
+                            EntitatFields.CODI.equal(codiEntitat));
+                    
+                    String errorDeLogin = sesionHttp.getErrorLogin();
+                    mav.addObject("errorLogin", errorDeLogin);
 
-                if (entitats.size() > 1) {
+                    mav.addObject("entitat", sesionHttp.getEntitat());
+                    mav.addObject("nomEntitat", sesionHttp.getNomEntitat());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
+                    mav.addObject("errorLogin", errorDeLogin);
+                    
+                    
+                    //Si hi ha entity code per defecte s'agafa com a entitat
+                } else if (defaultEntityCode != null) {
+                    log.info("Un defaultEntityCode: ");
+                    EntitatJPA entitat = entitatEjb.findByCodi(defaultEntityCode);
+                    //Agafar entitat de les properties.
+                    if (entitat != null) {
+                        
+                        entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
+                                EntitatFields.CODI.equal(defaultEntityCode));
+                        
+                        sesionHttp.setEntitatID(entitatID);
+                        sesionHttp.setEntitat(defaultEntityCode);
+                        
+                        codiEntitat = sesionHttp.getEntitat();
+                        
+                        mav.addObject("entitat", sesionHttp.getEntitat());
+                        mav.addObject("nomEntitat", entitat.getNom());
+                        mav.addObject("numEntitats", entitats.size());
+                        mav.addObject("canviarDeFront", canviardefront);
+                        mav.addObject("defaultEntityCode", defaultEntityCode);
 
+                    } else {
+                        mav = new ModelAndView("entitat");
+                        mav.addObject("entitats", entitats);
+                    }
+                
+            }else {
+              //Si unicament hi ha una entitat es selecciona
+                if (entitats.size() == 1) {
+                    log.info("Una entitat seleccionada: ");
+                    codiEntitat = entitats.get(0).getCodi();
+                    entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
+                            EntitatFields.CODI.equal(codiEntitat));
+
+                    sesionHttp.setEntitatID(entitatID);
+                    sesionHttp.setEntitat(codiEntitat);
+
+                    mav.addObject("entitat", entitats.get(0).getCodi());
+                    mav.addObject("nomEntitat", entitats.get(0).getNom());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
+                //Si hi ha mes de una entitat, no es selecciona entitat i es passen totes al model.
+                } else {
+                    log.info("Mes de una entitat seleccionada: ");
                     mav = new ModelAndView("entitat");
                     mav.addObject("entitats", entitats);
                     mav.addObject("numEntitats", entitats.size());
@@ -650,66 +708,43 @@ public class InicioController extends CommonFrontController {
                     }
                     mav.addObject("idiomes", idiomesActius);
                     mav.addObject("langActual", lang);
-
-                } else {
-
-                    String codiEntitat = entitats.get(0).getCodi();
-
-                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
-                            EntitatFields.CODI.equal(codiEntitat));
-                    sesionHttp.setEntitatID(entitatID);
-
-                    sesionHttp.setEntitat(codiEntitat);
-
-                    mav.addObject("entitat", codiEntitat);
-                    mav.addObject("nomEntitat", entitats.get(0).getNom());
-                    mav.addObject("numEntitats", entitats.size());
-                    mav.addObject("canviarDeFront", canviardefront);
-
                 }
-
-            } else if (defaultEntityCode != null && sesionHttp.getEntitat() == null) {
-
-                EntitatJPA entitat = entitatEjb.findByCodi(defaultEntityCode);
-
-                if (entitat != null) {
-
-                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
-                            EntitatFields.CODI.equal(defaultEntityCode));
-                    sesionHttp.setEntitatID(entitatID);
-
-                    sesionHttp.setEntitat(defaultEntityCode);
-
-                    mav.addObject("entitat", sesionHttp.getEntitat());
-                    mav.addObject("nomEntitat", entitat.getNom());
-                    mav.addObject("defaultEntityCode", defaultEntityCode);
-                    mav.addObject("numEntitats", entitats.size());
-                    mav.addObject("canviarDeFront", canviardefront);
-
-                } else {
-
-                    if (sesionHttp.getEntitat() != null) {
-                        mav.addObject("entitat", sesionHttp.getEntitat());
-                        mav.addObject("nomEntitat", sesionHttp.getNomEntitat());
-                        mav.addObject("numEntitats", entitats.size());
-                        mav.addObject("canviarDeFront", canviardefront);
-                    } else {
-                        mav = new ModelAndView("entitat");
-                        mav.addObject("entitats", entitats);
-                    }
-
-                }
-            } else if (sesionHttp.getEntitat() != null) {
-
-                mav.addObject("entitat", sesionHttp.getEntitat());
-                mav.addObject("nomEntitat", sesionHttp.getNomEntitat());
-                mav.addObject("numEntitats", entitats.size());
-                mav.addObject("canviarDeFront", canviardefront);
-                mav.addObject("errorLogin", errorDeLogin);
-
             }
 
-        } catch (Throwable e) {
+
+            //Implementacio de carrega de informacio de darrer login
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Object principal = authentication.getPrincipal();
+            
+            //Per defecte agafa el valor de la propietat global
+            Boolean showLastLogin = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb));
+            
+            //Si la prop global showLastLogin es fals, i userId te entitat seleccionada, comprova la prop de la Entitat
+            if(!showLastLogin && entitatID != 0) {
+                showLastLogin = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb, entitatID));
+            }/*else {
+                showLastLogin = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb));
+            }*/
+                
+            if (principal != null && principal instanceof UsuarioAutenticado && showLastLogin) {
+                UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
+                List<Acces> accessos;
+                if(entitatID != 0) {
+                    accessos = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(), 3, entitatID);
+                }else {
+                    accessos = accesEjb.getLastAcces(usuarioAutenticado.getUsuarioClave().getNif(), 3);
+                }
+
+                LocalDateTime lastAccessLocalDateTime = accessos.get(1).getDataAcces().toLocalDateTime();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+                String lastAccessDateTime = lastAccessLocalDateTime.format(formatter);
+                
+                mav.addObject("lastAccessDateTime", lastAccessDateTime);
+                sesionHttp.setLastAccessDateTime(lastAccessDateTime);
+            }
+
+        }} catch (Throwable e) {
             processExceptionHtml(e, request, response, temps);
         }
 

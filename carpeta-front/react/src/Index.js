@@ -120,7 +120,7 @@ class Index extends Component {
       }
 
       infoUsuari = (
-        <div className="imc-titol usuari ocultarMobil" style={styleColorMenu}>
+        <div className="imc-titol usuari ocultarMobil z-5" style={styleColorMenu}>
           <nav className="imc--contingut">
             <span className="estilUsuari">
               {icona} {usuariNomComplet}

@@ -224,7 +224,7 @@ img:hover {
 	text-transform: uppercase;
 	padding-right: 1em;
 }
-.estilUsuari, .nivellAut {
+.estilUsuari, .nivellAut{
     font-size: 0.9rem;
 }
 .usuari{
@@ -1228,6 +1228,7 @@ input.form-control, select.form-control {
 .margesMenu{
 	margin-left: 1em!important;
 }
+
 .floatEnll{
 	font-size: inherit!important;
 }
@@ -1645,6 +1646,14 @@ body {
 		height: auto !important;
 		width: 90%!important;
 	}
+}
+
+.dataDarrerLogin{
+    color: #fff;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 0.9rem;
 }
 
 /* FI RESPONSIVE */

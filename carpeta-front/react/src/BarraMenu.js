@@ -9,6 +9,7 @@ class BarraMenu extends Component {
 	constructor(){
 		super();
 		this.state = {
+            lastAccessDate: null,
 			enllasosMenuBar: null,
 			colorMenu: null,
 			error: null
@@ -98,6 +99,9 @@ class BarraMenu extends Component {
 				))
 			}
 		}
+		
+		let darrerLogin = t('darrerLogin');
+		let dataDarrerLogin = sessionStorage.getItem("lastAccessDateTime");
 
 		let styleColorMenu = { backgroundColor : '#ffffff'};
 		var amplePantalla = screen.width;
@@ -107,27 +111,37 @@ class BarraMenu extends Component {
 
 		let colorMenu = (this.state.colorMenu === null)? '#32814B' : "#"+this.state.colorMenu;
 		sessionStorage.setItem('colorBarra', colorMenu);
+		let lastAccessDate = null;
+		console.log("DataLogin -> "+dataDarrerLogin);
+		if(dataDarrerLogin && auth === "1"){
+           lastAccessDate =<div className="col-7 pr-0 d-flex align-items-center justify-content-end"> 
+                            <div id="lastAccessDate" className="border border-white ocultarMobil ">
+                                <span id="lastAccessDateText" className="pl-2 dataDarrerLogin h4 mx-2 text-nowrap">{darrerLogin}: {dataDarrerLogin}</span>
+                             </div>
+                             </div>;
+        }else{
+            lastAccessDate=null;
+        }
 
 		return <div id = "barraMenu">
-			<header className="imc-titol barraApp" style={styleColorMenu} id="headerBarra">
+			<header className="imc-titol barraApp z-10" style={styleColorMenu} id="headerBarra">
 
 				<nav className="">
-					<div className="row imc--contingut posHambApp">
+					<div className="d-flex imc--contingut posHambApp justify-content-between">
 
 					{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
 					{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
 
-						<div className="col-11 pl-0">
+						<div className="col-4 pl-0">
 							<h1 id="inici" className="ocultarMobil">
 								<Link to={'/'} className="titolAplicacio" tabIndex="101" aria-labelledby="inici">{t('menuTitol')}</Link>
 							</h1>
-
 							<ul className="ocultarMobil">
 								{content}
 							</ul>
 						</div>
-
-						<div className="col-1 pr-0">
+                        {lastAccessDate}
+						<div className="col-1 pr-0 d-flex align-items-center justify-content-between">
 							<button type="button" className="imc-bt-menu float-right" id="imc-bt-menu" title={t('menuMenu')} tabIndex="190" aria-label={t('menuHamburguesa')} aria-describedby="menuHamburguesa">
 								<span className="noVisible" id="menuHamburguesa">{t('accedirBoto') + t('menuHamburguesa')}</span>
 							</button>

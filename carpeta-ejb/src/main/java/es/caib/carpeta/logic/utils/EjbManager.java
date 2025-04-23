@@ -37,7 +37,7 @@ public final class EjbManager {
 	protected static AuthenticationLogicaService authenticationLogicaEjb;
 	
 	protected static LogCarpetaLogicaService logCarpetaLogicaEjb;
-
+	
 
 	private static void throwNewI18NException(Throwable e, String name) throws I18NException {
 		throw new I18NException(e, "error.unknown",
@@ -125,6 +125,20 @@ public final class EjbManager {
 	    return getPropertyValue(propietatGlobalEjb, partialProp);
 	    
 	}
+	
+	public static String getShowLastLogin(PropietatGlobalService propietatGlobalEjb, Long entitatID) throws I18NException {
+        final String partialProp = "showlastlogin";
+        
+        return getPropertyValue(propietatGlobalEjb, partialProp, entitatID);
+        
+    }
+	
+	public static String getShowLastLogin(PropietatGlobalService propietatGlobalEjb) throws I18NException {
+        final String partialProp = "showlastlogin";
+        
+        return getPropertyValueAnyEntity(propietatGlobalEjb, partialProp);
+        
+    }
 
 	public static String getCanviarDeFront(PropietatGlobalService propietatGlobalEjb) throws I18NException {
 		final String partialProp = "canviardefront";
@@ -178,10 +192,21 @@ public final class EjbManager {
 	}
 	
 	
-//    public static String getPropertyValue(PropietatGlobalService propietatGlobalEjb, String partialProp, long entitatID) {
-//        
-//    }
+    public static String getPropertyValue(PropietatGlobalService propietatGlobalEjb, String partialProp, long entitatID) throws I18NException {
+        Where w = Where.AND(
+                PropietatGlobalFields.CODI.equal(Constants.CARPETA_PROPERTY_BASE + partialProp),
+                PropietatGlobalFields.ENTITATID.equal(entitatID)
+                );
+        return propietatGlobalEjb.executeQueryOne(PropietatGlobalFields.VALUE, w);
+    }
 	
+    public  static String getPropertyValueAnyEntity(PropietatGlobalService propietatGlobalEjb, String partialProp) throws I18NException {
+        Where w = Where.AND(
+                PropietatGlobalFields.CODI.equal(Constants.CARPETA_PROPERTY_BASE + partialProp)
+                );
+        
+        return propietatGlobalEjb.executeQueryOne(PropietatGlobalFields.VALUE, w);
+    }
 	
 
 }

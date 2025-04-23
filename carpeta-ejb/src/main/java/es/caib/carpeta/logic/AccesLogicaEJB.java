@@ -94,5 +94,23 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
         //return query.getResultList();
 
     }
+    
+    /*Retorna el penultim acces registrat de l'usuari*/
+    @Override
+    public List<Acces> getLastAcces(String nif, int nAccessos) throws I18NException {
+        Where w1 = NIF.equal(nif);
+        OrderBy order = new OrderBy(DATAACCES, OrderType.DESC);
+        return select(w1,0,nAccessos,order);
+        
+    }
+    
+    @Override
+    public List<Acces> getLastAccesByEntity(String nif, int nAccessos, long entityId) throws I18NException {
+        Where w1 = NIF.equal(nif);
+        Where w2 = ENTITATID.equal(entityId);
+        OrderBy order = new OrderBy(DATAACCES, OrderType.DESC);
+        Where w3 = Where.AND(w1,w2);
+        return select(w3,0,nAccessos,order);
+    }
 
 }

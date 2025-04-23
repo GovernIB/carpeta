@@ -24,6 +24,7 @@ public class SesionHttp {
     private long accesPlugin;
     private String idSessio;
     private String ipAddress;
+    private String lastAccessDateTime;
 
     public SesionHttp() {
     }
@@ -104,6 +105,14 @@ public class SesionHttp {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public String getLastAccessDateTime() {
+        return lastAccessDateTime;
+    }
+
+    public void setLastAccessDateTime(String lastAccessDateTime) {
+        this.lastAccessDateTime = lastAccessDateTime;
     }
 
 }

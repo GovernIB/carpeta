@@ -143,6 +143,7 @@
 				sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 				sessionStorage.setItem('errorLogin', '${errorLogin}');
 				sessionStorage.setItem('maxInactiveInterval', '${maxInactiveInterval}');
+				sessionStorage.setItem('lastAccessDateTime', '${lastAccessDateTime}');
 
 				<c:if test="${not empty userRepresentant }" >
 				sessionStorage.setItem('representantExisteix', true);

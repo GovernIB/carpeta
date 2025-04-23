@@ -2,7 +2,7 @@
   "expo": {
     "name": "Carpeta Ciutadana GOIB",
     "slug": "CarpetaApp",
-    "version": "1.1.9",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "carpetaapp",
@@ -27,7 +27,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "es.caib.carpeta.carpetaapp",
-      "buildNumber": "1.1.9",
+      "buildNumber": "1.2.0",
       "infoPlist": {
         "CFBundleLocalizations": [
           "ca",
@@ -48,7 +48,7 @@
         "ACCESS_BACKGROUND_LOCATION"
       ],
       "googleServicesFile": "./google-services.json",
-      "versionCode": 119
+      "versionCode": 120
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

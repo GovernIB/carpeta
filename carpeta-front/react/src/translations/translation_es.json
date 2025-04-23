@@ -262,5 +262,7 @@
 	"tornar": "Volver",
 
 	"faqTitol": "Preguntas frecuentes (FAQ)",
-	"faqSubtitol": "A continuación puede consultar las preguntas más frecuentes (y sus respuestas) sobre la Carpeta Ciudadana."
+	"faqSubtitol": "A continuación puede consultar las preguntas más frecuentes (y sus respuestas) sobre la Carpeta Ciudadana.",
+	
+	"darrerLogin": "Ultimo login"
 }

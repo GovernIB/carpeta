@@ -262,6 +262,8 @@
 	"tornar": "Tornau",
 
 	"faqTitol": "Preguntes més freqüents (FAQ)",
-	"faqSubtitol": "A continuació podeu consultar les preguntes més freqüents (i les seves respostes) sobre la Carpeta Ciutadana."
+	"faqSubtitol": "A continuació podeu consultar les preguntes més freqüents (i les seves respostes) sobre la Carpeta Ciutadana.",
+	
+	"darrerLogin": "Data darrer login"
 
 }
