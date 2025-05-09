@@ -329,6 +329,50 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
   }
 
 
+  private java.lang.String textInfoTopEs;
+
+  public java.lang.String getTextInfoTopEs() {
+    return this.textInfoTopEs;
+  }
+
+  public void setTextInfoTopEs(java.lang.String textInfoTopEs) {
+    this.textInfoTopEs = textInfoTopEs;
+  }
+
+
+  private java.lang.String TextInfoTopCa;
+
+  public java.lang.String getTextInfoTopCa() {
+    return this.TextInfoTopCa;
+  }
+
+  public void setTextInfoTopCa(java.lang.String TextInfoTopCa) {
+    this.TextInfoTopCa = TextInfoTopCa;
+  }
+
+
+  private java.lang.String TextInfoBotEs;
+
+  public java.lang.String getTextInfoBotEs() {
+    return this.TextInfoBotEs;
+  }
+
+  public void setTextInfoBotEs(java.lang.String TextInfoBotEs) {
+    this.TextInfoBotEs = TextInfoBotEs;
+  }
+
+
+  private java.lang.String TextInfoBotCa;
+
+  public java.lang.String getTextInfoBotCa() {
+    return this.TextInfoBotCa;
+  }
+
+  public void setTextInfoBotCa(java.lang.String TextInfoBotCa) {
+    this.TextInfoBotCa = TextInfoBotCa;
+  }
+
+
   public EntitatFilterForm() {
   }
   
@@ -362,6 +406,10 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
     this.avisLegalEs = __toClone.avisLegalEs;
     this.accessibilitatCa = __toClone.accessibilitatCa;
     this.accessibilitatEs = __toClone.accessibilitatEs;
+    this.textInfoTopEs = __toClone.textInfoTopEs;
+    this.TextInfoTopCa = __toClone.TextInfoTopCa;
+    this.TextInfoBotEs = __toClone.TextInfoBotEs;
+    this.TextInfoBotCa = __toClone.TextInfoBotCa;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfPluginForPluginLoginID = __toClone.mapOfPluginForPluginLoginID;

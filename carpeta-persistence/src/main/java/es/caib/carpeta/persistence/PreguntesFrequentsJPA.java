@@ -43,12 +43,12 @@ public class PreguntesFrequentsJPA implements PreguntesFrequents {
     @Column(name="respostaca",nullable = false,length = 2147483647)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    java.lang.String respostaCa;
+    java.lang.String RespostaCa;
 
     @Column(name="respostaes",nullable = false,length = 2147483647)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    java.lang.String respostaEs;
+    java.lang.String RespostaEs;
 
 
 
@@ -57,21 +57,21 @@ public class PreguntesFrequentsJPA implements PreguntesFrequents {
   }
 
   /** Constructor amb tots els camps  */
-  public PreguntesFrequentsJPA(long preguntesFrequentsID , long enunciatID , int ordre , long entitatID , java.lang.String respostaCa , java.lang.String respostaEs) {
+  public PreguntesFrequentsJPA(long preguntesFrequentsID , long enunciatID , int ordre , long entitatID , java.lang.String RespostaCa , java.lang.String RespostaEs) {
     this.preguntesFrequentsID=preguntesFrequentsID;
     this.enunciatID=enunciatID;
     this.ordre=ordre;
     this.entitatID=entitatID;
-    this.respostaCa=respostaCa;
-    this.respostaEs=respostaEs;
+    this.RespostaCa=RespostaCa;
+    this.RespostaEs=RespostaEs;
 }
   /** Constructor sense valors autoincrementals */
-  public PreguntesFrequentsJPA(long enunciatID , int ordre , long entitatID , java.lang.String respostaCa , java.lang.String respostaEs) {
+  public PreguntesFrequentsJPA(long enunciatID , int ordre , long entitatID , java.lang.String RespostaCa , java.lang.String RespostaEs) {
     this.enunciatID=enunciatID;
     this.ordre=ordre;
     this.entitatID=entitatID;
-    this.respostaCa=respostaCa;
-    this.respostaEs=respostaEs;
+    this.RespostaCa=RespostaCa;
+    this.RespostaEs=RespostaEs;
 }
   public PreguntesFrequentsJPA(PreguntesFrequents __bean) {
     this.setPreguntesFrequentsID(__bean.getPreguntesFrequentsID());
@@ -111,33 +111,33 @@ public class PreguntesFrequentsJPA implements PreguntesFrequents {
 	};
 
 	public java.lang.String getRespostaCa() {
-		return(respostaCa);
+		return(RespostaCa);
 	};
-	public void setRespostaCa(java.lang.String _respostaCa_) {
-		this.respostaCa = _respostaCa_;
+	public void setRespostaCa(java.lang.String _RespostaCa_) {
+		this.RespostaCa = _RespostaCa_;
 	};
 
 	public java.lang.String getRespostaEs() {
-		return(respostaEs);
+		return(RespostaEs);
 	};
-	public void setRespostaEs(java.lang.String _respostaEs_) {
-		this.respostaEs = _respostaEs_;
+	public void setRespostaEs(java.lang.String _RespostaEs_) {
+		this.RespostaEs = _RespostaEs_;
 	};
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof PreguntesFrequents) {
-      PreguntesFrequents __instance = (PreguntesFrequents)__obj;
-      __result = true;
-      __result = __result && (this.getPreguntesFrequentsID() == __instance.getPreguntesFrequentsID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof PreguntesFrequents) {
+            PreguntesFrequents __instance = (PreguntesFrequents)__obj;
+            __result = true;
+            __result = __result && (this.getPreguntesFrequentsID() == __instance.getPreguntesFrequentsID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 

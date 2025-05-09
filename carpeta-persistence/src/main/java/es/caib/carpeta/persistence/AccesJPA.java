@@ -244,18 +244,18 @@ public class AccesJPA implements Acces {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof Acces) {
-      Acces __instance = (Acces)__obj;
-      __result = true;
-      __result = __result && (this.getAccesID() == __instance.getAccesID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof Acces) {
+            Acces __instance = (Acces)__obj;
+            __result = true;
+            __result = __result && (this.getAccesID() == __instance.getAccesID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 

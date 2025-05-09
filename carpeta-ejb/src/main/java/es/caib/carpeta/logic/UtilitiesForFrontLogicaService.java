@@ -65,5 +65,11 @@ public interface UtilitiesForFrontLogicaService {
     public List<PreguntesFrequents> getFaqsByEntity(String codiEntitat, String language) throws I18NException;
     
     public Ciutada updateMobileIdOfCiutada(UsuarioClave usuariClave, String expoPushToken) throws I18NException;
+    
+    public String getInfoTop(String codiEntitat, String lang) throws I18NException;
+    
+    public String getInfoBottom(String codiEntitat, String lang) throws I18NException;
+    
+    
 
 }

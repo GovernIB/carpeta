@@ -89,6 +89,18 @@ public interface Entitat extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getAccessibilitatEs();
 	public void setAccessibilitatEs(java.lang.String _accessibilitatEs_);
 
+	public java.lang.String getTextInfoTopEs();
+	public void setTextInfoTopEs(java.lang.String _textInfoTopEs_);
+
+	public java.lang.String getTextInfoTopCa();
+	public void setTextInfoTopCa(java.lang.String _TextInfoTopCa_);
+
+	public java.lang.String getTextInfoBotEs();
+	public void setTextInfoBotEs(java.lang.String _TextInfoBotEs_);
+
+	public java.lang.String getTextInfoBotCa();
+	public void setTextInfoBotCa(java.lang.String _TextInfoBotCa_);
+
   // Fitxer
   public <F extends Fitxer> F getLogoCapBack();
   // Fitxer

@@ -161,18 +161,18 @@ public class NotificacioAppJPA implements NotificacioApp {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof NotificacioApp) {
-      NotificacioApp __instance = (NotificacioApp)__obj;
-      __result = true;
-      __result = __result && (this.getNotificacioAppID() == __instance.getNotificacioAppID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof NotificacioApp) {
+            NotificacioApp __instance = (NotificacioApp)__obj;
+            __result = true;
+            __result = __result && (this.getNotificacioAppID() == __instance.getNotificacioAppID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 

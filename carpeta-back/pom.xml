@@ -15,8 +15,17 @@
     <description>Backoffice de carpeta</description>
 
     <properties>
-        <auth.method>BASIC</auth.method>
+        <webXml.authMethod>BASIC</webXml.authMethod>
     </properties>
+    
+    <profiles>
+        <profile>
+            <id>keycloak</id>
+            <properties>
+                <webXml.authMethod>KEYCLOAK</webXml.authMethod>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
 

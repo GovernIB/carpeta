@@ -18,6 +18,8 @@ import es.caib.carpeta.persistence.EntitatJPA;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.text.StringEscapeUtils;
+
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -630,6 +632,7 @@ public class InicioController extends CommonFrontController {
             // Entitat seleccionada
             long entitatID=0;
             String codiEntitat="";
+            EntitatJPA entitat;
             
             
             if (sesionHttp.getEntitat() != null || defaultEntityCode != null) {
@@ -650,11 +653,10 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("canviarDeFront", canviardefront);
                     mav.addObject("errorLogin", errorDeLogin);
                     
-                    
                     //Si hi ha entity code per defecte s'agafa com a entitat
                 } else if (defaultEntityCode != null) {
                     log.info("Un defaultEntityCode: ");
-                    EntitatJPA entitat = entitatEjb.findByCodi(defaultEntityCode);
+                    entitat = entitatEjb.findByCodi(defaultEntityCode);
                     //Agafar entitat de les properties.
                     if (entitat != null) {
                         
@@ -710,7 +712,17 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("langActual", lang);
                 }
             }
-
+                
+                if(entitatID != 0) {
+                    entitat = (EntitatJPA) entitatEjb.findByPrimaryKey(entitatID);
+                    mav.addObject("infoTextTop_ca",(entitat.getTextInfoTopCa()));
+                    mav.addObject("infoTextTop_es",entitat.getTextInfoTopEs());
+                    mav.addObject("infoTextBot_ca",entitat.getTextInfoBotCa());
+                    mav.addObject("infoTextBot_es",entitat.getTextInfoBotEs());
+                }
+                
+                
+                
 
             //Implementacio de carrega de informacio de darrer login
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -722,9 +734,7 @@ public class InicioController extends CommonFrontController {
             //Si la prop global showLastLogin es fals, i userId te entitat seleccionada, comprova la prop de la Entitat
             if(!showLastLogin && entitatID != 0) {
                 showLastLogin = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb, entitatID));
-            }/*else {
-                showLastLogin = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb));
-            }*/
+            }
                 
             if (principal != null && principal instanceof UsuarioAutenticado && showLastLogin) {
                 UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
@@ -743,6 +753,7 @@ public class InicioController extends CommonFrontController {
                 mav.addObject("lastAccessDateTime", lastAccessDateTime);
                 sesionHttp.setLastAccessDateTime(lastAccessDateTime);
             }
+            
 
         }} catch (Throwable e) {
             processExceptionHtml(e, request, response, temps);

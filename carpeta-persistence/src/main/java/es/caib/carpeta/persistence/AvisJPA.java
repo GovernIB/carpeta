@@ -155,18 +155,18 @@ public class AvisJPA implements Avis {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof Avis) {
-      Avis __instance = (Avis)__obj;
-      __result = true;
-      __result = __result && (this.getAvisID() == __instance.getAvisID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof Avis) {
+            Avis __instance = (Avis)__obj;
+            __result = true;
+            __result = __result && (this.getAvisID() == __instance.getAvisID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 

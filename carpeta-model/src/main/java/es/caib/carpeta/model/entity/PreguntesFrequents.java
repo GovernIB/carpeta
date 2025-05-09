@@ -15,10 +15,10 @@ public interface PreguntesFrequents extends org.fundaciobit.genapp.common.IGenAp
 	public void setEntitatID(long _entitatID_);
 
 	public java.lang.String getRespostaCa();
-	public void setRespostaCa(java.lang.String _respostaCa_);
+	public void setRespostaCa(java.lang.String _RespostaCa_);
 
 	public java.lang.String getRespostaEs();
-	public void setRespostaEs(java.lang.String _respostaEs_);
+	public void setRespostaEs(java.lang.String _RespostaEs_);
 
 
 

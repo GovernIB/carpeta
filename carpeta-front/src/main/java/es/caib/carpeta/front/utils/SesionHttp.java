@@ -25,6 +25,9 @@ public class SesionHttp {
     private String idSessio;
     private String ipAddress;
     private String lastAccessDateTime;
+    private String infoTextTop;
+    private String infoTextBot;
+    
 
     public SesionHttp() {
     }
@@ -113,6 +116,22 @@ public class SesionHttp {
 
     public void setLastAccessDateTime(String lastAccessDateTime) {
         this.lastAccessDateTime = lastAccessDateTime;
+    }
+
+    public String getInfoTextTop() {
+        return infoTextTop;
+    }
+
+    public void setInfoTextTop(String infoTextTop) {
+        this.infoTextTop = infoTextTop;
+    }
+
+    public String getInfoTextBot() {
+        return infoTextBot;
+    }
+
+    public void setInfoTextBot(String infoTextBot) {
+        this.infoTextBot = infoTextBot;
     }
 
 }

@@ -392,6 +392,58 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.TEXTINFOTOPES)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.textInfoTopEs" var="textInfoTopEs" />
+              <fmt:message key="genapp.form.searchby" var="cercapertextInfoTopEs" >                
+                 <fmt:param value="${textInfoTopEs}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${textInfoTopEs}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapertextInfoTopEs}" path="textInfoTopEs" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.TEXTINFOTOPCA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.TextInfoTopCa" var="TextInfoTopCa" />
+              <fmt:message key="genapp.form.searchby" var="cercaperTextInfoTopCa" >                
+                 <fmt:param value="${TextInfoTopCa}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${TextInfoTopCa}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperTextInfoTopCa}" path="TextInfoTopCa" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.TEXTINFOBOTES)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.TextInfoBotEs" var="TextInfoBotEs" />
+              <fmt:message key="genapp.form.searchby" var="cercaperTextInfoBotEs" >                
+                 <fmt:param value="${TextInfoBotEs}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${TextInfoBotEs}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperTextInfoBotEs}" path="TextInfoBotEs" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.TEXTINFOBOTCA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.TextInfoBotCa" var="TextInfoBotCa" />
+              <fmt:message key="genapp.form.searchby" var="cercaperTextInfoBotCa" >                
+                 <fmt:param value="${TextInfoBotCa}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${TextInfoBotCa}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperTextInfoBotCa}" path="TextInfoBotCa" />
+            </div>
+
+
+        </c:if>
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key >= 0 && not empty __entry.value.searchBy }">

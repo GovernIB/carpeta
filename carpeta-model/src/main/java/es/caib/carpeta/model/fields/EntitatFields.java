@@ -41,6 +41,10 @@ public interface EntitatFields extends java.io.Serializable {
 	 public static final StringField AVISLEGALES = new StringField(_TABLE_MODEL, "avisLegalEs", "avislegales");
 	 public static final StringField ACCESSIBILITATCA = new StringField(_TABLE_MODEL, "accessibilitatCa", "accessibilitatca");
 	 public static final StringField ACCESSIBILITATES = new StringField(_TABLE_MODEL, "accessibilitatEs", "accessibilitates");
+	 public static final StringField TEXTINFOTOPES = new StringField(_TABLE_MODEL, "textInfoTopEs", "txtinfotopes");
+	 public static final StringField TEXTINFOTOPCA = new StringField(_TABLE_MODEL, "TextInfoTopCa", "txtinfotopca");
+	 public static final StringField TEXTINFOBOTES = new StringField(_TABLE_MODEL, "TextInfoBotEs", "txtinfobotes");
+	 public static final StringField TEXTINFOBOTCA = new StringField(_TABLE_MODEL, "TextInfoBotCa", "txtinfobotca");
 
 
   public static final Field<?>[] ALL_ENTITAT_FIELDS = {
@@ -72,7 +76,11 @@ public interface EntitatFields extends java.io.Serializable {
     AVISLEGALCA,
     AVISLEGALES,
     ACCESSIBILITATCA,
-    ACCESSIBILITATES
+    ACCESSIBILITATES,
+    TEXTINFOTOPES,
+    TEXTINFOTOPCA,
+    TEXTINFOBOTES,
+    TEXTINFOBOTCA
   };
 
 

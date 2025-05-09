@@ -190,18 +190,18 @@ public class EnllazJPA implements Enllaz {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof Enllaz) {
-      Enllaz __instance = (Enllaz)__obj;
-      __result = true;
-      __result = __result && (this.getEnllazID() == __instance.getEnllazID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof Enllaz) {
+            Enllaz __instance = (Enllaz)__obj;
+            __result = true;
+            __result = __result && (this.getEnllazID() == __instance.getEnllazID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 

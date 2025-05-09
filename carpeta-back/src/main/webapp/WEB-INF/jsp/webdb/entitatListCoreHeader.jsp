@@ -99,6 +99,18 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITATES)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.ACCESSIBILITATES)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOTOPES)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.TEXTINFOTOPES)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOTOPCA)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.TEXTINFOTOPCA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOBOTES)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.TEXTINFOBOTES)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOBOTCA)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.TEXTINFOBOTCA)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

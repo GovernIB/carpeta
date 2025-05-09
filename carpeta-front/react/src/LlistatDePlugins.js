@@ -116,7 +116,6 @@ class LlistatDePlugins extends Component {
         alert(missatge);
     }
 
-
     render() {
 
         const autenticat = sessionStorage.getItem('autenticat');
@@ -297,6 +296,19 @@ class LlistatDePlugins extends Component {
                 )
             }
         })
+        
+        /*Text informatiu de Front (Subtitol 2)*/
+        
+        
+        var langActual = sessionStorage.getItem("langActual")
+        
+        var infoTextTopContent = sessionStorage.getItem("infoTextTop_"+langActual);
+        
+        var infoTextTop;
+       
+        if(infoTextTopContent){
+            infoTextTop = <div dangerouslySetInnerHTML={{__html: infoTextTopContent}}/>;
+        }
 
         return (<>
                 <div className="titolPaginaApp visioMobil">
@@ -319,7 +331,11 @@ class LlistatDePlugins extends Component {
 
                             {/*<p className="lh15 subtitol">{subtitolHeader}</p>*/}
                             <p className="lh15 subtitol ocultarMobil">{subtitolHeader}</p>
-
+                            
+                            {/* Informacio editable de front al Top */}
+                            {infoTextTop}
+    
+                            {/*Avisos de plugins (Info, Warning o Errors)*/}
                             {avisosPlugins}
 
                             <div className="card-body imc--llista--capses">

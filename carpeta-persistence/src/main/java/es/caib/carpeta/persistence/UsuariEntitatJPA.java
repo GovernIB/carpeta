@@ -97,18 +97,18 @@ public class UsuariEntitatJPA implements UsuariEntitat {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof UsuariEntitat) {
-      UsuariEntitat __instance = (UsuariEntitat)__obj;
-      __result = true;
-      __result = __result && (this.getUsuariEntitatID() == __instance.getUsuariEntitatID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof UsuariEntitat) {
+            UsuariEntitat __instance = (UsuariEntitat)__obj;
+            __result = true;
+            __result = __result && (this.getUsuariEntitatID() == __instance.getUsuariEntitatID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:usuariid | Table: car_usuari | Type: 1  
 

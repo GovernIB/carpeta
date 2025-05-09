@@ -203,7 +203,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
 	<login-config>
         <!-- Per defecte BASIC. Si profile -Pcaib llavors KEYCLOAK  -->
-        <auth-method>${auth.method}</auth-method>
+        <auth-method>${webXml.authMethod}</auth-method>
 		<realm-name>Govern de les Illes Balears</realm-name>
 	</login-config>
 

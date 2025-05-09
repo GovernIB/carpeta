@@ -95,7 +95,7 @@
 			  sessionStorage.setItem('langActual', '${pageContext.response.locale}');
 			  sessionStorage.setItem('pagTornar', '${pageContext.request.contextPath}');
 			  sessionStorage.setItem('cssExtern', '${pageContext.request.contextPath}/webui/customcss/${entitat}');
-	  </script>
+		</script>
   </sec:authorize>
 
   
@@ -160,8 +160,12 @@
 				sessionStorage.setItem('pagTornar', '${pageContext.request.contextPath}');
 				sessionStorage.setItem('cssExtern', '${pageContext.request.contextPath}/webui/customcss/${entitat}');
 				
+				sessionStorage.setItem('infoTextTop_ca', '${infoTextTop_ca}');
+				sessionStorage.setItem('infoTextTop_es', '${infoTextTop_es}');
+	            sessionStorage.setItem('infoTextBot_ca', '${infoTextBot_ca}');
+                sessionStorage.setItem('infoTextBot_es', '${infoTextBot_es}');
 
-		</script>
+			</script>
 	  </sec:authorize> 
 
 

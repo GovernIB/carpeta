@@ -12,8 +12,8 @@ public class PreguntesFrequentsBean implements PreguntesFrequents {
 	long enunciatID;
 	int ordre;
 	long entitatID;
-	java.lang.String respostaCa;
-	java.lang.String respostaEs;
+	java.lang.String RespostaCa;
+	java.lang.String RespostaEs;
 
 
   /** Constructor Buit */
@@ -21,21 +21,21 @@ public class PreguntesFrequentsBean implements PreguntesFrequents {
   }
 
   /** Constructor amb tots els camps  */
-  public PreguntesFrequentsBean(long preguntesFrequentsID , long enunciatID , int ordre , long entitatID , java.lang.String respostaCa , java.lang.String respostaEs) {
+  public PreguntesFrequentsBean(long preguntesFrequentsID , long enunciatID , int ordre , long entitatID , java.lang.String RespostaCa , java.lang.String RespostaEs) {
     this.preguntesFrequentsID=preguntesFrequentsID;
     this.enunciatID=enunciatID;
     this.ordre=ordre;
     this.entitatID=entitatID;
-    this.respostaCa=respostaCa;
-    this.respostaEs=respostaEs;
+    this.RespostaCa=RespostaCa;
+    this.RespostaEs=RespostaEs;
 }
   /** Constructor sense valors autoincrementals */
-  public PreguntesFrequentsBean(long enunciatID , int ordre , long entitatID , java.lang.String respostaCa , java.lang.String respostaEs) {
+  public PreguntesFrequentsBean(long enunciatID , int ordre , long entitatID , java.lang.String RespostaCa , java.lang.String RespostaEs) {
     this.enunciatID=enunciatID;
     this.ordre=ordre;
     this.entitatID=entitatID;
-    this.respostaCa=respostaCa;
-    this.respostaEs=respostaEs;
+    this.RespostaCa=RespostaCa;
+    this.RespostaEs=RespostaEs;
 }
   public PreguntesFrequentsBean(PreguntesFrequents __bean) {
     this.setPreguntesFrequentsID(__bean.getPreguntesFrequentsID());
@@ -75,17 +75,17 @@ public class PreguntesFrequentsBean implements PreguntesFrequents {
 	};
 
 	public java.lang.String getRespostaCa() {
-		return(respostaCa);
+		return(RespostaCa);
 	};
-	public void setRespostaCa(java.lang.String _respostaCa_) {
-		this.respostaCa = _respostaCa_;
+	public void setRespostaCa(java.lang.String _RespostaCa_) {
+		this.RespostaCa = _RespostaCa_;
 	};
 
 	public java.lang.String getRespostaEs() {
-		return(respostaEs);
+		return(RespostaEs);
 	};
-	public void setRespostaEs(java.lang.String _respostaEs_) {
-		this.respostaEs = _respostaEs_;
+	public void setRespostaEs(java.lang.String _RespostaEs_) {
+		this.RespostaEs = _RespostaEs_;
 	};
 
 

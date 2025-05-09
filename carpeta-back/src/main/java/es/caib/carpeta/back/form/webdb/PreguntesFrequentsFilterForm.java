@@ -109,25 +109,25 @@ public class PreguntesFrequentsFilterForm extends CarpetaBaseFilterForm implemen
   }
 
 
-  private java.lang.String respostaCa;
+  private java.lang.String RespostaCa;
 
   public java.lang.String getRespostaCa() {
-    return this.respostaCa;
+    return this.RespostaCa;
   }
 
-  public void setRespostaCa(java.lang.String respostaCa) {
-    this.respostaCa = respostaCa;
+  public void setRespostaCa(java.lang.String RespostaCa) {
+    this.RespostaCa = RespostaCa;
   }
 
 
-  private java.lang.String respostaEs;
+  private java.lang.String RespostaEs;
 
   public java.lang.String getRespostaEs() {
-    return this.respostaEs;
+    return this.RespostaEs;
   }
 
-  public void setRespostaEs(java.lang.String respostaEs) {
-    this.respostaEs = respostaEs;
+  public void setRespostaEs(java.lang.String RespostaEs) {
+    this.RespostaEs = RespostaEs;
   }
 
 
@@ -144,8 +144,8 @@ public class PreguntesFrequentsFilterForm extends CarpetaBaseFilterForm implemen
     this.ordreFins = __toClone.ordreFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
-    this.respostaCa = __toClone.respostaCa;
-    this.respostaEs = __toClone.respostaEs;
+    this.RespostaCa = __toClone.RespostaCa;
+    this.RespostaEs = __toClone.RespostaEs;
     this.mapOfTraduccioForEnunciatID = __toClone.mapOfTraduccioForEnunciatID;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
   }

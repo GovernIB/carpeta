@@ -2380,6 +2380,7 @@
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
+          "minAllowedValue": "textarea",
           "filter": false,
           "orderBy": 0,
           "groupBy": false,
@@ -2588,6 +2589,106 @@
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "txtinfotopes",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Text Informatiu Top Castellà",
+            "es": "Texto Informativo Top Castellano"
+          },
+          "javaName": "textInfoTopEs",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "txtinfotopca",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Text Informatiu Top Català",
+            "es": "Texto Informativo Top Catalan"
+          },
+          "javaName": "TextInfoTopCa",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "txtinfobotes",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Text Informatiu Bottom Castellà",
+            "es": "Texto Informativo Bottom Castellano"
+          },
+          "javaName": "TextInfoBotEs",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "txtinfobotca",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Text Informatiu Bottom Catala",
+            "es": "Texto Informativo Bottom Catalan"
+          },
+          "javaName": "TextInfoBotCa",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
           "transientField": false,
           "filter": false,
           "orderBy": 0,
@@ -4579,10 +4680,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "Resposta Català",
-            "es": "Respuesta Catalan"
+            "ca": "Resposta Cat",
+            "es": "Resposta Cat"
           },
-          "javaName": "respostaCa",
+          "javaName": "RespostaCa",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -4592,7 +4693,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 8
+            "webtype": 2
           },
           "foreignKeys": []
         },
@@ -4604,10 +4705,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "Resposta Castellà",
-            "es": "Respuesta Castellano"
+            "ca": "Respusta Esp",
+            "es": "Respuesta Esp"
           },
-          "javaName": "respostaEs",
+          "javaName": "RespostaEs",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -4617,7 +4718,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 8
+            "webtype": 2
           },
           "foreignKeys": []
         }

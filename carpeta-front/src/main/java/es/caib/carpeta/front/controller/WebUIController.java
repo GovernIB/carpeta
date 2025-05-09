@@ -70,6 +70,7 @@ public class WebUIController extends PluginFrontController {
 
     public static final String ENTITAT_CUSTOM_CSS = "/customcss";
     
+   
     /**
      * 
      * @author anadal
@@ -563,8 +564,10 @@ public class WebUIController extends PluginFrontController {
 
         getEnllazosJSON(request, response, enllazType);
     }*/
-
-
+    
+    
+    
+    
     @RequestMapping(value = "/laterallinks", method = RequestMethod.GET)
     public void getLateralLinks(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1464,9 +1467,10 @@ public class WebUIController extends PluginFrontController {
                     fullInfo.put("idiomesFront", idiomaInfo);
                 }
                 
+                EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
+
                 // Nom entitat
                 {
-                    EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
                     fullInfo.put("nomEntitat", entitat.getNom().getTraduccio(lang).getValor());
                 }
                 
@@ -1573,6 +1577,7 @@ public class WebUIController extends PluginFrontController {
         
     }
 
+    
     @RequestMapping(value = "/faq", method = RequestMethod.GET)
     public void getFaq(HttpServletRequest request, HttpServletResponse response) {
 

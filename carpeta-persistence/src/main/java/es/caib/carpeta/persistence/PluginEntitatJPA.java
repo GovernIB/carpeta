@@ -125,18 +125,18 @@ public class PluginEntitatJPA implements PluginEntitat {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof PluginEntitat) {
-      PluginEntitat __instance = (PluginEntitat)__obj;
-      __result = true;
-      __result = __result && (this.getPluginEntitatID() == __instance.getPluginEntitatID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof PluginEntitat) {
+            PluginEntitat __instance = (PluginEntitat)__obj;
+            __result = true;
+            __result = __result && (this.getPluginEntitatID() == __instance.getPluginEntitatID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:pluginid | Table: car_plugin | Type: 1  
 

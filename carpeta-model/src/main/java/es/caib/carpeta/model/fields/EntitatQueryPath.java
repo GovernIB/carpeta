@@ -127,6 +127,22 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new StringField(getQueryPath(), EntitatFields.ACCESSIBILITATES);
   }
 
+  public StringField TEXTINFOTOPES() {
+    return new StringField(getQueryPath(), EntitatFields.TEXTINFOTOPES);
+  }
+
+  public StringField TEXTINFOTOPCA() {
+    return new StringField(getQueryPath(), EntitatFields.TEXTINFOTOPCA);
+  }
+
+  public StringField TEXTINFOBOTES() {
+    return new StringField(getQueryPath(), EntitatFields.TEXTINFOBOTES);
+  }
+
+  public StringField TEXTINFOBOTCA() {
+    return new StringField(getQueryPath(), EntitatFields.TEXTINFOBOTCA);
+  }
+
 
 
   @Override

@@ -55,8 +55,8 @@ public class PreguntesFrequentsJPAManager
         return list.toArray(new PreguntesFrequents[list.size()]);
     };
 
-    public PreguntesFrequents create( long _enunciatID_, int _ordre_, long _entitatID_, java.lang.String _respostaCa_, java.lang.String _respostaEs_) throws I18NException {
-        PreguntesFrequentsJPA __bean =  new PreguntesFrequentsJPA(_enunciatID_,_ordre_,_entitatID_,_respostaCa_,_respostaEs_);
+    public PreguntesFrequents create( long _enunciatID_, int _ordre_, long _entitatID_, java.lang.String _RespostaCa_, java.lang.String _RespostaEs_) throws I18NException {
+        PreguntesFrequentsJPA __bean =  new PreguntesFrequentsJPA(_enunciatID_,_ordre_,_entitatID_,_RespostaCa_,_RespostaEs_);
         return create(__bean);
     }
 

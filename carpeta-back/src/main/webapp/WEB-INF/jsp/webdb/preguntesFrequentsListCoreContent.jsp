@@ -52,12 +52,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.RESPOSTACA)}">
           <td>
-          ${preguntesFrequents.respostaCa}
+          ${preguntesFrequents.RespostaCa}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.RESPOSTAES)}">
           <td>
-          ${preguntesFrequents.respostaEs}
+          ${preguntesFrequents.RespostaEs}
           </td>
         </c:if>
 

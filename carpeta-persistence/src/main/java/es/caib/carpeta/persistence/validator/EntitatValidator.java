@@ -222,6 +222,38 @@ public class EntitatValidator<I extends Entitat>
       }
     }
 
+    if (__vr.getFieldErrorCount(TEXTINFOTOPES) == 0) {
+      java.lang.String __textinfotopes = __target__.getTextInfoTopEs();
+      if (__textinfotopes!= null && __textinfotopes.length() > 2147483647) {
+        __vr.rejectValue(TEXTINFOTOPES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TEXTINFOTOPES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(TEXTINFOTOPCA) == 0) {
+      java.lang.String __textinfotopca = __target__.getTextInfoTopCa();
+      if (__textinfotopca!= null && __textinfotopca.length() > 2147483647) {
+        __vr.rejectValue(TEXTINFOTOPCA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TEXTINFOTOPCA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(TEXTINFOBOTES) == 0) {
+      java.lang.String __textinfobotes = __target__.getTextInfoBotEs();
+      if (__textinfobotes!= null && __textinfobotes.length() > 2147483647) {
+        __vr.rejectValue(TEXTINFOBOTES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TEXTINFOBOTES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(TEXTINFOBOTCA) == 0) {
+      java.lang.String __textinfobotca = __target__.getTextInfoBotCa();
+      if (__textinfobotca!= null && __textinfobotca.length() > 2147483647) {
+        __vr.rejectValue(TEXTINFOBOTCA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TEXTINFOBOTCA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 

@@ -18,7 +18,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import es.caib.carpeta.back.form.webdb.*;
 import es.caib.carpeta.back.form.webdb.PluginEntitatForm;
@@ -36,6 +36,11 @@ import es.caib.carpeta.back.validator.webdb.PluginEntitatWebValidator;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.*;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
+import es.caib.carpeta.back.utils.Tab;
 
 /**
  * Controller per gestionar un PluginEntitat
@@ -43,9 +48,14 @@ import es.caib.carpeta.model.fields.*;
  * 
  * @author GenApp
  */
+@MenuOption(labelCode="pluginEntitat.pluginEntitat.plural", order=120, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/pluginEntitat")
 @SessionAttributes(types = { PluginEntitatForm.class, PluginEntitatFilterForm.class })
+@Tile(name="pluginEntitatFormWebDB", contentJsp="/WEB-INF/jsp/webdb/pluginEntitatForm.jsp", extendsTile=Tab.MENU_WEBDB,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="pluginEntitat.pluginEntitat")})
+@Tile(name="pluginEntitatListWebDB", contentJsp="/WEB-INF/jsp/webdb/pluginEntitatList.jsp", extendsTile=Tab.MENU_WEBDB,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="pluginEntitat.pluginEntitat") })
 public class PluginEntitatController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<PluginEntitat, java.lang.Long> implements PluginEntitatFields {
 
@@ -382,7 +392,6 @@ public class PluginEntitatController
 
     if (pluginEntitat == null) {
       createMessageWarning(request, "error.notfound", pluginEntitatID);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, pluginEntitatID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -586,6 +595,14 @@ public java.lang.Long stringToPK(String value) {
      return getRedirectWhenCancel(request, pluginEntitatID);
   }
 
+  /**
+   * Entra aqui al pitjar el boto cancel en el la creació de PluginEntitat
+   */
+  @RequestMapping(value = "/cancel")
+  public String cancelPluginEntitat(HttpServletRequest request,HttpServletResponse response) {
+     return getRedirectWhenCancel(request, null);
+  }
+
   @Override
   public String getTableModelName() {
     return _TABLE_MODEL;
@@ -776,12 +793,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "pluginEntitatFormWebDB";
   }
 
-  public String getTileList() {
-    return "pluginEntitatListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "pluginEntitatListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "PluginEntitat_FilterForm_" + this.getClass().getName();

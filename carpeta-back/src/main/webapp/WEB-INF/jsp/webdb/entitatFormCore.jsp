@@ -628,7 +628,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_loginText_${idioma.idiomaID}">
                <form:errors path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)}" maxlength="4000" />
+               <form:textarea path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)}" maxlength="4000"  rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" />
            </div>
            </c:forEach>
          </div>
@@ -794,6 +794,74 @@
           <td id="entitat_accessibilitatEs_columnvalueid">
               <form:errors path="entitat.accessibilitatEs" cssClass="errorField alert alert-danger" />
        <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ACCESSIBILITATES)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.accessibilitatEs"  />
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.TEXTINFOTOPES)}">
+        <tr id="entitat_textInfoTopEs_rowid">
+          <td id="entitat_textInfoTopEs_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.TEXTINFOTOPES])?'entitat.textInfoTopEs':__theForm.labels[EntitatFields.TEXTINFOTOPES]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EntitatFields.TEXTINFOTOPES]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.TEXTINFOTOPES]}" ></i>
+              </c:if>
+            </td>
+          <td id="entitat_textInfoTopEs_columnvalueid">
+              <form:errors path="entitat.textInfoTopEs" cssClass="errorField alert alert-danger" />
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EntitatFields.TEXTINFOTOPES)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.textInfoTopEs"  />
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.TEXTINFOTOPCA)}">
+        <tr id="entitat_TextInfoTopCa_rowid">
+          <td id="entitat_TextInfoTopCa_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.TEXTINFOTOPCA])?'entitat.TextInfoTopCa':__theForm.labels[EntitatFields.TEXTINFOTOPCA]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EntitatFields.TEXTINFOTOPCA]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.TEXTINFOTOPCA]}" ></i>
+              </c:if>
+            </td>
+          <td id="entitat_TextInfoTopCa_columnvalueid">
+              <form:errors path="entitat.TextInfoTopCa" cssClass="errorField alert alert-danger" />
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EntitatFields.TEXTINFOTOPCA)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.TextInfoTopCa"  />
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.TEXTINFOBOTES)}">
+        <tr id="entitat_TextInfoBotEs_rowid">
+          <td id="entitat_TextInfoBotEs_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.TEXTINFOBOTES])?'entitat.TextInfoBotEs':__theForm.labels[EntitatFields.TEXTINFOBOTES]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EntitatFields.TEXTINFOBOTES]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.TEXTINFOBOTES]}" ></i>
+              </c:if>
+            </td>
+          <td id="entitat_TextInfoBotEs_columnvalueid">
+              <form:errors path="entitat.TextInfoBotEs" cssClass="errorField alert alert-danger" />
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EntitatFields.TEXTINFOBOTES)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.TextInfoBotEs"  />
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.TEXTINFOBOTCA)}">
+        <tr id="entitat_TextInfoBotCa_rowid">
+          <td id="entitat_TextInfoBotCa_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.TEXTINFOBOTCA])?'entitat.TextInfoBotCa':__theForm.labels[EntitatFields.TEXTINFOBOTCA]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EntitatFields.TEXTINFOBOTCA]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.TEXTINFOBOTCA]}" ></i>
+              </c:if>
+            </td>
+          <td id="entitat_TextInfoBotCa_columnvalueid">
+              <form:errors path="entitat.TextInfoBotCa" cssClass="errorField alert alert-danger" />
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EntitatFields.TEXTINFOBOTCA)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.TextInfoBotCa"  />
            </td>
         </tr>
         </c:if>

@@ -18,7 +18,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import es.caib.carpeta.back.form.webdb.*;
 import es.caib.carpeta.back.form.webdb.UsuariForm;
@@ -36,6 +36,11 @@ import es.caib.carpeta.back.validator.webdb.UsuariWebValidator;
 import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.model.entity.Usuari;
 import es.caib.carpeta.model.fields.*;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
+import es.caib.carpeta.back.utils.Tab;
 
 /**
  * Controller per gestionar un Usuari
@@ -43,9 +48,14 @@ import es.caib.carpeta.model.fields.*;
  * 
  * @author GenApp
  */
+@MenuOption(labelCode="usuari.usuari.plural", order=180, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/usuari")
 @SessionAttributes(types = { UsuariForm.class, UsuariFilterForm.class })
+@Tile(name="usuariFormWebDB", contentJsp="/WEB-INF/jsp/webdb/usuariForm.jsp", extendsTile=Tab.MENU_WEBDB,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="usuari.usuari")})
+@Tile(name="usuariListWebDB", contentJsp="/WEB-INF/jsp/webdb/usuariList.jsp", extendsTile=Tab.MENU_WEBDB,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="usuari.usuari") })
 public class UsuariController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Usuari, java.lang.Long> implements UsuariFields {
 
@@ -355,7 +365,6 @@ public class UsuariController
 
     if (usuari == null) {
       createMessageWarning(request, "error.notfound", usuariID);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, usuariID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -559,6 +568,14 @@ public java.lang.Long stringToPK(String value) {
      return getRedirectWhenCancel(request, usuariID);
   }
 
+  /**
+   * Entra aqui al pitjar el boto cancel en el la creació de Usuari
+   */
+  @RequestMapping(value = "/cancel")
+  public String cancelUsuari(HttpServletRequest request,HttpServletResponse response) {
+     return getRedirectWhenCancel(request, null);
+  }
+
   @Override
   public String getTableModelName() {
     return _TABLE_MODEL;
@@ -710,12 +727,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "usuariFormWebDB";
   }
 
-  public String getTileList() {
-    return "usuariListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "usuariListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "Usuari_FilterForm_" + this.getClass().getName();

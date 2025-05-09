@@ -87,35 +87,79 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.RESPOSTACA)}">
-        <tr id="preguntesFrequents_respostaCa_rowid">
-          <td id="preguntesFrequents_respostaCa_columnlabelid">
+        <tr id="preguntesFrequents_RespostaCa_rowid">
+          <td id="preguntesFrequents_RespostaCa_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.RESPOSTACA])?'preguntesFrequents.respostaCa':__theForm.labels[PreguntesFrequentsFields.RESPOSTACA]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.RESPOSTACA])?'preguntesFrequents.RespostaCa':__theForm.labels[PreguntesFrequentsFields.RESPOSTACA]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.RESPOSTACA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.RESPOSTACA]}" ></i>
               </c:if>
             </td>
-          <td id="preguntesFrequents_respostaCa_columnvalueid">
-              <form:errors path="preguntesFrequents.respostaCa" cssClass="errorField alert alert-danger" />
-       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTACA)? 'mceEditorReadOnly':'mceEditor'}"  path="preguntesFrequents.respostaCa"  />
+          <td id="preguntesFrequents_RespostaCa_columnvalueid">
+              <form:errors path="preguntesFrequents.RespostaCa" cssClass="errorField alert alert-danger" />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTACA)? 'true' : 'false'}" path="preguntesFrequents.RespostaCa"  />
+   </td>
+   <td style="width:40px">
+      <div id="dropdownMenuButton_RespostaCa" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_RespostaCa" class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('preguntesFrequents.RespostaCa'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('preguntesFrequents.RespostaCa'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('preguntesFrequents.RespostaCa'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_RespostaCa').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_RespostaCa').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_RespostaCa').css('display', valor);
+                 return false;
+				});
+      </script>   </td>
+   </tr>
+   </table>
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.RESPOSTAES)}">
-        <tr id="preguntesFrequents_respostaEs_rowid">
-          <td id="preguntesFrequents_respostaEs_columnlabelid">
+        <tr id="preguntesFrequents_RespostaEs_rowid">
+          <td id="preguntesFrequents_RespostaEs_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.RESPOSTAES])?'preguntesFrequents.respostaEs':__theForm.labels[PreguntesFrequentsFields.RESPOSTAES]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.RESPOSTAES])?'preguntesFrequents.RespostaEs':__theForm.labels[PreguntesFrequentsFields.RESPOSTAES]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.RESPOSTAES]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.RESPOSTAES]}" ></i>
               </c:if>
             </td>
-          <td id="preguntesFrequents_respostaEs_columnvalueid">
-              <form:errors path="preguntesFrequents.respostaEs" cssClass="errorField alert alert-danger" />
-       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTAES)? 'mceEditorReadOnly':'mceEditor'}"  path="preguntesFrequents.respostaEs"  />
+          <td id="preguntesFrequents_RespostaEs_columnvalueid">
+              <form:errors path="preguntesFrequents.RespostaEs" cssClass="errorField alert alert-danger" />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTAES)? 'true' : 'false'}" path="preguntesFrequents.RespostaEs"  />
+   </td>
+   <td style="width:40px">
+      <div id="dropdownMenuButton_RespostaEs" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_RespostaEs" class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('preguntesFrequents.RespostaEs'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('preguntesFrequents.RespostaEs'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('preguntesFrequents.RespostaEs'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_RespostaEs').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_RespostaEs').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_RespostaEs').css('display', valor);
+                 return false;
+				});
+      </script>   </td>
+   </tr>
+   </table>
            </td>
         </tr>
         </c:if>

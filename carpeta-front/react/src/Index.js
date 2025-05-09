@@ -13,6 +13,7 @@ import PluginHtml from "./PluginHtml";
 import PluginReact from "./PluginReact";
 import Accessibilitat from "./Accessibilitat";
 import AvisLegal from "./AvisLegal";
+//import InfoMessageFront from "./InfoMessageFront";
 import CanviarEntitat from "./CanviarEntitat";
 import NivellAutenticacio from "./NivellAutenticacio";
 import PreguntesFrequents from "./PreguntesFrequents";
@@ -73,16 +74,20 @@ class Index extends Component {
     // console.log(" XYZ ZZZ   \n INDEX :: Auth Val: " + auth + "\n");
 
     var usuariNomComplet = sessionStorage.getItem("usuariNomComplet");
+    
+    var langActual = sessionStorage.getItem("langActual")
 
     var infoUsuari;
     var estilContingut;
+    var infoTextTop;
+    var infoTextBot
 
     if (browserName === BrowserTypes.Safari) {
       //console.log("\n\n      MACOSX          ES SAFARI !!!!!!!!!!!!!!!!  \n\n");
       estilContingut = auth === "1" ? { paddingTop: "120px" } : { paddingTop: "0px" };
     } else {
       //console.log("\n\n      MACOSX         NO ES SAFARI !!!!!!!!!!!!!!!!  \n\n");
-      estilContingut = auth === "1" ? { paddingTop: "6em" } : { paddingTop: "0em" };
+      estilContingut = auth === "1" ? { paddingTop: "11em" } : { paddingTop: "0em" };
     }
 
     let styleColorMenu;
@@ -134,6 +139,14 @@ class Index extends Component {
     }
 
     const styleContenidor = auth === "1" ? { marginTop: "5.5em" } : { marginTop: "2em" };
+    var infoTextBotContent = sessionStorage.getItem("infoTextBot_"+langActual);
+    
+    var infoTextBot;
+    
+    if(auth === "1" && infoTextBotContent){
+        infoTextBot = <div dangerouslySetInnerHTML={{__html: infoTextBotContent}}/>
+    }
+     
 
     return (
       <div>
@@ -176,11 +189,11 @@ class Index extends Component {
 
             {/* Avisos Front */}
             <AvisosFront />
-
+            
             <div id="contingutok" className="pt-2">
               <Switch>
                 <Route exact path="/" component={Inici} refresh="true" />
-
+             
                 <Route exact path="/auth" component={Accessibilitat} refresh="true" />
 
                 <Route path="/accessibilitat" component={Accessibilitat} />
@@ -327,6 +340,9 @@ class Index extends Component {
                 />
               </Switch>
             </div>
+            
+            {infoTextBot}
+            
           </div>
           {/* Fi Zona Contingut */}
 

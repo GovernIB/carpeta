@@ -37,7 +37,7 @@ public class EntitatRefList extends RefListBase
     this.traduccioEjb = __clone.traduccioEjb;
   }
   public EntitatRefList() {
-    setSelects(new Select<?>[] { CODI.select, CODIDIR3.select });
+    setSelects(new Select<?>[] { CODI.select, CODIDIR3.select, TEXTINFOBOTCA.select });
     addCampTraduible(NOMID.select);
     addCampTraduible(DESCRIPCIOID.select);
     addCampTraduible(LOGINTEXTID.select);

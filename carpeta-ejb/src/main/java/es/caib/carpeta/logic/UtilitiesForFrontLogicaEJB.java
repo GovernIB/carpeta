@@ -567,4 +567,16 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
     }
 
+    @Override
+    public String getInfoTop(String codiEntitat, String lang) throws I18NException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getInfoBottom(String codiEntitat, String lang) throws I18NException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

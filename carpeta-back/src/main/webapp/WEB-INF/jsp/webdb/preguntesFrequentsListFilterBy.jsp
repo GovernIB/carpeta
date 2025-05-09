@@ -125,12 +125,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.RESPOSTACA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="preguntesFrequents.respostaCa" var="respostaCa" />
-              <fmt:message key="genapp.form.searchby" var="cercaperrespostaCa" >                
-                 <fmt:param value="${respostaCa}"/>
+              <fmt:message key="preguntesFrequents.RespostaCa" var="RespostaCa" />
+              <fmt:message key="genapp.form.searchby" var="cercaperRespostaCa" >                
+                 <fmt:param value="${RespostaCa}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${respostaCa}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperrespostaCa}" path="respostaCa" />
+              <span class="add-on"><c:out value="${RespostaCa}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperRespostaCa}" path="RespostaCa" />
             </div>
 
 
@@ -138,12 +138,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.RESPOSTAES)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="preguntesFrequents.respostaEs" var="respostaEs" />
-              <fmt:message key="genapp.form.searchby" var="cercaperrespostaEs" >                
-                 <fmt:param value="${respostaEs}"/>
+              <fmt:message key="preguntesFrequents.RespostaEs" var="RespostaEs" />
+              <fmt:message key="genapp.form.searchby" var="cercaperRespostaEs" >                
+                 <fmt:param value="${RespostaEs}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${respostaEs}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperrespostaEs}" path="respostaEs" />
+              <span class="add-on"><c:out value="${RespostaEs}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperRespostaEs}" path="RespostaEs" />
             </div>
 
 

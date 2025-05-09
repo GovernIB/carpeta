@@ -197,6 +197,26 @@
           ${entitat.accessibilitatEs}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOTOPES)}">
+          <td>
+          ${entitat.textInfoTopEs}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOTOPCA)}">
+          <td>
+          ${entitat.TextInfoTopCa}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOBOTES)}">
+          <td>
+          ${entitat.TextInfoBotEs}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTINFOBOTCA)}">
+          <td>
+          ${entitat.TextInfoBotCa}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->
