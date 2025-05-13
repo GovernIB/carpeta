@@ -77,6 +77,9 @@ public interface Entitat extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getCommit();
 	public void setCommit(java.lang.String _commit_);
 
+	public boolean isShowLastLogin();
+	public void setShowLastLogin(boolean _ShowLastLogin_);
+
 	public java.lang.String getAvisLegalCa();
 	public void setAvisLegalCa(java.lang.String _avisLegalCa_);
 

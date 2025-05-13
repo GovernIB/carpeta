@@ -2496,6 +2496,32 @@
         },
         {
           "isAutoIncrement": false,
+          "sqlName": "showlastlogin",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Mostrar darrer Login",
+            "es": "Mostrar ultimo login"
+          },
+          "javaName": "ShowLastLogin",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "false",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
           "sqlName": "avislegalca",
           "sqlType": 12,
           "size": 2147483647,
@@ -2606,8 +2632,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Text Informatiu Top Castellà",
-            "es": "Texto Informativo Top Castellano"
+            "ca": "Text Informatiu Superior Castellà",
+            "es": "Texto Informativo Superior Castellano"
           },
           "javaName": "textInfoTopEs",
           "javaType": "java.lang.String",
@@ -2631,8 +2657,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Text Informatiu Top Català",
-            "es": "Texto Informativo Top Catalan"
+            "ca": "Text Informatiu Superior Català",
+            "es": "Texto Informativo Superior Catalan"
           },
           "javaName": "TextInfoTopCa",
           "javaType": "java.lang.String",
@@ -2656,8 +2682,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Text Informatiu Bottom Castellà",
-            "es": "Texto Informativo Bottom Castellano"
+            "ca": "Text Informatiu Inferior Castellà",
+            "es": "Texto Informativo Inferior Castellano"
           },
           "javaName": "TextInfoBotEs",
           "javaType": "java.lang.String",
@@ -2681,8 +2707,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Text Informatiu Bottom Catala",
-            "es": "Texto Informativo Bottom Catalan"
+            "ca": "Text Informatiu Inferior Catala",
+            "es": "Texto Informativo Inferior Catalan"
           },
           "javaName": "TextInfoBotCa",
           "javaType": "java.lang.String",
@@ -5817,14 +5843,12 @@
       "nameJava": "UsuariEntitat",
       "shortName": "usuent",
       "labels": {
-        "en": "Entity Administrator",
-        "ca": "Administrador d\u0027Entitat",
-        "es": "Administrador de Entidad"
+        "ca": "Usuari Entitat",
+        "es": "Usuario Entidad"
       },
       "labelsPlural": {
-        "en": "Entity Administrators",
-        "ca": "Administradors d\u0027Entitat",
-        "es": "Administradores de Entidad"
+        "ca": "Usuaris Entitat",
+        "es": "Usuarios Entidad"
       },
       "generate": true,
       "fileMappingEntity": false,
@@ -5842,9 +5866,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "en": "ID",
-            "ca": "ID",
-            "es": "ID"
+            "ca": "UsuariEntitatID",
+            "es": "UsuariEntitatID"
           },
           "javaName": "usuariEntitatID",
           "javaType": "long",
@@ -5870,7 +5893,6 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "en": "User",
             "ca": "Usuari",
             "es": "Usuario"
           },
@@ -5910,7 +5932,6 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "en": "Entity",
             "ca": "Entitat",
             "es": "Entidad"
           },
@@ -5922,7 +5943,7 @@
           "transientField": false,
           "filter": false,
           "orderBy": 0,
-          "groupBy": true,
+          "groupBy": false,
           "webFieldInfo": {
             "webtype": 3,
             "foreignKey": {
@@ -5949,9 +5970,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "en": "Active",
-            "ca": "Actiu",
-            "es": "Activo"
+            "ca": "actiu",
+            "es": "actiu"
           },
           "javaName": "actiu",
           "javaType": "boolean",

@@ -66,6 +66,10 @@ public class EntitatValidator<I extends Entitat>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENTITATDESCFRONT)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,SHOWLASTLOGIN, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SHOWLASTLOGIN)));
+
     // Check size
     if (__vr.getFieldErrorCount(CODI) == 0) {
       java.lang.String __codi = __target__.getCodi();

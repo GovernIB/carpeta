@@ -116,6 +116,9 @@ public class EntitatJPA implements Entitat {
     @Column(name="commit",length = 255)
     java.lang.String commit;
 
+    @Column(name="showlastlogin",nullable = false,length = 1)
+    boolean ShowLastLogin = false;
+
     @Column(name="avislegalca",length = 2147483647)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
@@ -163,7 +166,7 @@ public class EntitatJPA implements Entitat {
   }
 
   /** Constructor amb tots els camps  */
-  public EntitatJPA(long entitatID , long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit , java.lang.String avisLegalCa , java.lang.String avisLegalEs , java.lang.String accessibilitatCa , java.lang.String accessibilitatEs , java.lang.String textInfoTopEs , java.lang.String TextInfoTopCa , java.lang.String TextInfoBotEs , java.lang.String TextInfoBotCa) {
+  public EntitatJPA(long entitatID , long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit , boolean ShowLastLogin , java.lang.String avisLegalCa , java.lang.String avisLegalEs , java.lang.String accessibilitatCa , java.lang.String accessibilitatEs , java.lang.String textInfoTopEs , java.lang.String TextInfoTopCa , java.lang.String TextInfoBotEs , java.lang.String TextInfoBotCa) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -189,6 +192,7 @@ public class EntitatJPA implements Entitat {
     this.fitxerCssID=fitxerCssID;
     this.context=context;
     this.commit=commit;
+    this.ShowLastLogin=ShowLastLogin;
     this.avisLegalCa=avisLegalCa;
     this.avisLegalEs=avisLegalEs;
     this.accessibilitatCa=accessibilitatCa;
@@ -199,7 +203,7 @@ public class EntitatJPA implements Entitat {
     this.TextInfoBotCa=TextInfoBotCa;
 }
   /** Constructor sense valors autoincrementals */
-  public EntitatJPA(long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit , java.lang.String avisLegalCa , java.lang.String avisLegalEs , java.lang.String accessibilitatCa , java.lang.String accessibilitatEs , java.lang.String textInfoTopEs , java.lang.String TextInfoTopCa , java.lang.String TextInfoBotEs , java.lang.String TextInfoBotCa) {
+  public EntitatJPA(long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit , boolean ShowLastLogin , java.lang.String avisLegalCa , java.lang.String avisLegalEs , java.lang.String accessibilitatCa , java.lang.String accessibilitatEs , java.lang.String textInfoTopEs , java.lang.String TextInfoTopCa , java.lang.String TextInfoBotEs , java.lang.String TextInfoBotCa) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.codi=codi;
@@ -224,6 +228,7 @@ public class EntitatJPA implements Entitat {
     this.fitxerCssID=fitxerCssID;
     this.context=context;
     this.commit=commit;
+    this.ShowLastLogin=ShowLastLogin;
     this.avisLegalCa=avisLegalCa;
     this.avisLegalEs=avisLegalEs;
     this.accessibilitatCa=accessibilitatCa;
@@ -234,7 +239,7 @@ public class EntitatJPA implements Entitat {
     this.TextInfoBotCa=TextInfoBotCa;
 }
   /** Constructor dels valors Not Null */
-  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront) {
+  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , boolean ShowLastLogin) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.codi=codi;
@@ -248,6 +253,7 @@ public class EntitatJPA implements Entitat {
     this.iconID=iconID;
     this.webEntitat=webEntitat;
     this.entitatDescFront=entitatDescFront;
+    this.ShowLastLogin=ShowLastLogin;
 }
   public EntitatJPA(Entitat __bean) {
     this.setEntitatID(__bean.getEntitatID());
@@ -275,6 +281,7 @@ public class EntitatJPA implements Entitat {
     this.setFitxerCssID(__bean.getFitxerCssID());
     this.setContext(__bean.getContext());
     this.setCommit(__bean.getCommit());
+    this.setShowLastLogin(__bean.isShowLastLogin());
     this.setAvisLegalCa(__bean.getAvisLegalCa());
     this.setAvisLegalEs(__bean.getAvisLegalEs());
     this.setAccessibilitatCa(__bean.getAccessibilitatCa());
@@ -468,6 +475,13 @@ public class EntitatJPA implements Entitat {
 	};
 	public void setCommit(java.lang.String _commit_) {
 		this.commit = _commit_;
+	};
+
+	public boolean isShowLastLogin() {
+		return(ShowLastLogin);
+	};
+	public void setShowLastLogin(boolean _ShowLastLogin_) {
+		this.ShowLastLogin = _ShowLastLogin_;
 	};
 
 	public java.lang.String getAvisLegalCa() {
@@ -857,6 +871,7 @@ public class EntitatJPA implements Entitat {
     __tmp.setFitxerCssID(__bean.getFitxerCssID());
     __tmp.setContext(__bean.getContext());
     __tmp.setCommit(__bean.getCommit());
+    __tmp.setShowLastLogin(__bean.isShowLastLogin());
     __tmp.setAvisLegalCa(__bean.getAvisLegalCa());
     __tmp.setAvisLegalEs(__bean.getAvisLegalEs());
     __tmp.setAccessibilitatCa(__bean.getAccessibilitatCa());

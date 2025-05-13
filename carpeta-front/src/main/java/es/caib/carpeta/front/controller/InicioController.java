@@ -611,9 +611,7 @@ public class InicioController extends CommonFrontController {
         } else {
             mav.addObject("maxInactiveInterval", 30 * 60);
         }
-        
-        
-        
+
         // Registram la variable de Id de Sessió per l'enregistrament dels accesos.
         sesionHttp.setIdSessio(request.getSession().getId());
         sesionHttp.setIpAddress(request.getRemoteAddr());
@@ -630,20 +628,19 @@ public class InicioController extends CommonFrontController {
             List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
 
             // Entitat seleccionada
-            long entitatID=0;
-            String codiEntitat="";
+            long entitatID = 0;
+            String codiEntitat = "";
             EntitatJPA entitat;
-            
-            
+
             if (sesionHttp.getEntitat() != null || defaultEntityCode != null) {
                 log.info("getEntitat != null or defaultEntityCode existent.... ");
 
                 if (sesionHttp.getEntitat() != null) {
-                    log.info("getEntitat() => "+sesionHttp.getEntitat());
+                    log.info("getEntitat() => " + sesionHttp.getEntitat());
                     codiEntitat = sesionHttp.getEntitat();
                     entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
                             EntitatFields.CODI.equal(codiEntitat));
-                    
+
                     String errorDeLogin = sesionHttp.getErrorLogin();
                     mav.addObject("errorLogin", errorDeLogin);
 
@@ -652,22 +649,22 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
                     mav.addObject("errorLogin", errorDeLogin);
-                    
+
                     //Si hi ha entity code per defecte s'agafa com a entitat
                 } else if (defaultEntityCode != null) {
                     log.info("Un defaultEntityCode: ");
                     entitat = entitatEjb.findByCodi(defaultEntityCode);
                     //Agafar entitat de les properties.
                     if (entitat != null) {
-                        
+
                         entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
                                 EntitatFields.CODI.equal(defaultEntityCode));
-                        
+
                         sesionHttp.setEntitatID(entitatID);
                         sesionHttp.setEntitat(defaultEntityCode);
-                        
+
                         codiEntitat = sesionHttp.getEntitat();
-                        
+
                         mav.addObject("entitat", sesionHttp.getEntitat());
                         mav.addObject("nomEntitat", entitat.getNom());
                         mav.addObject("numEntitats", entitats.size());
@@ -678,84 +675,97 @@ public class InicioController extends CommonFrontController {
                         mav = new ModelAndView("entitat");
                         mav.addObject("entitats", entitats);
                     }
-                
-            }else {
-              //Si unicament hi ha una entitat es selecciona
-                if (entitats.size() == 1) {
-                    log.info("Una entitat seleccionada: ");
-                    codiEntitat = entitats.get(0).getCodi();
-                    entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
-                            EntitatFields.CODI.equal(codiEntitat));
 
-                    sesionHttp.setEntitatID(entitatID);
-                    sesionHttp.setEntitat(codiEntitat);
-
-                    mav.addObject("entitat", entitats.get(0).getCodi());
-                    mav.addObject("nomEntitat", entitats.get(0).getNom());
-                    mav.addObject("numEntitats", entitats.size());
-                    mav.addObject("canviarDeFront", canviardefront);
-                //Si hi ha mes de una entitat, no es selecciona entitat i es passen totes al model.
                 } else {
-                    log.info("Mes de una entitat seleccionada: ");
-                    mav = new ModelAndView("entitat");
-                    mav.addObject("entitats", entitats);
-                    mav.addObject("numEntitats", entitats.size());
-                    mav.addObject("canviarDeFront", canviardefront);
-                    List<Idioma> idiomes = utilsEjb.getIdiomes();
-                    List<Idioma> idiomesActius = new ArrayList<>();
-                    for (Idioma idioma : idiomes) {
-                        if (idioma.isSuportat()) {
-                            idiomesActius.add(idioma);
+                    //Si unicament hi ha una entitat es selecciona
+                    if (entitats.size() == 1) {
+                        log.info("Una entitat seleccionada: ");
+                        codiEntitat = entitats.get(0).getCodi();
+                        entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
+                                EntitatFields.CODI.equal(codiEntitat));
+
+                        sesionHttp.setEntitatID(entitatID);
+                        sesionHttp.setEntitat(codiEntitat);
+
+                        mav.addObject("entitat", entitats.get(0).getCodi());
+                        mav.addObject("nomEntitat", entitats.get(0).getNom());
+                        mav.addObject("numEntitats", entitats.size());
+                        mav.addObject("canviarDeFront", canviardefront);
+                        //Si hi ha mes de una entitat, no es selecciona entitat i es passen totes al model.
+                    } else {
+                        log.info("Mes de una entitat seleccionada: ");
+                        mav = new ModelAndView("entitat");
+                        mav.addObject("entitats", entitats);
+                        mav.addObject("numEntitats", entitats.size());
+                        mav.addObject("canviarDeFront", canviardefront);
+                        List<Idioma> idiomes = utilsEjb.getIdiomes();
+                        List<Idioma> idiomesActius = new ArrayList<>();
+                        for (Idioma idioma : idiomes) {
+                            if (idioma.isSuportat()) {
+                                idiomesActius.add(idioma);
+                            }
                         }
+                        mav.addObject("idiomes", idiomesActius);
+                        mav.addObject("langActual", lang);
                     }
-                    mav.addObject("idiomes", idiomesActius);
-                    mav.addObject("langActual", lang);
-                }
-            }
-                
-                if(entitatID != 0) {
-                    entitat = (EntitatJPA) entitatEjb.findByPrimaryKey(entitatID);
-                    mav.addObject("infoTextTop_ca",(entitat.getTextInfoTopCa()));
-                    mav.addObject("infoTextTop_es",entitat.getTextInfoTopEs());
-                    mav.addObject("infoTextBot_ca",entitat.getTextInfoBotCa());
-                    mav.addObject("infoTextBot_es",entitat.getTextInfoBotEs());
-                }
-                
-                
-                
-
-            //Implementacio de carrega de informacio de darrer login
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            Object principal = authentication.getPrincipal();
-            
-            //Per defecte agafa el valor de la propietat global
-            Boolean showLastLogin = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb));
-            
-            //Si la prop global showLastLogin es fals, i userId te entitat seleccionada, comprova la prop de la Entitat
-            if(!showLastLogin && entitatID != 0) {
-                showLastLogin = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb, entitatID));
-            }
-                
-            if (principal != null && principal instanceof UsuarioAutenticado && showLastLogin) {
-                UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
-                List<Acces> accessos;
-                if(entitatID != 0) {
-                    accessos = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(), 3, entitatID);
-                }else {
-                    accessos = accesEjb.getLastAcces(usuarioAutenticado.getUsuarioClave().getNif(), 3);
                 }
 
-                LocalDateTime lastAccessLocalDateTime = accessos.get(1).getDataAcces().toLocalDateTime();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                //Implementacio de carrega de informacio de darrer login
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                Object principal = authentication.getPrincipal();
 
-                String lastAccessDateTime = lastAccessLocalDateTime.format(formatter);
-                
-                mav.addObject("lastAccessDateTime", lastAccessDateTime);
-                sesionHttp.setLastAccessDateTime(lastAccessDateTime);
+                if (principal != null && principal instanceof UsuarioAutenticado) {
+
+                    // Entitat seleccionada
+                    if (entitatID != 0) {
+                        entitat = (EntitatJPA) entitatEjb.findByPrimaryKey(entitatID);
+                        mav.addObject("infoTextTop_ca", (entitat.getTextInfoTopCa()));
+                        mav.addObject("infoTextTop_es", entitat.getTextInfoTopEs());
+                        mav.addObject("infoTextBot_ca", entitat.getTextInfoBotCa());
+                        mav.addObject("infoTextBot_es", entitat.getTextInfoBotEs());
+                    }
+
+                    //Llistat d'accessos per recuperar el darrer Login
+                    List<Acces> accessos = new ArrayList<Acces> ();
+
+                    Boolean showLastLoginGlobal = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb));
+
+                    // Si el show las login global esta activat, es mostra en tots els casos.
+                    if (showLastLoginGlobal) {
+                        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
+                        if (entitatID != 0) {
+                            accessos = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(), 3,
+                                    entitatID);
+                        } else {
+                            accessos = accesEjb.getLastAcces(usuarioAutenticado.getUsuarioClave().getNif(), 3);
+                        }
+                    } else if (entitatID != 0) {
+
+                        boolean showLastLoginEntitat = entitatEjb.executeQueryOne(EntitatFields.SHOWLASTLOGIN,
+                                EntitatFields.ENTITATID.equal(entitatID));
+
+                        if (showLastLoginEntitat) {
+                            UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
+                            accessos = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(), 3,
+                                    entitatID);
+                        }
+
+                    }
+
+                    if (accessos != null && accessos.size() > 0) {
+                        LocalDateTime lastAccessLocalDateTime = accessos.get(1).getDataAcces().toLocalDateTime();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+                        String lastAccessDateTime = lastAccessLocalDateTime.format(formatter);
+
+                        mav.addObject("lastAccessDateTime", lastAccessDateTime);
+                        sesionHttp.setLastAccessDateTime(lastAccessDateTime);
+                    }
+
+                }
+
             }
-            
-
-        }} catch (Throwable e) {
+        } catch (Throwable e) {
             processExceptionHtml(e, request, response, temps);
         }
 

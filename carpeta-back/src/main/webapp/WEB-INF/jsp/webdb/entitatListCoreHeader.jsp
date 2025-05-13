@@ -87,6 +87,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COMMIT)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.COMMIT)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SHOWLASTLOGIN)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.SHOWLASTLOGIN)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGALCA)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.AVISLEGALCA)}</th>
         </c:if>

@@ -246,6 +246,9 @@ public class EntitatController
     }
 
 
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, SHOWLASTLOGIN);
+
+
     return groupByItemsMap;
   }
 

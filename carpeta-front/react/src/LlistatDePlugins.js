@@ -309,6 +309,13 @@ class LlistatDePlugins extends Component {
         if(infoTextTopContent){
             infoTextTop = <div dangerouslySetInnerHTML={{__html: infoTextTopContent}}/>;
         }
+        
+        var infoTextBot;
+        var infoTextBotContent = sessionStorage.getItem("infoTextBot_"+langActual);
+
+        if(infoTextBotContent){
+            infoTextBot = <div dangerouslySetInnerHTML={{__html: infoTextBotContent}}/>
+        }
 
         return (<>
                 <div className="titolPaginaApp visioMobil">
@@ -356,6 +363,8 @@ class LlistatDePlugins extends Component {
                     {botoTornarEnrera}
 
                 </div>
+                
+                {infoTextBot}
             </>
 
         );

@@ -341,7 +341,6 @@ class Index extends Component {
               </Switch>
             </div>
             
-            {infoTextBot}
             
           </div>
           {/* Fi Zona Contingut */}

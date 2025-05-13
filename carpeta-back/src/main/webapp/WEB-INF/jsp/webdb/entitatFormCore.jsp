@@ -730,6 +730,28 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.SHOWLASTLOGIN)}">
+        <tr id="entitat_ShowLastLogin_rowid">
+          <td id="entitat_ShowLastLogin_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.SHOWLASTLOGIN])?'entitat.ShowLastLogin':__theForm.labels[EntitatFields.SHOWLASTLOGIN]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EntitatFields.SHOWLASTLOGIN]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SHOWLASTLOGIN]}" ></i>
+              </c:if>
+            </td>
+          <td id="entitat_ShowLastLogin_columnvalueid">
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.SHOWLASTLOGIN)}" >
+              <form:errors path="entitat.ShowLastLogin" cssClass="errorField alert alert-danger" />
+              <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SHOWLASTLOGIN)? 'false' : 'true'}" path="entitat.ShowLastLogin" />
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.SHOWLASTLOGIN)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.entitat.ShowLastLogin}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.AVISLEGALCA)}">
         <tr id="entitat_avisLegalCa_rowid">
           <td id="entitat_avisLegalCa_columnlabelid">

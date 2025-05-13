@@ -111,6 +111,10 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new StringField(getQueryPath(), EntitatFields.COMMIT);
   }
 
+  public BooleanField SHOWLASTLOGIN() {
+    return new BooleanField(getQueryPath(), EntitatFields.SHOWLASTLOGIN);
+  }
+
   public StringField AVISLEGALCA() {
     return new StringField(getQueryPath(), EntitatFields.AVISLEGALCA);
   }
