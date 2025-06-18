@@ -115,8 +115,8 @@ class BarraMenu extends Component {
 		console.log("DataLogin -> "+dataDarrerLogin);
 		if(dataDarrerLogin && auth === "1"){
            lastAccessDate =<div className="col-7 pr-0 d-flex align-items-center justify-content-end"> 
-                            <div id="lastAccessDate" className="border border-white ocultarMobil ">
-                                <span id="lastAccessDateText" className="pl-2 dataDarrerLogin h4 mx-2 text-nowrap">{darrerLogin}: {dataDarrerLogin}</span>
+                            <div id="lastAccessDate" className="ocultarMobil ">
+                                <span id="lastAccessDateText" className="pl-2 dataDarrerLogin h4 mx-2 text-nowrap" style={{ fontSize: "0.85rem", opacity: 0.85 }}>{darrerLogin}: {dataDarrerLogin}</span>
                              </div>
                              </div>;
         }else{
