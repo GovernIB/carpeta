@@ -137,6 +137,11 @@
                   <form:option value="" ></form:option>
               </c:if>
             </c:if>
+          <script>
+              $(document).ready(function() {
+                  $('#logCarpeta_pluginID').select2();
+              });
+          </script>
           </form:select>
           </c:if>
            </td>

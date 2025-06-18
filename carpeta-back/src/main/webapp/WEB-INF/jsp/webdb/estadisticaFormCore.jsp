@@ -121,6 +121,11 @@
                   <form:option value="" ></form:option>
               </c:if>
             </c:if>
+          <script>
+              $(document).ready(function() {
+                  $('#estadistica_pluginID').select2();
+              });
+          </script>
           </form:select>
           </c:if>
            </td>
