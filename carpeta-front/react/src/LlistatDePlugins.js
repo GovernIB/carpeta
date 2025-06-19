@@ -304,6 +304,7 @@ class LlistatDePlugins extends Component {
         
         var infoTextTopContent = sessionStorage.getItem("infoTextTop_"+langActual);
         
+        /*Aqui es configuren el text superior i inferior*/
         var infoTextTop;
        
         if(infoTextTopContent){

@@ -252,6 +252,12 @@
 			<scope>provided</scope>
 		</dependency>
 		-->
+		
+		<dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>

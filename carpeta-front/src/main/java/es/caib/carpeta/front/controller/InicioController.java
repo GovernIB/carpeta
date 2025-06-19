@@ -21,6 +21,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.text.StringEscapeUtils;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
@@ -719,10 +723,23 @@ public class InicioController extends CommonFrontController {
                     // Entitat seleccionada
                     if (entitatID != 0) {
                         entitat = (EntitatJPA) entitatEjb.findByPrimaryKey(entitatID);
-                        mav.addObject("infoTextTop_ca", (entitat.getTextInfoTopCa()));
+                        mav.addObject("infoTextTop_ca", entitat.getTextInfoTopCa());
                         mav.addObject("infoTextTop_es", entitat.getTextInfoTopEs());
                         mav.addObject("infoTextBot_ca", entitat.getTextInfoBotCa());
                         mav.addObject("infoTextBot_es", entitat.getTextInfoBotEs());
+                        
+                        /*
+                        mav.addObject("infoTextTop_ca", StringEscapeUtils.escapeHtml4(entitat.getTextInfoTopCa()));
+                        mav.addObject("infoTextTop_es", StringEscapeUtils.escapeHtml4(entitat.getTextInfoTopEs()));
+                        mav.addObject("infoTextBot_ca", StringEscapeUtils.escapeHtml4(entitat.getTextInfoBotCa()));
+                        mav.addObject("infoTextBot_es", StringEscapeUtils.escapeHtml4(entitat.getTextInfoBotEs()));
+                        
+                        mav.addObject("infoTextTop_ca", escapeTextButKeepTags(entitat.getTextInfoTopCa()));
+                        mav.addObject("infoTextTop_es", escapeTextButKeepTags(entitat.getTextInfoTopEs()));
+                        mav.addObject("infoTextBot_ca", escapeTextButKeepTags(entitat.getTextInfoBotCa()));
+                        mav.addObject("infoTextBot_es", escapeTextButKeepTags(entitat.getTextInfoBotEs()));
+                        */
+                        
                     }
 
                     //Llistat d'accessos per recuperar el darrer Login
@@ -789,6 +806,32 @@ public class InicioController extends CommonFrontController {
 
         return mav;
 
+    }
+    
+    public static String escapeTextButKeepTags(String html) {
+        Document doc = Jsoup.parse(html); // només body, no <html><head> etc.
+        sanitizeNode(doc);
+        return doc.html(); // només retornem el contingut dins del <body>
+    }
+    
+    private static void sanitizeNode(Node node) {
+        if (node instanceof TextNode) {
+            TextNode text = (TextNode) node;
+            // Escapem només el contingut del text, no les etiquetes
+            text.text(escapeHtml(text.text()));
+        } else {
+            for (Node child : node.childNodes()) {
+                sanitizeNode(child);
+            }
+        }
+    }
+    
+    private static String escapeHtml(String text) {
+        return text
+            .replace("&", "&amp;")
+            .replace("\"", "&quot;")
+            .replace("'", "&#39;");
+            // No escapem < ni > perquè són part de tags
     }
 
 }
