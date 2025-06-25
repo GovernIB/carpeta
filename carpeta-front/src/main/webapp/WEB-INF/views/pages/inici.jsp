@@ -4,6 +4,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+private String echo(String str){
+    
+    return str;
+}
+
+public static String escapeJsString(String input) {
+    if (input == null) return "";
+    return input.replace("\\", "\\\\")
+               .replace("'", "\\'")
+               .replace("\"", "\\\"")
+               .replace("\n", "\\n")
+               .replace("\r", "\\r");
+}
+
+%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="${pageContext.response.locale.language}">
   <head>
@@ -160,10 +176,15 @@
 				sessionStorage.setItem('pagTornar', '${pageContext.request.contextPath}');
 				sessionStorage.setItem('cssExtern', '${pageContext.request.contextPath}/webui/customcss/${entitat}');
 				
-				sessionStorage.setItem('infoTextTop_ca', '${infoTextTop_ca}');
-				sessionStorage.setItem('infoTextTop_es', '${infoTextTop_es}');
-	            sessionStorage.setItem('infoTextBot_ca', '${infoTextBot_ca}');
-                sessionStorage.setItem('infoTextBot_es', '${infoTextBot_es}');
+				
+				
+				
+				sessionStorage.setItem('infoTextTop_ca', <%="'"+escapeJsString((String) request.getAttribute("infoTextTop_ca"))+"'"%>);
+	            sessionStorage.setItem('infoTextTop_es', <%="'"+escapeJsString((String) request.getAttribute("infoTextTop_es"))+"'"%>);
+	            sessionStorage.setItem('infoTextBot_ca', <%="'"+escapeJsString((String) request.getAttribute("infoTextBot_ca"))+"'"%>);
+	            sessionStorage.setItem('infoTextBot_es', <%="'"+escapeJsString((String) request.getAttribute("infoTextBot_es"))+"'"%>);
+
+				
 
 			</script>
 	  </sec:authorize> 
