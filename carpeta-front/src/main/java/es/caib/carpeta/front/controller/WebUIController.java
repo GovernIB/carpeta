@@ -33,6 +33,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,6 +41,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import es.caib.carpeta.commons.utils.Version;
 
 
 /**
@@ -554,6 +556,29 @@ public class WebUIController extends PluginFrontController {
         final int enllazType = es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL;
 
         getEnllazosJSON(request, response, enllazType);
+    }
+    
+    @RequestMapping(value = "/versiocarpeta", method = RequestMethod.GET)
+    public void getVersioCarpeta(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            Version versio = new Version();
+            versio.init();
+            final String versioCarpeta = versio.getVersion();
+
+         // Passar enllazosInfo a 
+            Gson gson = new Gson();
+            String json = gson.toJson(versioCarpeta);
+    
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+    
+            byte[] utf8JsonString = json.getBytes("UTF8");
+            
+            response.getOutputStream().write(utf8JsonString);
+        } catch (Throwable e) {
+            processExceptionRest(e, request, response);
+        }
+
     }
 
 

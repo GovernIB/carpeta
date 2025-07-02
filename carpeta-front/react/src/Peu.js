@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import DadesEntitat from './DadesEntitat';
 import EnllasosXarxes from "./EnllasosXarxes";
+import VersioCarpeta from "./VersioCarpeta";
 import EnllasosPeuCentral from './EnllasosPeuCentral';
 import {Link} from "react-router-dom";
 import axios from "axios";
@@ -112,10 +113,14 @@ class Peu extends Component {
 
 						<EnllasosPeuCentral autenticat={autenticat} />
 					</div>
-
-					<div className="imc-peu-xarxes">
-						<EnllasosXarxes/>
-					</div>
+                    <div className="peu-xarxes-versio">
+    					<div className="imc-peu-xarxes">
+    						<EnllasosXarxes/>
+    					</div>
+    					<div className="imc-peu-versio">
+    					   <VersioCarpeta/>
+    				    </div>
+				    </div>
 				</div>
 
 				<div className="modal fade" id="ajudaModal" tabIndex="-1" aria-hidden="true">

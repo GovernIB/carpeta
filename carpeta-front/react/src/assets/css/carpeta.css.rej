@@ -1,0 +1,19 @@
+diff a/carpeta-front/react/src/assets/css/carpeta.css b/carpeta-front/react/src/assets/css/carpeta.css	(rejected hunks)
+@@ -634,6 +634,17 @@
+ .imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
+ 	width: 33%;
+ }
++
++.imc-peu-xarxes {
++    display: flex;
++    flex-direction: column;
++    gap: 0.5rem;
++}
++
++.imc-peu-xarxes > div {
++    width: 100%;
++    box-sizing: border-box;
++}
+ .mRapidGlobal {
+ 	/*padding-left: 3.5em !important;*/
+ 	width: calc(100% - 8em);

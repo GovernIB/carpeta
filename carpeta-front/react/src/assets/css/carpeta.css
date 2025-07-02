@@ -631,9 +631,26 @@ a.imc-bt-xarxa:hover {
 .imc--canviarEntitat::before {
 	background-image: url(../images/canviarEntitat.png);
 }
-.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
+.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes, .imc-peu-versio {
 	width: 33%;
 }
+
+.imc-peu-xarxes,
+.imc-peu-versio {
+  display: block;
+  width: auto;               /* Permet que el contingut es centri naturalment */
+}
+
+.peu-xarxes-versio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* Centra horitzontalment els fills */
+  justify-content: center;   /* Opcional: centra verticalment si cal */
+  gap: 0.5rem;               /* Separació entre xarxes i versió */
+  width: 33%;
+  text-align: center;        /* Centra text si n'hi ha */
+}
+
 .mRapidGlobal {
 	/*padding-left: 3.5em !important;*/
 	width: calc(100% - 8em);
@@ -1106,7 +1123,7 @@ thead>tr>th.sorting {
 	float: none!important;
 	width: 95%;
 }
-.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
+.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes, .imc-peu-versio, .peu-xarxes-versio {
 	width: 100%!important;
 }
 }
@@ -1599,7 +1616,7 @@ body {
 	.imc-peu .imc--contingut {
 		flex-direction: column;
 	}
-	.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
+	.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes, .imc-peu-versio, .peu-xarxes-versio {
 		width: 100%;
 		font-size: 100%;
 		text-align: center;
