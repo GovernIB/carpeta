@@ -239,9 +239,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-text</artifactId>
-          <version>1.10.0</version> <!-- o l'última versió disponible -->
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.10.0</version>            <!-- o l'última versió disponible -->
         </dependency>
         <!-- Sistra1 -->
         <!--
@@ -252,8 +252,8 @@
 			<scope>provided</scope>
 		</dependency>
 		-->
-		
-		<dependency>
+
+        <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
         </dependency>
@@ -265,6 +265,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <packagingExcludes>
+                        <!-- Requereix afegir mòdul 'org.jsoup' a jboss-deployment-structure.xml -->
+                        **/jsoup*redhat*.jar,
+                    </packagingExcludes>
+                </configuration>
+                
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>

@@ -381,6 +381,14 @@
                         **/istack-commons-runtime-*.redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.jboss.logging.commons.logging' a jboss-deployment-structure.xml -->
                          **/commons-logging-jboss-logging*redhat*.jar,
+                        <!-- Exclusió substituida per com.sun.xml.bind -->
+                        **/jaxb-core-2.3.0.jar
+                        <!-- Requereix afegir mòdul 'javax.mail.api' a jboss-deployment-structure.xml -->
+                        **/javax.mail*redhat*.jar,
+
+                        **/jsr311-api-1.1.1.jar
+                        **/javax.activation-api-1.2.0.jar
+                        **/jaxb-core-2.3.0.1.jar
                     </packagingExcludes>
                     
                     

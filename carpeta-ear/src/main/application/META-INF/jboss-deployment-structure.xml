@@ -17,8 +17,8 @@
             <module name="org.keycloak.keycloak-wildfly-adapter" optional="TRUE"/>
             <module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE"/>
             <module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE"/>
-            
-            
+
+
             <!-- Afegir dins del fitxer jboss-deployment-structure.xml en l'apartat de jboss-deployment-structure>>deployment>>dependencies -->
             <module name="org.codehaus.woodstox" export="TRUE"/>
             <module name="org.apache.ws.security" export="TRUE"/>
@@ -41,14 +41,19 @@
             <module name="com.sun.xml.bind" export="TRUE"/>
             <module name="javax.wsdl4j.api" export="TRUE"/>
             <module name="org.apache.commons.codec" export="TRUE"/>
-            
+            <module name="com.sun.xml.bind" export="TRUE"/>
+            <module name="javax.mail.api" export="TRUE"/>
             <module name="org.apache.cxf" export="true"/>
             <module name="org.apache.cxf.impl" export="true"/>
-            
-            
-            <module name="com.sun.istack" export="TRUE"/> 
-            
+            <module name="com.sun.istack" export="TRUE"/>
+
             <module name="org.jboss.logging.commons.logging" export="TRUE"/>
+
+            <module name="javax.activation.api" export="TRUE"/>
+            <module name="javax.ws.rs.api" export="TRUE"/>
+            <module name="javax.ejb.api" export="TRUE"/>
+            <module name="com.sun.xml.bind" export="TRUE"/>
+
         </dependencies>
     </deployment>
     <sub-deployment name="carpeta-back.war">
@@ -56,5 +61,10 @@
             <module name="org.apache.commons.beanutils" export="TRUE"/>
             <module name="org.apache.commons.collections" export="TRUE"/>
         </dependencies>
-   </sub-deployment>
+    </sub-deployment>
+    <sub-deployment name="carpeta-front.war">
+        <dependencies>
+            <module name="org.jsoup" export="TRUE"/>
+        </dependencies>
+    </sub-deployment>
 </jboss-deployment-structure>
