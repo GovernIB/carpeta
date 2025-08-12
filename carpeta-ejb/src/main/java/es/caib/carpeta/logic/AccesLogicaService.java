@@ -17,6 +17,7 @@ import java.util.List;
  * Created by Fundació BIT.
  *
  * @author mgonzalez Date: 16/12/2020
+ * @author anadal Date: 11/08/2025
  */
 @Local
 public interface AccesLogicaService extends AccesService {
@@ -24,14 +25,18 @@ public interface AccesLogicaService extends AccesService {
 
     @PermitAll
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
-            Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat, String idSessio) throws I18NException;
+            Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat, String idSessio)
+            throws I18NException;
 
-    /* Llistat de accesos entre dues dates ordenat per data descendent */
+    /** Llistat de accesos entre dues dates ordenat per data descendent */
     public List<Acces> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException;
-    
-    /* Retorna el penultim acces d'un usuari especific (per poder veure el seu darrer inici de sesio previ)*/
-    public List<Acces> getLastAcces(String nif, int nAccessos) throws I18NException;
-    
-    public List<Acces> getLastAccesByEntity(String nif, int nAccessos, long entitatId) throws I18NException;
+
+    /**
+     * Retorna el penultim acces d'un usuari especific (per poder veure el seu
+     * darrer inici de sesio previ)
+     */
+    public Acces getLastAcces(String nif) throws I18NException;
+
+    public Acces getLastAccesByEntity(String nif, long entitatId) throws I18NException;
 
 }
