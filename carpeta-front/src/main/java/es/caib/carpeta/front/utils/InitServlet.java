@@ -2,7 +2,6 @@ package es.caib.carpeta.front.utils;
 
 
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.front.pluginlogin.IPluginLogin;
 
 import org.apache.log4j.Logger;
 

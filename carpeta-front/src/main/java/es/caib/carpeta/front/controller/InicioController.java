@@ -18,9 +18,8 @@ import es.caib.carpeta.persistence.EntitatJPA;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.text.StringEscapeUtils;
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.i18n.I18NDateTimeFormat;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
@@ -44,9 +43,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -721,7 +717,9 @@ public class InicioController extends CommonFrontController {
                 // Entitat seleccionada
                 if (entitatID != 0) {
                     entitat = (EntitatJPA) entitatEjb.findByPrimaryKey(entitatID);
-                    log.info("Text CA = [" + entitat.getTextInfoTopCa() + "]");
+                    if (log.isDebugEnabled()) {
+                        log.debug("Text CA = [" + entitat.getTextInfoTopCa() + "]");
+                    }
 
                     mav.addObject("infoTextTop_ca", entitat.getTextInfoTopCa());
                     mav.addObject("infoTextTop_es", entitat.getTextInfoTopEs());
@@ -729,8 +727,8 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("infoTextBot_es", entitat.getTextInfoBotEs());
                 }
 
-                //Llistat d'accessos per recuperar el darrer Login
-                List<Acces> accessos = new ArrayList<Acces>();
+                // Acces per recuperar el darrer Login
+                final Acces lastAccess;
 
                 Boolean showLastLoginGlobal = Boolean.valueOf(EjbManager.getShowLastLogin(propietatGlobalEjb));
 
@@ -738,10 +736,9 @@ public class InicioController extends CommonFrontController {
                 if (showLastLoginGlobal) {
                     UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
                     if (entitatID != 0) {
-                        accessos = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(), 3,
-                                entitatID);
+                        lastAccess = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(), entitatID);
                     } else {
-                        accessos = accesEjb.getLastAcces(usuarioAutenticado.getUsuarioClave().getNif(), 3);
+                        lastAccess = accesEjb.getLastAcces(usuarioAutenticado.getUsuarioClave().getNif());
                     }
                 } else if (entitatID != 0) {
 
@@ -750,17 +747,24 @@ public class InicioController extends CommonFrontController {
 
                     if (showLastLoginEntitat) {
                         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
-                        accessos = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(), 3,
+                        lastAccess = accesEjb.getLastAccesByEntity(usuarioAutenticado.getUsuarioClave().getNif(),
                                 entitatID);
+                    } else {
+                        lastAccess = null;
                     }
 
+                } else {
+                    lastAccess = null;
                 }
 
-                if (accessos != null && accessos.size() > 0) {
-                    LocalDateTime lastAccessLocalDateTime = accessos.get(1).getDataAcces().toLocalDateTime();
+                if (lastAccess != null) {
+                    /*
+                    LocalDateTime lastAccessLocalDateTime = lastAccess.getDataAcces().toLocalDateTime();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
                     String lastAccessDateTime = lastAccessLocalDateTime.format(formatter);
+                    */
+                    String lastAccessDateTime = new I18NDateTimeFormat().format(lastAccess.getDataAcces());
 
                     mav.addObject("lastAccessDateTime", lastAccessDateTime);
                     sesionHttp.setLastAccessDateTime(lastAccessDateTime);

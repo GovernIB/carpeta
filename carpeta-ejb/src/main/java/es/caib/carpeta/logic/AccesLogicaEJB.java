@@ -23,6 +23,7 @@ import java.util.List;
  * Created by Fundació BIT.
  *
  * @author mgonzalez Date: 16/12/2020
+ * @author anadal Date: 11/08/2025
  */
 @Stateless
 public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
@@ -33,8 +34,8 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
     @PermitAll
     @Override
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
-                           Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat, 
-                           String idSessio ) throws I18NException {
+            Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat, String idSessio)
+            throws I18NException {
 
         AccesJPA accesJPA = new AccesJPA();
 
@@ -44,7 +45,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
             accesJPA.setLlinatges(usuarioClave.getApellido1() + " " + usuarioClave.getApellido2());
             accesJPA.setNif(usuarioClave.getNif());
             accesJPA.setQaa(usuarioClave.getQaa());
-    
+
             // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
             // Això està be ????
             accesJPA.setMetodeAutenticacio(usuarioClave.getMetodoAutentificacion());
@@ -75,42 +76,66 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
     @Override
     public List<Acces> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException {
 
-       /* String sentencia = "select a from AccesJPA a " + "where a.dataAcces between :dataInici and :dataFi "
-                + "and a.entitat.codi = :codiEntitat " + "order by a.dataAcces desc";
-
-        TypedQuery<AccesJPA> query = getEntityManager().createQuery(sentencia, AccesJPA.class);
-        query.setParameter("dataInici", inici);
-        query.setParameter("dataFi", fi);
-        query.setParameter("codiEntitat", codiEntitat);*/
-        
+        /*
+         * String sentencia = "select a from AccesJPA a " +
+         * "where a.dataAcces between :dataInici and :dataFi " +
+         * "and a.entitat.codi = :codiEntitat " + "order by a.dataAcces desc";
+         * 
+         * TypedQuery<AccesJPA> query = getEntityManager().createQuery(sentencia,
+         * AccesJPA.class); query.setParameter("dataInici", inici);
+         * query.setParameter("dataFi", fi); query.setParameter("codiEntitat",
+         * codiEntitat);
+         */
 
         Where w1 = DATAACCES.between(new Timestamp(inici.getTime()), new Timestamp(fi.getTime()));
         AccesQueryPath aqp = new AccesQueryPath();
         Where w2 = aqp.ENTITAT().CODI().equal(codiEntitat);
-        Where w = Where.AND(w1,w2);
+        Where w = Where.AND(w1, w2);
         OrderBy order = new OrderBy(DATAACCES, OrderType.DESC);
-        return select(w,order);
+        return select(w, order);
 
-        //return query.getResultList();
+        // return query.getResultList();
 
     }
-    
-    /*Retorna el penultim acces registrat de l'usuari*/
+
+    /* Retorna el darrer acces registrat de l'usuari */
     @Override
-    public List<Acces> getLastAcces(String nif, int nAccessos) throws I18NException {
-        Where w1 = NIF.equal(nif);
+    public Acces getLastAcces(String nif) throws I18NException {
+        final int nAccessos = 2; // Hem de recuperar ara i el darrer Login
+        final Where w1 = NIF.equal(nif);
+        final Where w2 = PLUGINID.isNull(); // Si plugin==null significa que es de tipus Login
         OrderBy order = new OrderBy(DATAACCES, OrderType.DESC);
-        return select(w1,0,nAccessos,order);
-        
+        Where w = Where.AND(w1, w2);
+        List<Acces> accessos = select(w, 0, nAccessos, order);
+        if (accessos==null || accessos.isEmpty()) {
+            return null; // Si no hi ha accés, retornem null
+        } else if (accessos.size() == 1) {
+            return accessos.get(0); // Si només hi ha un accés, el retornam;
+        } else {
+            // Si hi ha més d'un accés, retornam el segon (el penúltim)
+            // Perquè el primer és l'actual i el segon és el darrer Login
+            return accessos.get(1);
+        }
     }
-    
+
     @Override
-    public List<Acces> getLastAccesByEntity(String nif, int nAccessos, long entityId) throws I18NException {
-        Where w1 = NIF.equal(nif);
-        Where w2 = ENTITATID.equal(entityId);
+    public Acces getLastAccesByEntity(String nif, long entityId) throws I18NException {
+        final int nAccessos = 2; // Per defecte, només volem l'últim accés
+        final Where w1 = NIF.equal(nif);
+        final Where w2 = ENTITATID.equal(entityId);
+        final Where w3 = PLUGINID.isNull(); // Si plugin==null significa que es de tipus Login
         OrderBy order = new OrderBy(DATAACCES, OrderType.DESC);
-        Where w3 = Where.AND(w1,w2);
-        return select(w3,0,nAccessos,order);
+        Where w = Where.AND(w1, w2, w3);
+        List<Acces> accessos = select(w, 0, nAccessos, order);
+        if (accessos==null || accessos.isEmpty()) {
+            return null; // Si no hi ha accés, retornem null
+        } else if (accessos.size() == 1) {
+            return accessos.get(0); // Si només hi ha un accés, el retornam;
+        } else {
+            // Si hi ha més d'un accés, retornam el segon (el penúltim)
+            // Perquè el primer és l'actual i el segon és el darrer Login
+            return accessos.get(1);
+        }
     }
 
 }
