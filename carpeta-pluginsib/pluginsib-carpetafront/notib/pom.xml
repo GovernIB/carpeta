@@ -116,6 +116,12 @@
 			<artifactId>resteasy-jaxrs</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<artifactId>pluginsib-utils-rest</artifactId>
+			<groupId>org.fundaciobit.pluginsib.utils</groupId>
+			<version>${pluginsib.utils.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 
