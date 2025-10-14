@@ -451,26 +451,7 @@
                          WS END -->
 					</modules>
 				</configuration>
-			</plugin>
-			<!--
-                Per arrencar/desplegar automàticament l'aplicació.
-                Documentació ús: https://codehaus-cargo.github.io/cargo/Maven2+plugin.html
-                configuració: https://codehaus-cargo.github.io/cargo/Maven2+Plugin+Reference+Guide.html
-            -->
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<configuration>
-					<skip>false</skip>
-					<deployables>
-						<deployable>
-							<properties>
-								<name>${project.build.finalName}</name>
-							</properties>
-						</deployable>
-					</deployables>
-				</configuration>
-			</plugin>
+			</plugin>			
 		</plugins>
 	</build>
 </project>
