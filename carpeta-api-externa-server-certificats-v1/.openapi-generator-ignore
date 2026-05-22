@@ -21,9 +21,8 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
-
-**/impl/*
 #_POM.XML_JA_PROCESSAT
 pom.xml
 .gitignore
-src/main/java/es/caib/carpeta/api/externa/server/certificats/v1/api/impl/CertificatsApiServiceImpl.java
+**/impl/*
+src/gen/java/es/caib/carpeta/api/externa/server/certificats/v1/api/CertificatsApi.java
