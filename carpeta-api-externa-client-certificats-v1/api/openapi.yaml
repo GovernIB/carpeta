@@ -143,7 +143,9 @@ paths:
           description: Paràmetres incorrectes
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: Error intern de servidor
       security:
       - BasicAuth: []

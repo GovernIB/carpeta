@@ -194,7 +194,11 @@
           "500" : {
             "description" : "Error intern de servidor",
             "content" : {
-              "application/json" : { }
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
             }
           }
         },

@@ -216,6 +216,55 @@
                             </configOptions>
                         </configuration>
                     </execution>
+                    
+                    
+                    <execution>
+                        <id>openapi2</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/openapi/openapi_certificats.json</inputSpec>
+                            <!-- 
+                            
+                            // "jaxrs-spec" = afegeix anotaciosn pero retorna RESPONSE
+// java-camel
+jaxrs-cxf  => retorna tipus correctes i afegeix anotacions Swagger (OpenAPI) via interface
+jaxrs-cxf-extended => retorna tipus correctes pero no afegeix anotacions Swagger (OpenAPI)
+jaxrs-cxf-cdi => Retorna response, no afegeix anotacions Swagger (OpenAPI) 
+jaxrs-jersey => Retorna response, no afegeix anotacions Swagger (OpenAPI)
+jaxrs-resteasy = afegeix anotaciosn pero retorna RESPONSE
+jaxrs-resteasy-eap = Retorna REsponse i no afegeix anotacions
+jaxrs-spec => Crea classe ni interface amb retorn RESPONSE
+                            
+                             -->
+                            
+                            <generatorName>jaxrs-cxf</generatorName>
+                            <skipValidateSpec>false</skipValidateSpec>
+ 
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <output>${project.basedir}/../carpeta-api-externa-server-certificats-v1</output>
+                            <apiPackage>es.caib.carpeta.api.externa.server.certificats.v1.api</apiPackage>
+                            <modelPackage>es.caib.carpeta.api.externa.server.certificats.v1.model</modelPackage>
+                            <invokerPackage>es.caib.carpeta.api.externa.server.certificats.v1.invoker</invokerPackage>
+                            <generateModelTests>false</generateModelTests>
+                            <generateApiTests>false</generateApiTests>
+                            <configOptions>
+                                <groupId>es.caib.carpeta</groupId>
+                                <artifactId>carpeta-api-externa-server-certificats-v1</artifactId>
+                                <artifactVersion>1.0-SNAPSHOT</artifactVersion>
+                                <artifactDescription>Carpeta - API Rest - Externa Server - Certificats v1</artifactDescription>
+                                <dateLibrary>java8</dateLibrary>
+                                <useTags>true</useTags>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <java11>true</java11>
+                                <useJakartaEe>false</useJakartaEe>
+                                <interfaceOnly>true</interfaceOnly>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    
 
                 </executions>
             </plugin>

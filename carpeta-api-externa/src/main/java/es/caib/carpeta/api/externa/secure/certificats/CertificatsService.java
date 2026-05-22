@@ -73,35 +73,34 @@ public class CertificatsService {
             method = "get")
     @ApiResponses(
             value = {
-            		@ApiResponse(
+                    @ApiResponse(
                             responseCode = "200",
                             description = "Llista d'accessos a CARPETA",
                             content = @Content(schema = @Schema(implementation = CertificatBean.class))),
-            		@ApiResponse(
+                    @ApiResponse(
                             responseCode = "400",
                             description = "Paràmetres incorrectes",
-                            content = { @Content(
+                            content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = RestExceptionInfo.class)) }),
-                   @ApiResponse(
-                           responseCode = "401",
-                           description = "No Autenticat",
-                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                   @ApiResponse(
-                           responseCode = "403",
-                           description = "No Autoritzat",
-                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-            		@ApiResponse(
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "No Autenticat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "No Autoritzat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-            		@ApiResponse(
+                    @ApiResponse(
                             responseCode = "500",
                             description = "Error no controlat",
-                            content = { @Content(
+                            content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = RestExceptionInfo.class)) })
-                    })
+                                    schema = @Schema(implementation = RestExceptionInfo.class))) })
     @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -113,19 +112,22 @@ public class CertificatsService {
                     description = "DNI o NIF de la persona de la qual volem obtenir el certificat.",
                     required = true,
                     example = "99999999X",
-                    schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni,
+                    schema = @Schema(implementation = String.class)) @QueryParam("dni")
+            String dni,
 
             @Parameter(
                     description = "Codi de l'idioma",
                     required = true,
                     example = "ca",
-                    schema = @Schema(implementation = String.class)) @QueryParam("idioma") String idiomaRequest,
+                    schema = @Schema(implementation = String.class)) @QueryParam("idioma")
+            String idiomaRequest,
             @Parameter(
                     in = ParameterIn.HEADER,
                     description = "Numero de plugin",
                     required = false,
                     example = "1",
-                    schema = @Schema(implementation = String.class)) @HeaderParam("pluginNumber") String pluginNumber) {
+                    schema = @Schema(implementation = String.class)) @HeaderParam("pluginNumber")
+            String pluginNumber) {
 
         log.info("\n\n\n DOWN HEADER pluginNumber => ]" + pluginNumber + "[  \n\n\n");
 
@@ -236,27 +238,27 @@ public class CertificatsService {
             method = "get")
     @ApiResponses(
             value = {
-            		@ApiResponse(
+                    @ApiResponse(
                             responseCode = "200",
                             description = "Llista d'accessos a CARPETA",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = CertificatInfo.class))),
-            		@ApiResponse(
+                    @ApiResponse(
                             responseCode = "400",
                             description = "Paràmetres incorrectes",
-                            content = { @Content(
+                            content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = RestExceptionInfo.class)) }),
-                   @ApiResponse(
-                           responseCode = "401",
-                           description = "No Autenticat",
-                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                   @ApiResponse(
-                           responseCode = "403",
-                           description = "No Autoritzat",
-                           content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-                    
+                                    schema = @Schema(implementation = RestExceptionInfo.class))),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "No Autenticat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "No Autoritzat",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+
                     @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
@@ -264,25 +266,27 @@ public class CertificatsService {
                     @ApiResponse(
                             responseCode = "500",
                             description = "Error intern de servidor",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON))
-                     })
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class))) })
     @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/teCertificat")
-    public Response teCertificat(
-            @Parameter(
-                    description = "DNI o NIF de la persona de la qual volem saber si té certificat.",
-                    required = true,
-                    example = "99999999X",
-                    schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni,
+    public Response teCertificat(@Parameter(
+            description = "DNI o NIF de la persona de la qual volem saber si té certificat.",
+            required = true,
+            example = "99999999X",
+            schema = @Schema(implementation = String.class)) @QueryParam("dni")
+    String dni,
             @Parameter(
                     in = ParameterIn.HEADER,
                     description = "Numero de plugin",
                     required = false,
                     example = "1",
-                    schema = @Schema(implementation = String.class)) @HeaderParam("pluginNumber") String pluginNumber) {
+                    schema = @Schema(implementation = String.class)) @HeaderParam("pluginNumber")
+            String pluginNumber) {
 
         log.info("\n\n\n TE HEADER pluginNumber => ]" + pluginNumber + "[  \n\n\n");
 
