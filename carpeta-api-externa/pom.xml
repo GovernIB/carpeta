@@ -218,6 +218,20 @@
                     </execution>
                     
                     
+                    <!-- 
+                            
+jaxrs-spec = afegeix anotaciosn pero retorna RESPONSE
+java-camel
+jaxrs-cxf  => retorna tipus correctes i afegeix anotacions Swagger (OpenAPI) via interface
+jaxrs-cxf-extended => retorna tipus correctes pero no afegeix anotacions Swagger (OpenAPI)
+jaxrs-cxf-cdi => Retorna response, no afegeix anotacions Swagger (OpenAPI) 
+jaxrs-jersey => Retorna response, no afegeix anotacions Swagger (OpenAPI)
+jaxrs-resteasy = afegeix anotaciosn pero retorna RESPONSE
+jaxrs-resteasy-eap = Retorna REsponse i no afegeix anotacions
+jaxrs-spec => Crea classe ni interface amb retorn RESPONSE, però no afegeix anotacions Swagger (OpenAPI) ni genera models correctament      
+                            
+                             -->
+                    <!--
                     <execution>
                         <id>openapi2</id>
                         <phase>prepare-package</phase>
@@ -226,19 +240,7 @@
                         </goals>
                         <configuration>
                             <inputSpec>${project.basedir}/openapi/openapi_certificats.json</inputSpec>
-                            <!-- 
-                            
-                            // "jaxrs-spec" = afegeix anotaciosn pero retorna RESPONSE
-// java-camel
-jaxrs-cxf  => retorna tipus correctes i afegeix anotacions Swagger (OpenAPI) via interface
-jaxrs-cxf-extended => retorna tipus correctes pero no afegeix anotacions Swagger (OpenAPI)
-jaxrs-cxf-cdi => Retorna response, no afegeix anotacions Swagger (OpenAPI) 
-jaxrs-jersey => Retorna response, no afegeix anotacions Swagger (OpenAPI)
-jaxrs-resteasy = afegeix anotaciosn pero retorna RESPONSE
-jaxrs-resteasy-eap = Retorna REsponse i no afegeix anotacions
-jaxrs-spec => Crea classe ni interface amb retorn RESPONSE
-                            
-                             -->
+
                             
                             <generatorName>jaxrs-cxf</generatorName>
                             <skipValidateSpec>false</skipValidateSpec>
@@ -260,11 +262,10 @@ jaxrs-spec => Crea classe ni interface amb retorn RESPONSE
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
                                 <useJakartaEe>false</useJakartaEe>
-                                <interfaceOnly>true</interfaceOnly>
                             </configOptions>
                         </configuration>
                     </execution>
-                    
+                     -->
 
                 </executions>
             </plugin>
