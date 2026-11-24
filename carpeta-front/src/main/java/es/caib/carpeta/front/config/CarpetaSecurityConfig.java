@@ -2,6 +2,8 @@ package es.caib.carpeta.front.config;
 
 import es.caib.carpeta.front.controller.WebUIController;
 import es.caib.carpeta.front.security.CarpetaFrontAuthProvider;
+import es.caib.carpeta.front.security.LoginController;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -31,12 +33,21 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(carpetaFrontAuthProvider);
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/", "/public/**", "/fa/**", "/inici", "/prelogin/**", "/sortir", "/dist/**", "/src/**", "/utils/**", "/assets/**", "/js/**", "/pluginfront","/pluginfront/**", WebUIController.WEBUI_PATH + "/**", "/entitat", "/e/**", "/error")
+                .antMatchers("/", "/public/**", "/fa/**", "/inici", "/sortir", "/dist/**", "/src/**",
+                        "/utils/**", "/assets/**", "/js/**", "/pluginfront", "/pluginfront/**",
+                        WebUIController.WEBUI_PATH + "/**", "/entitat", "/e/**", "/error", 
+                        // Plugin Login
+                        LoginController.MAPPING_PRELOGIN + "/**",                        
+                        LoginController.MAPPING_ERROR_LOGIN + "/**",
+                        LoginController.MAPPING_LOGOUT, 
+                        "/js/**", "/error", "/css/**", "/images/**", "/fonts/**", "/webfonts/**"
+                    
+                    
+                    )
                 .permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
@@ -51,12 +62,13 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and().logout().logoutSuccessUrl("/sortir")
                 .and().headers().frameOptions().sameOrigin();
-                //XYZ ZZZ .frameOptions().disable().addHeaderWriter(new StaticHeadersWriter("X-FRAME-OPTIONS", "ALLOW-FROM 10.215.216.17"));;
+        // XYZ ZZZ .frameOptions().disable().addHeaderWriter(new
+        // StaticHeadersWriter("X-FRAME-OPTIONS", "ALLOW-FROM 10.215.216.17"));;
     }
 
     @Bean
-    AndRequestMatcher csrfMatcher(){
-        AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher("/**/*.json","POST");
+    AndRequestMatcher csrfMatcher() {
+        AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher("/**/*.json", "POST");
 
         return new AndRequestMatcher(antPathRequestMatcher);
     }

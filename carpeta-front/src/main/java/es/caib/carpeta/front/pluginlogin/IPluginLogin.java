@@ -1,5 +1,7 @@
 package es.caib.carpeta.front.pluginlogin;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.fundaciobit.pluginsib.core.v3.IPluginIB;
 
 /**
@@ -36,4 +38,9 @@ public interface IPluginLogin extends IPluginIB {
      * @throws Exception
      */
     public String logout(String urlCallBackLogout, String language) throws Exception;
+
+    public String getError(HttpServletRequest request, String locale) throws Exception;
+
+
+
 }

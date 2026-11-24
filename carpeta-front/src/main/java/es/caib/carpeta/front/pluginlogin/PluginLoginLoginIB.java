@@ -1,9 +1,11 @@
 package es.caib.carpeta.front.pluginlogin;
 
 import java.net.HttpURLConnection;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -366,6 +368,40 @@ public class PluginLoginLoginIB implements IPluginLogin {
 
         }
 
+    }
+
+        @Override
+    public String getError(HttpServletRequest request, String language) {
+        
+        // XYZ DEBUG
+        log.warn("PluginLoginLoginIBSwagger::getError() => HttpServletRequest:");
+        log.warn(" ++++ request::Scheme: " + request.getScheme());
+        log.warn(" ++++ request::PathInfo: " + request.getPathInfo());
+        log.warn(" ++++ request::PathTrans: " + request.getPathTranslated());
+        log.warn(" ++++ request::ContextPath: " + request.getContextPath());
+        log.warn(" ++++ request::ServletPath: " + request.getServletPath());
+        log.warn(" ++++ request::getRequestURI: " + request.getRequestURI());
+        log.warn(" ++++ request::getRequestURL: " + request.getRequestURL().toString());
+        log.warn(" ++++ request::getQueryString: " + request.getQueryString());
+ 
+        StringBuffer errorStr = new StringBuffer();
+ 
+        Map<String, String[]> map = request.getParameterMap();
+ 
+        for (Map.Entry<String, String[]> entry : map.entrySet()) {
+            String key = entry.getKey();
+            String[] val = entry.getValue();
+            errorStr.append("KEY => ]" + key + "[ : {" + Arrays.toString(val) + "}\n");
+        }
+ 
+        if (errorStr.length() == 0) {
+            log.error("PluginLoginLoginIBSwagger::getError() => getParameterMap Error: null");
+            return null;
+        } else {
+            log.error("PluginLoginLoginIBSwagger::getError() => getParameterMap Error: " + errorStr.toString());
+            return errorStr.toString();
+        }
+ 
     }
 
 }

@@ -2,6 +2,9 @@ package es.caib.carpeta.front.pluginlogin;
 
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,6 +65,11 @@ public class PluginLoginMock implements IPluginLogin {
     public String logout(String urlCallBackLogout, String language) throws Exception {
 
         return urlCallBackLogout;
+    }
+
+    @Override
+    public String getError(javax.servlet.http.HttpServletRequest request, String language) {
+        return null;
     }
 
 }

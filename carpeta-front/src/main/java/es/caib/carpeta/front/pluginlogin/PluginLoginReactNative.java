@@ -89,4 +89,9 @@ public class PluginLoginReactNative implements IPluginLogin {
         return urlCallBackLogout;
     }
 
+    @Override
+    public String getError(javax.servlet.http.HttpServletRequest request, String language) {
+        return null;
+    }
+
 }

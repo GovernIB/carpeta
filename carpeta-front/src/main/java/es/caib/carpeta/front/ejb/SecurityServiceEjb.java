@@ -32,4 +32,9 @@ public class SecurityServiceEjb implements SecurityService {
     public String iniciarSesionLogout(String URL_CALLBACK_LOGOUT, String IDIOMA) throws Exception {
         return securityService.iniciarSesionLogout(URL_CALLBACK_LOGOUT, IDIOMA);
     }
+
+    @Override
+    public String getError(javax.servlet.http.HttpServletRequest request, String language) throws Exception {
+        return securityService.getError(request, language);
+    }
 }

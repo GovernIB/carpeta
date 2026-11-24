@@ -117,4 +117,11 @@ public class SecurityServiceImpl implements SecurityService {
 
     }
 
+
+    public String getError(HttpServletRequest request, String locale) throws Exception{
+        return getPluginLogin().getError(request, locale);
+    }
+
+    
+
 }

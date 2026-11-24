@@ -5,6 +5,7 @@ import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.config.LoginRequestCache;
 import es.caib.carpeta.front.controller.InicioController;
 import es.caib.carpeta.front.controller.WebUIController;
+import es.caib.carpeta.front.pluginlogin.PluginLoginLoginIB;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
@@ -18,6 +19,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.ejb.EJB;
@@ -40,6 +42,20 @@ public class LoginController {
 
     public static final String SESSION_RETURN_URL_POST_LOGIN = "SESSION_RETURN_URL_POST_LOGIN";
 
+    public static final String MAPPING_ERROR_LOGIN = "/errorLogin";
+
+    public static final String MAPPING_PRELOGIN = "/prelogin";
+
+    public static final String MAPPING_LOGOUT = "/sortir";
+
+    
+    public static final String URL_BASE_LOGIN = "URL_BASE_LOGIN";
+
+    /** 
+     * Quan el plugin no controla l'error
+     */
+    public static final String SESSION_PLUGIN_LOGIN_ERROR_MESSAGE = "_SESSION_PLUGIN_LOGIN_ERROR_MESSAGE_";
+
     private final Log log = LogFactory.getLog(getClass());
 
     @Autowired
@@ -58,7 +74,11 @@ public class LoginController {
     protected AuditoriaLogicaService auditoriaLogicaEjb;
 
 
-    @RequestMapping(value = "/prelogin")
+
+
+
+
+    @RequestMapping(value = MAPPING_PRELOGIN)
     public String prelogin(HttpServletRequest request, HttpServletResponse response
     // , @PathVariable("mprotocol") String protocol, @PathVariable("mhost") String
     // host
@@ -200,7 +220,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value = "/sortir")
+    @RequestMapping(value = MAPPING_LOGOUT)
     public String salir(HttpServletRequest request) throws Exception {
 
         log.info("Dentro de salir");
@@ -314,4 +334,60 @@ public class LoginController {
         }
         return null;
     }
+
+
+    @RequestMapping(value = { MAPPING_ERROR_LOGIN }, method = RequestMethod.GET)
+    public String error(HttpServletRequest request, HttpServletResponse response) throws Exception {
+ 
+        // Primer revisam si hi ha error NO CONTROLAT
+        log.error("Entra a PluginLoginController::error()");
+        String error = (String)request.getSession().getAttribute(SESSION_PLUGIN_LOGIN_ERROR_MESSAGE);
+        log.error("Entra a PluginLoginController::error() => error = ]" + error + "[");
+        if (error == null) {
+            // Miram l'error del Propi PLugin
+            try {
+                        
+
+            
+
+
+               error = securityService.getError(request,
+                        LocaleContextHolder.getLocale().getLanguage());
+
+
+
+
+               if (error == null) {
+                   error = "El plugin de Login per alguna raó desconeguda he retornat "
+                           + "a la pàgina d'error però no ha definit cap error en el mètode getError()";
+               } 
+            } catch (Throwable e1) {
+                error = "S'ha produit una excepció al intentar recuperar el missatge d'error del Plugin de Login: " + e1.getMessage();
+                log.error("Error: " + error, e1);
+            }
+
+        }
+        request.getSession().setAttribute(SESSION_PLUGIN_LOGIN_ERROR_MESSAGE, error);
+ 
+        String fullUrlRedirect = getFinalRedirectAndClean(request);
+        log.info("PLUGIN LOGIN(/errorLogin):  Error => |" + error + "|");
+ 
+        log.info("PLUGIN LOGIN(/errorLogin):  TORNAM el CONTROL A => " + fullUrlRedirect);
+ 
+        return "redirect:" + fullUrlRedirect;
+ 
+    }
+
+      protected String getFinalRedirectAndClean(HttpServletRequest request) {
+        String fullUrlRedirect = (String) request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
+ 
+        if (fullUrlRedirect == null) {
+            fullUrlRedirect = "/";
+        }
+ 
+        request.getSession().removeAttribute(SESSION_RETURN_URL_POST_LOGIN);
+        request.getSession().removeAttribute(URL_BASE_LOGIN);
+        return fullUrlRedirect;
+    }
+
 }

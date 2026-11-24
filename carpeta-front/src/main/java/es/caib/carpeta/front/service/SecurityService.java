@@ -1,5 +1,7 @@
 package es.caib.carpeta.front.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import es.caib.carpeta.commons.utils.UsuarioClave;
 
 public interface SecurityService {
@@ -26,4 +28,7 @@ public interface SecurityService {
      * @throws Exception
      */
     public String iniciarSesionLogout(String URL_CALLBACK_LOGOUT, String IDIOMA) throws Exception;
+
+    public String getError(HttpServletRequest request, String locale) throws Exception;
+
 }
